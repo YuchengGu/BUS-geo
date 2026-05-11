@@ -12,11 +12,12 @@ def save_frame(
     obs: Dict[str, np.ndarray],
     action: np.ndarray,
 ) -> None:
-    obs["control"] = action  # add action to obs
+    frame = dict(obs)
+    frame["control"] = np.asarray(action)  # add action to saved frame
 
     # make folder if it doesn't exist
     folder.mkdir(exist_ok=True, parents=True)
     recorded_file = folder / (timestamp.isoformat() + ".pkl")
 
     with open(recorded_file, "wb") as f:
-        pickle.dump(obs, f)
+        pickle.dump(frame, f)

@@ -5,6 +5,17 @@ import numpy as np
 from gello.robots.robot import Robot
 
 
+def _rotvec_to_wxyz_quat(rotvec: np.ndarray) -> np.ndarray:
+    """Convert a rotation vector to a [qw, qx, qy, qz] quaternion."""
+    angle = np.linalg.norm(rotvec)
+    if angle < 1e-12:
+        return np.array([1.0, 0.0, 0.0, 0.0])
+
+    axis = rotvec / angle
+    half_angle = angle / 2.0
+    return np.concatenate([[np.cos(half_angle)], axis * np.sin(half_angle)])
+
+
 class URRobot(Robot):
     """A class representing a UR robot."""
 
@@ -58,7 +69,7 @@ class URRobot(Robot):
         Returns:
             T: The current state of the leader robot.
         """
-        robot_joints = self.r_inter.getActualQ()
+        robot_joints = np.asarray(self.r_inter.getActualQ(), dtype=float)
         if self._use_gripper:
             gripper_pos = self._get_gripper_pos()
             pos = np.append(robot_joints, gripper_pos)
@@ -110,15 +121,27 @@ class URRobot(Robot):
             self.robot.endFreedriveMode()
 
     def get_observations(self) -> Dict[str, np.ndarray]:
-        joints = self.get_joint_state()
-        pos_quat = np.zeros(7)
-        gripper_pos = np.array([joints[-1]])
-        return {
-            "joint_positions": joints,
-            "joint_velocities": joints,
-            "ee_pos_quat": pos_quat,
-            "gripper_position": gripper_pos,
+        robot_joints = np.asarray(self.r_inter.getActualQ(), dtype=float)
+        robot_joint_velocities = np.asarray(self.r_inter.getActualQd(), dtype=float)
+        tcp_pose = np.asarray(self.r_inter.getActualTCPPose(), dtype=float)
+        ee_pos_quat = np.concatenate(
+            [tcp_pose[:3], _rotvec_to_wxyz_quat(tcp_pose[3:])]
+        )
+
+        observations = {
+            "joint_positions": robot_joints,
+            "joint_velocities": robot_joint_velocities,
+            "ee_pos_rotvec": tcp_pose,
+            "ee_pos_quat": ee_pos_quat,
         }
+
+        if self._use_gripper:
+            gripper_pos = self._get_gripper_pos()
+            observations["joint_positions"] = np.append(robot_joints, gripper_pos)
+            observations["joint_velocities"] = np.append(robot_joint_velocities, 0.0)
+            observations["gripper_position"] = np.array([gripper_pos])
+
+        return observations
 
 
 def main():

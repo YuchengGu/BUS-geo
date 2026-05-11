@@ -78,7 +78,10 @@ class RobotEnv:
         observations["joint_positions"] = robot_obs["joint_positions"]
         observations["joint_velocities"] = robot_obs["joint_velocities"]
         observations["ee_pos_quat"] = robot_obs["ee_pos_quat"]
-        observations["gripper_position"] = robot_obs["gripper_position"]
+        if "ee_pos_rotvec" in robot_obs:
+            observations["ee_pos_rotvec"] = robot_obs["ee_pos_rotvec"]
+        if "gripper_position" in robot_obs:
+            observations["gripper_position"] = robot_obs["gripper_position"]
 
         if self._force_sensor is not None:
             force_data = self._force_sensor.read_values()

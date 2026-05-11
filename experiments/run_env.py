@@ -58,14 +58,16 @@ def main(args):
         from gello.cameras.Orbbec import OrbbecCamera
         from gello.cameras.Ultrasound import UltrasoundCamera
         from gello.force_sensor_mtcp import ForceSensorMTCP
-        camera_clients : Dict[str, CameraDriver] = {
-            # you can optionally add camera nodes here for imitation learning purposes
-            # "wrist": ZMQClientCamera(port=args.wrist_camera_port, host=args.hostname),
-            # "base": ZMQClientCamera(port=args.base_camera_port, host=args.hostname),
-            "D405": RealSenseD405(),
-            "Orbbec": OrbbecCamera(),
-            "Ultrasound":UltrasoundCamera(camera_index=5),
-        }
+        # camera_clients : Dict[str, CameraDriver] = {
+        #     # you can optionally add camera nodes here for imitation learning purposes
+        #     # "wrist": ZMQClientCamera(port=args.wrist_camera_port, host=args.hostname),
+        #     # "base": ZMQClientCamera(port=args.base_camera_port, host=args.hostname),
+        #     "D405": RealSenseD405(),
+        #     "Orbbec": OrbbecCamera(),
+        #     "Ultrasound":UltrasoundCamera(camera_index=5),
+        # }
+        camera_clients = {}
+
         my_force_sensor = ForceSensorMTCP(ip='192.168.1.160')
         my_force_sensor.connect()
         #my_force_sensor = None

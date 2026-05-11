@@ -38,8 +38,13 @@ def main():
 
     print("\n⚙️ 2. 核心物理数据：")
     print(f"🦾 【UR5 当前关节】: {np.round(data.get('joint_positions',[]), 3)}")
-    print(f"🎯 【GELLO 指令】: {np.round(data.get('control',[]), 3)}")
+    print(f"🦾 【UR5 当前关节速度】: {np.round(data.get('joint_velocities',[]), 3)}")
+    print(f"🦾 【UR5 末端 rotvec 位姿】: {np.round(data.get('ee_pos_rotvec',[]), 3)}")
+    print(f"🦾 【UR5 末端 quat 位姿】: {np.round(data.get('ee_pos_quat',[]), 3)}")
+    print(f"🎯 【发送到 UR5 的关节指令】: {np.round(data.get('control',[]), 3)}")
     print(f"🏋️ 【六维力读数】: {np.round(data.get('force',[]), 3)}")
+    if 'gripper_position' in data:
+        print(f"⚠️ 【夹爪字段】: {np.round(data.get('gripper_position',[]), 3)}")
 
     print("\n📸 3. 正在生成多模态仪表盘...")
     

@@ -4,7 +4,7 @@
 实现一套更可靠的 UR5 示教数据记录流程：记录真实的机器人低维状态、实际发送给 UR5 的关节控制指令、各模态独立时间戳，以及足够的元数据，用于把较慢的图像流和较快的机器人/控制流对齐，服务后续模仿学习。
 
 ## 当前阶段
-阶段 1
+阶段 4
 
 ## 阶段
 
@@ -22,12 +22,12 @@
 - **状态：** 待开始
 
 ### 阶段 3：UR5 状态修正
-- [ ] 修改 `gello/robots/ur.py`，用真实 `getActualQd()` 填充 `joint_velocities`。
-- [ ] 修改 `gello/robots/ur.py`，用真实 `getActualTCPPose()` 读取 TCP 位置和旋转向量。
-- [ ] 将 TCP 旋转向量转换成四元数，填充 `ee_pos_quat`。
-- [ ] 避免 `no_gripper=True` 时误用 `gripper_position`。
-- [ ] 新增明确的原始 TCP 字段，例如 `ee_pos_rotvec` 或 `tcp_pose_ur`。
-- **状态：** 待开始
+- [x] 修改 `gello/robots/ur.py`，用真实 `getActualQd()` 填充 `joint_velocities`。
+- [x] 修改 `gello/robots/ur.py`，用真实 `getActualTCPPose()` 读取 TCP 位置和旋转向量。
+- [x] 将 TCP 旋转向量转换成四元数，填充 `ee_pos_quat`。
+- [x] 避免 `no_gripper=True` 时误用 `gripper_position`。
+- [x] 新增明确的原始 TCP 字段 `ee_pos_rotvec`。
+- **状态：** 已完成
 
 ### 阶段 4：时间戳与频率测量
 - [ ] 在每个采集步骤前后添加 monotonic 软件时间戳。
@@ -79,6 +79,6 @@
 | 暂无 | 1 | 目前只做计划，尚未实现。 |
 
 ## 备注
-- 当前可信低维状态主要是 `joint_positions` 和 `force`；当前 `joint_velocities`、`ee_pos_quat`、无夹爪 UR5 下的 `gripper_position` 语义错误或只是占位。
+- 当前 UR5 低维状态已修正为真实 `joint_positions`、`joint_velocities`、`ee_pos_rotvec`、`ee_pos_quat`；无夹爪 UR5 不再保存 `gripper_position`。
 - `control` 单位是 rad，默认应保持为实际发送的目标关节角；如需调试可额外保存 raw GELLO action。
 - 传感器同步应通过显式时间戳表达，而不是因为数据在同一个 `.pkl` 文件里就假设严格同步。

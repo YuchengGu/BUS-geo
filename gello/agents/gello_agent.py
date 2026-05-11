@@ -110,12 +110,12 @@ PORT_CONFIG_MAP: Dict[str, DynamixelRobotConfig] = {
     "/dev/serial/by-id/usb-FTDI_USB__-__Serial_Converter_FTAW77E7-if00-port0": DynamixelRobotConfig(
         joint_ids=(1, 2, 3, 4, 5, 6),
         joint_offsets=(
-            2 * np.pi / 2,
+            0 * np.pi / 2,
             3 * np.pi / 2,
             2 * np.pi / 2,
             2 * np.pi / 2,
             2 * np.pi / 2,
-            3 * np.pi / 2,
+            1 * np.pi / 2,
         ),
         joint_signs=(1, 1, -1, 1, 1, 1),
         # 虽然你不用夹爪，但填入校准出的数据能防止报错

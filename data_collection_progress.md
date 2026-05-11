@@ -25,11 +25,22 @@
   -
 
 ### 阶段 3：UR5 状态修正
-- **状态：** 待开始
+- **状态：** 已完成
 - 已执行操作：
-  -
+  - 新增 `tests/test_ur_lowdim.py`，用 fake RTDE receive 验证 UR5 lowdim 字段来源和四元数顺序。
+  - 新增 `tests/test_env_lowdim.py`，验证无夹爪 robot obs 可以通过 `RobotEnv.get_obs()`，保存 pkl 时不会新增假夹爪字段。
+  - 修改 `gello/robots/ur.py`，使用 `getActualQd()` 记录真实关节速度。
+  - 修改 `gello/robots/ur.py`，使用 `getActualTCPPose()` 记录 `ee_pos_rotvec`，并转换为 `[x,y,z,qw,qx,qy,qz]` 的 `ee_pos_quat`。
+  - 修改 `gello/env.py`，让 `gripper_position` 成为可选字段，并透传 `ee_pos_rotvec`。
+  - 修改 `gello/data_utils/format_obs.py`，保存时复制 obs 后再加入 `control`，避免原地污染观测字典。
+  - 修改 `chack_data.py`，打印真实 lowdim 字段。
 - 创建/修改文件：
-  -
+  - `tests/test_ur_lowdim.py`
+  - `tests/test_env_lowdim.py`
+  - `gello/robots/ur.py`
+  - `gello/env.py`
+  - `gello/data_utils/format_obs.py`
+  - `chack_data.py`
 
 ### 阶段 4：时间戳与频率测量
 - **状态：** 待开始
@@ -63,11 +74,13 @@
 | 测试 | 输入 | 预期 | 实际 | 状态 |
 |------|------|------|------|------|
 | 计划文件存在 | `find . -maxdepth 1 ...` | 存在 `data_collection_findings.md`、`data_collection_progress.md`、`data_collection_task_plan.md` | 已在修改前确认存在 | 通过 |
+| lowdim 单元测试 RED | `python -m pytest tests/test_ur_lowdim.py tests/test_env_lowdim.py -q` | 当前代码因 fake velocity/pose/gripper 失败 | 5 failed | 通过 |
+| lowdim 单元测试 GREEN | `python -m pytest tests/test_ur_lowdim.py tests/test_env_lowdim.py -q` | 修改后通过 | 5 passed | 通过 |
 
 ## 错误日志
 | 时间戳 | 错误 | 尝试 | 处理 |
 |--------|------|------|------|
-| 2026-05-11 | 暂无 | 1 | 当前只修改计划文档，未尝试业务代码实现。 |
+| 2026-05-11 | lowdim 测试在旧代码上失败 | 1 | 失败原因与预期一致：速度字段、TCP pose、无夹爪 gripper 处理均暴露问题。 |
 
 ## 5 问恢复检查
 | 问题 | 回答 |
