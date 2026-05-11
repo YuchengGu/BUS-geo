@@ -51,8 +51,25 @@ def move_to_start_position(
             )
         return False
 
+    # print(f"Start pos: {len(start_pos)}", f"Joints: {len(joints)}")
+    # assert len(start_pos) == len(
+    #     joints
+    # ), f"agent output dim = {len(start_pos)}, but env dim = {len(joints)}"
+
+    # for _ in range(steps):
+    #     obs = env.get_obs()
+    #     command_joints = agent.act(obs)
+    #     current_joints = obs["joint_positions"]
+    #     delta = command_joints - current_joints
+    #     max_joint_delta = np.abs(delta).max()
+    #     if max_joint_delta > max_delta:
+    #         delta = delta / max_joint_delta * max_delta
+    #     env.step(current_joints + delta)
+
     print(f"Start pos: {len(start_pos)}", f"Joints: {len(joints)}")
-    assert len(start_pos) == len(
+    
+    # 1. 修改断言：允许手柄数据比机器人多 (>=)
+    assert len(start_pos) >= len(
         joints
     ), f"agent output dim = {len(start_pos)}, but env dim = {len(joints)}"
 
@@ -60,6 +77,11 @@ def move_to_start_position(
         obs = env.get_obs()
         command_joints = agent.act(obs)
         current_joints = obs["joint_positions"]
+
+        # 2. 【关键】自动裁剪：如果手柄数据多，就只取前几个匹配机器人的
+        if len(command_joints) > len(current_joints):
+            command_joints = command_joints[:len(current_joints)]
+
         delta = command_joints - current_joints
         max_joint_delta = np.abs(delta).max()
         if max_joint_delta > max_delta:
@@ -166,24 +188,53 @@ def run_control_loop(
     start_time = time.time()
     obs = env.get_obs()
 
+    # while True:
+    #     if print_timing:
+    #         num = time.time() - start_time
+    #         message = f"\rTime passed: {round(num, 2)}          "
+
+    #         if colors_available:
+    #             print(
+    #                 colored(message, color="white", attrs=["bold"]), end="", flush=True
+    #             )
+    #         else:
+    #             print(message, end="", flush=True)
+
+    #     action = agent.act(obs)
+
+    #     # Handle save interface
+    #     if save_interface is not None:
+    #         result = save_interface.update(obs, action)
+    #         if result == "quit":
+    #             break
+
+    #     obs = env.step(action)
+
     while True:
         if print_timing:
             num = time.time() - start_time
             message = f"\rTime passed: {round(num, 2)}          "
-
             if colors_available:
-                print(
-                    colored(message, color="white", attrs=["bold"]), end="", flush=True
-                )
+                print(colored(message, color="white", attrs=["bold"]), end="", flush=True)
             else:
                 print(message, end="", flush=True)
 
+        # 1. 获取手柄原始数据 (可能是 7 维)
         action = agent.act(obs)
+        
+        # 2. 获取机器人实际关节数 (例如 6 维)
+        robot_dof = len(obs["joint_positions"])
+
+        # 3. 【关键】自动裁剪：如果 action 是 7 维，这里切成 6 维
+        if len(action) > robot_dof:
+            action = action[:robot_dof]
 
         # Handle save interface
         if save_interface is not None:
+            # 注意：保存的数据也建议是裁剪后的，否则回放时会报错
             result = save_interface.update(obs, action)
             if result == "quit":
                 break
 
+        # 4. 现在 action 肯定是 6 维了，传给 env.step 就不会报错了
         obs = env.step(action)

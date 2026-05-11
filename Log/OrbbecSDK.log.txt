@@ -1,0 +1,1325 @@
+[03/19 13:49:55.897128][info][6709][LinuxUsbPal.cpp:335] Create PollingDeviceWatcher!
+[03/19 13:49:55.897203][info][6709][DeviceManager.cpp:25] Current found device(s): (1)
+[03/19 13:49:55.897216][info][6709][DeviceManager.cpp:34] 	- Name: Gemini2, PID: 0x0670, SN/ID: AY366300070, Connection: USB3.0
+[03/19 13:49:55.897220][info][6709][DeviceManager.cpp:339] Enable net device enumeration: true
+[03/19 13:49:57.904371][info][6709][DeviceManager.cpp:25] Current device(s) list: (1)
+[03/19 13:49:57.904444][info][6709][DeviceManager.cpp:34] 	- Name: Gemini2, PID: 0x0670, SN/ID: AY366300070, Connection: USB3.0
+[03/19 13:49:57.909107][warning][6709][PropertyServer.cpp:87] [AY366300070] Not added to property map, property not found in OBPropertyBaseInfoMap, id=108
+[03/19 13:49:57.909155][warning][6709][PropertyServer.cpp:87] [AY366300070] Not added to property map, property not found in OBPropertyBaseInfoMap, id=4035
+[03/19 13:49:57.909214][warning][6709][PropertyServer.cpp:87] [AY366300070] Not added to property map, property not found in OBPropertyBaseInfoMap, id=5003
+[03/19 13:49:57.923711][info][6709][DeviceManager.cpp:194] Device created successfully! Name: Gemini 2, PID: 0x0670, SN/ID: AY366300070 FW: 1.4.76
+[03/19 13:49:57.923782][info][6709][Pipeline.cpp:42] [AY366300070] Pipeline created with device: {name: Gemini 2, sn: AY366300070}, @0x2103BFA0
+[03/19 13:49:57.954540][info][6709][Pipeline.cpp:216] [AY366300070] Check and set config done!
+[03/19 13:49:57.955083][info][6709][Pipeline.cpp:254] [AY366300070] Try to start streams!
+[03/19 13:49:57.955093][info][6709][VideoSensor.cpp:58] [AY366300070] Try to start stream: {type: Color, format: RGB, width: 1920, height: 1080, fps: 30}
+[03/19 13:49:57.955103][info][6709][SensorBase.cpp:213] [AY366300070] Stream state changed to STARTING@Color
+[03/19 13:49:57.955112][info][6709][VideoSensor.cpp:127] [AY366300070] Start backend stream: {type: Color, format: MJPG, width: 1920, height: 1080, fps: 30}
+[03/19 13:49:57.961916][info][6709][VideoSensor.cpp:58] [AY366300070] Try to start stream: {type: Depth, format: RLE, width: 1280, height: 800, fps: 30}
+[03/19 13:49:57.961954][info][6709][SensorBase.cpp:213] [AY366300070] Stream state changed to STARTING@Depth
+[03/19 13:49:57.961965][info][6709][VideoSensor.cpp:127] [AY366300070] Start backend stream: {type: Depth, format: MJPG, width: 1280, height: 800, fps: 30}
+[03/19 13:49:57.965301][info][6709][Pipeline.cpp:270] [AY366300070] Start streams done!
+[03/19 13:49:57.965325][info][6709][Pipeline.cpp:238] [AY366300070] Pipeline start done!
+[03/19 13:49:58.072674][info][6817][SensorBase.cpp:213] [AY366300070] Stream state changed to STREAMING@Depth
+[03/19 13:49:58.085931][info][6816][SensorBase.cpp:213] [AY366300070] Stream state changed to STREAMING@Color
+[03/19 13:49:58.445636][warning][6818][Pipeline.cpp:295] [AY366300070] Output frameset queue is full, drop oldest frameset!
+[03/19 13:50:00.346641][info][6709][Pipeline.cpp:336] [AY366300070] Try to stop pipeline!
+[03/19 13:50:00.346683][info][6709][Pipeline.cpp:312] [AY366300070] Try to stop streams!
+[03/19 13:50:00.346705][info][6709][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPING@Depth
+[03/19 13:50:00.353192][info][6709][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPED@Depth
+[03/19 13:50:00.353288][info][6709][Pipeline.cpp:326] [AY366300070] Sensor stream stopped, sensorType=Depth
+[03/19 13:50:00.353303][info][6709][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPING@Color
+[03/19 13:50:00.361625][info][6709][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPED@Color
+[03/19 13:50:00.373208][info][6709][Pipeline.cpp:326] [AY366300070] Sensor stream stopped, sensorType=Color
+[03/19 13:50:00.373215][info][6709][Pipeline.cpp:332] [AY366300070] Stop streams done!
+[03/19 13:50:00.373725][info][6709][Pipeline.cpp:356] [AY366300070] Stop pipeline done!
+[03/19 13:50:00.373752][info][6709][Pipeline.cpp:53] [AY366300070] Pipeline destroyed! @0x2103BFA0
+[03/19 13:50:00.373824][info][6709][SensorBase.cpp:47] [AY366300070] SensorBase is destroyed
+[03/19 13:50:00.374641][info][6709][ObLibuvcDevicePort.cpp:87] uvc_close done.
+[03/19 13:50:00.374647][info][6709][ObLibuvcDevicePort.cpp:88] ~ObLibuvcDevicePort done
+[03/19 13:50:00.374684][info][6709][SensorBase.cpp:47] [AY366300070] SensorBase is destroyed
+[03/19 13:50:00.375094][info][6709][ObLibuvcDevicePort.cpp:87] uvc_close done.
+[03/19 13:50:00.375099][info][6709][ObLibuvcDevicePort.cpp:88] ~ObLibuvcDevicePort done
+[03/19 13:50:00.922254][warning][6823][Pipeline.cpp:295] [AY366300070] Output frameset queue is full, drop oldest frameset! [**56 logs in 2476ms, last: 13:50:00.342712**]
+[03/19 13:51:48.057086][info][6921][LinuxUsbPal.cpp:335] Create PollingDeviceWatcher!
+[03/19 13:51:48.057129][info][6921][DeviceManager.cpp:25] Current found device(s): (1)
+[03/19 13:51:48.057134][info][6921][DeviceManager.cpp:34] 	- Name: Gemini2, PID: 0x0670, SN/ID: AY366300070, Connection: USB3.0
+[03/19 13:51:48.057138][info][6921][DeviceManager.cpp:339] Enable net device enumeration: true
+[03/19 13:51:50.063688][info][6921][DeviceManager.cpp:25] Current device(s) list: (1)
+[03/19 13:51:50.063738][info][6921][DeviceManager.cpp:34] 	- Name: Gemini2, PID: 0x0670, SN/ID: AY366300070, Connection: USB3.0
+[03/19 13:51:50.063852][warning][6921][PropertyServer.cpp:87] [AY366300070] Not added to property map, property not found in OBPropertyBaseInfoMap, id=108
+[03/19 13:51:50.063865][warning][6921][PropertyServer.cpp:87] [AY366300070] Not added to property map, property not found in OBPropertyBaseInfoMap, id=4035
+[03/19 13:51:50.063888][warning][6921][PropertyServer.cpp:87] [AY366300070] Not added to property map, property not found in OBPropertyBaseInfoMap, id=5003
+[03/19 13:51:50.076407][info][6921][DeviceManager.cpp:194] Device created successfully! Name: Gemini 2, PID: 0x0670, SN/ID: AY366300070 FW: 1.4.76
+[03/19 13:51:50.076464][info][6921][Pipeline.cpp:42] [AY366300070] Pipeline created with device: {name: Gemini 2, sn: AY366300070}, @0x254109E0
+[03/19 13:51:50.104555][info][6921][Pipeline.cpp:216] [AY366300070] Check and set config done!
+[03/19 13:51:50.105148][info][6921][Pipeline.cpp:254] [AY366300070] Try to start streams!
+[03/19 13:51:50.105156][info][6921][VideoSensor.cpp:58] [AY366300070] Try to start stream: {type: Color, format: RGB, width: 1920, height: 1080, fps: 30}
+[03/19 13:51:50.105165][info][6921][SensorBase.cpp:213] [AY366300070] Stream state changed to STARTING@Color
+[03/19 13:51:50.105172][info][6921][VideoSensor.cpp:127] [AY366300070] Start backend stream: {type: Color, format: MJPG, width: 1920, height: 1080, fps: 30}
+[03/19 13:51:50.112516][info][6921][VideoSensor.cpp:58] [AY366300070] Try to start stream: {type: Depth, format: RLE, width: 1280, height: 800, fps: 30}
+[03/19 13:51:50.112557][info][6921][SensorBase.cpp:213] [AY366300070] Stream state changed to STARTING@Depth
+[03/19 13:51:50.112573][info][6921][VideoSensor.cpp:127] [AY366300070] Start backend stream: {type: Depth, format: MJPG, width: 1280, height: 800, fps: 30}
+[03/19 13:51:50.132496][info][6921][Pipeline.cpp:270] [AY366300070] Start streams done!
+[03/19 13:51:50.132538][info][6921][Pipeline.cpp:238] [AY366300070] Pipeline start done!
+[03/19 13:51:50.148642][info][7010][SensorBase.cpp:213] [AY366300070] Stream state changed to STREAMING@Depth
+[03/19 13:51:50.150146][warning][7011][ObException.hpp:48] Frame unpack failed
+[03/19 13:51:50.156398][warning][7010][ObException.cpp:8] Timestamp anomaly detected, timestamp: 89457856, cacheTimestamp: 665352979 ,currentDiff: 575895123, maxValidTimestampDiff: 5000000
+[03/19 13:51:50.156925][warning][7010][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 89457856, cacheTimestamp: 665352979 ,currentDiff: 575895123, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 13:51:50.156946][error][7010][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 89457856, sensor: Depth
+[03/19 13:51:50.156997][warning][7010][ObException.cpp:8] Timestamp anomaly detected, timestamp: 2523314841, cacheTimestamp: 89457856 ,currentDiff: 2433856985, maxValidTimestampDiff: 5000000
+[03/19 13:51:50.157029][warning][7010][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 2523314841, cacheTimestamp: 89457856 ,currentDiff: 2433856985, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 13:51:50.157036][error][7010][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 2523314841, sensor: Depth
+[03/19 13:51:50.158664][warning][7011][ObException.hpp:48] Frame unpack failed
+[03/19 13:51:50.160805][warning][7010][ObException.cpp:8] Timestamp anomaly detected, timestamp: 2998300, cacheTimestamp: 2523314841 ,currentDiff: 2520316541, maxValidTimestampDiff: 5000000
+[03/19 13:51:50.160832][warning][7010][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 2998300, cacheTimestamp: 2523314841 ,currentDiff: 2520316541, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 13:51:50.160838][error][7010][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 2998300, sensor: Depth
+[03/19 13:51:50.160868][warning][7010][ObException.cpp:8] Timestamp anomaly detected, timestamp: 3723333736, cacheTimestamp: 2998300 ,currentDiff: 3720335436, maxValidTimestampDiff: 5000000
+[03/19 13:51:50.160880][warning][7010][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 3723333736, cacheTimestamp: 2998300 ,currentDiff: 3720335436, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 13:51:50.160885][error][7010][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 3723333736, sensor: Depth
+[03/19 13:51:50.163003][warning][7010][ObException.cpp:8] Timestamp anomaly detected, timestamp: 4292925096, cacheTimestamp: 3723333736 ,currentDiff: 569591360, maxValidTimestampDiff: 5000000
+[03/19 13:51:50.163026][warning][7010][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 4292925096, cacheTimestamp: 3723333736 ,currentDiff: 569591360, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 13:51:50.163031][error][7010][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 4292925096, sensor: Depth
+[03/19 13:51:50.163991][warning][7011][ObException.hpp:48] Frame unpack failed
+[03/19 13:51:50.165631][warning][7010][ObException.cpp:8] Timestamp anomaly detected, timestamp: 704500, cacheTimestamp: 4292768396 ,currentDiff: 4292063896, maxValidTimestampDiff: 5000000
+[03/19 13:51:50.165652][warning][7010][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 704500, cacheTimestamp: 4292768396 ,currentDiff: 4292063896, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 13:51:50.165657][error][7010][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 704500, sensor: Depth
+[03/19 13:51:50.167913][warning][7010][ObException.cpp:8] Timestamp anomaly detected, timestamp: 4028200775, cacheTimestamp: 704500 ,currentDiff: 4027496275, maxValidTimestampDiff: 5000000
+[03/19 13:51:50.167933][warning][7010][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 4028200775, cacheTimestamp: 704500 ,currentDiff: 4027496275, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 13:51:50.167938][error][7010][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 4028200775, sensor: Depth
+[03/19 13:51:50.177093][warning][7010][ObException.cpp:8] Timestamp anomaly detected, timestamp: 1432332622, cacheTimestamp: 4028200775 ,currentDiff: 2595868153, maxValidTimestampDiff: 5000000
+[03/19 13:51:50.177151][warning][7010][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 1432332622, cacheTimestamp: 4028200775 ,currentDiff: 2595868153, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 13:51:50.177160][error][7010][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 1432332622, sensor: Depth
+[03/19 13:51:50.203842][warning][7010][ObException.cpp:8] Timestamp anomaly detected, timestamp: 775187611, cacheTimestamp: 1432332622 ,currentDiff: 657145011, maxValidTimestampDiff: 5000000
+[03/19 13:51:50.203919][warning][7010][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 775187611, cacheTimestamp: 1432332622 ,currentDiff: 657145011, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 13:51:50.203932][error][7010][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 775187611, sensor: Depth
+[03/19 13:51:50.217111][warning][7009][VideoSensor.cpp:184] [AY366300070] This frame will be dropped because jpg format verification failure! @Color
+[03/19 13:51:50.277870][info][7009][SensorBase.cpp:213] [AY366300070] Stream state changed to STREAMING@Color
+[03/19 13:51:50.665629][warning][7018][Pipeline.cpp:295] [AY366300070] Output frameset queue is full, drop oldest frameset!
+[03/19 13:51:52.486905][info][6921][Pipeline.cpp:336] [AY366300070] Try to stop pipeline!
+[03/19 13:51:52.486956][info][6921][Pipeline.cpp:312] [AY366300070] Try to stop streams!
+[03/19 13:51:52.486976][info][6921][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPING@Depth
+[03/19 13:51:52.494960][info][6921][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPED@Depth
+[03/19 13:51:52.495158][info][6921][Pipeline.cpp:326] [AY366300070] Sensor stream stopped, sensorType=Depth
+[03/19 13:51:52.495167][info][6921][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPING@Color
+[03/19 13:51:52.505157][info][6921][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPED@Color
+[03/19 13:51:52.505496][info][6921][Pipeline.cpp:326] [AY366300070] Sensor stream stopped, sensorType=Color
+[03/19 13:51:52.505502][info][6921][Pipeline.cpp:332] [AY366300070] Stop streams done!
+[03/19 13:51:52.506018][info][6921][Pipeline.cpp:356] [AY366300070] Stop pipeline done!
+[03/19 13:51:52.506045][info][6921][Pipeline.cpp:53] [AY366300070] Pipeline destroyed! @0x254109E0
+[03/19 13:51:52.506114][info][6921][SensorBase.cpp:47] [AY366300070] SensorBase is destroyed
+[03/19 13:51:52.506973][info][6921][ObLibuvcDevicePort.cpp:87] uvc_close done.
+[03/19 13:51:52.506980][info][6921][ObLibuvcDevicePort.cpp:88] ~ObLibuvcDevicePort done
+[03/19 13:51:52.507025][info][6921][SensorBase.cpp:47] [AY366300070] SensorBase is destroyed
+[03/19 13:51:52.507461][info][6921][ObLibuvcDevicePort.cpp:87] uvc_close done.
+[03/19 13:51:52.507467][info][6921][ObLibuvcDevicePort.cpp:88] ~ObLibuvcDevicePort done
+[03/19 13:51:53.080595][warning][7016][VideoSensor.cpp:184] [AY366300070] This frame will be dropped because jpg format verification failure! @Color [**5 logs in 2863ms, last: 13:51:50.249419**]
+[03/19 13:51:53.081242][warning][7020][Pipeline.cpp:295] [AY366300070] Output frameset queue is full, drop oldest frameset! [**53 logs in 2415ms, last: 13:51:52.461195**]
+[03/19 13:56:46.141073][info][8193][LinuxUsbPal.cpp:335] Create PollingDeviceWatcher!
+[03/19 13:56:46.141117][info][8193][DeviceManager.cpp:25] Current found device(s): (1)
+[03/19 13:56:46.141123][info][8193][DeviceManager.cpp:34] 	- Name: Gemini2, PID: 0x0670, SN/ID: AY366300070, Connection: USB3.0
+[03/19 13:56:46.141138][info][8193][DeviceManager.cpp:339] Enable net device enumeration: true
+[03/19 13:56:48.148653][info][8193][DeviceManager.cpp:25] Current device(s) list: (1)
+[03/19 13:56:48.148724][info][8193][DeviceManager.cpp:34] 	- Name: Gemini2, PID: 0x0670, SN/ID: AY366300070, Connection: USB3.0
+[03/19 13:56:48.148870][warning][8193][PropertyServer.cpp:87] [AY366300070] Not added to property map, property not found in OBPropertyBaseInfoMap, id=108
+[03/19 13:56:48.148884][warning][8193][PropertyServer.cpp:87] [AY366300070] Not added to property map, property not found in OBPropertyBaseInfoMap, id=4035
+[03/19 13:56:48.148912][warning][8193][PropertyServer.cpp:87] [AY366300070] Not added to property map, property not found in OBPropertyBaseInfoMap, id=5003
+[03/19 13:56:48.161824][info][8193][DeviceManager.cpp:194] Device created successfully! Name: Gemini 2, PID: 0x0670, SN/ID: AY366300070 FW: 1.4.76
+[03/19 13:56:48.161883][info][8193][Pipeline.cpp:42] [AY366300070] Pipeline created with device: {name: Gemini 2, sn: AY366300070}, @0x253A100
+[03/19 13:56:48.190274][info][8193][Pipeline.cpp:216] [AY366300070] Check and set config done!
+[03/19 13:56:48.190884][info][8193][Pipeline.cpp:254] [AY366300070] Try to start streams!
+[03/19 13:56:48.190919][info][8193][VideoSensor.cpp:58] [AY366300070] Try to start stream: {type: Color, format: RGB, width: 1920, height: 1080, fps: 30}
+[03/19 13:56:48.190930][info][8193][SensorBase.cpp:213] [AY366300070] Stream state changed to STARTING@Color
+[03/19 13:56:48.190939][info][8193][VideoSensor.cpp:127] [AY366300070] Start backend stream: {type: Color, format: MJPG, width: 1920, height: 1080, fps: 30}
+[03/19 13:56:48.197318][info][8193][VideoSensor.cpp:58] [AY366300070] Try to start stream: {type: Depth, format: RLE, width: 1280, height: 800, fps: 30}
+[03/19 13:56:48.197341][info][8193][SensorBase.cpp:213] [AY366300070] Stream state changed to STARTING@Depth
+[03/19 13:56:48.197348][info][8193][VideoSensor.cpp:127] [AY366300070] Start backend stream: {type: Depth, format: MJPG, width: 1280, height: 800, fps: 30}
+[03/19 13:56:48.216673][info][8193][Pipeline.cpp:270] [AY366300070] Start streams done!
+[03/19 13:56:48.216707][info][8193][Pipeline.cpp:238] [AY366300070] Pipeline start done!
+[03/19 13:56:48.254455][info][8281][SensorBase.cpp:213] [AY366300070] Stream state changed to STREAMING@Depth
+[03/19 13:56:48.260047][warning][8282][ObException.hpp:48] Frame unpack failed
+[03/19 13:56:48.330032][info][8280][SensorBase.cpp:213] [AY366300070] Stream state changed to STREAMING@Color
+[03/19 13:56:48.750839][warning][8285][Pipeline.cpp:295] [AY366300070] Output frameset queue is full, drop oldest frameset!
+[03/19 13:56:50.572103][info][8193][Pipeline.cpp:336] [AY366300070] Try to stop pipeline!
+[03/19 13:56:50.572143][info][8193][Pipeline.cpp:312] [AY366300070] Try to stop streams!
+[03/19 13:56:50.572162][info][8193][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPING@Depth
+[03/19 13:56:50.583084][info][8193][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPED@Depth
+[03/19 13:56:50.583173][info][8193][Pipeline.cpp:326] [AY366300070] Sensor stream stopped, sensorType=Depth
+[03/19 13:56:50.583183][info][8193][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPING@Color
+[03/19 13:56:50.591324][info][8193][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPED@Color
+[03/19 13:56:50.591638][info][8193][Pipeline.cpp:326] [AY366300070] Sensor stream stopped, sensorType=Color
+[03/19 13:56:50.591644][info][8193][Pipeline.cpp:332] [AY366300070] Stop streams done!
+[03/19 13:56:50.592152][info][8193][Pipeline.cpp:356] [AY366300070] Stop pipeline done!
+[03/19 13:56:50.592183][info][8193][Pipeline.cpp:53] [AY366300070] Pipeline destroyed! @0x253A100
+[03/19 13:56:50.592266][info][8193][SensorBase.cpp:47] [AY366300070] SensorBase is destroyed
+[03/19 13:56:50.592966][info][8193][ObLibuvcDevicePort.cpp:87] uvc_close done.
+[03/19 13:56:50.592972][info][8193][ObLibuvcDevicePort.cpp:88] ~ObLibuvcDevicePort done
+[03/19 13:56:50.593031][info][8193][SensorBase.cpp:47] [AY366300070] SensorBase is destroyed
+[03/19 13:56:50.593530][info][8193][ObLibuvcDevicePort.cpp:87] uvc_close done.
+[03/19 13:56:50.593557][info][8193][ObLibuvcDevicePort.cpp:88] ~ObLibuvcDevicePort done
+[03/19 13:56:51.167077][warning][8290][Pipeline.cpp:295] [AY366300070] Output frameset queue is full, drop oldest frameset! [**54 logs in 2416ms, last: 13:56:50.582395**]
+[03/19 13:59:09.082248][info][8386][LinuxUsbPal.cpp:335] Create PollingDeviceWatcher!
+[03/19 13:59:09.082304][info][8386][DeviceManager.cpp:25] Current found device(s): (1)
+[03/19 13:59:09.082310][info][8386][DeviceManager.cpp:34] 	- Name: Gemini2, PID: 0x0670, SN/ID: AY366300070, Connection: USB3.0
+[03/19 13:59:09.082315][info][8386][DeviceManager.cpp:339] Enable net device enumeration: true
+[03/19 13:59:11.089904][info][8386][DeviceManager.cpp:25] Current device(s) list: (1)
+[03/19 13:59:11.089980][info][8386][DeviceManager.cpp:34] 	- Name: Gemini2, PID: 0x0670, SN/ID: AY366300070, Connection: USB3.0
+[03/19 13:59:11.090135][warning][8386][PropertyServer.cpp:87] [AY366300070] Not added to property map, property not found in OBPropertyBaseInfoMap, id=108
+[03/19 13:59:11.090150][warning][8386][PropertyServer.cpp:87] [AY366300070] Not added to property map, property not found in OBPropertyBaseInfoMap, id=4035
+[03/19 13:59:11.090183][warning][8386][PropertyServer.cpp:87] [AY366300070] Not added to property map, property not found in OBPropertyBaseInfoMap, id=5003
+[03/19 13:59:11.103432][info][8386][DeviceManager.cpp:194] Device created successfully! Name: Gemini 2, PID: 0x0670, SN/ID: AY366300070 FW: 1.4.76
+[03/19 13:59:11.103490][info][8386][Pipeline.cpp:42] [AY366300070] Pipeline created with device: {name: Gemini 2, sn: AY366300070}, @0xB28FDC0
+[03/19 13:59:11.132178][info][8386][Pipeline.cpp:216] [AY366300070] Check and set config done!
+[03/19 13:59:11.132887][info][8386][Pipeline.cpp:254] [AY366300070] Try to start streams!
+[03/19 13:59:11.132919][info][8386][VideoSensor.cpp:58] [AY366300070] Try to start stream: {type: Color, format: RGB, width: 1920, height: 1080, fps: 30}
+[03/19 13:59:11.132929][info][8386][SensorBase.cpp:213] [AY366300070] Stream state changed to STARTING@Color
+[03/19 13:59:11.132936][info][8386][VideoSensor.cpp:127] [AY366300070] Start backend stream: {type: Color, format: MJPG, width: 1920, height: 1080, fps: 30}
+[03/19 13:59:11.139449][info][8386][VideoSensor.cpp:58] [AY366300070] Try to start stream: {type: Depth, format: RLE, width: 1280, height: 800, fps: 30}
+[03/19 13:59:11.139482][info][8386][SensorBase.cpp:213] [AY366300070] Stream state changed to STARTING@Depth
+[03/19 13:59:11.139491][info][8386][VideoSensor.cpp:127] [AY366300070] Start backend stream: {type: Depth, format: MJPG, width: 1280, height: 800, fps: 30}
+[03/19 13:59:11.158783][info][8386][Pipeline.cpp:270] [AY366300070] Start streams done!
+[03/19 13:59:11.158814][info][8386][Pipeline.cpp:238] [AY366300070] Pipeline start done!
+[03/19 13:59:11.175530][info][8474][SensorBase.cpp:213] [AY366300070] Stream state changed to STREAMING@Depth
+[03/19 13:59:11.176789][warning][8475][ObException.hpp:48] Frame unpack failed
+[03/19 13:59:11.197222][warning][8474][ObException.cpp:8] Timestamp anomaly detected, timestamp: 1216175500, cacheTimestamp: 4292770695 ,currentDiff: 3076595195, maxValidTimestampDiff: 5000000
+[03/19 13:59:11.197316][warning][8474][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 1216175500, cacheTimestamp: 4292770695 ,currentDiff: 3076595195, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 13:59:11.197326][error][8474][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 1216175500, sensor: Depth
+[03/19 13:59:11.272139][warning][8473][VideoSensor.cpp:184] [AY366300070] This frame will be dropped because jpg format verification failure! @Color
+[03/19 13:59:11.304915][info][8473][SensorBase.cpp:213] [AY366300070] Stream state changed to STREAMING@Color
+[03/19 13:59:11.660073][warning][8481][Pipeline.cpp:295] [AY366300070] Output frameset queue is full, drop oldest frameset!
+[03/19 13:59:13.512011][info][8386][Pipeline.cpp:336] [AY366300070] Try to stop pipeline!
+[03/19 13:59:13.512054][info][8386][Pipeline.cpp:312] [AY366300070] Try to stop streams!
+[03/19 13:59:13.512074][info][8386][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPING@Depth
+[03/19 13:59:13.519063][info][8386][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPED@Depth
+[03/19 13:59:13.519151][info][8386][Pipeline.cpp:326] [AY366300070] Sensor stream stopped, sensorType=Depth
+[03/19 13:59:13.519160][info][8386][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPING@Color
+[03/19 13:59:13.528030][info][8386][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPED@Color
+[03/19 13:59:13.528343][info][8386][Pipeline.cpp:326] [AY366300070] Sensor stream stopped, sensorType=Color
+[03/19 13:59:13.528348][info][8386][Pipeline.cpp:332] [AY366300070] Stop streams done!
+[03/19 13:59:13.528856][info][8386][Pipeline.cpp:356] [AY366300070] Stop pipeline done!
+[03/19 13:59:13.528881][info][8386][Pipeline.cpp:53] [AY366300070] Pipeline destroyed! @0xB28FDC0
+[03/19 13:59:13.528944][info][8386][SensorBase.cpp:47] [AY366300070] SensorBase is destroyed
+[03/19 13:59:13.529823][info][8386][ObLibuvcDevicePort.cpp:87] uvc_close done.
+[03/19 13:59:13.529829][info][8386][ObLibuvcDevicePort.cpp:88] ~ObLibuvcDevicePort done
+[03/19 13:59:13.529868][info][8386][SensorBase.cpp:47] [AY366300070] SensorBase is destroyed
+[03/19 13:59:13.530245][info][8386][ObLibuvcDevicePort.cpp:87] uvc_close done.
+[03/19 13:59:13.530249][info][8386][ObLibuvcDevicePort.cpp:88] ~ObLibuvcDevicePort done
+[03/19 13:59:14.108690][warning][8483][Pipeline.cpp:295] [AY366300070] Output frameset queue is full, drop oldest frameset! [**54 logs in 2448ms, last: 13:59:13.491570**]
+[03/19 14:00:26.566097][info][8563][LinuxUsbPal.cpp:335] Create PollingDeviceWatcher!
+[03/19 14:00:26.566144][info][8563][DeviceManager.cpp:25] Current found device(s): (1)
+[03/19 14:00:26.566149][info][8563][DeviceManager.cpp:34] 	- Name: Gemini2, PID: 0x0670, SN/ID: AY366300070, Connection: USB3.0
+[03/19 14:00:26.566154][info][8563][DeviceManager.cpp:339] Enable net device enumeration: true
+[03/19 14:00:28.572862][info][8563][DeviceManager.cpp:25] Current device(s) list: (1)
+[03/19 14:00:28.572930][info][8563][DeviceManager.cpp:34] 	- Name: Gemini2, PID: 0x0670, SN/ID: AY366300070, Connection: USB3.0
+[03/19 14:00:28.573097][warning][8563][PropertyServer.cpp:87] [AY366300070] Not added to property map, property not found in OBPropertyBaseInfoMap, id=108
+[03/19 14:00:28.573124][warning][8563][PropertyServer.cpp:87] [AY366300070] Not added to property map, property not found in OBPropertyBaseInfoMap, id=4035
+[03/19 14:00:28.573160][warning][8563][PropertyServer.cpp:87] [AY366300070] Not added to property map, property not found in OBPropertyBaseInfoMap, id=5003
+[03/19 14:00:28.587020][info][8563][DeviceManager.cpp:194] Device created successfully! Name: Gemini 2, PID: 0x0670, SN/ID: AY366300070 FW: 1.4.76
+[03/19 14:00:28.587078][info][8563][Pipeline.cpp:42] [AY366300070] Pipeline created with device: {name: Gemini 2, sn: AY366300070}, @0x370DA10
+[03/19 14:00:28.615756][info][8563][Pipeline.cpp:216] [AY366300070] Check and set config done!
+[03/19 14:00:28.616649][info][8563][Pipeline.cpp:254] [AY366300070] Try to start streams!
+[03/19 14:00:28.616696][info][8563][VideoSensor.cpp:58] [AY366300070] Try to start stream: {type: Color, format: RGB, width: 1920, height: 1080, fps: 30}
+[03/19 14:00:28.616707][info][8563][SensorBase.cpp:213] [AY366300070] Stream state changed to STARTING@Color
+[03/19 14:00:28.616716][info][8563][VideoSensor.cpp:127] [AY366300070] Start backend stream: {type: Color, format: MJPG, width: 1920, height: 1080, fps: 30}
+[03/19 14:00:28.623294][info][8563][VideoSensor.cpp:58] [AY366300070] Try to start stream: {type: Depth, format: RLE, width: 1280, height: 800, fps: 30}
+[03/19 14:00:28.623329][info][8563][SensorBase.cpp:213] [AY366300070] Stream state changed to STARTING@Depth
+[03/19 14:00:28.623350][info][8563][VideoSensor.cpp:127] [AY366300070] Start backend stream: {type: Depth, format: MJPG, width: 1280, height: 800, fps: 30}
+[03/19 14:00:28.642178][info][8563][Pipeline.cpp:270] [AY366300070] Start streams done!
+[03/19 14:00:28.642216][info][8563][Pipeline.cpp:238] [AY366300070] Pipeline start done!
+[03/19 14:00:28.659328][info][8653][SensorBase.cpp:213] [AY366300070] Stream state changed to STREAMING@Depth
+[03/19 14:00:28.661258][warning][8653][ObException.cpp:8] Timestamp anomaly detected, timestamp: 2684600, cacheTimestamp: 1218509590 ,currentDiff: 1215824990, maxValidTimestampDiff: 5000000
+[03/19 14:00:28.661335][warning][8654][ObException.hpp:48] Frame unpack failed
+[03/19 14:00:28.661441][warning][8653][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 2684600, cacheTimestamp: 1218509590 ,currentDiff: 1215824990, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 14:00:28.661457][error][8653][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 2684600, sensor: Depth
+[03/19 14:00:28.680475][warning][8653][ObException.cpp:8] Timestamp anomaly detected, timestamp: 1293657689, cacheTimestamp: 2684600 ,currentDiff: 1290973089, maxValidTimestampDiff: 5000000
+[03/19 14:00:28.680553][warning][8653][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 1293657689, cacheTimestamp: 2684600 ,currentDiff: 1290973089, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 14:00:28.680566][error][8653][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 1293657689, sensor: Depth
+[03/19 14:00:28.756107][warning][8652][VideoSensor.cpp:184] [AY366300070] This frame will be dropped because jpg format verification failure! @Color
+[03/19 14:00:28.788872][info][8652][SensorBase.cpp:213] [AY366300070] Stream state changed to STREAMING@Color
+[03/19 14:00:29.143237][warning][8660][Pipeline.cpp:295] [AY366300070] Output frameset queue is full, drop oldest frameset!
+[03/19 14:00:30.996349][info][8563][Pipeline.cpp:336] [AY366300070] Try to stop pipeline!
+[03/19 14:00:30.996391][info][8563][Pipeline.cpp:312] [AY366300070] Try to stop streams!
+[03/19 14:00:30.996413][info][8563][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPING@Depth
+[03/19 14:00:31.006709][info][8563][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPED@Depth
+[03/19 14:00:31.006773][info][8563][Pipeline.cpp:326] [AY366300070] Sensor stream stopped, sensorType=Depth
+[03/19 14:00:31.006782][info][8563][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPING@Color
+[03/19 14:00:31.014105][info][8563][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPED@Color
+[03/19 14:00:31.014352][info][8563][Pipeline.cpp:326] [AY366300070] Sensor stream stopped, sensorType=Color
+[03/19 14:00:31.014358][info][8563][Pipeline.cpp:332] [AY366300070] Stop streams done!
+[03/19 14:00:31.014854][info][8563][Pipeline.cpp:356] [AY366300070] Stop pipeline done!
+[03/19 14:00:31.014881][info][8563][Pipeline.cpp:53] [AY366300070] Pipeline destroyed! @0x370DA10
+[03/19 14:00:31.014957][info][8563][SensorBase.cpp:47] [AY366300070] SensorBase is destroyed
+[03/19 14:00:31.015772][info][8563][ObLibuvcDevicePort.cpp:87] uvc_close done.
+[03/19 14:00:31.015782][info][8563][ObLibuvcDevicePort.cpp:88] ~ObLibuvcDevicePort done
+[03/19 14:00:31.015830][info][8563][SensorBase.cpp:47] [AY366300070] SensorBase is destroyed
+[03/19 14:00:31.016151][info][8563][ObLibuvcDevicePort.cpp:87] uvc_close done.
+[03/19 14:00:31.016156][info][8563][ObLibuvcDevicePort.cpp:88] ~ObLibuvcDevicePort done
+[03/19 14:00:31.590348][warning][8662][Pipeline.cpp:295] [AY366300070] Output frameset queue is full, drop oldest frameset! [**54 logs in 2447ms, last: 14:00:30.973797**]
+[03/19 14:04:35.143666][info][9105][LinuxUsbPal.cpp:335] Create PollingDeviceWatcher!
+[03/19 14:04:35.143712][info][9105][DeviceManager.cpp:25] Current found device(s): (1)
+[03/19 14:04:35.143718][info][9105][DeviceManager.cpp:34] 	- Name: Gemini2, PID: 0x0670, SN/ID: AY366300070, Connection: USB3.0
+[03/19 14:04:35.143722][info][9105][DeviceManager.cpp:339] Enable net device enumeration: true
+[03/19 14:04:37.151508][info][9105][DeviceManager.cpp:25] Current device(s) list: (1)
+[03/19 14:04:37.151585][info][9105][DeviceManager.cpp:34] 	- Name: Gemini2, PID: 0x0670, SN/ID: AY366300070, Connection: USB3.0
+[03/19 14:04:37.151740][warning][9105][PropertyServer.cpp:87] [AY366300070] Not added to property map, property not found in OBPropertyBaseInfoMap, id=108
+[03/19 14:04:37.151757][warning][9105][PropertyServer.cpp:87] [AY366300070] Not added to property map, property not found in OBPropertyBaseInfoMap, id=4035
+[03/19 14:04:37.151790][warning][9105][PropertyServer.cpp:87] [AY366300070] Not added to property map, property not found in OBPropertyBaseInfoMap, id=5003
+[03/19 14:04:37.166230][info][9105][DeviceManager.cpp:194] Device created successfully! Name: Gemini 2, PID: 0x0670, SN/ID: AY366300070 FW: 1.4.76
+[03/19 14:04:37.166283][info][9105][Pipeline.cpp:42] [AY366300070] Pipeline created with device: {name: Gemini 2, sn: AY366300070}, @0x31165690
+[03/19 14:04:37.195756][info][9105][Pipeline.cpp:216] [AY366300070] Check and set config done!
+[03/19 14:04:37.196669][info][9105][Pipeline.cpp:254] [AY366300070] Try to start streams!
+[03/19 14:04:37.196709][info][9105][VideoSensor.cpp:58] [AY366300070] Try to start stream: {type: Color, format: RGB, width: 1920, height: 1080, fps: 30}
+[03/19 14:04:37.196720][info][9105][SensorBase.cpp:213] [AY366300070] Stream state changed to STARTING@Color
+[03/19 14:04:37.196729][info][9105][VideoSensor.cpp:127] [AY366300070] Start backend stream: {type: Color, format: MJPG, width: 1920, height: 1080, fps: 30}
+[03/19 14:04:37.203713][info][9105][VideoSensor.cpp:58] [AY366300070] Try to start stream: {type: Depth, format: RLE, width: 1280, height: 800, fps: 30}
+[03/19 14:04:37.203744][info][9105][SensorBase.cpp:213] [AY366300070] Stream state changed to STARTING@Depth
+[03/19 14:04:37.203753][info][9105][VideoSensor.cpp:127] [AY366300070] Start backend stream: {type: Depth, format: MJPG, width: 1280, height: 800, fps: 30}
+[03/19 14:04:37.206942][info][9105][Pipeline.cpp:270] [AY366300070] Start streams done!
+[03/19 14:04:37.206968][info][9105][Pipeline.cpp:238] [AY366300070] Pipeline start done!
+[03/19 14:04:37.314238][info][9211][SensorBase.cpp:213] [AY366300070] Stream state changed to STREAMING@Depth
+[03/19 14:04:37.328002][info][9207][SensorBase.cpp:213] [AY366300070] Stream state changed to STREAMING@Color
+[03/19 14:04:37.689106][warning][9212][Pipeline.cpp:295] [AY366300070] Output frameset queue is full, drop oldest frameset!
+[03/19 14:04:40.589441][info][9105][Pipeline.cpp:336] [AY366300070] Try to stop pipeline!
+[03/19 14:04:40.589505][info][9105][Pipeline.cpp:312] [AY366300070] Try to stop streams!
+[03/19 14:04:40.589533][info][9105][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPING@Depth
+[03/19 14:04:40.600824][info][9105][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPED@Depth
+[03/19 14:04:40.601049][info][9105][Pipeline.cpp:326] [AY366300070] Sensor stream stopped, sensorType=Depth
+[03/19 14:04:40.601063][info][9105][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPING@Color
+[03/19 14:04:40.612291][info][9105][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPED@Color
+[03/19 14:04:40.624111][info][9105][Pipeline.cpp:326] [AY366300070] Sensor stream stopped, sensorType=Color
+[03/19 14:04:40.624136][info][9105][Pipeline.cpp:332] [AY366300070] Stop streams done!
+[03/19 14:04:40.624731][info][9105][Pipeline.cpp:356] [AY366300070] Stop pipeline done!
+[03/19 14:04:40.624762][info][9105][Pipeline.cpp:53] [AY366300070] Pipeline destroyed! @0x31165690
+[03/19 14:04:40.624839][info][9105][SensorBase.cpp:47] [AY366300070] SensorBase is destroyed
+[03/19 14:04:40.625532][info][9105][ObLibuvcDevicePort.cpp:87] uvc_close done.
+[03/19 14:04:40.625539][info][9105][ObLibuvcDevicePort.cpp:88] ~ObLibuvcDevicePort done
+[03/19 14:04:40.625581][info][9105][SensorBase.cpp:47] [AY366300070] SensorBase is destroyed
+[03/19 14:04:40.626117][info][9105][ObLibuvcDevicePort.cpp:87] uvc_close done.
+[03/19 14:04:40.626141][info][9105][ObLibuvcDevicePort.cpp:88] ~ObLibuvcDevicePort done
+[03/19 14:04:40.637448][warning][9217][Pipeline.cpp:295] [AY366300070] Output frameset queue is full, drop oldest frameset! [**83 logs in 2948ms, last: 14:04:40.585683**]
+[03/19 14:07:37.103249][info][9494][LinuxUsbPal.cpp:335] Create PollingDeviceWatcher!
+[03/19 14:07:37.103298][info][9494][DeviceManager.cpp:25] Current found device(s): (1)
+[03/19 14:07:37.103303][info][9494][DeviceManager.cpp:34] 	- Name: Gemini2, PID: 0x0670, SN/ID: AY366300070, Connection: USB3.0
+[03/19 14:07:37.103308][info][9494][DeviceManager.cpp:339] Enable net device enumeration: true
+[03/19 14:07:39.109709][info][9494][DeviceManager.cpp:25] Current device(s) list: (1)
+[03/19 14:07:39.109773][info][9494][DeviceManager.cpp:34] 	- Name: Gemini2, PID: 0x0670, SN/ID: AY366300070, Connection: USB3.0
+[03/19 14:07:39.109943][warning][9494][PropertyServer.cpp:87] [AY366300070] Not added to property map, property not found in OBPropertyBaseInfoMap, id=108
+[03/19 14:07:39.109959][warning][9494][PropertyServer.cpp:87] [AY366300070] Not added to property map, property not found in OBPropertyBaseInfoMap, id=4035
+[03/19 14:07:39.109994][warning][9494][PropertyServer.cpp:87] [AY366300070] Not added to property map, property not found in OBPropertyBaseInfoMap, id=5003
+[03/19 14:07:39.124747][info][9494][DeviceManager.cpp:194] Device created successfully! Name: Gemini 2, PID: 0x0670, SN/ID: AY366300070 FW: 1.4.76
+[03/19 14:07:39.124832][info][9494][Pipeline.cpp:42] [AY366300070] Pipeline created with device: {name: Gemini 2, sn: AY366300070}, @0x8BF0140
+[03/19 14:07:39.154243][info][9494][Pipeline.cpp:216] [AY366300070] Check and set config done!
+[03/19 14:07:39.155045][info][9494][Pipeline.cpp:254] [AY366300070] Try to start streams!
+[03/19 14:07:39.155096][info][9494][VideoSensor.cpp:58] [AY366300070] Try to start stream: {type: Color, format: RGB, width: 1920, height: 1080, fps: 30}
+[03/19 14:07:39.155107][info][9494][SensorBase.cpp:213] [AY366300070] Stream state changed to STARTING@Color
+[03/19 14:07:39.155116][info][9494][VideoSensor.cpp:127] [AY366300070] Start backend stream: {type: Color, format: MJPG, width: 1920, height: 1080, fps: 30}
+[03/19 14:07:39.161831][info][9494][VideoSensor.cpp:58] [AY366300070] Try to start stream: {type: Depth, format: RLE, width: 1280, height: 800, fps: 30}
+[03/19 14:07:39.161863][info][9494][SensorBase.cpp:213] [AY366300070] Stream state changed to STARTING@Depth
+[03/19 14:07:39.161872][info][9494][VideoSensor.cpp:127] [AY366300070] Start backend stream: {type: Depth, format: MJPG, width: 1280, height: 800, fps: 30}
+[03/19 14:07:39.181370][info][9494][Pipeline.cpp:270] [AY366300070] Start streams done!
+[03/19 14:07:39.181406][info][9494][Pipeline.cpp:238] [AY366300070] Pipeline start done!
+[03/19 14:07:39.198132][info][9585][SensorBase.cpp:213] [AY366300070] Stream state changed to STREAMING@Depth
+[03/19 14:07:39.199698][warning][9586][ObException.hpp:48] Frame unpack failed
+[03/19 14:07:39.219132][warning][9585][ObException.cpp:8] Timestamp anomaly detected, timestamp: 288475006, cacheTimestamp: 109878902 ,currentDiff: 178596104, maxValidTimestampDiff: 5000000
+[03/19 14:07:39.219263][warning][9585][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 288475006, cacheTimestamp: 109878902 ,currentDiff: 178596104, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 14:07:39.219282][error][9585][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 288475006, sensor: Depth
+[03/19 14:07:39.294698][info][9584][SensorBase.cpp:213] [AY366300070] Stream state changed to STREAMING@Color
+[03/19 14:07:39.682103][warning][9589][Pipeline.cpp:295] [AY366300070] Output frameset queue is full, drop oldest frameset!
+[03/19 14:07:42.537711][info][9494][Pipeline.cpp:336] [AY366300070] Try to stop pipeline!
+[03/19 14:07:42.537750][info][9494][Pipeline.cpp:312] [AY366300070] Try to stop streams!
+[03/19 14:07:42.537772][info][9494][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPING@Depth
+[03/19 14:07:42.544655][info][9494][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPED@Depth
+[03/19 14:07:42.544745][info][9494][Pipeline.cpp:326] [AY366300070] Sensor stream stopped, sensorType=Depth
+[03/19 14:07:42.544754][info][9494][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPING@Color
+[03/19 14:07:42.552118][info][9494][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPED@Color
+[03/19 14:07:42.552531][info][9494][Pipeline.cpp:326] [AY366300070] Sensor stream stopped, sensorType=Color
+[03/19 14:07:42.552538][info][9494][Pipeline.cpp:332] [AY366300070] Stop streams done!
+[03/19 14:07:42.553036][info][9494][Pipeline.cpp:356] [AY366300070] Stop pipeline done!
+[03/19 14:07:42.553063][info][9494][Pipeline.cpp:53] [AY366300070] Pipeline destroyed! @0x8BF0140
+[03/19 14:07:42.553127][info][9494][SensorBase.cpp:47] [AY366300070] SensorBase is destroyed
+[03/19 14:07:42.553847][info][9494][ObLibuvcDevicePort.cpp:87] uvc_close done.
+[03/19 14:07:42.553853][info][9494][ObLibuvcDevicePort.cpp:88] ~ObLibuvcDevicePort done
+[03/19 14:07:42.553892][info][9494][SensorBase.cpp:47] [AY366300070] SensorBase is destroyed
+[03/19 14:07:42.554341][info][9494][ObLibuvcDevicePort.cpp:87] uvc_close done.
+[03/19 14:07:42.554375][info][9494][ObLibuvcDevicePort.cpp:88] ~ObLibuvcDevicePort done
+[03/19 14:07:42.564708][warning][9591][Pipeline.cpp:295] [AY366300070] Output frameset queue is full, drop oldest frameset! [**81 logs in 2882ms, last: 14:07:42.512636**]
+[03/19 14:10:51.421378][info][9760][LinuxUsbPal.cpp:335] Create PollingDeviceWatcher!
+[03/19 14:10:51.421422][info][9760][DeviceManager.cpp:25] Current found device(s): (1)
+[03/19 14:10:51.421428][info][9760][DeviceManager.cpp:34] 	- Name: Gemini2, PID: 0x0670, SN/ID: AY366300070, Connection: USB3.0
+[03/19 14:10:51.421432][info][9760][DeviceManager.cpp:339] Enable net device enumeration: true
+[03/19 14:10:53.426900][info][9760][DeviceManager.cpp:25] Current device(s) list: (1)
+[03/19 14:10:53.426964][info][9760][DeviceManager.cpp:34] 	- Name: Gemini2, PID: 0x0670, SN/ID: AY366300070, Connection: USB3.0
+[03/19 14:10:53.427134][warning][9760][PropertyServer.cpp:87] [AY366300070] Not added to property map, property not found in OBPropertyBaseInfoMap, id=108
+[03/19 14:10:53.427154][warning][9760][PropertyServer.cpp:87] [AY366300070] Not added to property map, property not found in OBPropertyBaseInfoMap, id=4035
+[03/19 14:10:53.427213][warning][9760][PropertyServer.cpp:87] [AY366300070] Not added to property map, property not found in OBPropertyBaseInfoMap, id=5003
+[03/19 14:10:53.439059][info][9760][DeviceManager.cpp:194] Device created successfully! Name: Gemini 2, PID: 0x0670, SN/ID: AY366300070 FW: 1.4.76
+[03/19 14:10:53.439105][info][9760][Pipeline.cpp:42] [AY366300070] Pipeline created with device: {name: Gemini 2, sn: AY366300070}, @0xB4CEC40
+[03/19 14:10:53.467712][info][9760][Pipeline.cpp:216] [AY366300070] Check and set config done!
+[03/19 14:10:53.468549][info][9760][Pipeline.cpp:254] [AY366300070] Try to start streams!
+[03/19 14:10:53.468584][info][9760][VideoSensor.cpp:58] [AY366300070] Try to start stream: {type: Color, format: RGB, width: 1920, height: 1080, fps: 30}
+[03/19 14:10:53.468595][info][9760][SensorBase.cpp:213] [AY366300070] Stream state changed to STARTING@Color
+[03/19 14:10:53.468603][info][9760][VideoSensor.cpp:127] [AY366300070] Start backend stream: {type: Color, format: MJPG, width: 1920, height: 1080, fps: 30}
+[03/19 14:10:53.475009][info][9760][VideoSensor.cpp:58] [AY366300070] Try to start stream: {type: Depth, format: RLE, width: 1280, height: 800, fps: 30}
+[03/19 14:10:53.475048][info][9760][SensorBase.cpp:213] [AY366300070] Stream state changed to STARTING@Depth
+[03/19 14:10:53.475056][info][9760][VideoSensor.cpp:127] [AY366300070] Start backend stream: {type: Depth, format: MJPG, width: 1280, height: 800, fps: 30}
+[03/19 14:10:53.494167][info][9760][Pipeline.cpp:270] [AY366300070] Start streams done!
+[03/19 14:10:53.494203][info][9760][Pipeline.cpp:238] [AY366300070] Pipeline start done!
+[03/19 14:10:53.508987][info][9848][SensorBase.cpp:213] [AY366300070] Stream state changed to STREAMING@Depth
+[03/19 14:10:53.510594][warning][9849][ObException.hpp:48] Frame unpack failed
+[03/19 14:10:53.511469][warning][9848][ObException.cpp:8] Timestamp anomaly detected, timestamp: 848300, cacheTimestamp: 2605059584 ,currentDiff: 2604211284, maxValidTimestampDiff: 5000000
+[03/19 14:10:53.511566][warning][9848][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 848300, cacheTimestamp: 2605059584 ,currentDiff: 2604211284, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 14:10:53.511578][error][9848][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 848300, sensor: Depth
+[03/19 14:10:53.511741][warning][9848][ObException.cpp:8] Timestamp anomaly detected, timestamp: 4293345896, cacheTimestamp: 848300 ,currentDiff: 4292497596, maxValidTimestampDiff: 5000000
+[03/19 14:10:53.511762][warning][9848][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 4293345896, cacheTimestamp: 848300 ,currentDiff: 4292497596, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 14:10:53.511769][error][9848][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 4293345896, sensor: Depth
+[03/19 14:10:53.514741][warning][9849][ObException.hpp:48] Frame unpack failed
+[03/19 14:10:53.516238][warning][9849][ObException.hpp:48] Frame unpack failed
+[03/19 14:10:53.516811][warning][9848][ObException.cpp:8] Timestamp anomaly detected, timestamp: 8000, cacheTimestamp: 4291905496 ,currentDiff: 4291897496, maxValidTimestampDiff: 5000000
+[03/19 14:10:53.516868][warning][9848][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 8000, cacheTimestamp: 4291905496 ,currentDiff: 4291897496, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 14:10:53.516879][error][9848][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 8000, sensor: Depth
+[03/19 14:10:53.517826][warning][9849][ObException.hpp:48] Frame unpack failed
+[03/19 14:10:53.521028][warning][9848][ObException.cpp:8] Timestamp anomaly detected, timestamp: 3741804489, cacheTimestamp: 1634300 ,currentDiff: 3740170189, maxValidTimestampDiff: 5000000
+[03/19 14:10:53.521106][warning][9848][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 3741804489, cacheTimestamp: 1634300 ,currentDiff: 3740170189, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 14:10:53.521119][error][9848][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 3741804489, sensor: Depth
+[03/19 14:10:53.521955][warning][9848][ObException.cpp:8] Timestamp anomaly detected, timestamp: 1101018959, cacheTimestamp: 3741804489 ,currentDiff: 2640785530, maxValidTimestampDiff: 5000000
+[03/19 14:10:53.522025][warning][9848][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 1101018959, cacheTimestamp: 3741804489 ,currentDiff: 2640785530, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 14:10:53.522069][error][9848][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 1101018959, sensor: Depth
+[03/19 14:10:53.523520][warning][9848][ObException.cpp:8] Timestamp anomaly detected, timestamp: 4294531495, cacheTimestamp: 1101018959 ,currentDiff: 3193512536, maxValidTimestampDiff: 5000000
+[03/19 14:10:53.523601][warning][9848][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 4294531495, cacheTimestamp: 1101018959 ,currentDiff: 3193512536, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 14:10:53.523616][error][9848][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 4294531495, sensor: Depth
+[03/19 14:10:53.524357][warning][9848][ObException.cpp:8] Timestamp anomaly detected, timestamp: 3087200, cacheTimestamp: 4294531495 ,currentDiff: 4291444295, maxValidTimestampDiff: 5000000
+[03/19 14:10:53.524398][warning][9848][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 3087200, cacheTimestamp: 4294531495 ,currentDiff: 4291444295, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 14:10:53.524408][error][9848][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 3087200, sensor: Depth
+[03/19 14:10:53.526315][warning][9848][ObException.cpp:8] Timestamp anomaly detected, timestamp: 554944245, cacheTimestamp: 3087200 ,currentDiff: 551857045, maxValidTimestampDiff: 5000000
+[03/19 14:10:53.526363][warning][9848][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 554944245, cacheTimestamp: 3087200 ,currentDiff: 551857045, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 14:10:53.526374][error][9848][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 554944245, sensor: Depth
+[03/19 14:10:53.528494][warning][9848][ObException.cpp:8] Timestamp anomaly detected, timestamp: 4294926496, cacheTimestamp: 554944245 ,currentDiff: 3739982251, maxValidTimestampDiff: 5000000
+[03/19 14:10:53.528567][warning][9848][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 4294926496, cacheTimestamp: 554944245 ,currentDiff: 3739982251, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 14:10:53.528580][error][9848][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 4294926496, sensor: Depth
+[03/19 14:10:53.530780][warning][9849][ObException.hpp:48] Frame unpack failed
+[03/19 14:10:53.531031][warning][9848][ObException.cpp:8] Timestamp anomaly detected, timestamp: 2814900, cacheTimestamp: 4293037496 ,currentDiff: 4290222596, maxValidTimestampDiff: 5000000
+[03/19 14:10:53.531096][warning][9848][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 2814900, cacheTimestamp: 4293037496 ,currentDiff: 4290222596, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 14:10:53.531108][error][9848][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 2814900, sensor: Depth
+[03/19 14:10:53.531201][warning][9848][ObException.cpp:8] Timestamp anomaly detected, timestamp: 3664433519, cacheTimestamp: 2814900 ,currentDiff: 3661618619, maxValidTimestampDiff: 5000000
+[03/19 14:10:53.531238][warning][9848][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 3664433519, cacheTimestamp: 2814900 ,currentDiff: 3661618619, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 14:10:53.531267][error][9848][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 3664433519, sensor: Depth
+[03/19 14:10:53.566621][warning][9848][ObException.cpp:8] Timestamp anomaly detected, timestamp: 482812474, cacheTimestamp: 3664433519 ,currentDiff: 3181621045, maxValidTimestampDiff: 5000000
+[03/19 14:10:53.566676][warning][9848][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 482812474, cacheTimestamp: 3664433519 ,currentDiff: 3181621045, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 14:10:53.566685][error][9848][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 482812474, sensor: Depth
+[03/19 14:10:53.607924][info][9847][SensorBase.cpp:213] [AY366300070] Stream state changed to STREAMING@Color
+[03/19 14:10:54.061813][warning][9855][Pipeline.cpp:295] [AY366300070] Output frameset queue is full, drop oldest frameset!
+[03/19 14:10:56.849097][info][9760][Pipeline.cpp:336] [AY366300070] Try to stop pipeline!
+[03/19 14:10:56.849143][info][9760][Pipeline.cpp:312] [AY366300070] Try to stop streams!
+[03/19 14:10:56.849166][info][9760][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPING@Depth
+[03/19 14:10:56.856913][info][9760][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPED@Depth
+[03/19 14:10:56.857024][info][9760][Pipeline.cpp:326] [AY366300070] Sensor stream stopped, sensorType=Depth
+[03/19 14:10:56.857035][info][9760][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPING@Color
+[03/19 14:10:56.864227][info][9760][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPED@Color
+[03/19 14:10:56.864370][info][9760][Pipeline.cpp:326] [AY366300070] Sensor stream stopped, sensorType=Color
+[03/19 14:10:56.864376][info][9760][Pipeline.cpp:332] [AY366300070] Stop streams done!
+[03/19 14:10:56.864903][info][9760][Pipeline.cpp:356] [AY366300070] Stop pipeline done!
+[03/19 14:10:56.864933][info][9760][Pipeline.cpp:53] [AY366300070] Pipeline destroyed! @0xB4CEC40
+[03/19 14:10:56.865003][info][9760][SensorBase.cpp:47] [AY366300070] SensorBase is destroyed
+[03/19 14:10:56.865737][info][9760][ObLibuvcDevicePort.cpp:87] uvc_close done.
+[03/19 14:10:56.865744][info][9760][ObLibuvcDevicePort.cpp:88] ~ObLibuvcDevicePort done
+[03/19 14:10:56.865786][info][9760][SensorBase.cpp:47] [AY366300070] SensorBase is destroyed
+[03/19 14:10:56.866101][info][9760][ObLibuvcDevicePort.cpp:87] uvc_close done.
+[03/19 14:10:56.866106][info][9760][ObLibuvcDevicePort.cpp:88] ~ObLibuvcDevicePort done
+[03/19 14:10:56.874786][warning][9857][Pipeline.cpp:295] [AY366300070] Output frameset queue is full, drop oldest frameset! [**79 logs in 2812ms, last: 14:10:56.827488**]
+[03/19 14:18:53.383736][info][10372][LinuxUsbPal.cpp:335] Create PollingDeviceWatcher!
+[03/19 14:18:53.383801][info][10372][DeviceManager.cpp:25] Current found device(s): (1)
+[03/19 14:18:53.383807][info][10372][DeviceManager.cpp:34] 	- Name: Gemini2, PID: 0x0670, SN/ID: AY366300070, Connection: USB3.0
+[03/19 14:18:53.383811][info][10372][DeviceManager.cpp:339] Enable net device enumeration: true
+[03/19 14:18:55.390891][info][10372][DeviceManager.cpp:25] Current device(s) list: (1)
+[03/19 14:18:55.390955][info][10372][DeviceManager.cpp:34] 	- Name: Gemini2, PID: 0x0670, SN/ID: AY366300070, Connection: USB3.0
+[03/19 14:18:55.391116][warning][10372][PropertyServer.cpp:87] [AY366300070] Not added to property map, property not found in OBPropertyBaseInfoMap, id=108
+[03/19 14:18:55.391133][warning][10372][PropertyServer.cpp:87] [AY366300070] Not added to property map, property not found in OBPropertyBaseInfoMap, id=4035
+[03/19 14:18:55.391166][warning][10372][PropertyServer.cpp:87] [AY366300070] Not added to property map, property not found in OBPropertyBaseInfoMap, id=5003
+[03/19 14:18:55.404449][info][10372][DeviceManager.cpp:194] Device created successfully! Name: Gemini 2, PID: 0x0670, SN/ID: AY366300070 FW: 1.4.76
+[03/19 14:18:55.404514][info][10372][Pipeline.cpp:42] [AY366300070] Pipeline created with device: {name: Gemini 2, sn: AY366300070}, @0x33356C40
+[03/19 14:18:55.433941][info][10372][Pipeline.cpp:216] [AY366300070] Check and set config done!
+[03/19 14:18:55.434658][info][10372][Pipeline.cpp:254] [AY366300070] Try to start streams!
+[03/19 14:18:55.434692][info][10372][VideoSensor.cpp:58] [AY366300070] Try to start stream: {type: Color, format: RGB, width: 1920, height: 1080, fps: 30}
+[03/19 14:18:55.434702][info][10372][SensorBase.cpp:213] [AY366300070] Stream state changed to STARTING@Color
+[03/19 14:18:55.434709][info][10372][VideoSensor.cpp:127] [AY366300070] Start backend stream: {type: Color, format: MJPG, width: 1920, height: 1080, fps: 30}
+[03/19 14:18:55.441201][info][10372][VideoSensor.cpp:58] [AY366300070] Try to start stream: {type: Depth, format: RLE, width: 1280, height: 800, fps: 30}
+[03/19 14:18:55.441235][info][10372][SensorBase.cpp:213] [AY366300070] Stream state changed to STARTING@Depth
+[03/19 14:18:55.441243][info][10372][VideoSensor.cpp:127] [AY366300070] Start backend stream: {type: Depth, format: MJPG, width: 1280, height: 800, fps: 30}
+[03/19 14:18:55.460770][info][10372][Pipeline.cpp:270] [AY366300070] Start streams done!
+[03/19 14:18:55.460808][info][10372][Pipeline.cpp:238] [AY366300070] Pipeline start done!
+[03/19 14:18:55.498680][info][10460][SensorBase.cpp:213] [AY366300070] Stream state changed to STREAMING@Depth
+[03/19 14:18:55.504594][warning][10461][ObException.hpp:48] Frame unpack failed
+[03/19 14:18:55.573992][info][10459][SensorBase.cpp:213] [AY366300070] Stream state changed to STREAMING@Color
+[03/19 14:18:55.962305][warning][10464][Pipeline.cpp:295] [AY366300070] Output frameset queue is full, drop oldest frameset!
+[03/19 14:18:58.993545][warning][10466][Pipeline.cpp:295] [AY366300070] Output frameset queue is full, drop oldest frameset! [**74 logs in 3031ms, last: 14:18:58.664093**]
+[03/19 14:19:00.527088][info][10460][VideoSensor.cpp:153] [AY366300070] Depth backend frame callback, frameRate=30.224697fps
+[03/19 14:19:00.536074][info][10461][SensorBase.cpp:370] [AY366300070] Depth Streaming... frameRate=30.206676fps
+[03/19 14:19:00.606011][info][10459][VideoSensor.cpp:153] [AY366300070] Color backend frame callback, frameRate=30.206676fps
+[03/19 14:19:00.630232][info][10464][SensorBase.cpp:370] [AY366300070] Color Streaming... frameRate=30.206676fps
+[03/19 14:19:04.997714][warning][10464][Pipeline.cpp:295] [AY366300070] Output frameset queue is full, drop oldest frameset! [**52 logs in 6004ms**]
+[03/19 14:19:05.557437][info][10460][VideoSensor.cpp:153] [AY366300070] Depth backend frame callback, frameRate=30.019880fps
+[03/19 14:19:05.568076][info][10461][SensorBase.cpp:370] [AY366300070] Depth Streaming... frameRate=30.007948fps
+[03/19 14:19:05.638768][info][10459][VideoSensor.cpp:153] [AY366300070] Color backend frame callback, frameRate=30.001987fps
+[03/19 14:19:05.662989][info][10464][SensorBase.cpp:370] [AY366300070] Color Streaming... frameRate=30.007948fps
+[03/19 14:19:10.587039][info][10460][VideoSensor.cpp:153] [AY366300070] Depth backend frame callback, frameRate=30.019880fps
+[03/19 14:19:10.597825][info][10461][SensorBase.cpp:370] [AY366300070] Depth Streaming... frameRate=30.025850fps
+[03/19 14:19:10.671262][info][10459][VideoSensor.cpp:153] [AY366300070] Color backend frame callback, frameRate=30.001987fps
+[03/19 14:19:10.694017][info][10464][SensorBase.cpp:370] [AY366300070] Color Streaming... frameRate=30.007948fps
+[03/19 14:19:15.616763][info][10460][VideoSensor.cpp:153] [AY366300070] Depth backend frame callback, frameRate=30.025850fps
+[03/19 14:19:15.626381][info][10461][SensorBase.cpp:370] [AY366300070] Depth Streaming... frameRate=30.025850fps
+[03/19 14:19:15.697309][info][10464][SensorBase.cpp:370] [AY366300070] Color Streaming... frameRate=29.982012fps
+[03/19 14:19:15.703856][info][10459][VideoSensor.cpp:153] [AY366300070] Color backend frame callback, frameRate=30.007948fps
+[03/19 14:19:17.062629][warning][10532][Pipeline.cpp:295] [AY366300070] Output frameset queue is full, drop oldest frameset! [**122 logs in 12064ms, last: 14:19:16.963434**]
+[03/19 14:19:20.646480][info][10460][VideoSensor.cpp:153] [AY366300070] Depth backend frame callback, frameRate=30.019880fps
+[03/19 14:19:20.657209][info][10461][SensorBase.cpp:370] [AY366300070] Depth Streaming... frameRate=30.013912fps
+[03/19 14:19:20.729080][info][10464][SensorBase.cpp:370] [AY366300070] Color Streaming... frameRate=30.007948fps
+[03/19 14:19:20.736479][info][10459][VideoSensor.cpp:153] [AY366300070] Color backend frame callback, frameRate=30.001987fps
+[03/19 14:19:22.862515][info][10372][Pipeline.cpp:336] [AY366300070] Try to stop pipeline!
+[03/19 14:19:22.862569][info][10372][Pipeline.cpp:312] [AY366300070] Try to stop streams!
+[03/19 14:19:22.862598][info][10372][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPING@Depth
+[03/19 14:19:22.871598][info][10372][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPED@Depth
+[03/19 14:19:22.871779][info][10372][Pipeline.cpp:326] [AY366300070] Sensor stream stopped, sensorType=Depth
+[03/19 14:19:22.871792][info][10372][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPING@Color
+[03/19 14:19:22.880284][info][10372][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPED@Color
+[03/19 14:19:22.893421][info][10372][Pipeline.cpp:326] [AY366300070] Sensor stream stopped, sensorType=Color
+[03/19 14:19:22.893432][info][10372][Pipeline.cpp:332] [AY366300070] Stop streams done!
+[03/19 14:19:22.893985][info][10372][Pipeline.cpp:356] [AY366300070] Stop pipeline done!
+[03/19 14:19:22.894023][info][10372][Pipeline.cpp:53] [AY366300070] Pipeline destroyed! @0x33356C40
+[03/19 14:19:22.894156][info][10372][SensorBase.cpp:47] [AY366300070] SensorBase is destroyed
+[03/19 14:19:22.894983][info][10372][ObLibuvcDevicePort.cpp:87] uvc_close done.
+[03/19 14:19:22.894989][info][10372][ObLibuvcDevicePort.cpp:88] ~ObLibuvcDevicePort done
+[03/19 14:19:22.895047][info][10372][SensorBase.cpp:47] [AY366300070] SensorBase is destroyed
+[03/19 14:19:22.895744][info][10372][ObLibuvcDevicePort.cpp:87] uvc_close done.
+[03/19 14:19:22.895770][info][10372][ObLibuvcDevicePort.cpp:88] ~ObLibuvcDevicePort done
+[03/19 14:19:22.904559][warning][10548][Pipeline.cpp:295] [AY366300070] Output frameset queue is full, drop oldest frameset! [**33 logs in 5841ms, last: 14:19:22.857843**]
+[03/19 14:25:15.121167][info][10995][LinuxUsbPal.cpp:335] Create PollingDeviceWatcher!
+[03/19 14:25:15.121218][info][10995][DeviceManager.cpp:25] Current found device(s): (1)
+[03/19 14:25:15.121224][info][10995][DeviceManager.cpp:34] 	- Name: Gemini2, PID: 0x0670, SN/ID: AY366300070, Connection: USB3.0
+[03/19 14:25:15.121228][info][10995][DeviceManager.cpp:339] Enable net device enumeration: true
+[03/19 14:25:17.127033][info][10995][DeviceManager.cpp:25] Current device(s) list: (1)
+[03/19 14:25:17.127101][info][10995][DeviceManager.cpp:34] 	- Name: Gemini2, PID: 0x0670, SN/ID: AY366300070, Connection: USB3.0
+[03/19 14:25:17.127270][warning][10995][PropertyServer.cpp:87] [AY366300070] Not added to property map, property not found in OBPropertyBaseInfoMap, id=108
+[03/19 14:25:17.127288][warning][10995][PropertyServer.cpp:87] [AY366300070] Not added to property map, property not found in OBPropertyBaseInfoMap, id=4035
+[03/19 14:25:17.127320][warning][10995][PropertyServer.cpp:87] [AY366300070] Not added to property map, property not found in OBPropertyBaseInfoMap, id=5003
+[03/19 14:25:17.140029][info][10995][DeviceManager.cpp:194] Device created successfully! Name: Gemini 2, PID: 0x0670, SN/ID: AY366300070 FW: 1.4.76
+[03/19 14:25:17.140092][info][10995][Pipeline.cpp:42] [AY366300070] Pipeline created with device: {name: Gemini 2, sn: AY366300070}, @0x9604690
+[03/19 14:25:17.168958][info][10995][Pipeline.cpp:216] [AY366300070] Check and set config done!
+[03/19 14:25:17.169879][info][10995][Pipeline.cpp:254] [AY366300070] Try to start streams!
+[03/19 14:25:17.169915][info][10995][VideoSensor.cpp:58] [AY366300070] Try to start stream: {type: Color, format: RGB, width: 1920, height: 1080, fps: 30}
+[03/19 14:25:17.169939][info][10995][SensorBase.cpp:213] [AY366300070] Stream state changed to STARTING@Color
+[03/19 14:25:17.169947][info][10995][VideoSensor.cpp:127] [AY366300070] Start backend stream: {type: Color, format: MJPG, width: 1920, height: 1080, fps: 30}
+[03/19 14:25:17.177067][info][10995][VideoSensor.cpp:58] [AY366300070] Try to start stream: {type: Depth, format: RLE, width: 1280, height: 800, fps: 30}
+[03/19 14:25:17.177104][info][10995][SensorBase.cpp:213] [AY366300070] Stream state changed to STARTING@Depth
+[03/19 14:25:17.177113][info][10995][VideoSensor.cpp:127] [AY366300070] Start backend stream: {type: Depth, format: MJPG, width: 1280, height: 800, fps: 30}
+[03/19 14:25:17.196139][info][10995][Pipeline.cpp:270] [AY366300070] Start streams done!
+[03/19 14:25:17.196167][info][10995][Pipeline.cpp:238] [AY366300070] Pipeline start done!
+[03/19 14:25:17.213584][info][11085][SensorBase.cpp:213] [AY366300070] Stream state changed to STREAMING@Depth
+[03/19 14:25:17.215313][warning][11086][ObException.hpp:48] Frame unpack failed
+[03/19 14:25:17.215984][warning][11085][ObException.cpp:8] Timestamp anomaly detected, timestamp: 377100, cacheTimestamp: 4293203996 ,currentDiff: 4292826896, maxValidTimestampDiff: 5000000
+[03/19 14:25:17.216078][warning][11085][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 377100, cacheTimestamp: 4293203996 ,currentDiff: 4292826896, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 14:25:17.216090][error][11085][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 377100, sensor: Depth
+[03/19 14:25:17.216388][warning][11086][ObException.hpp:48] Frame unpack failed
+[03/19 14:25:17.220455][warning][11085][ObException.cpp:8] Timestamp anomaly detected, timestamp: 2214638971, cacheTimestamp: 68300 ,currentDiff: 2214570671, maxValidTimestampDiff: 5000000
+[03/19 14:25:17.220531][warning][11085][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 2214638971, cacheTimestamp: 68300 ,currentDiff: 2214570671, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 14:25:17.220544][error][11085][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 2214638971, sensor: Depth
+[03/19 14:25:17.220780][warning][11086][ObException.hpp:48] Frame unpack failed
+[03/19 14:25:17.221956][warning][11085][ObException.cpp:8] Timestamp anomaly detected, timestamp: 2254157276, cacheTimestamp: 2214638971 ,currentDiff: 39518305, maxValidTimestampDiff: 5000000
+[03/19 14:25:17.221995][warning][11085][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 2254157276, cacheTimestamp: 2214638971 ,currentDiff: 39518305, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 14:25:17.222005][error][11085][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 2254157276, sensor: Depth
+[03/19 14:25:17.225226][warning][11085][ObException.cpp:8] Timestamp anomaly detected, timestamp: 1715100, cacheTimestamp: 2254157276 ,currentDiff: 2252442176, maxValidTimestampDiff: 5000000
+[03/19 14:25:17.225299][warning][11085][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 1715100, cacheTimestamp: 2254157276 ,currentDiff: 2252442176, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 14:25:17.225315][error][11085][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 1715100, sensor: Depth
+[03/19 14:25:17.225405][warning][11085][ObException.cpp:8] Timestamp anomaly detected, timestamp: 4292391896, cacheTimestamp: 1715100 ,currentDiff: 4290676796, maxValidTimestampDiff: 5000000
+[03/19 14:25:17.225431][warning][11085][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 4292391896, cacheTimestamp: 1715100 ,currentDiff: 4290676796, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 14:25:17.225442][error][11085][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 4292391896, sensor: Depth
+[03/19 14:25:17.227214][warning][11086][ObException.hpp:48] Frame unpack failed
+[03/19 14:25:17.230106][warning][11085][ObException.cpp:8] Timestamp anomaly detected, timestamp: 22925773, cacheTimestamp: 4293230896 ,currentDiff: 4270305123, maxValidTimestampDiff: 5000000
+[03/19 14:25:17.230179][warning][11085][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 22925773, cacheTimestamp: 4293230896 ,currentDiff: 4270305123, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 14:25:17.230204][error][11085][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 22925773, sensor: Depth
+[03/19 14:25:17.230273][warning][11085][ObException.cpp:8] Timestamp anomaly detected, timestamp: 4293379696, cacheTimestamp: 22925773 ,currentDiff: 4270453923, maxValidTimestampDiff: 5000000
+[03/19 14:25:17.230295][warning][11085][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 4293379696, cacheTimestamp: 22925773 ,currentDiff: 4270453923, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 14:25:17.230302][error][11085][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 4293379696, sensor: Depth
+[03/19 14:25:17.232872][warning][11085][ObException.cpp:8] Timestamp anomaly detected, timestamp: 2350535331, cacheTimestamp: 4293379696 ,currentDiff: 1942844365, maxValidTimestampDiff: 5000000
+[03/19 14:25:17.232942][warning][11085][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 2350535331, cacheTimestamp: 4293379696 ,currentDiff: 1942844365, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 14:25:17.232956][error][11085][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 2350535331, sensor: Depth
+[03/19 14:25:17.234575][warning][11085][ObException.cpp:8] Timestamp anomaly detected, timestamp: 1010699, cacheTimestamp: 2350535331 ,currentDiff: 2349524632, maxValidTimestampDiff: 5000000
+[03/19 14:25:17.234649][warning][11085][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 1010699, cacheTimestamp: 2350535331 ,currentDiff: 2349524632, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 14:25:17.234662][error][11085][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 1010699, sensor: Depth
+[03/19 14:25:17.234722][warning][11085][ObException.cpp:8] Timestamp anomaly detected, timestamp: 1432014440, cacheTimestamp: 1010699 ,currentDiff: 1431003741, maxValidTimestampDiff: 5000000
+[03/19 14:25:17.234747][warning][11085][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 1432014440, cacheTimestamp: 1010699 ,currentDiff: 1431003741, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 14:25:17.234756][error][11085][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 1432014440, sensor: Depth
+[03/19 14:25:17.234828][warning][11085][ObException.cpp:8] Timestamp anomaly detected, timestamp: 4294614096, cacheTimestamp: 1432014440 ,currentDiff: 2862599656, maxValidTimestampDiff: 5000000
+[03/19 14:25:17.234852][warning][11085][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 4294614096, cacheTimestamp: 1432014440 ,currentDiff: 2862599656, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 14:25:17.234860][error][11085][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 4294614096, sensor: Depth
+[03/19 14:25:17.235482][warning][11085][ObException.cpp:8] Timestamp anomaly detected, timestamp: 2357202910, cacheTimestamp: 4294614096 ,currentDiff: 1937411186, maxValidTimestampDiff: 5000000
+[03/19 14:25:17.235518][warning][11085][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 2357202910, cacheTimestamp: 4294614096 ,currentDiff: 1937411186, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 14:25:17.235527][error][11085][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 2357202910, sensor: Depth
+[03/19 14:25:17.270522][warning][11085][ObException.cpp:8] Timestamp anomaly detected, timestamp: 1346479599, cacheTimestamp: 2357202910 ,currentDiff: 1010723311, maxValidTimestampDiff: 5000000
+[03/19 14:25:17.270590][warning][11085][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 1346479599, cacheTimestamp: 2357202910 ,currentDiff: 1010723311, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 14:25:17.270601][error][11085][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 1346479599, sensor: Depth
+[03/19 14:25:17.308331][warning][11084][VideoSensor.cpp:184] [AY366300070] This frame will be dropped because jpg format verification failure! @Color
+[03/19 14:25:17.341020][info][11084][SensorBase.cpp:213] [AY366300070] Stream state changed to STREAMING@Color
+[03/19 14:25:17.730124][warning][11092][Pipeline.cpp:295] [AY366300070] Output frameset queue is full, drop oldest frameset!
+[03/19 14:25:20.760092][warning][11094][Pipeline.cpp:295] [AY366300070] Output frameset queue is full, drop oldest frameset! [**73 logs in 3029ms, last: 14:25:20.533730**]
+[03/19 14:25:22.231838][info][11085][VideoSensor.cpp:153] [AY366300070] Depth backend frame callback, frameRate=33.080910fps
+[03/19 14:25:22.241734][info][11086][SensorBase.cpp:370] [AY366300070] Depth Streaming... frameRate=30.441704fps
+[03/19 14:25:22.340173][info][11084][VideoSensor.cpp:153] [AY366300070] Color backend frame callback, frameRate=30.206676fps
+[03/19 14:25:22.397890][info][11092][SensorBase.cpp:370] [AY366300070] Color Streaming... frameRate=30.212681fps
+[03/19 14:25:26.762607][warning][11092][Pipeline.cpp:295] [AY366300070] Output frameset queue is full, drop oldest frameset! [**54 logs in 6002ms**]
+[03/19 14:25:27.261310][info][11085][VideoSensor.cpp:153] [AY366300070] Depth backend frame callback, frameRate=30.019880fps
+[03/19 14:25:27.271453][info][11086][SensorBase.cpp:370] [AY366300070] Depth Streaming... frameRate=30.019880fps
+[03/19 14:25:27.372997][info][11084][VideoSensor.cpp:153] [AY366300070] Color backend frame callback, frameRate=30.007948fps
+[03/19 14:25:27.398439][info][11092][SensorBase.cpp:370] [AY366300070] Color Streaming... frameRate=29.994001fps
+[03/19 14:25:32.291431][info][11085][VideoSensor.cpp:153] [AY366300070] Depth backend frame callback, frameRate=30.019880fps
+[03/19 14:25:32.301463][info][11086][SensorBase.cpp:370] [AY366300070] Depth Streaming... frameRate=30.019880fps
+[03/19 14:25:32.405461][info][11084][VideoSensor.cpp:153] [AY366300070] Color backend frame callback, frameRate=30.001987fps
+[03/19 14:25:32.431122][info][11092][SensorBase.cpp:370] [AY366300070] Color Streaming... frameRate=30.001987fps
+[03/19 14:25:33.572890][info][10995][Pipeline.cpp:336] [AY366300070] Try to stop pipeline!
+[03/19 14:25:33.572931][info][10995][Pipeline.cpp:312] [AY366300070] Try to stop streams!
+[03/19 14:25:33.572956][info][10995][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPING@Depth
+[03/19 14:25:33.582893][info][10995][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPED@Depth
+[03/19 14:25:33.583117][info][10995][Pipeline.cpp:326] [AY366300070] Sensor stream stopped, sensorType=Depth
+[03/19 14:25:33.583126][info][10995][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPING@Color
+[03/19 14:25:33.591999][info][10995][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPED@Color
+[03/19 14:25:33.594134][info][10995][Pipeline.cpp:326] [AY366300070] Sensor stream stopped, sensorType=Color
+[03/19 14:25:33.594140][info][10995][Pipeline.cpp:332] [AY366300070] Stop streams done!
+[03/19 14:25:33.594642][info][10995][Pipeline.cpp:356] [AY366300070] Stop pipeline done!
+[03/19 14:25:33.594671][info][10995][Pipeline.cpp:53] [AY366300070] Pipeline destroyed! @0x9604690
+[03/19 14:25:33.594767][info][10995][SensorBase.cpp:47] [AY366300070] SensorBase is destroyed
+[03/19 14:25:33.595554][info][10995][ObLibuvcDevicePort.cpp:87] uvc_close done.
+[03/19 14:25:33.595562][info][10995][ObLibuvcDevicePort.cpp:88] ~ObLibuvcDevicePort done
+[03/19 14:25:33.595610][info][10995][SensorBase.cpp:47] [AY366300070] SensorBase is destroyed
+[03/19 14:25:33.595948][info][10995][ObLibuvcDevicePort.cpp:87] uvc_close done.
+[03/19 14:25:33.595951][info][10995][ObLibuvcDevicePort.cpp:88] ~ObLibuvcDevicePort done
+[03/19 14:25:34.178956][warning][11154][Pipeline.cpp:295] [AY366300070] Output frameset queue is full, drop oldest frameset! [**110 logs in 7416ms, last: 14:25:33.564287**]
+[03/19 14:29:54.480639][info][11423][LinuxUsbPal.cpp:335] Create PollingDeviceWatcher!
+[03/19 14:29:54.480681][info][11423][DeviceManager.cpp:25] Current found device(s): (1)
+[03/19 14:29:54.480687][info][11423][DeviceManager.cpp:34] 	- Name: Gemini2, PID: 0x0670, SN/ID: AY366300070, Connection: USB3.0
+[03/19 14:29:54.480691][info][11423][DeviceManager.cpp:339] Enable net device enumeration: true
+[03/19 14:29:56.488802][info][11423][DeviceManager.cpp:25] Current device(s) list: (1)
+[03/19 14:29:56.488882][info][11423][DeviceManager.cpp:34] 	- Name: Gemini2, PID: 0x0670, SN/ID: AY366300070, Connection: USB3.0
+[03/19 14:29:56.489059][warning][11423][PropertyServer.cpp:87] [AY366300070] Not added to property map, property not found in OBPropertyBaseInfoMap, id=108
+[03/19 14:29:56.489086][warning][11423][PropertyServer.cpp:87] [AY366300070] Not added to property map, property not found in OBPropertyBaseInfoMap, id=4035
+[03/19 14:29:56.489126][warning][11423][PropertyServer.cpp:87] [AY366300070] Not added to property map, property not found in OBPropertyBaseInfoMap, id=5003
+[03/19 14:29:56.504140][info][11423][DeviceManager.cpp:194] Device created successfully! Name: Gemini 2, PID: 0x0670, SN/ID: AY366300070 FW: 1.4.76
+[03/19 14:29:56.504225][info][11423][Pipeline.cpp:42] [AY366300070] Pipeline created with device: {name: Gemini 2, sn: AY366300070}, @0x3BB110C0
+[03/19 14:29:56.533295][info][11423][Pipeline.cpp:216] [AY366300070] Check and set config done!
+[03/19 14:29:56.533968][info][11423][Pipeline.cpp:254] [AY366300070] Try to start streams!
+[03/19 14:29:56.534003][info][11423][VideoSensor.cpp:58] [AY366300070] Try to start stream: {type: Color, format: RGB, width: 1920, height: 1080, fps: 30}
+[03/19 14:29:56.534014][info][11423][SensorBase.cpp:213] [AY366300070] Stream state changed to STARTING@Color
+[03/19 14:29:56.534023][info][11423][VideoSensor.cpp:127] [AY366300070] Start backend stream: {type: Color, format: MJPG, width: 1920, height: 1080, fps: 30}
+[03/19 14:29:56.540577][info][11423][VideoSensor.cpp:58] [AY366300070] Try to start stream: {type: Depth, format: RLE, width: 1280, height: 800, fps: 30}
+[03/19 14:29:56.540620][info][11423][SensorBase.cpp:213] [AY366300070] Stream state changed to STARTING@Depth
+[03/19 14:29:56.540628][info][11423][VideoSensor.cpp:127] [AY366300070] Start backend stream: {type: Depth, format: MJPG, width: 1280, height: 800, fps: 30}
+[03/19 14:29:56.559913][info][11423][Pipeline.cpp:270] [AY366300070] Start streams done!
+[03/19 14:29:56.559947][info][11423][Pipeline.cpp:238] [AY366300070] Pipeline start done!
+[03/19 14:29:56.577646][info][11513][SensorBase.cpp:213] [AY366300070] Stream state changed to STREAMING@Depth
+[03/19 14:29:56.579546][warning][11514][ObException.hpp:48] Frame unpack failed
+[03/19 14:29:56.580233][warning][11513][ObException.cpp:8] Timestamp anomaly detected, timestamp: 2267434828, cacheTimestamp: 4289082883 ,currentDiff: 2021648055, maxValidTimestampDiff: 5000000
+[03/19 14:29:56.580340][warning][11513][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 2267434828, cacheTimestamp: 4289082883 ,currentDiff: 2021648055, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 14:29:56.580350][error][11513][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 2267434828, sensor: Depth
+[03/19 14:29:56.581152][warning][11513][ObException.cpp:8] Timestamp anomaly detected, timestamp: 705100, cacheTimestamp: 2267434828 ,currentDiff: 2266729728, maxValidTimestampDiff: 5000000
+[03/19 14:29:56.581217][warning][11513][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 705100, cacheTimestamp: 2267434828 ,currentDiff: 2266729728, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 14:29:56.581227][error][11513][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 705100, sensor: Depth
+[03/19 14:29:56.584897][warning][11513][ObException.cpp:8] Timestamp anomaly detected, timestamp: 1413307091, cacheTimestamp: 705100 ,currentDiff: 1412601991, maxValidTimestampDiff: 5000000
+[03/19 14:29:56.584957][warning][11513][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 1413307091, cacheTimestamp: 705100 ,currentDiff: 1412601991, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 14:29:56.584967][error][11513][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 1413307091, sensor: Depth
+[03/19 14:29:56.585039][warning][11513][ObException.cpp:8] Timestamp anomaly detected, timestamp: 4291793096, cacheTimestamp: 1413307091 ,currentDiff: 2878486005, maxValidTimestampDiff: 5000000
+[03/19 14:29:56.585058][warning][11513][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 4291793096, cacheTimestamp: 1413307091 ,currentDiff: 2878486005, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 14:29:56.585064][error][11513][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 4291793096, sensor: Depth
+[03/19 14:29:56.588161][warning][11513][ObException.cpp:8] Timestamp anomaly detected, timestamp: 76800, cacheTimestamp: 4291793096 ,currentDiff: 4291716296, maxValidTimestampDiff: 5000000
+[03/19 14:29:56.588237][warning][11513][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 76800, cacheTimestamp: 4291793096 ,currentDiff: 4291716296, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 14:29:56.588249][error][11513][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 76800, sensor: Depth
+[03/19 14:29:56.590076][warning][11514][ObException.hpp:48] Frame unpack failed
+[03/19 14:29:56.592233][warning][11513][ObException.cpp:8] Timestamp anomaly detected, timestamp: 4294504495, cacheTimestamp: 76800 ,currentDiff: 4294427695, maxValidTimestampDiff: 5000000
+[03/19 14:29:56.592312][warning][11513][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 4294504495, cacheTimestamp: 76800 ,currentDiff: 4294427695, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 14:29:56.592320][error][11513][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 4294504495, sensor: Depth
+[03/19 14:29:56.595245][warning][11514][ObException.hpp:48] Frame unpack failed
+[03/19 14:29:56.596740][warning][11514][ObException.hpp:48] Frame unpack failed
+[03/19 14:29:56.597741][warning][11513][ObException.cpp:8] Timestamp anomaly detected, timestamp: 1468088375, cacheTimestamp: 4294504495 ,currentDiff: 2826416120, maxValidTimestampDiff: 5000000
+[03/19 14:29:56.597804][warning][11513][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 1468088375, cacheTimestamp: 4294504495 ,currentDiff: 2826416120, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 14:29:56.597812][error][11513][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 1468088375, sensor: Depth
+[03/19 14:29:56.597881][warning][11513][ObException.cpp:8] Timestamp anomaly detected, timestamp: 2534891368, cacheTimestamp: 1468088375 ,currentDiff: 1066802993, maxValidTimestampDiff: 5000000
+[03/19 14:29:56.597897][warning][11513][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 2534891368, cacheTimestamp: 1468088375 ,currentDiff: 1066802993, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 14:29:56.597902][error][11513][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 2534891368, sensor: Depth
+[03/19 14:29:56.633209][warning][11513][ObException.cpp:8] Timestamp anomaly detected, timestamp: 1627470504, cacheTimestamp: 2534891368 ,currentDiff: 907420864, maxValidTimestampDiff: 5000000
+[03/19 14:29:56.633278][warning][11513][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 1627470504, cacheTimestamp: 2534891368 ,currentDiff: 907420864, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 14:29:56.633287][error][11513][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 1627470504, sensor: Depth
+[03/19 14:29:56.643340][warning][11512][VideoSensor.cpp:184] [AY366300070] This frame will be dropped because jpg format verification failure! @Color
+[03/19 14:29:56.672249][info][11512][SensorBase.cpp:213] [AY366300070] Stream state changed to STREAMING@Color
+[03/19 14:29:57.097036][warning][11520][Pipeline.cpp:295] [AY366300070] Output frameset queue is full, drop oldest frameset!
+[03/19 14:30:00.126077][warning][11522][Pipeline.cpp:295] [AY366300070] Output frameset queue is full, drop oldest frameset! [**72 logs in 3028ms, last: 14:29:59.594391**]
+[03/19 14:30:01.593855][info][11513][VideoSensor.cpp:153] [AY366300070] Depth backend frame callback, frameRate=32.296654fps
+[03/19 14:30:01.605674][info][11514][SensorBase.cpp:370] [AY366300070] Depth Streaming... frameRate=30.441704fps
+[03/19 14:30:01.671063][info][11512][VideoSensor.cpp:153] [AY366300070] Color backend frame callback, frameRate=30.230709fps
+[03/19 14:30:01.728370][info][11520][SensorBase.cpp:370] [AY366300070] Color Streaming... frameRate=30.218687fps
+[03/19 14:30:06.159321][warning][11520][Pipeline.cpp:295] [AY366300070] Output frameset queue is full, drop oldest frameset! [**59 logs in 6033ms**]
+[03/19 14:30:06.623462][info][11513][VideoSensor.cpp:153] [AY366300070] Depth backend frame callback, frameRate=30.019880fps
+[03/19 14:30:06.632903][info][11514][SensorBase.cpp:370] [AY366300070] Depth Streaming... frameRate=30.037796fps
+[03/19 14:30:06.703687][info][11512][VideoSensor.cpp:153] [AY366300070] Color backend frame callback, frameRate=30.007948fps
+[03/19 14:30:06.758829][info][11520][SensorBase.cpp:370] [AY366300070] Color Streaming... frameRate=30.019880fps
+[03/19 14:30:11.653210][info][11513][VideoSensor.cpp:153] [AY366300070] Depth backend frame callback, frameRate=30.019880fps
+[03/19 14:30:11.663998][info][11514][SensorBase.cpp:370] [AY366300070] Depth Streaming... frameRate=30.013912fps
+[03/19 14:30:11.736219][info][11512][VideoSensor.cpp:153] [AY366300070] Color backend frame callback, frameRate=30.001987fps
+[03/19 14:30:11.792142][info][11520][SensorBase.cpp:370] [AY366300070] Color Streaming... frameRate=29.996027fps
+[03/19 14:30:16.682969][info][11513][VideoSensor.cpp:153] [AY366300070] Depth backend frame callback, frameRate=30.025850fps
+[03/19 14:30:16.691935][info][11514][SensorBase.cpp:370] [AY366300070] Depth Streaming... frameRate=30.031822fps
+[03/19 14:30:16.768842][info][11512][VideoSensor.cpp:153] [AY366300070] Color backend frame callback, frameRate=30.007948fps
+[03/19 14:30:16.824678][info][11520][SensorBase.cpp:370] [AY366300070] Color Streaming... frameRate=30.007948fps
+[03/19 14:30:16.941220][info][11423][Pipeline.cpp:336] [AY366300070] Try to stop pipeline!
+[03/19 14:30:16.941267][info][11423][Pipeline.cpp:312] [AY366300070] Try to stop streams!
+[03/19 14:30:16.941299][info][11423][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPING@Depth
+[03/19 14:30:16.950032][info][11423][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPED@Depth
+[03/19 14:30:16.950176][info][11423][Pipeline.cpp:326] [AY366300070] Sensor stream stopped, sensorType=Depth
+[03/19 14:30:16.950200][info][11423][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPING@Color
+[03/19 14:30:16.958924][info][11423][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPED@Color
+[03/19 14:30:16.961803][info][11423][Pipeline.cpp:326] [AY366300070] Sensor stream stopped, sensorType=Color
+[03/19 14:30:16.961817][info][11423][Pipeline.cpp:332] [AY366300070] Stop streams done!
+[03/19 14:30:16.962383][info][11423][Pipeline.cpp:356] [AY366300070] Stop pipeline done!
+[03/19 14:30:16.962413][info][11423][Pipeline.cpp:53] [AY366300070] Pipeline destroyed! @0x3BB110C0
+[03/19 14:30:16.962482][info][11423][SensorBase.cpp:47] [AY366300070] SensorBase is destroyed
+[03/19 14:30:16.963213][info][11423][ObLibuvcDevicePort.cpp:87] uvc_close done.
+[03/19 14:30:16.963220][info][11423][ObLibuvcDevicePort.cpp:88] ~ObLibuvcDevicePort done
+[03/19 14:30:16.963261][info][11423][SensorBase.cpp:47] [AY366300070] SensorBase is destroyed
+[03/19 14:30:16.963629][info][11423][ObLibuvcDevicePort.cpp:87] uvc_close done.
+[03/19 14:30:16.963634][info][11423][ObLibuvcDevicePort.cpp:88] ~ObLibuvcDevicePort done
+[03/19 14:30:17.537911][warning][11594][Pipeline.cpp:295] [AY366300070] Output frameset queue is full, drop oldest frameset! [**155 logs in 11378ms, last: 14:30:16.924879**]
+[03/19 14:48:21.135635][info][12760][LinuxUsbPal.cpp:335] Create PollingDeviceWatcher!
+[03/19 14:48:21.135683][info][12760][DeviceManager.cpp:25] Current found device(s): (1)
+[03/19 14:48:21.135689][info][12760][DeviceManager.cpp:34] 	- Name: Gemini2, PID: 0x0670, SN/ID: AY366300070, Connection: USB3.0
+[03/19 14:48:21.135694][info][12760][DeviceManager.cpp:339] Enable net device enumeration: true
+[03/19 14:48:23.143060][info][12760][DeviceManager.cpp:25] Current device(s) list: (1)
+[03/19 14:48:23.143136][info][12760][DeviceManager.cpp:34] 	- Name: Gemini2, PID: 0x0670, SN/ID: AY366300070, Connection: USB3.0
+[03/19 14:48:23.143332][warning][12760][PropertyServer.cpp:87] [AY366300070] Not added to property map, property not found in OBPropertyBaseInfoMap, id=108
+[03/19 14:48:23.143374][warning][12760][PropertyServer.cpp:87] [AY366300070] Not added to property map, property not found in OBPropertyBaseInfoMap, id=4035
+[03/19 14:48:23.143407][warning][12760][PropertyServer.cpp:87] [AY366300070] Not added to property map, property not found in OBPropertyBaseInfoMap, id=5003
+[03/19 14:48:23.155493][info][12760][DeviceManager.cpp:194] Device created successfully! Name: Gemini 2, PID: 0x0670, SN/ID: AY366300070 FW: 1.4.76
+[03/19 14:48:23.155545][info][12760][Pipeline.cpp:42] [AY366300070] Pipeline created with device: {name: Gemini 2, sn: AY366300070}, @0x2BAD4FB0
+[03/19 14:48:23.183797][info][12760][Pipeline.cpp:216] [AY366300070] Check and set config done!
+[03/19 14:48:23.184645][info][12760][Pipeline.cpp:254] [AY366300070] Try to start streams!
+[03/19 14:48:23.184680][info][12760][VideoSensor.cpp:58] [AY366300070] Try to start stream: {type: Color, format: RGB, width: 1920, height: 1080, fps: 30}
+[03/19 14:48:23.184690][info][12760][SensorBase.cpp:213] [AY366300070] Stream state changed to STARTING@Color
+[03/19 14:48:23.184697][info][12760][VideoSensor.cpp:127] [AY366300070] Start backend stream: {type: Color, format: MJPG, width: 1920, height: 1080, fps: 30}
+[03/19 14:48:23.191244][info][12760][VideoSensor.cpp:58] [AY366300070] Try to start stream: {type: Depth, format: RLE, width: 1280, height: 800, fps: 30}
+[03/19 14:48:23.191278][info][12760][SensorBase.cpp:213] [AY366300070] Stream state changed to STARTING@Depth
+[03/19 14:48:23.191286][info][12760][VideoSensor.cpp:127] [AY366300070] Start backend stream: {type: Depth, format: MJPG, width: 1280, height: 800, fps: 30}
+[03/19 14:48:23.210712][info][12760][Pipeline.cpp:270] [AY366300070] Start streams done!
+[03/19 14:48:23.210755][info][12760][Pipeline.cpp:238] [AY366300070] Pipeline start done!
+[03/19 14:48:23.227453][info][12849][SensorBase.cpp:213] [AY366300070] Stream state changed to STREAMING@Depth
+[03/19 14:48:23.228953][warning][12850][ObException.hpp:48] Frame unpack failed
+[03/19 14:48:23.229232][warning][12849][ObException.cpp:8] Timestamp anomaly detected, timestamp: 914800, cacheTimestamp: 2733846477 ,currentDiff: 2732931677, maxValidTimestampDiff: 5000000
+[03/19 14:48:23.229306][warning][12849][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 914800, cacheTimestamp: 2733846477 ,currentDiff: 2732931677, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 14:48:23.229314][error][12849][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 914800, sensor: Depth
+[03/19 14:48:23.229722][warning][12849][ObException.cpp:8] Timestamp anomaly detected, timestamp: 2735612830, cacheTimestamp: 914800 ,currentDiff: 2734698030, maxValidTimestampDiff: 5000000
+[03/19 14:48:23.229747][warning][12849][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 2735612830, cacheTimestamp: 914800 ,currentDiff: 2734698030, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 14:48:23.229754][error][12849][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 2735612830, sensor: Depth
+[03/19 14:48:23.232621][warning][12849][ObException.cpp:8] Timestamp anomaly detected, timestamp: 1769036002, cacheTimestamp: 2735612830 ,currentDiff: 966576828, maxValidTimestampDiff: 5000000
+[03/19 14:48:23.232636][warning][12849][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 1769036002, cacheTimestamp: 2735612830 ,currentDiff: 966576828, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 14:48:23.232640][error][12849][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 1769036002, sensor: Depth
+[03/19 14:48:23.232656][warning][12849][ObException.cpp:8] Timestamp anomaly detected, timestamp: 4291775796, cacheTimestamp: 1769036002 ,currentDiff: 2522739794, maxValidTimestampDiff: 5000000
+[03/19 14:48:23.232681][warning][12849][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 4291775796, cacheTimestamp: 1769036002 ,currentDiff: 2522739794, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 14:48:23.232684][error][12849][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 4291775796, sensor: Depth
+[03/19 14:48:23.235212][warning][12849][ObException.cpp:8] Timestamp anomaly detected, timestamp: 2614700, cacheTimestamp: 4291775796 ,currentDiff: 4289161096, maxValidTimestampDiff: 5000000
+[03/19 14:48:23.235227][warning][12849][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 2614700, cacheTimestamp: 4291775796 ,currentDiff: 4289161096, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 14:48:23.235230][error][12849][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 2614700, sensor: Depth
+[03/19 14:48:23.237377][warning][12850][ObException.hpp:48] Frame unpack failed
+[03/19 14:48:23.240341][warning][12850][ObException.hpp:48] Frame unpack failed
+[03/19 14:48:23.244425][warning][12849][ObException.cpp:8] Timestamp anomaly detected, timestamp: 2005106579, cacheTimestamp: 2614700 ,currentDiff: 2002491879, maxValidTimestampDiff: 5000000
+[03/19 14:48:23.244440][warning][12849][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 2005106579, cacheTimestamp: 2614700 ,currentDiff: 2002491879, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 14:48:23.244444][error][12849][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 2005106579, sensor: Depth
+[03/19 14:48:23.244558][warning][12849][ObException.cpp:8] Timestamp anomaly detected, timestamp: 4292563495, cacheTimestamp: 2005106579 ,currentDiff: 2287456916, maxValidTimestampDiff: 5000000
+[03/19 14:48:23.244570][warning][12849][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 4292563495, cacheTimestamp: 2005106579 ,currentDiff: 2287456916, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 14:48:23.244574][error][12849][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 4292563495, sensor: Depth
+[03/19 14:48:23.247359][warning][12849][ObException.cpp:8] Timestamp anomaly detected, timestamp: 3018900, cacheTimestamp: 4292563495 ,currentDiff: 4289544595, maxValidTimestampDiff: 5000000
+[03/19 14:48:23.247379][warning][12849][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 3018900, cacheTimestamp: 4292563495 ,currentDiff: 4289544595, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 14:48:23.247383][error][12849][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 3018900, sensor: Depth
+[03/19 14:48:23.247420][warning][12849][ObException.cpp:8] Timestamp anomaly detected, timestamp: 4294069596, cacheTimestamp: 3018900 ,currentDiff: 4291050696, maxValidTimestampDiff: 5000000
+[03/19 14:48:23.247433][warning][12849][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 4294069596, cacheTimestamp: 3018900 ,currentDiff: 4291050696, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 14:48:23.247449][error][12849][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 4294069596, sensor: Depth
+[03/19 14:48:23.282703][warning][12849][ObException.cpp:8] Timestamp anomaly detected, timestamp: 2732496355, cacheTimestamp: 4294069596 ,currentDiff: 1561573241, maxValidTimestampDiff: 5000000
+[03/19 14:48:23.282758][warning][12849][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 2732496355, cacheTimestamp: 4294069596 ,currentDiff: 1561573241, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 14:48:23.282766][error][12849][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 2732496355, sensor: Depth
+[03/19 14:48:23.324156][info][12848][SensorBase.cpp:213] [AY366300070] Stream state changed to STREAMING@Color
+[03/19 14:48:23.712169][warning][12856][Pipeline.cpp:295] [AY366300070] Output frameset queue is full, drop oldest frameset!
+[03/19 14:48:26.742467][warning][12858][Pipeline.cpp:295] [AY366300070] Output frameset queue is full, drop oldest frameset! [**72 logs in 3030ms, last: 14:48:26.212461**]
+[03/19 14:48:28.243554][info][12849][VideoSensor.cpp:153] [AY366300070] Depth backend frame callback, frameRate=32.296654fps
+[03/19 14:48:28.255533][info][12850][SensorBase.cpp:370] [AY366300070] Depth Streaming... frameRate=30.242737fps
+[03/19 14:48:28.351000][info][12856][SensorBase.cpp:370] [AY366300070] Color Streaming... frameRate=30.193962fps
+[03/19 14:48:28.355628][info][12848][VideoSensor.cpp:153] [AY366300070] Color backend frame callback, frameRate=30.212681fps
+[03/19 14:48:32.977799][warning][12856][Pipeline.cpp:295] [AY366300070] Output frameset queue is full, drop oldest frameset! [**32 logs in 6235ms**]
+[03/19 14:48:33.272834][info][12849][VideoSensor.cpp:153] [AY366300070] Depth backend frame callback, frameRate=30.025850fps
+[03/19 14:48:33.282231][info][12850][SensorBase.cpp:370] [AY366300070] Depth Streaming... frameRate=30.037796fps
+[03/19 14:48:33.377496][info][12856][SensorBase.cpp:370] [AY366300070] Color Streaming... frameRate=30.037796fps
+[03/19 14:48:33.387940][info][12848][VideoSensor.cpp:153] [AY366300070] Color backend frame callback, frameRate=30.007948fps
+[03/19 14:48:38.302105][info][12849][VideoSensor.cpp:153] [AY366300070] Depth backend frame callback, frameRate=30.019880fps
+[03/19 14:48:38.313418][info][12850][SensorBase.cpp:370] [AY366300070] Depth Streaming... frameRate=30.013912fps
+[03/19 14:48:38.408619][info][12856][SensorBase.cpp:370] [AY366300070] Color Streaming... frameRate=30.013912fps
+[03/19 14:48:38.420350][info][12848][VideoSensor.cpp:153] [AY366300070] Color backend frame callback, frameRate=30.001987fps
+[03/19 14:48:43.331822][info][12849][VideoSensor.cpp:153] [AY366300070] Depth backend frame callback, frameRate=30.025850fps
+[03/19 14:48:43.340572][info][12850][SensorBase.cpp:370] [AY366300070] Depth Streaming... frameRate=30.037796fps
+[03/19 14:48:43.440975][info][12856][SensorBase.cpp:370] [AY366300070] Color Streaming... frameRate=30.007948fps
+[03/19 14:48:43.452704][info][12848][VideoSensor.cpp:153] [AY366300070] Color backend frame callback, frameRate=30.007948fps
+[03/19 14:48:45.007816][warning][12856][Pipeline.cpp:295] [AY366300070] Output frameset queue is full, drop oldest frameset! [**51 logs in 12030ms**]
+[03/19 14:48:48.361232][info][12849][VideoSensor.cpp:153] [AY366300070] Depth backend frame callback, frameRate=30.019880fps
+[03/19 14:48:48.370565][info][12850][SensorBase.cpp:370] [AY366300070] Depth Streaming... frameRate=30.019880fps
+[03/19 14:48:48.441505][info][12856][SensorBase.cpp:370] [AY366300070] Color Streaming... frameRate=29.994001fps
+[03/19 14:48:48.484643][info][12848][VideoSensor.cpp:153] [AY366300070] Color backend frame callback, frameRate=30.007948fps
+[03/19 14:48:51.604557][info][12760][Pipeline.cpp:336] [AY366300070] Try to stop pipeline!
+[03/19 14:48:51.604608][info][12760][Pipeline.cpp:312] [AY366300070] Try to stop streams!
+[03/19 14:48:51.604643][info][12760][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPING@Depth
+[03/19 14:48:51.614165][info][12760][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPED@Depth
+[03/19 14:48:51.614455][info][12760][Pipeline.cpp:326] [AY366300070] Sensor stream stopped, sensorType=Depth
+[03/19 14:48:51.614467][info][12760][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPING@Color
+[03/19 14:48:51.622289][info][12760][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPED@Color
+[03/19 14:48:51.622554][info][12760][Pipeline.cpp:326] [AY366300070] Sensor stream stopped, sensorType=Color
+[03/19 14:48:51.622562][info][12760][Pipeline.cpp:332] [AY366300070] Stop streams done!
+[03/19 14:48:51.623148][info][12760][Pipeline.cpp:356] [AY366300070] Stop pipeline done!
+[03/19 14:48:51.623179][info][12760][Pipeline.cpp:53] [AY366300070] Pipeline destroyed! @0x2BAD4FB0
+[03/19 14:48:51.623268][info][12760][SensorBase.cpp:47] [AY366300070] SensorBase is destroyed
+[03/19 14:48:51.624035][info][12760][ObLibuvcDevicePort.cpp:87] uvc_close done.
+[03/19 14:48:51.624040][info][12760][ObLibuvcDevicePort.cpp:88] ~ObLibuvcDevicePort done
+[03/19 14:48:51.624089][info][12760][SensorBase.cpp:47] [AY366300070] SensorBase is destroyed
+[03/19 14:48:51.624511][info][12760][ObLibuvcDevicePort.cpp:87] uvc_close done.
+[03/19 14:48:51.624517][info][12760][ObLibuvcDevicePort.cpp:88] ~ObLibuvcDevicePort done
+[03/19 14:48:52.222148][warning][12944][Pipeline.cpp:295] [AY366300070] Output frameset queue is full, drop oldest frameset! [**76 logs in 7214ms, last: 14:48:51.605917**]
+[03/19 15:09:32.021653][info][13332][LinuxUsbPal.cpp:335] Create PollingDeviceWatcher!
+[03/19 15:09:32.021697][info][13332][DeviceManager.cpp:25] Current found device(s): (1)
+[03/19 15:09:32.021703][info][13332][DeviceManager.cpp:34] 	- Name: Gemini2, PID: 0x0670, SN/ID: AY366300070, Connection: USB3.0
+[03/19 15:09:32.021707][info][13332][DeviceManager.cpp:339] Enable net device enumeration: true
+[03/19 15:09:34.028764][info][13332][DeviceManager.cpp:25] Current device(s) list: (1)
+[03/19 15:09:34.028808][info][13332][DeviceManager.cpp:34] 	- Name: Gemini2, PID: 0x0670, SN/ID: AY366300070, Connection: USB3.0
+[03/19 15:09:34.028909][warning][13332][PropertyServer.cpp:87] [AY366300070] Not added to property map, property not found in OBPropertyBaseInfoMap, id=108
+[03/19 15:09:34.028920][warning][13332][PropertyServer.cpp:87] [AY366300070] Not added to property map, property not found in OBPropertyBaseInfoMap, id=4035
+[03/19 15:09:34.028944][warning][13332][PropertyServer.cpp:87] [AY366300070] Not added to property map, property not found in OBPropertyBaseInfoMap, id=5003
+[03/19 15:09:34.040797][info][13332][DeviceManager.cpp:194] Device created successfully! Name: Gemini 2, PID: 0x0670, SN/ID: AY366300070 FW: 1.4.76
+[03/19 15:09:34.040841][info][13332][Pipeline.cpp:42] [AY366300070] Pipeline created with device: {name: Gemini 2, sn: AY366300070}, @0x3F799170
+[03/19 15:09:34.069373][info][13332][Pipeline.cpp:216] [AY366300070] Check and set config done!
+[03/19 15:09:34.069922][info][13332][Pipeline.cpp:254] [AY366300070] Try to start streams!
+[03/19 15:09:34.069934][info][13332][VideoSensor.cpp:58] [AY366300070] Try to start stream: {type: Color, format: RGB, width: 1920, height: 1080, fps: 30}
+[03/19 15:09:34.069945][info][13332][SensorBase.cpp:213] [AY366300070] Stream state changed to STARTING@Color
+[03/19 15:09:34.069953][info][13332][VideoSensor.cpp:127] [AY366300070] Start backend stream: {type: Color, format: MJPG, width: 1920, height: 1080, fps: 30}
+[03/19 15:09:34.076357][info][13332][VideoSensor.cpp:58] [AY366300070] Try to start stream: {type: Depth, format: RLE, width: 1280, height: 800, fps: 30}
+[03/19 15:09:34.076390][info][13332][SensorBase.cpp:213] [AY366300070] Stream state changed to STARTING@Depth
+[03/19 15:09:34.076399][info][13332][VideoSensor.cpp:127] [AY366300070] Start backend stream: {type: Depth, format: MJPG, width: 1280, height: 800, fps: 30}
+[03/19 15:09:34.095358][info][13332][Pipeline.cpp:270] [AY366300070] Start streams done!
+[03/19 15:09:34.095398][info][13332][Pipeline.cpp:238] [AY366300070] Pipeline start done!
+[03/19 15:09:34.114474][info][13421][SensorBase.cpp:213] [AY366300070] Stream state changed to STREAMING@Depth
+[03/19 15:09:34.116334][warning][13422][ObException.hpp:48] Frame unpack failed
+[03/19 15:09:34.117580][warning][13422][ObException.hpp:48] Frame unpack failed
+[03/19 15:09:34.119596][warning][13421][ObException.cpp:8] Timestamp anomaly detected, timestamp: 1788800, cacheTimestamp: 4119444139 ,currentDiff: 4117655339, maxValidTimestampDiff: 5000000
+[03/19 15:09:34.119678][warning][13421][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 1788800, cacheTimestamp: 4119444139 ,currentDiff: 4117655339, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 15:09:34.119687][error][13421][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 1788800, sensor: Depth
+[03/19 15:09:34.121045][warning][13421][ObException.cpp:8] Timestamp anomaly detected, timestamp: 4294950196, cacheTimestamp: 1788800 ,currentDiff: 4293161396, maxValidTimestampDiff: 5000000
+[03/19 15:09:34.121069][warning][13421][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 4294950196, cacheTimestamp: 1788800 ,currentDiff: 4293161396, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 15:09:34.121075][error][13421][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 4294950196, sensor: Depth
+[03/19 15:09:34.121485][warning][13422][ObException.hpp:48] Frame unpack failed
+[03/19 15:09:34.127003][warning][13421][ObException.cpp:8] Timestamp anomaly detected, timestamp: 2242494238, cacheTimestamp: 4294950196 ,currentDiff: 2052455958, maxValidTimestampDiff: 5000000
+[03/19 15:09:34.127057][warning][13421][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 2242494238, cacheTimestamp: 4294950196 ,currentDiff: 2052455958, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 15:09:34.127066][error][13421][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 2242494238, sensor: Depth
+[03/19 15:09:34.166081][warning][13421][ObException.cpp:8] Timestamp anomaly detected, timestamp: 4001182693, cacheTimestamp: 2242494238 ,currentDiff: 1758688455, maxValidTimestampDiff: 5000000
+[03/19 15:09:34.166156][warning][13421][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 4001182693, cacheTimestamp: 2242494238 ,currentDiff: 1758688455, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 15:09:34.166168][error][13421][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 4001182693, sensor: Depth
+[03/19 15:09:34.189669][info][13420][SensorBase.cpp:213] [AY366300070] Stream state changed to STREAMING@Color
+[03/19 15:09:35.014901][warning][13428][Pipeline.cpp:295] [AY366300070] Output frameset queue is full, drop oldest frameset!
+[03/19 15:09:38.045203][warning][13430][Pipeline.cpp:295] [AY366300070] Output frameset queue is full, drop oldest frameset! [**60 logs in 3030ms, last: 15:09:37.112195**]
+[03/19 15:09:39.128300][info][13421][VideoSensor.cpp:153] [AY366300070] Depth backend frame callback, frameRate=31.112885fps
+[03/19 15:09:39.138781][info][13422][SensorBase.cpp:370] [AY366300070] Depth Streaming... frameRate=30.266827fps
+[03/19 15:09:39.221385][info][13420][VideoSensor.cpp:153] [AY366300070] Color backend frame callback, frameRate=30.206676fps
+[03/19 15:09:39.245089][info][13428][SensorBase.cpp:370] [AY366300070] Color Streaming... frameRate=30.236723fps
+[03/19 15:09:44.078913][warning][13428][Pipeline.cpp:295] [AY366300070] Output frameset queue is full, drop oldest frameset! [**50 logs in 6033ms**]
+[03/19 15:09:44.157715][info][13421][VideoSensor.cpp:153] [AY366300070] Depth backend frame callback, frameRate=30.025850fps
+[03/19 15:09:44.167841][info][13422][SensorBase.cpp:370] [AY366300070] Depth Streaming... frameRate=30.025850fps
+[03/19 15:09:44.253799][info][13420][VideoSensor.cpp:153] [AY366300070] Color backend frame callback, frameRate=30.007948fps
+[03/19 15:09:44.278370][info][13428][SensorBase.cpp:370] [AY366300070] Color Streaming... frameRate=30.001987fps
+[03/19 15:09:46.466583][info][13332][Pipeline.cpp:336] [AY366300070] Try to stop pipeline!
+[03/19 15:09:46.466630][info][13332][Pipeline.cpp:312] [AY366300070] Try to stop streams!
+[03/19 15:09:46.466653][info][13332][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPING@Depth
+[03/19 15:09:46.472965][info][13332][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPED@Depth
+[03/19 15:09:46.473039][info][13332][Pipeline.cpp:326] [AY366300070] Sensor stream stopped, sensorType=Depth
+[03/19 15:09:46.473050][info][13332][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPING@Color
+[03/19 15:09:46.483142][info][13332][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPED@Color
+[03/19 15:09:46.483421][info][13332][Pipeline.cpp:326] [AY366300070] Sensor stream stopped, sensorType=Color
+[03/19 15:09:46.483432][info][13332][Pipeline.cpp:332] [AY366300070] Stop streams done!
+[03/19 15:09:46.484008][info][13332][Pipeline.cpp:356] [AY366300070] Stop pipeline done!
+[03/19 15:09:46.484040][info][13332][Pipeline.cpp:53] [AY366300070] Pipeline destroyed! @0x3F799170
+[03/19 15:09:46.484121][info][13332][SensorBase.cpp:47] [AY366300070] SensorBase is destroyed
+[03/19 15:09:46.484906][info][13332][ObLibuvcDevicePort.cpp:87] uvc_close done.
+[03/19 15:09:46.484913][info][13332][ObLibuvcDevicePort.cpp:88] ~ObLibuvcDevicePort done
+[03/19 15:09:46.484960][info][13332][SensorBase.cpp:47] [AY366300070] SensorBase is destroyed
+[03/19 15:09:46.485332][info][13332][ObLibuvcDevicePort.cpp:87] uvc_close done.
+[03/19 15:09:46.485339][info][13332][ObLibuvcDevicePort.cpp:88] ~ObLibuvcDevicePort done
+[03/19 15:09:47.068063][warning][13489][Pipeline.cpp:295] [AY366300070] Output frameset queue is full, drop oldest frameset! [**42 logs in 2989ms, last: 15:09:46.443517**]
+[03/19 15:26:13.744326][info][15584][LinuxUsbPal.cpp:335] Create PollingDeviceWatcher!
+[03/19 15:26:13.744374][info][15584][DeviceManager.cpp:25] Current found device(s): (1)
+[03/19 15:26:13.744380][info][15584][DeviceManager.cpp:34] 	- Name: Gemini2, PID: 0x0670, SN/ID: AY366300070, Connection: USB3.0
+[03/19 15:26:13.744384][info][15584][DeviceManager.cpp:339] Enable net device enumeration: true
+[03/19 15:26:15.751688][info][15584][DeviceManager.cpp:25] Current device(s) list: (1)
+[03/19 15:26:15.751747][info][15584][DeviceManager.cpp:34] 	- Name: Gemini2, PID: 0x0670, SN/ID: AY366300070, Connection: USB3.0
+[03/19 15:26:15.751888][warning][15584][PropertyServer.cpp:87] [AY366300070] Not added to property map, property not found in OBPropertyBaseInfoMap, id=108
+[03/19 15:26:15.751902][warning][15584][PropertyServer.cpp:87] [AY366300070] Not added to property map, property not found in OBPropertyBaseInfoMap, id=4035
+[03/19 15:26:15.751930][warning][15584][PropertyServer.cpp:87] [AY366300070] Not added to property map, property not found in OBPropertyBaseInfoMap, id=5003
+[03/19 15:26:15.764771][info][15584][DeviceManager.cpp:194] Device created successfully! Name: Gemini 2, PID: 0x0670, SN/ID: AY366300070 FW: 1.4.76
+[03/19 15:26:15.764820][info][15584][Pipeline.cpp:42] [AY366300070] Pipeline created with device: {name: Gemini 2, sn: AY366300070}, @0x2EB41170
+[03/19 15:26:15.793332][info][15584][Pipeline.cpp:216] [AY366300070] Check and set config done!
+[03/19 15:26:15.794045][info][15584][Pipeline.cpp:254] [AY366300070] Try to start streams!
+[03/19 15:26:15.794054][info][15584][VideoSensor.cpp:58] [AY366300070] Try to start stream: {type: Color, format: RGB, width: 1920, height: 1080, fps: 30}
+[03/19 15:26:15.794073][info][15584][SensorBase.cpp:213] [AY366300070] Stream state changed to STARTING@Color
+[03/19 15:26:15.794080][info][15584][VideoSensor.cpp:127] [AY366300070] Start backend stream: {type: Color, format: MJPG, width: 1920, height: 1080, fps: 30}
+[03/19 15:26:15.800823][info][15584][VideoSensor.cpp:58] [AY366300070] Try to start stream: {type: Depth, format: RLE, width: 1280, height: 800, fps: 30}
+[03/19 15:26:15.800848][info][15584][SensorBase.cpp:213] [AY366300070] Stream state changed to STARTING@Depth
+[03/19 15:26:15.800857][info][15584][VideoSensor.cpp:127] [AY366300070] Start backend stream: {type: Depth, format: MJPG, width: 1280, height: 800, fps: 30}
+[03/19 15:26:15.820076][info][15584][Pipeline.cpp:270] [AY366300070] Start streams done!
+[03/19 15:26:15.820101][info][15584][Pipeline.cpp:238] [AY366300070] Pipeline start done!
+[03/19 15:26:15.837237][info][15673][SensorBase.cpp:213] [AY366300070] Stream state changed to STREAMING@Depth
+[03/19 15:26:15.838671][warning][15674][ObException.hpp:48] Frame unpack failed
+[03/19 15:26:15.862820][warning][15674][ObException.hpp:48] Frame unpack failed
+[03/19 15:26:15.905101][warning][15672][VideoSensor.cpp:184] [AY366300070] This frame will be dropped because jpg format verification failure! @Color
+[03/19 15:26:15.933405][info][15672][SensorBase.cpp:213] [AY366300070] Stream state changed to STREAMING@Color
+[03/19 15:26:16.290968][warning][15677][Pipeline.cpp:295] [AY366300070] Output frameset queue is full, drop oldest frameset!
+[03/19 15:26:19.322127][warning][15679][Pipeline.cpp:295] [AY366300070] Output frameset queue is full, drop oldest frameset! [**75 logs in 3031ms, last: 15:26:18.888995**]
+[03/19 15:26:20.853456][info][15673][VideoSensor.cpp:153] [AY366300070] Depth backend frame callback, frameRate=30.303032fps
+[03/19 15:26:20.864950][info][15674][SensorBase.cpp:370] [AY366300070] Depth Streaming... frameRate=30.242737fps
+[03/19 15:26:20.932112][info][15672][VideoSensor.cpp:153] [AY366300070] Color backend frame callback, frameRate=30.236723fps
+[03/19 15:26:20.989035][info][15677][SensorBase.cpp:370] [AY366300070] Color Streaming... frameRate=30.224697fps
+[03/19 15:26:25.353048][warning][15677][Pipeline.cpp:295] [AY366300070] Output frameset queue is full, drop oldest frameset! [**48 logs in 6030ms**]
+[03/19 15:26:25.883403][info][15673][VideoSensor.cpp:153] [AY366300070] Depth backend frame callback, frameRate=30.019880fps
+[03/19 15:26:25.893440][info][15674][SensorBase.cpp:370] [AY366300070] Depth Streaming... frameRate=30.025850fps
+[03/19 15:26:25.964424][info][15672][VideoSensor.cpp:153] [AY366300070] Color backend frame callback, frameRate=30.007948fps
+[03/19 15:26:26.019608][info][15677][SensorBase.cpp:370] [AY366300070] Color Streaming... frameRate=30.019880fps
+[03/19 15:26:30.913012][info][15673][VideoSensor.cpp:153] [AY366300070] Depth backend frame callback, frameRate=30.025850fps
+[03/19 15:26:30.924277][info][15674][SensorBase.cpp:370] [AY366300070] Depth Streaming... frameRate=30.013912fps
+[03/19 15:26:30.996875][info][15672][VideoSensor.cpp:153] [AY366300070] Color backend frame callback, frameRate=30.007948fps
+[03/19 15:26:31.020915][info][15677][SensorBase.cpp:370] [AY366300070] Color Streaming... frameRate=29.994001fps
+[03/19 15:26:35.942430][info][15673][VideoSensor.cpp:153] [AY366300070] Depth backend frame callback, frameRate=30.019880fps
+[03/19 15:26:35.952291][info][15674][SensorBase.cpp:370] [AY366300070] Depth Streaming... frameRate=30.031822fps
+[03/19 15:26:36.029313][info][15672][VideoSensor.cpp:153] [AY366300070] Color backend frame callback, frameRate=30.001987fps
+[03/19 15:26:36.053704][info][15677][SensorBase.cpp:370] [AY366300070] Color Streaming... frameRate=30.001987fps
+[03/19 15:26:37.387545][warning][15677][Pipeline.cpp:295] [AY366300070] Output frameset queue is full, drop oldest frameset! [**145 logs in 12034ms**]
+[03/19 15:26:38.207997][info][15584][Pipeline.cpp:336] [AY366300070] Try to stop pipeline!
+[03/19 15:26:38.208054][info][15584][Pipeline.cpp:312] [AY366300070] Try to stop streams!
+[03/19 15:26:38.208077][info][15584][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPING@Depth
+[03/19 15:26:38.220543][info][15584][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPED@Depth
+[03/19 15:26:38.220654][info][15584][Pipeline.cpp:326] [AY366300070] Sensor stream stopped, sensorType=Depth
+[03/19 15:26:38.220668][info][15584][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPING@Color
+[03/19 15:26:38.231393][info][15584][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPED@Color
+[03/19 15:26:38.231665][info][15584][Pipeline.cpp:326] [AY366300070] Sensor stream stopped, sensorType=Color
+[03/19 15:26:38.231671][info][15584][Pipeline.cpp:332] [AY366300070] Stop streams done!
+[03/19 15:26:38.232206][info][15584][Pipeline.cpp:356] [AY366300070] Stop pipeline done!
+[03/19 15:26:38.232240][info][15584][Pipeline.cpp:53] [AY366300070] Pipeline destroyed! @0x2EB41170
+[03/19 15:26:38.232316][info][15584][SensorBase.cpp:47] [AY366300070] SensorBase is destroyed
+[03/19 15:26:38.233152][info][15584][ObLibuvcDevicePort.cpp:87] uvc_close done.
+[03/19 15:26:38.233159][info][15584][ObLibuvcDevicePort.cpp:88] ~ObLibuvcDevicePort done
+[03/19 15:26:38.233218][info][15584][SensorBase.cpp:47] [AY366300070] SensorBase is destroyed
+[03/19 15:26:38.233575][info][15584][ObLibuvcDevicePort.cpp:87] uvc_close done.
+[03/19 15:26:38.233581][info][15584][ObLibuvcDevicePort.cpp:88] ~ObLibuvcDevicePort done
+[03/19 15:26:38.816663][warning][15752][Pipeline.cpp:295] [AY366300070] Output frameset queue is full, drop oldest frameset! [**23 logs in 1429ms, last: 15:26:38.218974**]
+[03/19 15:31:51.138197][info][16172][LinuxUsbPal.cpp:335] Create PollingDeviceWatcher!
+[03/19 15:31:51.138238][info][16172][DeviceManager.cpp:25] Current found device(s): (1)
+[03/19 15:31:51.138243][info][16172][DeviceManager.cpp:34] 	- Name: Gemini2, PID: 0x0670, SN/ID: AY366300070, Connection: USB3.0
+[03/19 15:31:51.138247][info][16172][DeviceManager.cpp:339] Enable net device enumeration: true
+[03/19 15:31:53.146144][info][16172][DeviceManager.cpp:25] Current device(s) list: (1)
+[03/19 15:31:53.146231][info][16172][DeviceManager.cpp:34] 	- Name: Gemini2, PID: 0x0670, SN/ID: AY366300070, Connection: USB3.0
+[03/19 15:31:53.146392][warning][16172][PropertyServer.cpp:87] [AY366300070] Not added to property map, property not found in OBPropertyBaseInfoMap, id=108
+[03/19 15:31:53.146410][warning][16172][PropertyServer.cpp:87] [AY366300070] Not added to property map, property not found in OBPropertyBaseInfoMap, id=4035
+[03/19 15:31:53.146446][warning][16172][PropertyServer.cpp:87] [AY366300070] Not added to property map, property not found in OBPropertyBaseInfoMap, id=5003
+[03/19 15:31:53.158900][info][16172][DeviceManager.cpp:194] Device created successfully! Name: Gemini 2, PID: 0x0670, SN/ID: AY366300070 FW: 1.4.76
+[03/19 15:31:53.158950][info][16172][Pipeline.cpp:42] [AY366300070] Pipeline created with device: {name: Gemini 2, sn: AY366300070}, @0x118EF640
+[03/19 15:31:53.187592][info][16172][Pipeline.cpp:216] [AY366300070] Check and set config done!
+[03/19 15:31:53.188334][info][16172][Pipeline.cpp:254] [AY366300070] Try to start streams!
+[03/19 15:31:53.188374][info][16172][VideoSensor.cpp:58] [AY366300070] Try to start stream: {type: Color, format: RGB, width: 1920, height: 1080, fps: 30}
+[03/19 15:31:53.188385][info][16172][SensorBase.cpp:213] [AY366300070] Stream state changed to STARTING@Color
+[03/19 15:31:53.188393][info][16172][VideoSensor.cpp:127] [AY366300070] Start backend stream: {type: Color, format: MJPG, width: 1920, height: 1080, fps: 30}
+[03/19 15:31:53.195329][info][16172][VideoSensor.cpp:58] [AY366300070] Try to start stream: {type: Depth, format: RLE, width: 1280, height: 800, fps: 30}
+[03/19 15:31:53.195366][info][16172][SensorBase.cpp:213] [AY366300070] Stream state changed to STARTING@Depth
+[03/19 15:31:53.195375][info][16172][VideoSensor.cpp:127] [AY366300070] Start backend stream: {type: Depth, format: MJPG, width: 1280, height: 800, fps: 30}
+[03/19 15:31:53.212674][warning][16260][VideoSensor.cpp:184] [AY366300070] This frame will be dropped because jpg format verification failure! @Color
+[03/19 15:31:53.214571][info][16172][Pipeline.cpp:270] [AY366300070] Start streams done!
+[03/19 15:31:53.214614][info][16172][Pipeline.cpp:238] [AY366300070] Pipeline start done!
+[03/19 15:31:53.231711][info][16261][SensorBase.cpp:213] [AY366300070] Stream state changed to STREAMING@Depth
+[03/19 15:31:53.233109][warning][16262][ObException.hpp:48] Frame unpack failed
+[03/19 15:31:53.234051][warning][16261][ObException.cpp:8] Timestamp anomaly detected, timestamp: 4294967296, cacheTimestamp: 5027466182 ,currentDiff: 732498886, maxValidTimestampDiff: 5000000
+[03/19 15:31:53.234120][warning][16261][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 4294967296, cacheTimestamp: 5027466182 ,currentDiff: 732498886, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 15:31:53.234129][error][16261][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 4294967296, sensor: Depth
+[03/19 15:31:53.252429][warning][16261][ObException.cpp:8] Timestamp anomaly detected, timestamp: 5342473912, cacheTimestamp: 4294967296 ,currentDiff: 1047506616, maxValidTimestampDiff: 5000000
+[03/19 15:31:53.252462][warning][16261][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 5342473912, cacheTimestamp: 4294967296 ,currentDiff: 1047506616, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 15:31:53.252469][error][16261][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 5342473912, sensor: Depth
+[03/19 15:31:53.327874][info][16260][SensorBase.cpp:213] [AY366300070] Stream state changed to STREAMING@Color
+[03/19 15:31:53.681801][warning][16268][Pipeline.cpp:295] [AY366300070] Output frameset queue is full, drop oldest frameset!
+[03/19 15:31:56.713677][warning][16270][Pipeline.cpp:295] [AY366300070] Output frameset queue is full, drop oldest frameset! [**76 logs in 3031ms, last: 15:31:56.315400**]
+[03/19 15:31:58.226454][info][16260][VideoSensor.cpp:153] [AY366300070] Color backend frame callback, frameRate=29.716793fps
+[03/19 15:31:58.247172][info][16261][VideoSensor.cpp:153] [AY366300070] Depth backend frame callback, frameRate=30.502394fps
+[03/19 15:31:58.256657][info][16262][SensorBase.cpp:370] [AY366300070] Depth Streaming... frameRate=30.061718fps
+[03/19 15:31:58.383926][info][16268][SensorBase.cpp:370] [AY366300070] Color Streaming... frameRate=30.224697fps
+[03/19 15:32:02.750049][warning][16268][Pipeline.cpp:295] [AY366300070] Output frameset queue is full, drop oldest frameset! [**64 logs in 6036ms**]
+[03/19 15:32:03.258913][info][16260][VideoSensor.cpp:153] [AY366300070] Color backend frame callback, frameRate=30.007948fps
+[03/19 15:32:03.276521][info][16261][VideoSensor.cpp:153] [AY366300070] Depth backend frame callback, frameRate=30.025850fps
+[03/19 15:32:03.286273][info][16262][SensorBase.cpp:370] [AY366300070] Depth Streaming... frameRate=30.019880fps
+[03/19 15:32:03.415412][info][16268][SensorBase.cpp:370] [AY366300070] Color Streaming... frameRate=30.007948fps
+[03/19 15:32:05.586437][info][16172][Pipeline.cpp:336] [AY366300070] Try to stop pipeline!
+[03/19 15:32:05.586491][info][16172][Pipeline.cpp:312] [AY366300070] Try to stop streams!
+[03/19 15:32:05.586521][info][16172][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPING@Depth
+[03/19 15:32:05.600553][info][16172][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPED@Depth
+[03/19 15:32:05.600667][info][16172][Pipeline.cpp:326] [AY366300070] Sensor stream stopped, sensorType=Depth
+[03/19 15:32:05.600680][info][16172][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPING@Color
+[03/19 15:32:05.608823][info][16172][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPED@Color
+[03/19 15:32:05.618905][info][16172][Pipeline.cpp:326] [AY366300070] Sensor stream stopped, sensorType=Color
+[03/19 15:32:05.618914][info][16172][Pipeline.cpp:332] [AY366300070] Stop streams done!
+[03/19 15:32:05.619598][info][16172][Pipeline.cpp:356] [AY366300070] Stop pipeline done!
+[03/19 15:32:05.619626][info][16172][Pipeline.cpp:53] [AY366300070] Pipeline destroyed! @0x118EF640
+[03/19 15:32:05.619689][info][16172][SensorBase.cpp:47] [AY366300070] SensorBase is destroyed
+[03/19 15:32:05.620530][info][16172][ObLibuvcDevicePort.cpp:87] uvc_close done.
+[03/19 15:32:05.620537][info][16172][ObLibuvcDevicePort.cpp:88] ~ObLibuvcDevicePort done
+[03/19 15:32:05.620585][info][16172][SensorBase.cpp:47] [AY366300070] SensorBase is destroyed
+[03/19 15:32:05.621037][info][16172][ObLibuvcDevicePort.cpp:87] uvc_close done.
+[03/19 15:32:05.621041][info][16172][ObLibuvcDevicePort.cpp:88] ~ObLibuvcDevicePort done
+[03/19 15:32:06.188229][warning][16330][Pipeline.cpp:295] [AY366300070] Output frameset queue is full, drop oldest frameset! [**49 logs in 3438ms, last: 15:32:05.582284**]
+[03/19 15:35:58.245903][info][16905][LinuxUsbPal.cpp:335] Create PollingDeviceWatcher!
+[03/19 15:35:58.245949][info][16905][DeviceManager.cpp:25] Current found device(s): (1)
+[03/19 15:35:58.245955][info][16905][DeviceManager.cpp:34] 	- Name: Gemini2, PID: 0x0670, SN/ID: AY366300070, Connection: USB3.0
+[03/19 15:35:58.245959][info][16905][DeviceManager.cpp:339] Enable net device enumeration: true
+[03/19 15:36:00.252681][info][16905][DeviceManager.cpp:25] Current device(s) list: (1)
+[03/19 15:36:00.252754][info][16905][DeviceManager.cpp:34] 	- Name: Gemini2, PID: 0x0670, SN/ID: AY366300070, Connection: USB3.0
+[03/19 15:36:00.252914][warning][16905][PropertyServer.cpp:87] [AY366300070] Not added to property map, property not found in OBPropertyBaseInfoMap, id=108
+[03/19 15:36:00.252929][warning][16905][PropertyServer.cpp:87] [AY366300070] Not added to property map, property not found in OBPropertyBaseInfoMap, id=4035
+[03/19 15:36:00.252962][warning][16905][PropertyServer.cpp:87] [AY366300070] Not added to property map, property not found in OBPropertyBaseInfoMap, id=5003
+[03/19 15:36:00.265858][info][16905][DeviceManager.cpp:194] Device created successfully! Name: Gemini 2, PID: 0x0670, SN/ID: AY366300070 FW: 1.4.76
+[03/19 15:36:00.265923][info][16905][Pipeline.cpp:42] [AY366300070] Pipeline created with device: {name: Gemini 2, sn: AY366300070}, @0x237A120
+[03/19 15:36:00.297238][info][16905][Pipeline.cpp:216] [AY366300070] Check and set config done!
+[03/19 15:36:00.298110][info][16905][Pipeline.cpp:254] [AY366300070] Try to start streams!
+[03/19 15:36:00.298152][info][16905][VideoSensor.cpp:58] [AY366300070] Try to start stream: {type: Color, format: RGB, width: 1920, height: 1080, fps: 30}
+[03/19 15:36:00.298163][info][16905][SensorBase.cpp:213] [AY366300070] Stream state changed to STARTING@Color
+[03/19 15:36:00.298173][info][16905][VideoSensor.cpp:127] [AY366300070] Start backend stream: {type: Color, format: MJPG, width: 1920, height: 1080, fps: 30}
+[03/19 15:36:00.305210][info][16905][VideoSensor.cpp:58] [AY366300070] Try to start stream: {type: Depth, format: RLE, width: 1280, height: 800, fps: 30}
+[03/19 15:36:00.305247][info][16905][SensorBase.cpp:213] [AY366300070] Stream state changed to STARTING@Depth
+[03/19 15:36:00.305256][info][16905][VideoSensor.cpp:127] [AY366300070] Start backend stream: {type: Depth, format: MJPG, width: 1280, height: 800, fps: 30}
+[03/19 15:36:00.323974][info][16905][Pipeline.cpp:270] [AY366300070] Start streams done!
+[03/19 15:36:00.324009][info][16905][Pipeline.cpp:238] [AY366300070] Pipeline start done!
+[03/19 15:36:00.340980][info][16997][SensorBase.cpp:213] [AY366300070] Stream state changed to STREAMING@Depth
+[03/19 15:36:00.342093][warning][16998][ObException.hpp:48] Frame unpack failed
+[03/19 15:36:00.343377][warning][16997][ObException.cpp:8] Timestamp anomaly detected, timestamp: 8589615092, cacheTimestamp: 5589263196 ,currentDiff: 3000351896, maxValidTimestampDiff: 5000000
+[03/19 15:36:00.343459][warning][16997][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 8589615092, cacheTimestamp: 5589263196 ,currentDiff: 3000351896, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 15:36:00.343469][error][16997][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 8589615092, sensor: Depth
+[03/19 15:36:00.346445][warning][16998][ObException.hpp:48] Frame unpack failed
+[03/19 15:36:00.348936][warning][16998][ObException.hpp:48] Frame unpack failed
+[03/19 15:36:00.349415][warning][16997][ObException.cpp:8] Timestamp anomaly detected, timestamp: 4292787795, cacheTimestamp: 8589924492 ,currentDiff: 4297136697, maxValidTimestampDiff: 5000000
+[03/19 15:36:00.349448][warning][16997][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 4292787795, cacheTimestamp: 8589924492 ,currentDiff: 4297136697, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 15:36:00.349456][error][16997][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 4292787795, sensor: Depth
+[03/19 15:36:00.355923][warning][16998][ObException.hpp:48] Frame unpack failed
+[03/19 15:36:00.356207][warning][16998][ObException.hpp:48] Frame unpack failed
+[03/19 15:36:00.359757][warning][16998][ObException.hpp:48] Frame unpack failed
+[03/19 15:36:00.359979][warning][16998][ObException.hpp:48] Frame unpack failed
+[03/19 15:36:00.360292][warning][16997][ObException.cpp:8] Timestamp anomaly detected, timestamp: 5473020032, cacheTimestamp: 4294071296 ,currentDiff: 1178948736, maxValidTimestampDiff: 5000000
+[03/19 15:36:00.360329][warning][16997][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 5473020032, cacheTimestamp: 4294071296 ,currentDiff: 1178948736, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 15:36:00.360337][error][16997][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 5473020032, sensor: Depth
+[03/19 15:36:00.370097][warning][16997][ObException.cpp:8] Timestamp anomaly detected, timestamp: 4297993596, cacheTimestamp: 5473020032 ,currentDiff: 1175026436, maxValidTimestampDiff: 5000000
+[03/19 15:36:00.370132][warning][16997][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 4297993596, cacheTimestamp: 5473020032 ,currentDiff: 1175026436, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 15:36:00.370140][error][16997][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 4297993596, sensor: Depth
+[03/19 15:36:00.395036][warning][16997][ObException.cpp:8] Timestamp anomaly detected, timestamp: 5589618620, cacheTimestamp: 4297993596 ,currentDiff: 1291625024, maxValidTimestampDiff: 5000000
+[03/19 15:36:00.395078][warning][16997][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 5589618620, cacheTimestamp: 4297993596 ,currentDiff: 1291625024, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 15:36:00.395086][error][16997][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 5589618620, sensor: Depth
+[03/19 15:36:00.409236][warning][16996][VideoSensor.cpp:184] [AY366300070] This frame will be dropped because jpg format verification failure! @Color
+[03/19 15:36:00.437815][info][16996][SensorBase.cpp:213] [AY366300070] Stream state changed to STREAMING@Color
+[03/19 15:36:00.860123][warning][17004][Pipeline.cpp:295] [AY366300070] Output frameset queue is full, drop oldest frameset!
+[03/19 15:36:03.891269][warning][17006][Pipeline.cpp:295] [AY366300070] Output frameset queue is full, drop oldest frameset! [**74 logs in 3031ms, last: 15:36:03.425790**]
+[03/19 15:36:05.357574][info][16997][VideoSensor.cpp:153] [AY366300070] Depth backend frame callback, frameRate=32.090889fps
+[03/19 15:36:05.367313][info][16998][SensorBase.cpp:370] [AY366300070] Depth Streaming... frameRate=31.044775fps
+[03/19 15:36:05.436417][info][16996][VideoSensor.cpp:153] [AY366300070] Color backend frame callback, frameRate=30.236723fps
+[03/19 15:36:05.494806][info][17004][SensorBase.cpp:370] [AY366300070] Color Streaming... frameRate=30.200676fps
+[03/19 15:36:09.925722][warning][17004][Pipeline.cpp:295] [AY366300070] Output frameset queue is full, drop oldest frameset! [**66 logs in 6034ms**]
+[03/19 15:36:10.387018][info][16997][VideoSensor.cpp:153] [AY366300070] Depth backend frame callback, frameRate=30.025850fps
+[03/19 15:36:10.397878][info][16998][SensorBase.cpp:370] [AY366300070] Depth Streaming... frameRate=30.019880fps
+[03/19 15:36:10.468893][info][16996][VideoSensor.cpp:153] [AY366300070] Color backend frame callback, frameRate=30.007948fps
+[03/19 15:36:10.525380][info][17004][SensorBase.cpp:370] [AY366300070] Color Streaming... frameRate=30.013912fps
+[03/19 15:36:13.693546][info][16905][Pipeline.cpp:336] [AY366300070] Try to stop pipeline!
+[03/19 15:36:13.693598][info][16905][Pipeline.cpp:312] [AY366300070] Try to stop streams!
+[03/19 15:36:13.693628][info][16905][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPING@Depth
+[03/19 15:36:13.702779][info][16905][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPED@Depth
+[03/19 15:36:13.703014][info][16905][Pipeline.cpp:326] [AY366300070] Sensor stream stopped, sensorType=Depth
+[03/19 15:36:13.703049][info][16905][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPING@Color
+[03/19 15:36:13.711408][info][16905][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPED@Color
+[03/19 15:36:13.724078][info][16905][Pipeline.cpp:326] [AY366300070] Sensor stream stopped, sensorType=Color
+[03/19 15:36:13.724088][info][16905][Pipeline.cpp:332] [AY366300070] Stop streams done!
+[03/19 15:36:13.724607][info][16905][Pipeline.cpp:356] [AY366300070] Stop pipeline done!
+[03/19 15:36:13.724639][info][16905][Pipeline.cpp:53] [AY366300070] Pipeline destroyed! @0x237A120
+[03/19 15:36:13.724708][info][16905][SensorBase.cpp:47] [AY366300070] SensorBase is destroyed
+[03/19 15:36:13.725526][info][16905][ObLibuvcDevicePort.cpp:87] uvc_close done.
+[03/19 15:36:13.725534][info][16905][ObLibuvcDevicePort.cpp:88] ~ObLibuvcDevicePort done
+[03/19 15:36:13.725578][info][16905][SensorBase.cpp:47] [AY366300070] SensorBase is destroyed
+[03/19 15:36:13.726255][info][16905][ObLibuvcDevicePort.cpp:87] uvc_close done.
+[03/19 15:36:13.726262][info][16905][ObLibuvcDevicePort.cpp:88] ~ObLibuvcDevicePort done
+[03/19 15:36:13.735655][warning][17065][Pipeline.cpp:295] [AY366300070] Output frameset queue is full, drop oldest frameset! [**56 logs in 3809ms, last: 15:36:13.694013**]
+[03/19 15:40:23.431349][info][17307][LinuxUsbPal.cpp:335] Create PollingDeviceWatcher!
+[03/19 15:40:23.431393][info][17307][DeviceManager.cpp:25] Current found device(s): (1)
+[03/19 15:40:23.431398][info][17307][DeviceManager.cpp:34] 	- Name: Gemini2, PID: 0x0670, SN/ID: AY366300070, Connection: USB3.0
+[03/19 15:40:23.431402][info][17307][DeviceManager.cpp:339] Enable net device enumeration: true
+[03/19 15:40:25.437449][info][17307][DeviceManager.cpp:25] Current device(s) list: (1)
+[03/19 15:40:25.437518][info][17307][DeviceManager.cpp:34] 	- Name: Gemini2, PID: 0x0670, SN/ID: AY366300070, Connection: USB3.0
+[03/19 15:40:25.437683][warning][17307][PropertyServer.cpp:87] [AY366300070] Not added to property map, property not found in OBPropertyBaseInfoMap, id=108
+[03/19 15:40:25.437698][warning][17307][PropertyServer.cpp:87] [AY366300070] Not added to property map, property not found in OBPropertyBaseInfoMap, id=4035
+[03/19 15:40:25.437731][warning][17307][PropertyServer.cpp:87] [AY366300070] Not added to property map, property not found in OBPropertyBaseInfoMap, id=5003
+[03/19 15:40:25.451648][info][17307][DeviceManager.cpp:194] Device created successfully! Name: Gemini 2, PID: 0x0670, SN/ID: AY366300070 FW: 1.4.76
+[03/19 15:40:25.451723][info][17307][Pipeline.cpp:42] [AY366300070] Pipeline created with device: {name: Gemini 2, sn: AY366300070}, @0x20800A50
+[03/19 15:40:25.482848][info][17307][Pipeline.cpp:216] [AY366300070] Check and set config done!
+[03/19 15:40:25.483456][info][17307][Pipeline.cpp:254] [AY366300070] Try to start streams!
+[03/19 15:40:25.483467][info][17307][VideoSensor.cpp:58] [AY366300070] Try to start stream: {type: Color, format: RGB, width: 1920, height: 1080, fps: 30}
+[03/19 15:40:25.483475][info][17307][SensorBase.cpp:213] [AY366300070] Stream state changed to STARTING@Color
+[03/19 15:40:25.483483][info][17307][VideoSensor.cpp:127] [AY366300070] Start backend stream: {type: Color, format: MJPG, width: 1920, height: 1080, fps: 30}
+[03/19 15:40:25.489835][info][17307][VideoSensor.cpp:58] [AY366300070] Try to start stream: {type: Depth, format: RLE, width: 1280, height: 800, fps: 30}
+[03/19 15:40:25.489865][info][17307][SensorBase.cpp:213] [AY366300070] Stream state changed to STARTING@Depth
+[03/19 15:40:25.489873][info][17307][VideoSensor.cpp:127] [AY366300070] Start backend stream: {type: Depth, format: MJPG, width: 1280, height: 800, fps: 30}
+[03/19 15:40:25.509348][info][17307][Pipeline.cpp:270] [AY366300070] Start streams done!
+[03/19 15:40:25.509384][info][17307][Pipeline.cpp:238] [AY366300070] Pipeline start done!
+[03/19 15:40:25.525912][info][17398][SensorBase.cpp:213] [AY366300070] Stream state changed to STREAMING@Depth
+[03/19 15:40:25.527381][warning][17399][ObException.hpp:48] Frame unpack failed
+[03/19 15:40:25.527626][warning][17398][ObException.cpp:8] Timestamp anomaly detected, timestamp: 4294967296, cacheTimestamp: 5602941990 ,currentDiff: 1307974694, maxValidTimestampDiff: 5000000
+[03/19 15:40:25.527695][warning][17398][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 4294967296, cacheTimestamp: 5602941990 ,currentDiff: 1307974694, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 15:40:25.527705][error][17398][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 4294967296, sensor: Depth
+[03/19 15:40:25.547496][warning][17398][ObException.cpp:8] Timestamp anomaly detected, timestamp: 1561177483, cacheTimestamp: 4294967296 ,currentDiff: 2733789813, maxValidTimestampDiff: 5000000
+[03/19 15:40:25.547535][warning][17398][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 1561177483, cacheTimestamp: 4294967296 ,currentDiff: 2733789813, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 15:40:25.547543][error][17398][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 1561177483, sensor: Depth
+[03/19 15:40:25.580709][warning][17398][ObException.cpp:8] Timestamp anomaly detected, timestamp: 5854802041, cacheTimestamp: 1561177483 ,currentDiff: 4293624558, maxValidTimestampDiff: 5000000
+[03/19 15:40:25.580760][warning][17398][SensorBase.cpp:418] [AY366300070] Execute failure! A libobsensor_exception has occurred!
+ - where: SensorBase.cpp(418):outputFrame
+ - msg: Timestamp anomaly detected, timestamp: 5854802041, cacheTimestamp: 1561177483 ,currentDiff: 4293624558, maxValidTimestampDiff: 5000000
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/19 15:40:25.580768][error][17398][SensorBase.cpp:418] [AY366300070] Timestamp anomaly detected, frame: 5854802041, sensor: Depth
+[03/19 15:40:25.594347][warning][17397][VideoSensor.cpp:184] [AY366300070] This frame will be dropped because jpg format verification failure! @Color
+[03/19 15:40:25.622579][info][17397][SensorBase.cpp:213] [AY366300070] Stream state changed to STREAMING@Color
+[03/19 15:40:25.978589][warning][17405][Pipeline.cpp:295] [AY366300070] Output frameset queue is full, drop oldest frameset!
+[03/19 15:40:29.008371][warning][17407][Pipeline.cpp:295] [AY366300070] Output frameset queue is full, drop oldest frameset! [**76 logs in 3029ms, last: 15:40:28.611926**]
+[03/19 15:40:30.542651][info][17398][VideoSensor.cpp:153] [AY366300070] Depth backend frame callback, frameRate=30.496311fps
+[03/19 15:40:30.552221][info][17399][SensorBase.cpp:370] [AY366300070] Depth Streaming... frameRate=29.850746fps
+[03/19 15:40:30.621233][info][17397][VideoSensor.cpp:153] [AY366300070] Color backend frame callback, frameRate=30.236723fps
+[03/19 15:40:30.679983][info][17405][SensorBase.cpp:370] [AY366300070] Color Streaming... frameRate=30.212681fps
+[03/19 15:40:35.012732][warning][17405][Pipeline.cpp:295] [AY366300070] Output frameset queue is full, drop oldest frameset! [**59 logs in 6004ms**]
+[03/19 15:40:35.572217][info][17398][VideoSensor.cpp:153] [AY366300070] Depth backend frame callback, frameRate=30.019880fps
+[03/19 15:40:35.581606][info][17399][SensorBase.cpp:370] [AY366300070] Depth Streaming... frameRate=30.025850fps
+[03/19 15:40:35.653772][info][17397][VideoSensor.cpp:153] [AY366300070] Color backend frame callback, frameRate=30.007948fps
+[03/19 15:40:35.711836][info][17405][SensorBase.cpp:370] [AY366300070] Color Streaming... frameRate=30.007948fps
+[03/19 15:40:36.876040][info][17307][Pipeline.cpp:336] [AY366300070] Try to stop pipeline!
+[03/19 15:40:36.876079][info][17307][Pipeline.cpp:312] [AY366300070] Try to stop streams!
+[03/19 15:40:36.876103][info][17307][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPING@Depth
+[03/19 15:40:36.882942][info][17307][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPED@Depth
+[03/19 15:40:36.883136][info][17307][Pipeline.cpp:326] [AY366300070] Sensor stream stopped, sensorType=Depth
+[03/19 15:40:36.883147][info][17307][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPING@Color
+[03/19 15:40:36.892077][info][17307][SensorBase.cpp:213] [AY366300070] Stream state changed to STOPPED@Color
+[03/19 15:40:36.892292][info][17307][Pipeline.cpp:326] [AY366300070] Sensor stream stopped, sensorType=Color
+[03/19 15:40:36.892298][info][17307][Pipeline.cpp:332] [AY366300070] Stop streams done!
+[03/19 15:40:36.892914][info][17307][Pipeline.cpp:356] [AY366300070] Stop pipeline done!
+[03/19 15:40:36.892968][info][17307][Pipeline.cpp:53] [AY366300070] Pipeline destroyed! @0x20800A50
+[03/19 15:40:36.893118][info][17307][SensorBase.cpp:47] [AY366300070] SensorBase is destroyed
+[03/19 15:40:36.893891][info][17307][ObLibuvcDevicePort.cpp:87] uvc_close done.
+[03/19 15:40:36.893901][info][17307][ObLibuvcDevicePort.cpp:88] ~ObLibuvcDevicePort done
+[03/19 15:40:36.893950][info][17307][SensorBase.cpp:47] [AY366300070] SensorBase is destroyed
+[03/19 15:40:36.894274][info][17307][ObLibuvcDevicePort.cpp:87] uvc_close done.
+[03/19 15:40:36.894280][info][17307][ObLibuvcDevicePort.cpp:88] ~ObLibuvcDevicePort done
+[03/19 15:40:36.902835][warning][17466][Pipeline.cpp:295] [AY366300070] Output frameset queue is full, drop oldest frameset! [**27 logs in 1890ms, last: 15:40:36.878748**]

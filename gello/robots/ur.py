@@ -8,7 +8,7 @@ from gello.robots.robot import Robot
 class URRobot(Robot):
     """A class representing a UR robot."""
 
-    def __init__(self, robot_ip: str = "192.168.1.10", no_gripper: bool = False):
+    def __init__(self, robot_ip: str = "192.168.1.15", no_gripper: bool = False):
         import rtde_control
         import rtde_receive
 
@@ -122,7 +122,7 @@ class URRobot(Robot):
 
 
 def main():
-    robot_ip = "192.168.1.11"
+    robot_ip = "192.168.1.15"
     ur = URRobot(robot_ip, no_gripper=True)
     print(ur)
     ur.set_freedrive_mode(True)

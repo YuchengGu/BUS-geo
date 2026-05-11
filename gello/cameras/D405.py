@@ -1,0 +1,68 @@
+import pyrealsense2 as rs
+import numpy as np
+from typing import Optional, Tuple
+import time
+
+class RealSenseD405:
+    def __init__(self):
+        print("正在启动 D405 相机...")
+        self.pipeline = rs.pipeline()
+        config = rs.config()
+        
+        config.enable_stream(rs.stream.depth, 848, 480, rs.format.z16, 30)
+        config.enable_stream(rs.stream.color, 848, 480, rs.format.rgb8, 30)
+        
+        self.pipeline.start(config)
+        self.align = rs.align(rs.stream.color)
+        
+        print("等待相机预热 2 秒钟...")
+        time.sleep(2.0)
+        
+        print("正在获取第一帧画面...")
+        # 初始化时，耐心等它吐出完美的双图套餐
+        for _ in range(20): 
+            try:
+                frames = self.pipeline.wait_for_frames(timeout_ms=1000)
+                aligned_frames = self.align.process(frames)
+                color_frame = aligned_frames.get_color_frame()
+                depth_frame = aligned_frames.get_depth_frame()
+                if color_frame and depth_frame:
+                    break
+            except RuntimeError:
+                continue
+                
+        self.last_color = np.asanyarray(color_frame.get_data())
+        self.last_depth = np.asanyarray(depth_frame.get_data())
+        if len(self.last_depth.shape) == 2:
+            self.last_depth = self.last_depth[:, :, None]
+            
+        print("✅ D405 准备就绪，已开启严谨防抖轮询模式！")
+
+    def read(self, img_size: Optional[Tuple[int, int]] = None) -> Tuple[np.ndarray, np.ndarray]:
+        try:
+            # 【终极修复】：强制使用 wait_for_frames，它保证吐出来的绝对是完整的 frameset！
+            # 设定 10ms 超时。因为 D405 是 30帧 (33ms一帧)，所以大部分时间它都会超时报错。
+            # 这是极其正常的！正好符合我们 100Hz 的设计！
+            frames = self.pipeline.wait_for_frames(10)
+            
+            # 只要没超时，走到这里，frames 绝对是完美的套餐！放心大胆地对齐！
+            aligned_frames = self.align.process(frames)
+            color_frame = aligned_frames.get_color_frame()
+            depth_frame = aligned_frames.get_depth_frame()
+            
+            if color_frame and depth_frame:
+                self.last_color = np.asanyarray(color_frame.get_data())
+                
+                depth = np.asanyarray(depth_frame.get_data())
+                if len(depth.shape) == 2:
+                    depth = depth[:, :, None]
+                self.last_depth = depth
+
+        except RuntimeError:
+            # 拿不到新图（超时），或者数据残缺，直接静默忽略，返回老缓存！
+            pass
+        except Exception as e:
+            # 捕获其他意外，防止系统崩溃
+            pass
+
+        return self.last_color, self.last_depth

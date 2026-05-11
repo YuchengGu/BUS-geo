@@ -24,6 +24,7 @@ class CameraDriver(Protocol):
             np.ndarray: The color image.
             np.ndarray: The depth image.
         """
+        ...
 
 
 class DummyCamera(CameraDriver):

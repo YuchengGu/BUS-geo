@@ -1,7 +1,7 @@
 import glob
 import time
 from dataclasses import dataclass
-from typing import Optional, Tuple
+from typing import Optional, Tuple, Dict, cast
 
 import numpy as np
 import tyro
@@ -10,6 +10,8 @@ from gello.env import RobotEnv
 from gello.robots.robot import PrintRobot
 from gello.utils.launch_utils import instantiate_from_dict
 from gello.zmq_core.robot_node import ZMQClientRobot
+
+from gello.agents.agent import Agent
 
 
 def print_color(*args, color=None, attrs=(), **kwargs):
@@ -27,9 +29,10 @@ class Args:
     wrist_camera_port: int = 5000
     base_camera_port: int = 5001
     hostname: str = "127.0.0.1"
-    robot_type: str = None  # only needed for quest agent or spacemouse agent
+    robot_type: Optional[str] = None  # only needed for quest agent or spacemouse agent
     hz: int = 100
-    start_joints: Optional[Tuple[float, ...]] = None
+    # start_joints: Optional[Tuple[float, ...]] = None
+    start_joints: Tuple[float, ...] | np.ndarray | None = None
 
     gello_port: Optional[str] = None
     mock: bool = False
@@ -41,20 +44,33 @@ class Args:
     def __post_init__(self):
         if self.start_joints is not None:
             self.start_joints = np.array(self.start_joints)
+            
 
 
 def main(args):
     if args.mock:
         robot_client = PrintRobot(8, dont_print=True)
         camera_clients = {}
+        my_force_sensor = None
     else:
-        camera_clients = {
+        from gello.cameras.camera import CameraDriver
+        from gello.cameras.D405 import RealSenseD405
+        from gello.cameras.Orbbec import OrbbecCamera
+        from gello.cameras.Ultrasound import UltrasoundCamera
+        from gello.force_sensor_mtcp import ForceSensorMTCP
+        camera_clients : Dict[str, CameraDriver] = {
             # you can optionally add camera nodes here for imitation learning purposes
             # "wrist": ZMQClientCamera(port=args.wrist_camera_port, host=args.hostname),
             # "base": ZMQClientCamera(port=args.base_camera_port, host=args.hostname),
+            "D405": RealSenseD405(),
+            "Orbbec": OrbbecCamera(),
+            "Ultrasound":UltrasoundCamera(camera_index=5),
         }
+        my_force_sensor = ForceSensorMTCP(ip='192.168.1.160')
+        my_force_sensor.connect()
+        #my_force_sensor = None
         robot_client = ZMQClientRobot(port=args.robot_port, host=args.hostname)
-    env = RobotEnv(robot_client, control_rate_hz=args.hz, camera_dict=camera_clients)
+    env = RobotEnv(robot_client, control_rate_hz=args.hz, camera_dict=camera_clients, force_sensor=my_force_sensor)
 
     agent_cfg = {}
     if args.bimanual:
@@ -145,7 +161,7 @@ def main(args):
             else:
                 reset_joints = np.array(args.start_joints)
 
-            curr_joints = env.get_obs()["joint_positions"]
+            curr_joints = np.array(env.get_obs()["joint_positions"])
             if reset_joints.shape == curr_joints.shape:
                 max_delta = (np.abs(curr_joints - reset_joints)).max()
                 steps = min(int(max_delta / 0.01), 100)
@@ -174,13 +190,22 @@ def main(args):
             raise NotImplementedError("add your imitation policy here if there is one")
         else:
             raise ValueError("Invalid agent name")
+    
+    #agent = instantiate_from_dict(agent_cfg)
+    agent = cast(Agent, instantiate_from_dict(agent_cfg))
 
-    agent = instantiate_from_dict(agent_cfg)
     # going to start position
     print("Going to start position")
     start_pos = agent.act(env.get_obs())
     obs = env.get_obs()
-    joints = obs["joint_positions"]
+    joints = np.array(obs["joint_positions"])
+
+    # =========== 【新增代码开始】 ===========
+    # 自动裁剪：如果手柄数据(7)比机器人关节(6)多，就只取前6个
+    if start_pos.shape[0] > joints.shape[0]:
+        # print("警告：正在裁剪手柄数据以匹配机器人关节数...")
+        start_pos = start_pos[:joints.shape[0]]
+    # =========== 【新增代码结束】 ===========
 
     abs_deltas = np.abs(start_pos - joints)
     id_max_joint_delta = np.argmax(abs_deltas)
@@ -210,7 +235,12 @@ def main(args):
     for _ in range(25):
         obs = env.get_obs()
         command_joints = agent.act(obs)
-        current_joints = obs["joint_positions"]
+        current_joints = np.array(obs["joint_positions"])
+
+        # 1. 裁剪 command_joints (7 -> 6)
+        if command_joints.shape[0] > current_joints.shape[0]:
+            command_joints = command_joints[:current_joints.shape[0]]
+
         delta = command_joints - current_joints
         max_joint_delta = np.abs(delta).max()
         if max_joint_delta > max_delta:
@@ -218,8 +248,13 @@ def main(args):
         env.step(current_joints + delta)
 
     obs = env.get_obs()
-    joints = obs["joint_positions"]
+    joints = np.array(obs["joint_positions"])
     action = agent.act(obs)
+
+    # 2. 裁剪 action (7 -> 6) 以防止安全检查报错
+    if action.shape[0] > joints.shape[0]:
+        action = action[:joints.shape[0]]
+
     if (action - joints > 0.5).any():
         print("Action is too big")
 

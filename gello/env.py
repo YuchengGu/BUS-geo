@@ -24,10 +24,12 @@ class RobotEnv:
         robot: Robot,
         control_rate_hz: float = 100.0,
         camera_dict: Optional[Dict[str, CameraDriver]] = None,
+        force_sensor = None,
     ) -> None:
         self._robot = robot
         self._rate = Rate(control_rate_hz)
         self._camera_dict = {} if camera_dict is None else camera_dict
+        self._force_sensor = force_sensor
 
     def robot(self) -> Robot:
         """Get the robot object.
@@ -77,6 +79,14 @@ class RobotEnv:
         observations["joint_velocities"] = robot_obs["joint_velocities"]
         observations["ee_pos_quat"] = robot_obs["ee_pos_quat"]
         observations["gripper_position"] = robot_obs["gripper_position"]
+
+        if self._force_sensor is not None:
+            force_data = self._force_sensor.read_values()
+            if force_data is not None:
+                observations["force"] = np.array(force_data)
+            else:
+                observations["force"] = np.zeros(6) # 如果这一帧没读到，用0填充防崩溃
+
         return observations
 
 
