@@ -1323,3 +1323,8 @@
 [03/19 15:40:36.894274][info][17307][ObLibuvcDevicePort.cpp:87] uvc_close done.
 [03/19 15:40:36.894280][info][17307][ObLibuvcDevicePort.cpp:88] ~ObLibuvcDevicePort done
 [03/19 15:40:36.902835][warning][17466][Pipeline.cpp:295] [AY366300070] Output frameset queue is full, drop oldest frameset! [**27 logs in 1890ms, last: 15:40:36.878748**]
+[05/12 18:40:36.293603][info][7282][LinuxUsbPal.cpp:335] Create PollingDeviceWatcher!
+[05/12 18:40:36.293947][info][7282][DeviceManager.cpp:25] Current found device(s): (0)
+[05/12 18:40:36.293954][info][7282][DeviceManager.cpp:339] Enable net device enumeration: true
+[05/12 18:40:38.302804][info][7282][DeviceManager.cpp:25] Current device(s) list: (0)
+[05/12 18:40:38.302885][warning][7282][ObException.hpp:48] No device found

@@ -47,6 +47,7 @@
 
 import cv2
 import numpy as np
+import time
 from typing import Optional, Tuple
 from gello.cameras.camera import CameraDriver
 
@@ -66,11 +67,31 @@ class UltrasoundCamera(CameraDriver):
             print("✅ 超声采集卡启动成功！")
             
         self.dummy_depth = None
+        self.frame_id = 0
+        self.last_frame_mono_ns = None
+        self.last_metadata = {
+            "valid": False,
+            "frame_new": False,
+            "frame_id": None,
+            "cache_age_ms": None,
+            "error": "not read yet",
+        }
 
     def read(self, img_size: Optional[Tuple[int, int]] = None) -> Tuple[np.ndarray, np.ndarray]:
+        read_start = time.monotonic_ns()
         ret, frame = self.cap.read()
         
         if not ret or frame is None:
+            read_end = time.monotonic_ns()
+            self.last_metadata = {
+                "read_start_mono_ns": read_start,
+                "read_end_mono_ns": read_end,
+                "valid": False,
+                "frame_new": False,
+                "frame_id": self.frame_id,
+                "cache_age_ms": None,
+                "error": "cap.read failed",
+            }
             return np.zeros((480, 640, 3), dtype=np.uint8), np.zeros((480, 640, 1), dtype=np.uint16)
         
 
@@ -88,4 +109,16 @@ class UltrasoundCamera(CameraDriver):
         if self.dummy_depth is None or self.dummy_depth.shape[:2] != frame_rgb.shape[:2]:
             self.dummy_depth = np.zeros((frame_rgb.shape[0], frame_rgb.shape[1], 1), dtype=np.uint16)
 
+        self.frame_id += 1
+        read_end = time.monotonic_ns()
+        self.last_frame_mono_ns = read_end
+        self.last_metadata = {
+            "read_start_mono_ns": read_start,
+            "read_end_mono_ns": read_end,
+            "valid": True,
+            "frame_new": True,
+            "frame_id": self.frame_id,
+            "cache_age_ms": 0.0,
+            "error": None,
+        }
         return frame_rgb, self.dummy_depth

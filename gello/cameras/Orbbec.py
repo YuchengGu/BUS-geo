@@ -77,8 +77,22 @@ class OrbbecCamera(CameraDriver):
         depth_2d = depth_data.reshape((depth_frame.get_height(), depth_frame.get_width()))
         # 增加通道维度以匹配 Gello (H, W, 1)
         self.last_depth = depth_2d[:, :, None]
+        self.last_frame_mono_ns = time.monotonic_ns()
+        self.last_frame_id = self._read_frame_attr(color_frame, "get_frame_number")
+        self.last_hardware_timestamp_ms = self._read_frame_attr(color_frame, "get_timestamp")
+
+    @staticmethod
+    def _read_frame_attr(frame, attr_name):
+        try:
+            return getattr(frame, attr_name)()
+        except Exception:
+            return None
 
     def read(self, img_size: Optional[Tuple[int, int]] = None) -> Tuple[np.ndarray, np.ndarray]:
+        read_start = time.monotonic_ns()
+        frame_new = False
+        valid = True
+        error = None
         try:
             # 【核心护城河】：只等 10ms！如果有新图就拿，没有就直接抛出异常，绝不卡主循环！
             frames = self.pipeline.wait_for_frames(10)
@@ -93,8 +107,21 @@ class OrbbecCamera(CameraDriver):
                     
                     if color_frame and depth_frame:
                         self._update_cache(color_frame, depth_frame)
-        except Exception:
+                        frame_new = True
+        except Exception as e:
             # 捕获 10ms 超时异常。跳过更新，直接返回老照片
-            pass
+            error = str(e)
             
+        read_end = time.monotonic_ns()
+        last_frame_mono_ns = getattr(self, "last_frame_mono_ns", read_end)
+        self.last_metadata = {
+            "read_start_mono_ns": read_start,
+            "read_end_mono_ns": read_end,
+            "valid": valid,
+            "frame_new": frame_new,
+            "frame_id": getattr(self, "last_frame_id", None),
+            "hardware_timestamp_ms": getattr(self, "last_hardware_timestamp_ms", None),
+            "cache_age_ms": (read_end - last_frame_mono_ns) / 1_000_000.0,
+            "error": error,
+        }
         return self.last_color, self.last_depth

@@ -30,7 +30,7 @@ class Args:
     base_camera_port: int = 5001
     hostname: str = "127.0.0.1"
     robot_type: Optional[str] = None  # only needed for quest agent or spacemouse agent
-    hz: int = 100
+    hz: int = 50
     # start_joints: Optional[Tuple[float, ...]] = None
     start_joints: Tuple[float, ...] | np.ndarray | None = None
 
@@ -44,7 +44,6 @@ class Args:
     def __post_init__(self):
         if self.start_joints is not None:
             self.start_joints = np.array(self.start_joints)
-            
 
 
 def main(args):
@@ -58,15 +57,15 @@ def main(args):
         from gello.cameras.Orbbec import OrbbecCamera
         from gello.cameras.Ultrasound import UltrasoundCamera
         from gello.force_sensor_mtcp import ForceSensorMTCP
-        # camera_clients : Dict[str, CameraDriver] = {
-        #     # you can optionally add camera nodes here for imitation learning purposes
-        #     # "wrist": ZMQClientCamera(port=args.wrist_camera_port, host=args.hostname),
-        #     # "base": ZMQClientCamera(port=args.base_camera_port, host=args.hostname),
-        #     "D405": RealSenseD405(),
-        #     "Orbbec": OrbbecCamera(),
-        #     "Ultrasound":UltrasoundCamera(camera_index=5),
-        # }
-        camera_clients = {}
+        camera_clients : Dict[str, CameraDriver] = {
+            # you can optionally add camera nodes here for imitation learning purposes
+            # "wrist": ZMQClientCamera(port=args.wrist_camera_port, host=args.hostname),
+            # "base": ZMQClientCamera(port=args.base_camera_port, host=args.hostname),
+            "D405": RealSenseD405(),
+            # "Orbbec": OrbbecCamera(),
+            # "Ultrasound":UltrasoundCamera(camera_index=5),
+        }
+        # camera_clients = {}
 
         my_force_sensor = ForceSensorMTCP(ip='192.168.1.160')
         my_force_sensor.connect()

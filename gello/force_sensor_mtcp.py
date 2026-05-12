@@ -17,6 +17,10 @@ class ForceSensorMTCP:
         # 默认小数点位数 (防止初始化读取失败时无法计算)
         self.decimals = {'force': 2, 'torque': 2}
         self.is_connected = False
+        self.last_metadata = {
+            "valid": False,
+            "error": "not read yet",
+        }
 
     def connect(self):
         """建立连接并读取一次参数配置"""
@@ -61,8 +65,15 @@ class ForceSensorMTCP:
         读取当前6维力/力矩数据
         :return: 包含6个浮点数的列表 [Fx, Fy, Fz, Mx, My, Mz] 或 None (如果失败)
         """
+        read_start = time.monotonic_ns()
         if not self.is_connected:
             print("[错误] 未连接设备")
+            self.last_metadata = {
+                "read_start_mono_ns": read_start,
+                "read_end_mono_ns": time.monotonic_ns(),
+                "valid": False,
+                "error": "not connected",
+            }
             return None
 
         try:
@@ -71,6 +82,12 @@ class ForceSensorMTCP:
             
             if result.isError():
                 print(f"[通信错误] Modbus返回错误")
+                self.last_metadata = {
+                    "read_start_mono_ns": read_start,
+                    "read_end_mono_ns": time.monotonic_ns(),
+                    "valid": False,
+                    "error": "modbus error",
+                }
                 return None
 
             # 转换数据
@@ -91,8 +108,20 @@ class ForceSensorMTCP:
                 else:     # 后3个是力矩 (Mx, My, Mz)
                     real_values.append(round(val / t_scale, 3))
             
+            self.last_metadata = {
+                "read_start_mono_ns": read_start,
+                "read_end_mono_ns": time.monotonic_ns(),
+                "valid": True,
+                "error": None,
+            }
             return real_values
 
         except Exception as e:
             print(f"[异常] 读取数据出错: {e}")
+            self.last_metadata = {
+                "read_start_mono_ns": read_start,
+                "read_end_mono_ns": time.monotonic_ns(),
+                "valid": False,
+                "error": str(e),
+            }
             return None

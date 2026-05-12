@@ -1,13 +1,13 @@
 import pickle
+import argparse
+from pathlib import Path
+from typing import Any, Dict
+
 import numpy as np
-import matplotlib
-print(matplotlib.get_backend())
-print(matplotlib.rcParams['backend'])
-import matplotlib.pyplot as plt
 
 
 # ⚠️ 换成你最新的 pkl 文件的绝对路径
-FILE_PATH = "/home/ubuntu22/bc_data/gello/0319_153159/2026-03-19T15:32:01.397344.pkl"
+FILE_PATH = "/home/ubuntu22/bc_data/gello/0512_184259/2026-05-12T18:43:00.226474.pkl"
 
 def scan_dict(d, indent=0):
     """递归扫描字典里的所有内容并打印结构"""
@@ -23,10 +23,104 @@ def scan_dict(d, indent=0):
         else:
             print(f"{space}📄 [{k}] -> {type(v).__name__}: {v}")
 
+
+def load_frame(path: Path) -> Dict[str, Any]:
+    with open(path, "rb") as f:
+        return pickle.load(f)
+
+
+def summarize_episode(episode_dir: Path) -> Dict[str, Any]:
+    episode_dir = Path(episode_dir)
+    pkl_paths = sorted(episode_dir.glob("*.pkl"))
+    summary: Dict[str, Any] = {
+        "episode_dir": str(episode_dir),
+        "num_frames": len(pkl_paths),
+        "legacy_frames": 0,
+        "schema_versions": {},
+        "action_send_interval_ms": {},
+        "camera_cache_ratio": {},
+        "invalid_modalities": {},
+    }
+
+    action_send_times = []
+    camera_counts: Dict[str, Dict[str, int]] = {}
+    invalid_counts: Dict[str, int] = {}
+
+    for path in pkl_paths:
+        data = load_frame(path)
+        meta = data.get("meta")
+        if not isinstance(meta, dict):
+            summary["legacy_frames"] += 1
+            continue
+
+        schema_version = meta.get("schema_version", "unknown")
+        summary["schema_versions"][schema_version] = (
+            summary["schema_versions"].get(schema_version, 0) + 1
+        )
+
+        timing = meta.get("timing", {})
+        action_send_start = timing.get("action_send_start_mono_ns")
+        if action_send_start is not None:
+            action_send_times.append(action_send_start)
+
+        for name, modality_meta in meta.get("modalities", {}).items():
+            if not isinstance(modality_meta, dict):
+                continue
+            if modality_meta.get("valid") is False:
+                invalid_counts[name] = invalid_counts.get(name, 0) + 1
+            if "frame_new" in modality_meta:
+                counts = camera_counts.setdefault(name, {"total": 0, "cached": 0})
+                counts["total"] += 1
+                if modality_meta.get("frame_new") is False:
+                    counts["cached"] += 1
+
+    if len(action_send_times) >= 2:
+        intervals_ms = np.diff(np.array(action_send_times, dtype=np.int64)) / 1_000_000.0
+        summary["action_send_interval_ms"] = {
+            "mean": float(np.mean(intervals_ms)),
+            "p50": float(np.percentile(intervals_ms, 50)),
+            "p95": float(np.percentile(intervals_ms, 95)),
+            "max": float(np.max(intervals_ms)),
+        }
+
+    summary["camera_cache_ratio"] = {
+        name: counts["cached"] / counts["total"]
+        for name, counts in camera_counts.items()
+        if counts["total"] > 0
+    }
+    summary["invalid_modalities"] = invalid_counts
+    return summary
+
+
+def print_episode_summary(summary: Dict[str, Any]) -> None:
+    print("=" * 60)
+    print("📊 Episode 时间对齐摘要")
+    print(f"目录: {summary['episode_dir']}")
+    print(f"帧数: {summary['num_frames']}")
+    print(f"legacy 帧数: {summary['legacy_frames']}")
+    print(f"schema: {summary['schema_versions']}")
+    print(f"action 间隔(ms): {summary['action_send_interval_ms']}")
+    print(f"camera 缓存比例: {summary['camera_cache_ratio']}")
+    print(f"无效模态计数: {summary['invalid_modalities']}")
+
+
 def main():
+    parser = argparse.ArgumentParser(description="Inspect one GELLO pkl or summarize an episode directory.")
+    parser.add_argument("path", nargs="?", default=FILE_PATH)
+    args = parser.parse_args()
+    path = Path(args.path)
+
+    if path.is_dir():
+        print_episode_summary(summarize_episode(path))
+        return
+
+    import matplotlib
+    print(matplotlib.get_backend())
+    print(matplotlib.rcParams['backend'])
+    import matplotlib.pyplot as plt
+
     try:
-        with open(FILE_PATH, 'rb') as f:
-            data = pickle.load(f)
+        data = load_frame(path)
     except Exception as e:
         print(f"❌ 读取文件失败: {e}")
         return
