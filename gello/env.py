@@ -7,6 +7,23 @@ from gello.cameras.camera import CameraDriver
 from gello.robots.robot import Robot
 
 
+def _rotvec_to_matrix(rotvec: np.ndarray) -> np.ndarray:
+    angle = np.linalg.norm(rotvec)
+    if angle < 1e-12:
+        return np.eye(3)
+
+    axis = rotvec / angle
+    x, y, z = axis
+    skew = np.array(
+        [
+            [0.0, -z, y],
+            [z, 0.0, -x],
+            [-y, x, 0.0],
+        ]
+    )
+    return np.eye(3) + np.sin(angle) * skew + (1.0 - np.cos(angle)) * (skew @ skew)
+
+
 class Rate:
     def __init__(self, rate: float):
         self.last = time.monotonic()
@@ -114,6 +131,13 @@ class RobotEnv:
         observations["ee_pos_quat"] = robot_obs["ee_pos_quat"]
         if "ee_pos_rotvec" in robot_obs:
             observations["ee_pos_rotvec"] = robot_obs["ee_pos_rotvec"]
+            tcp_pose = np.asarray(robot_obs["ee_pos_rotvec"], dtype=float)
+            if tcp_pose.shape[0] >= 6:
+                r_base_tcp = _rotvec_to_matrix(tcp_pose[3:6])
+                observations["tcp_position_base"] = tcp_pose[:3]
+                observations["tcp_x_axis_base"] = r_base_tcp[:, 0]
+                observations["tcp_y_axis_base"] = r_base_tcp[:, 1]
+                observations["tcp_z_axis_base"] = r_base_tcp[:, 2]
         if "gripper_position" in robot_obs:
             observations["gripper_position"] = robot_obs["gripper_position"]
 

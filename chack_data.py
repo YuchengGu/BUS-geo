@@ -7,7 +7,7 @@ import numpy as np
 
 
 # ⚠️ 换成你最新的 pkl 文件的绝对路径
-FILE_PATH = "/home/ubuntu22/bc_data/gello/0512_184259/2026-05-12T18:43:00.226474.pkl"
+FILE_PATH = "/home/ubuntu22/bc_data/gello/0512_210114/2026-05-12T21:01:22.573213.pkl"
 
 def scan_dict(d, indent=0):
     """递归扫描字典里的所有内容并打印结构"""

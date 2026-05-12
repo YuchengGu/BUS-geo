@@ -37,6 +37,17 @@ def test_env_accepts_lowdim_observations_without_gripper_position():
     np.testing.assert_allclose(obs["ee_pos_rotvec"], np.array([0.4, -0.1, 0.2, 0.0, 0.0, 0.0]))
 
 
+def test_env_adds_tcp_position_and_axes_in_base_frame():
+    env = RobotEnv(FakeRobotWithoutGripper(), control_rate_hz=100)
+
+    obs = env.get_obs()
+
+    np.testing.assert_allclose(obs["tcp_position_base"], np.array([0.4, -0.1, 0.2]))
+    np.testing.assert_allclose(obs["tcp_x_axis_base"], np.array([1.0, 0.0, 0.0]))
+    np.testing.assert_allclose(obs["tcp_y_axis_base"], np.array([0.0, 1.0, 0.0]))
+    np.testing.assert_allclose(obs["tcp_z_axis_base"], np.array([0.0, 0.0, 1.0]))
+
+
 def test_save_frame_does_not_add_fake_gripper_position(tmp_path):
     env = RobotEnv(FakeRobotWithoutGripper(), control_rate_hz=100)
     obs = env.get_obs()
