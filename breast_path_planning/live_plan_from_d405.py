@@ -135,7 +135,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--warmup-reads", type=int, default=3)
     parser.add_argument("--point-stride", type=int, default=2)
     parser.add_argument("--min-depth-m", type=float, default=0.05)
-    parser.add_argument("--max-depth-m", type=float, default=2.0)
+    parser.add_argument("--max-depth-m", type=float, default=0.7)
     parser.add_argument("--spatial-radius-m", type=float, default=0.015)
     parser.add_argument("--hue-threshold-deg", type=float, default=30.0)
     parser.add_argument("--saturation-threshold", type=float, default=0.35)

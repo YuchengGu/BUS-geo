@@ -53,7 +53,8 @@ planned_path[i] = {
   - 当前 gello 的手眼标定结果、D405 实时 RGB/depth 数据
 - 范围外：
   - demo1 的自动力控、贝叶斯优化、Plus/NDI 重建、超声视频校正。
-  - GUI 的按钮和窗口实现，放到 `Note/visual_collection_gui/`。
+  - 完整 GUI 的按钮和窗口实现不在第一阶段。
+  - 摆位、拍照、规划确认、启动 GELLO 示教和路径 residual 保存属于可视化引导采集 GUI 子任务，见 `Note/visual_guided_collection_gui/`。
   - 每帧 pkl 的实时保存和 `obs_t -> action_t` 控制循环。
   - 训练代码。
 
@@ -208,8 +209,18 @@ path_lookahead_mask[j]
 正常扫查时建议使用单调窗口搜索，避免最近点来回跳：
 
 ```text
-search_window = [last_k - 5, last_k + 50]
+search_window = [last_k - 3, last_k + 7]
 ```
+
+默认采集特征建议使用：
+
+```text
+lookahead = 8
+backtrack = 3
+forward = 7
+```
+
+其中 `lookahead=8` 表示每帧保存从当前最近点 `k` 到 `k+7` 的 8 个 residual/normal；`backtrack=3, forward=7` 表示最近点只在上一帧附近的 `-3` 到 `+7` 窗口里搜索。
 
 ## 实现步骤
 

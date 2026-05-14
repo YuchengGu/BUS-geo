@@ -9,9 +9,9 @@ from breast_path_planning.path_io import PlannedPath
 
 @dataclass
 class PathFeatureParams:
-    lookahead: int = 16
-    backtrack: int = 5
-    forward: int = 50
+    lookahead: int = 8
+    backtrack: int = 3
+    forward: int = 7
 
 
 def compute_path_features(
