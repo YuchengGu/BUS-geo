@@ -296,10 +296,11 @@ PnP reprojection_error_px
 
 标定完成后，路径规划可按以下方式做：
 
-1. 规划时刻从 D405 depth 反投影局部点云：
+1. 规划时刻从 D405 RealSense 当前帧生成局部点云。当前路径规划工具不要求用户输入相机内参，点云由 librealsense pointcloud 生成：
 
 ```text
-P_camera = depth_to_point_cloud(D405_depth, camera_intrinsics, depth_scale)
+pc.map_to(color_frame)
+P_camera = pc.calculate(depth_frame).get_vertices()
 ```
 
 2. 在相机坐标系下生成路径点和法向：

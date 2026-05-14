@@ -27,6 +27,8 @@ class RealSenseD405:
                 color_frame = aligned_frames.get_color_frame()
                 depth_frame = aligned_frames.get_depth_frame()
                 if color_frame and depth_frame:
+                    self.last_color_frame = color_frame
+                    self.last_depth_frame = depth_frame
                     break
             except RuntimeError:
                 continue
@@ -73,6 +75,8 @@ class RealSenseD405:
             depth_frame = aligned_frames.get_depth_frame()
             
             if color_frame and depth_frame:
+                self.last_color_frame = color_frame
+                self.last_depth_frame = depth_frame
                 self.last_color = np.asanyarray(color_frame.get_data())
                 
                 depth = np.asanyarray(depth_frame.get_data())
@@ -105,3 +109,7 @@ class RealSenseD405:
             "error": error,
         }
         return self.last_color, self.last_depth
+
+    def latest_frames(self):
+        """Return the latest RealSense color/depth frame objects for SDK pointcloud generation."""
+        return self.last_color_frame, self.last_depth_frame
