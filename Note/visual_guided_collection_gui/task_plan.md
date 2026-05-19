@@ -218,6 +218,71 @@ forward = 7
 
 ## GUI 第一版范围
 
+第一版采用 Open3D GUI 单窗口方案：
+
+```text
+左侧：SceneWidget 3D 点云视图
+  - 完整 RGBXYZ 点云
+  - Shift + 左键选 seed
+  - 分割乳腺高亮
+  - 路径线 / 路径点 / 法向量
+  - 当前探头末端坐标架
+
+右侧：D405 RGB + 状态文本 + 控制按钮
+```
+
+实际第一版右侧图像预览扩展为：
+
+```text
+D405 RGB
+D405 depth 伪彩色
+Ultrasound
+状态文本
+控制按钮
+```
+
+新增代码入口：
+
+```text
+visual_guided_collection_gui/main.py
+visual_guided_collection_gui/app.py
+visual_guided_collection_gui/device_manager.py
+visual_guided_collection_gui/planning_session.py
+visual_guided_collection_gui/collection_session.py
+visual_guided_collection_gui/episode_recorder.py
+visual_guided_collection_gui/picking.py
+visual_guided_collection_gui/state.py
+```
+
+运行方式：
+
+```bash
+python -m visual_guided_collection_gui.main --point-stride 2
+```
+
+采集前 GELLO 连接约束：
+
+```text
+连接服务
+  -> 初始化 GELLO agent
+拍照摆位
+  -> 启动 GELLO 控制循环
+拍照冻结
+  -> 停止 GELLO 控制循环，但不物理断开 GELLO 串口
+规划 / 确认路径
+  -> GELLO 保持已连接
+采集前 GELLO 接管
+  -> 重新启动 GELLO 控制循环
+  -> 不保存 episode
+  -> 等操作者确认接管稳定
+开始记录 episode
+  -> 检查 GELLO 已连接
+  -> 检查 GELLO 已经接管控制
+  -> 保存数据
+```
+
+因此必须先让 GELLO 连接成功，并且在记录前先点 `采集前 GELLO 接管`，才能开始采集；但拍照规划中间不需要断开再重连。
+
 第一版 GUI 不需要做复杂美化，重点是把流程打通：
 
 ```text

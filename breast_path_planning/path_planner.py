@@ -13,8 +13,8 @@ from breast_path_planning.surface_processing import constrain_normals_to_referen
 
 @dataclass
 class PathPlannerParams:
-    step_y_m: float = 0.015
-    step_x_m: float = 0.007
+    step_y_m: float = 0.025
+    step_x_m: float = 0.015
     slice_tolerance_ratio: float = 0.65
     max_query_distance_m: float | None = None
     normal_k_neighbors: int = 20
@@ -64,14 +64,20 @@ def plan_serpentine_path(
 
     min_y = float(np.min(points[:, 1]))
     max_y = float(np.max(points[:, 1]))
-    tolerance = float(params.step_y_m * params.slice_tolerance_ratio)
+    center_y = 0.5 * (min_y + max_y)
+    half_y = 0.5 * (max_y - min_y) * 0.8
+    min_y = center_y - half_y
+    max_y = center_y + half_y
+    step_y = params.step_y_m
+    step_x = params.step_x_m
+    tolerance = float(step_y * params.slice_tolerance_ratio)
     max_query = params.max_query_distance_m
     if max_query is None:
-        max_query = max(params.step_x_m, params.step_y_m) * 2.0
+        max_query = max(step_x, step_y) * 2.0
 
     rows: list[tuple[np.ndarray, np.ndarray]] = []
     row_index = 0
-    y_values = np.arange(min_y, max_y + params.step_y_m * 0.5, params.step_y_m)
+    y_values = np.arange(min_y, max_y + step_y * 0.5, step_y)
     points_xy = points[:, :2]
     for y in y_values:
         row_mask = np.abs(points[:, 1] - y) <= tolerance
@@ -82,9 +88,13 @@ def plan_serpentine_path(
         row_points = points[row_indices]
         x_min = float(np.min(row_points[:, 0]))
         x_max = float(np.max(row_points[:, 0]))
+        center_x = 0.5 * (x_min + x_max)
+        half_x = 0.5 * (x_max - x_min) * 0.8
+        x_min = center_x - half_x
+        x_max = center_x + half_x
         if x_max < x_min:
             continue
-        num = max(2, int(np.floor((x_max - x_min) / params.step_x_m)) + 1)
+        num = max(2, int(np.floor((x_max - x_min) / step_x)) + 1)
         x_samples = np.linspace(x_min, x_max, num)
         query_xy = np.stack([x_samples, np.full_like(x_samples, y)], axis=1)
         nearest = _nearest_xy_indices(points_xy, query_xy, max_query)

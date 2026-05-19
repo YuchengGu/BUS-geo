@@ -7,7 +7,7 @@ import numpy as np
 
 
 # ⚠️ 换成你最新的 pkl 文件的绝对路径
-FILE_PATH = "/home/ubuntu22/bc_data/gello/0512_210114/2026-05-12T21:01:22.573213.pkl"
+FILE_PATH = "/home/ubuntu22/bc_data/gello/0518_211702/2026-05-18T21:17:11.802173.pkl"
 
 def scan_dict(d, indent=0):
     """递归扫描字典里的所有内容并打印结构"""
@@ -161,7 +161,10 @@ def main():
         depth_2d = np.squeeze(data['Orbbec_depth'])
         images.append(("Camera 2: Orbbec Depth", depth_2d, 'jet'))
         
-    if 'Ultrasound_rgb' in data:
+    if 'Ultrasound_gray' in data:
+        us_gray = np.squeeze(data['Ultrasound_gray'])
+        images.append(("Ultrasound", us_gray, 'gray'))
+    elif 'Ultrasound_rgb' in data:
         # 强制转灰度 + 强制指定 gray 色图
         us_img = data['Ultrasound_rgb']
         us_gray = us_img[..., 0]  # 取单通道

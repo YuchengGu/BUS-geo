@@ -148,6 +148,7 @@ class SaveInterface:
         self.data_dir = Path(data_dir).expanduser() if expand_user else Path(data_dir)
         self.agent_name = agent_name
         self.save_path: Optional[Path] = None
+        self.last_save_timing: Optional[Dict[str, Any]] = None
 
         print("Save interface enabled. Use keyboard controls:")
         print("  S: Start recording")
@@ -187,6 +188,7 @@ class SaveInterface:
 
         from gello.data_utils.format_obs import save_frame
 
+        save_start = time.monotonic_ns()
         save_frame(
             self.save_path,
             timestamp or datetime.datetime.now(),
@@ -194,6 +196,12 @@ class SaveInterface:
             action,
             meta=meta,
         )
+        save_end = time.monotonic_ns()
+        self.last_save_timing = {
+            "save_start_mono_ns": save_start,
+            "save_end_mono_ns": save_end,
+            "save_duration_ms": (save_end - save_start) / 1_000_000.0,
+        }
 
     def update(
         self,
@@ -330,5 +338,12 @@ def run_control_loop(
                 },
                 step_timing=dict(getattr(env, "last_step_timing", {}) or {}),
             )
+            if save_interface.last_save_timing is not None:
+                meta["timing"].update(
+                    {
+                        f"previous_{key}": value
+                        for key, value in save_interface.last_save_timing.items()
+                    }
+                )
             save_interface.save(current_obs, action, meta=meta, timestamp=timestamp)
             sample_index += 1

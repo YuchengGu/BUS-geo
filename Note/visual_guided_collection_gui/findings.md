@@ -27,3 +27,17 @@ GUI 中先用 GELLO 摆位到适合拍照的位置，再拍照、规划、确认
 - 摆位模式只控制 UR5，不应保存 episode 样本；确认规划后才开始正式记录。
 - `probe_tip_offset_m` 的正负号必须实物确认。
 - 只有真实 D405 在线规划出来的 base 坐标系路径，才能直接用于真实 UR 采集 residual。
+
+## 第一版实现决策
+
+- `Newgello` 环境已有 `open3d 0.19.0`、`PyQt5`、`opencv-python`、`pyrealsense2`，不需要新增大依赖。
+- 为了最小化依赖和事件循环复杂度，第一版使用 Open3D 自带 GUI：
+
+```text
+open3d.visualization.gui.Application
+open3d.visualization.gui.SceneWidget
+open3d.visualization.rendering.Open3DScene
+```
+
+- seed 选择不再依赖独立 Open3D picker 窗口，而是在主 `SceneWidget` 中用当前相机矩阵把点云投影到屏幕，找 `Shift + 左键` 附近最近的点云点。
+- `visual_guided_collection_gui/` 是新入口；原来的命令行规划和采集代码仍保留，便于回退。

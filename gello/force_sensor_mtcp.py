@@ -2,7 +2,7 @@ import time
 from pymodbus.client import ModbusTcpClient
 
 class ForceSensorMTCP:
-    def __init__(self, ip, port=502, device_id=1):
+    def __init__(self, ip, port=502, device_id=1, reconnect_interval_s=1.0, log_interval_s=1.0):
         """
         初始化力传感器客户端
         :param ip: 变送器IP地址
@@ -13,6 +13,10 @@ class ForceSensorMTCP:
         self.port = port
         self.device_id = device_id
         self.client = ModbusTcpClient(self.ip, port=self.port)
+        self.reconnect_interval_s = float(reconnect_interval_s)
+        self.log_interval_s = float(log_interval_s)
+        self._last_reconnect_mono = 0.0
+        self._last_error_log_mono = 0.0
         
         # 默认小数点位数 (防止初始化读取失败时无法计算)
         self.decimals = {'force': 2, 'torque': 2}
@@ -24,6 +28,8 @@ class ForceSensorMTCP:
 
     def connect(self):
         """建立连接并读取一次参数配置"""
+        if self.client is None:
+            self.client = ModbusTcpClient(self.ip, port=self.port)
         if self.client.connect():
             self.is_connected = True
             print(f"[系统] 已连接到力传感器 {self.ip}")
@@ -36,9 +42,39 @@ class ForceSensorMTCP:
 
     def disconnect(self):
         """断开连接"""
-        self.client.close()
+        if self.client is not None:
+            self.client.close()
         self.is_connected = False
         print("[系统] 连接已关闭")
+
+    def _mark_disconnected(self):
+        self.is_connected = False
+        if self.client is not None:
+            try:
+                self.client.close()
+            except Exception:
+                pass
+        self.client = None
+
+    def _log_error_throttled(self, message: str):
+        now = time.monotonic()
+        if now - self._last_error_log_mono >= self.log_interval_s:
+            print(message)
+            self._last_error_log_mono = now
+
+    def _maybe_reconnect(self) -> bool:
+        now = time.monotonic()
+        if now - self._last_reconnect_mono < self.reconnect_interval_s:
+            return False
+        self._last_reconnect_mono = now
+        self.client = ModbusTcpClient(self.ip, port=self.port)
+        if self.client.connect():
+            self.is_connected = True
+            self._update_decimals()
+            print(f"[系统] 力传感器重连成功 {self.ip}")
+            return True
+        self._mark_disconnected()
+        return False
 
     def _update_decimals(self):
         """(内部方法) 读取力和小数点的位参数"""
@@ -67,7 +103,8 @@ class ForceSensorMTCP:
         """
         read_start = time.monotonic_ns()
         if not self.is_connected:
-            print("[错误] 未连接设备")
+            self._maybe_reconnect()
+        if not self.is_connected:
             self.last_metadata = {
                 "read_start_mono_ns": read_start,
                 "read_end_mono_ns": time.monotonic_ns(),
@@ -117,7 +154,8 @@ class ForceSensorMTCP:
             return real_values
 
         except Exception as e:
-            print(f"[异常] 读取数据出错: {e}")
+            self._log_error_throttled(f"[异常] 读取力传感器数据出错: {e}；将自动尝试重连")
+            self._mark_disconnected()
             self.last_metadata = {
                 "read_start_mono_ns": read_start,
                 "read_end_mono_ns": time.monotonic_ns(),

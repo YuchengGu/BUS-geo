@@ -103,6 +103,73 @@ def realsense_frames_to_point_cloud(
     return PointCloud(points_base, colors, pixels)
 
 
+def rgbd_arrays_to_point_cloud(
+    rgb: np.ndarray,
+    depth: np.ndarray,
+    intrinsics: Any,
+    T_base_camera: np.ndarray,
+    *,
+    depth_scale_m_per_unit: float,
+    stride: int = 2,
+    min_depth_m: float = 0.05,
+    max_depth_m: float = 2.0,
+) -> PointCloud:
+    """Generate a base-frame point cloud from aligned RGB/depth numpy arrays.
+
+    This is the generic RGB-D path used for cameras such as Orbbec. Depth must
+    already be aligned to the RGB image, and ``intrinsics`` must describe that
+    RGB/depth pixel grid.
+    """
+    if stride < 1:
+        raise ValueError("stride must be >= 1")
+    color_image = np.asarray(rgb)
+    depth_image = np.asarray(depth)
+    if color_image.ndim != 3 or color_image.shape[2] != 3:
+        raise ValueError(f"Expected rgb with shape (H, W, 3), got {color_image.shape}")
+    if depth_image.ndim == 3 and depth_image.shape[2] == 1:
+        depth_image = depth_image[:, :, 0]
+    if depth_image.ndim != 2:
+        raise ValueError(f"Expected depth with shape (H, W) or (H, W, 1), got {depth.shape}")
+    if depth_image.shape[:2] != color_image.shape[:2]:
+        raise ValueError(f"rgb/depth shapes must match, got {color_image.shape[:2]} and {depth_image.shape[:2]}")
+
+    fx, fy, cx, cy = _intrinsics_values(intrinsics)
+    height, width = depth_image.shape
+    v_grid, u_grid = np.mgrid[0:height:stride, 0:width:stride]
+    z = depth_image[0:height:stride, 0:width:stride].astype(float) * float(depth_scale_m_per_unit)
+    valid = np.isfinite(z) & (z >= min_depth_m) & (z <= max_depth_m)
+    if not np.any(valid):
+        return PointCloud(np.zeros((0, 3), dtype=float), np.zeros((0, 3), dtype=np.uint8), np.zeros((0, 2), dtype=int))
+
+    u = u_grid[valid].astype(float)
+    v = v_grid[valid].astype(float)
+    z_selected = z[valid]
+    x = (u - cx) / fx * z_selected
+    y = (v - cy) / fy * z_selected
+    points_camera = np.stack([x, y, z_selected], axis=1)
+    points_base = transform_points(points_camera, T_base_camera)
+    pixels = np.stack([u.astype(int), v.astype(int)], axis=1)
+    colors = color_image[pixels[:, 1], pixels[:, 0]].astype(np.uint8, copy=False)
+    return PointCloud(points_base, colors, pixels)
+
+
+def _intrinsics_values(intrinsics: Any) -> tuple[float, float, float, float]:
+    if isinstance(intrinsics, dict):
+        fx = intrinsics["fx"]
+        fy = intrinsics["fy"]
+        cx = intrinsics["cx"]
+        cy = intrinsics["cy"]
+    else:
+        fx = getattr(intrinsics, "fx")
+        fy = getattr(intrinsics, "fy")
+        cx = getattr(intrinsics, "cx")
+        cy = getattr(intrinsics, "cy")
+    values = (float(fx), float(fy), float(cx), float(cy))
+    if values[0] <= 0.0 or values[1] <= 0.0:
+        raise ValueError(f"Invalid camera intrinsics fx/fy: {values[:2]}")
+    return values
+
+
 def save_point_cloud_ply(cloud: PointCloud, output_path: str | Path) -> None:
     output = Path(output_path)
     output.parent.mkdir(parents=True, exist_ok=True)

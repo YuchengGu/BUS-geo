@@ -24,6 +24,13 @@ def _rotvec_to_matrix(rotvec: np.ndarray) -> np.ndarray:
     return np.eye(3) + np.sin(angle) * skew + (1.0 - np.cos(angle)) * (skew @ skew)
 
 
+def _rgb_to_gray_uint8(rgb: np.ndarray) -> np.ndarray:
+    image = np.asarray(rgb)
+    if image.ndim != 3 or image.shape[2] != 3:
+        raise ValueError(f"rgb image must have shape (H, W, 3), got {image.shape}")
+    return image[:, :, 0:1].astype(np.uint8, copy=False)
+
+
 class Rate:
     def __init__(self, rate: float):
         self.last = time.monotonic()
@@ -107,8 +114,11 @@ class RobotEnv:
             read_start = time.monotonic_ns()
             image, depth = camera.read()
             read_end = time.monotonic_ns()
-            observations[f"{name}_rgb"] = image
-            observations[f"{name}_depth"] = depth
+            if name == "Ultrasound":
+                observations["Ultrasound_gray"] = _rgb_to_gray_uint8(image)
+            else:
+                observations[f"{name}_rgb"] = image
+                observations[f"{name}_depth"] = depth
             camera_meta = dict(getattr(camera, "last_metadata", {}) or {})
             camera_meta.setdefault("read_start_mono_ns", read_start)
             camera_meta.setdefault("read_end_mono_ns", read_end)

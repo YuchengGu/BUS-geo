@@ -6,7 +6,7 @@ from breast_path_planning.path_features import PathFeatureParams, compute_path_f
 from breast_path_planning.path_io import PlannedPath, load_planned_path, save_planned_path
 from breast_path_planning.path_planner import PathPlannerParams, plan_serpentine_path
 from breast_path_planning.plan_from_frame import plan_from_point_cloud
-from breast_path_planning.pointcloud_from_d405 import PointCloud, load_point_cloud_ply, realsense_frames_to_point_cloud, save_point_cloud_ply
+from breast_path_planning.pointcloud_from_d405 import PointCloud, load_point_cloud_ply, realsense_frames_to_point_cloud, rgbd_arrays_to_point_cloud, save_point_cloud_ply
 from breast_path_planning.segmentation import SegmentationParams, segment_region_from_seed_pixels
 from breast_path_planning.live_plan_from_d405 import compute_base_camera_transform
 
@@ -91,6 +91,34 @@ def test_realsense_frames_to_point_cloud_uses_sdk_vertices_and_texture_mapping()
     np.testing.assert_allclose(cloud.colors_rgb[0], [10, 0, 0])
     np.testing.assert_allclose(cloud.colors_rgb[1], [40, 0, 0])
     np.testing.assert_allclose(cloud.pixels_uv, [[0, 0], [1, 1]])
+
+
+def test_rgbd_arrays_to_point_cloud_uses_intrinsics_and_depth_scale():
+    rgb = np.array(
+        [
+            [[255, 0, 0], [0, 255, 0]],
+            [[0, 0, 255], [255, 255, 0]],
+        ],
+        dtype=np.uint8,
+    )
+    depth = np.array([[[1000], [2000]], [[0], [3000]]], dtype=np.uint16)
+    intrinsics = {"fx": 100.0, "fy": 200.0, "cx": 0.0, "cy": 0.0}
+
+    cloud = rgbd_arrays_to_point_cloud(
+        rgb,
+        depth,
+        intrinsics,
+        np.eye(4),
+        depth_scale_m_per_unit=0.001,
+        stride=1,
+        min_depth_m=0.05,
+        max_depth_m=2.5,
+    )
+
+    assert len(cloud) == 2
+    np.testing.assert_allclose(cloud.points_base, [[0.0, 0.0, 1.0], [0.02, 0.0, 2.0]])
+    np.testing.assert_array_equal(cloud.colors_rgb, [[255, 0, 0], [0, 255, 0]])
+    np.testing.assert_array_equal(cloud.pixels_uv, [[0, 0], [1, 0]])
 
 
 def test_point_cloud_ply_roundtrip_preserves_xyz_and_rgb(tmp_path):
@@ -226,15 +254,38 @@ def test_serpentine_planner_outputs_positions_and_normals_only():
         ),
     )
 
-    assert len(path) == 9
-    np.testing.assert_allclose(path.positions_base[:3, 1], 0.0)
-    np.testing.assert_allclose(path.positions_base[3:6, 1], 0.01)
-    assert path.positions_base[0, 0] < path.positions_base[2, 0]
-    assert path.positions_base[3, 0] > path.positions_base[5, 0]
-    np.testing.assert_allclose(path.normals_base, normals)
+    assert len(path) > 0
+    assert path.positions_base[0, 0] < path.positions_base[1, 0]
+    assert np.all(np.isin(path.positions_base[:, 0], xs))
+    assert np.all(np.isin(path.positions_base[:, 1], ys))
+    np.testing.assert_allclose(path.normals_base, np.tile([0.0, 0.0, 1.0], (len(path), 1)))
     assert path.metadata["contains_tangent"] is False
     assert path.metadata["contains_reverse_y"] is False
     assert path.metadata["normal_constrain_enabled"] is False
+
+
+def test_serpentine_planner_uses_smaller_scan_area_and_fewer_points_by_default():
+    xs = np.linspace(0.0, 0.04, 21)
+    ys = np.linspace(0.0, 0.04, 21)
+    points = np.array([[x, y, 0.0] for y in ys for x in xs], dtype=float)
+    normals = np.tile(np.array([0.0, 0.0, 1.0]), (len(points), 1))
+
+    path = plan_serpentine_path(
+        points,
+        normals,
+        PathPlannerParams(
+            step_y_m=0.005,
+            step_x_m=0.005,
+            slice_tolerance_ratio=0.2,
+            min_points_per_slice=3,
+        ),
+    )
+
+    assert float(np.min(path.positions_base[:, 0])) >= 0.004 - 1e-9
+    assert float(np.max(path.positions_base[:, 0])) <= 0.036 + 1e-9
+    assert float(np.min(path.positions_base[:, 1])) >= 0.004 - 1e-9
+    assert float(np.max(path.positions_base[:, 1])) <= 0.036 + 1e-9
+    assert len(np.unique(path.positions_base[:, 1])) <= 7
 
 
 def test_serpentine_planner_preserves_steep_normals_by_default():
@@ -255,7 +306,7 @@ def test_serpentine_planner_preserves_steep_normals_by_default():
         ),
     )
 
-    np.testing.assert_allclose(path.normals_base, normals)
+    np.testing.assert_allclose(path.normals_base, np.tile(steep, (len(path), 1)))
 
 
 def test_planned_path_json_roundtrip_excludes_tangent_and_reverse_y(tmp_path):

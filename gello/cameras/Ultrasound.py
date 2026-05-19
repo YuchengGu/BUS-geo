@@ -47,12 +47,13 @@
 
 import cv2
 import numpy as np
+import threading
 import time
 from typing import Optional, Tuple
 from gello.cameras.camera import CameraDriver
 
 class UltrasoundCamera(CameraDriver):
-    def __init__(self, camera_index=5): # ⚠️ 你的 video 编号
+    def __init__(self, camera_index=4): # ⚠️ 你的 video 编号
         print(f"正在启动超声采集卡 (video{camera_index})...")
         self.cap = cv2.VideoCapture(camera_index)
         
@@ -69,6 +70,12 @@ class UltrasoundCamera(CameraDriver):
         self.dummy_depth = None
         self.frame_id = 0
         self.last_frame_mono_ns = None
+        self.last_rgb = None
+        self._last_returned_frame_id = None
+        self._last_error = "not read yet"
+        self._lock = threading.Lock()
+        self._stop_event = threading.Event()
+        self._reader_thread = None
         self.last_metadata = {
             "valid": False,
             "frame_new": False,
@@ -76,49 +83,74 @@ class UltrasoundCamera(CameraDriver):
             "cache_age_ms": None,
             "error": "not read yet",
         }
+        if self.cap.isOpened():
+            self._reader_thread = threading.Thread(target=self._reader_loop, daemon=True)
+            self._reader_thread.start()
+
+    def _reader_loop(self) -> None:
+        while not self._stop_event.is_set():
+            ret, frame = self.cap.read()
+            read_end = time.monotonic_ns()
+            if not ret or frame is None:
+                with self._lock:
+                    self._last_error = "cap.read failed"
+                time.sleep(0.001)
+                continue
+
+            frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+            with self._lock:
+                self.frame_id += 1
+                self.last_rgb = frame_rgb
+                self.last_frame_mono_ns = read_end
+                self._last_error = None
 
     def read(self, img_size: Optional[Tuple[int, int]] = None) -> Tuple[np.ndarray, np.ndarray]:
         read_start = time.monotonic_ns()
-        ret, frame = self.cap.read()
-        
-        if not ret or frame is None:
+        with self._lock:
+            frame_rgb = None if self.last_rgb is None else self.last_rgb.copy()
+            frame_id = self.frame_id
+            frame_mono_ns = self.last_frame_mono_ns
+            error = self._last_error
+
+        if frame_rgb is None:
             read_end = time.monotonic_ns()
             self.last_metadata = {
                 "read_start_mono_ns": read_start,
                 "read_end_mono_ns": read_end,
                 "valid": False,
                 "frame_new": False,
-                "frame_id": self.frame_id,
+                "frame_id": None,
                 "cache_age_ms": None,
-                "error": "cap.read failed",
+                "error": error or "no cached frame",
             }
             return np.zeros((480, 640, 3), dtype=np.uint8), np.zeros((480, 640, 1), dtype=np.uint16)
-        
 
-        
-        # OpenCV 默认读出来是 BGR，转换为 Gello 需要的 RGB 格式
-        frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-        
-
-        
-        # 缩放 (统一给下游的数据尺寸)
         if img_size is not None:
             frame_rgb = cv2.resize(frame_rgb, img_size)
 
-        # 补全一个空深度图以符合框架要求
         if self.dummy_depth is None or self.dummy_depth.shape[:2] != frame_rgb.shape[:2]:
             self.dummy_depth = np.zeros((frame_rgb.shape[0], frame_rgb.shape[1], 1), dtype=np.uint16)
 
-        self.frame_id += 1
         read_end = time.monotonic_ns()
-        self.last_frame_mono_ns = read_end
+        frame_new = frame_id != self._last_returned_frame_id
+        self._last_returned_frame_id = frame_id
+        cache_age_ms = None
+        if frame_mono_ns is not None:
+            cache_age_ms = (read_end - frame_mono_ns) / 1_000_000.0
         self.last_metadata = {
             "read_start_mono_ns": read_start,
             "read_end_mono_ns": read_end,
             "valid": True,
-            "frame_new": True,
-            "frame_id": self.frame_id,
-            "cache_age_ms": 0.0,
-            "error": None,
+            "frame_new": frame_new,
+            "frame_id": frame_id,
+            "cache_age_ms": cache_age_ms,
+            "error": error,
         }
         return frame_rgb, self.dummy_depth
+
+    def close(self) -> None:
+        self._stop_event.set()
+        if self._reader_thread is not None:
+            self._reader_thread.join(timeout=1.0)
+        if hasattr(self, "cap") and self.cap is not None:
+            self.cap.release()

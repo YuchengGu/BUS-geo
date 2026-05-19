@@ -12,8 +12,9 @@ class RealSenseD405:
         config.enable_stream(rs.stream.depth, 848, 480, rs.format.z16, 30)
         config.enable_stream(rs.stream.color, 848, 480, rs.format.rgb8, 30)
         
-        self.pipeline.start(config)
+        self.profile = self.pipeline.start(config)
         self.align = rs.align(rs.stream.color)
+        self.depth_scale = self._read_depth_scale(self.profile)
         
         print("等待相机预热 2 秒钟...")
         time.sleep(2.0)
@@ -45,6 +46,8 @@ class RealSenseD405:
             "frame_new": True,
             "frame_id": self.last_frame_id,
             "hardware_timestamp_ms": self.last_hardware_timestamp_ms,
+            "depth_scale_m_per_unit": self.depth_scale,
+            "depth_units": "raw_z16",
             "cache_age_ms": 0.0,
             "error": None,
         }
@@ -58,6 +61,14 @@ class RealSenseD405:
         except Exception:
             return None
 
+    @staticmethod
+    def _read_depth_scale(profile):
+        try:
+            depth_sensor = profile.get_device().first_depth_sensor()
+            return float(depth_sensor.get_depth_scale())
+        except Exception:
+            return None
+
     def read(self, img_size: Optional[Tuple[int, int]] = None) -> Tuple[np.ndarray, np.ndarray]:
         read_start = time.monotonic_ns()
         frame_new = False
@@ -67,7 +78,7 @@ class RealSenseD405:
             # 【终极修复】：强制使用 wait_for_frames，它保证吐出来的绝对是完整的 frameset！
             # 设定 10ms 超时。因为 D405 是 30帧 (33ms一帧)，所以大部分时间它都会超时报错。
             # 这是极其正常的！正好符合我们 100Hz 的设计！
-            frames = self.pipeline.wait_for_frames(10)
+            frames = self.pipeline.wait_for_frames(5)
             
             # 只要没超时，走到这里，frames 绝对是完美的套餐！放心大胆地对齐！
             aligned_frames = self.align.process(frames)
@@ -105,6 +116,8 @@ class RealSenseD405:
             "frame_new": frame_new,
             "frame_id": self.last_frame_id,
             "hardware_timestamp_ms": self.last_hardware_timestamp_ms,
+            "depth_scale_m_per_unit": self.depth_scale,
+            "depth_units": "raw_z16",
             "cache_age_ms": cache_age_ms,
             "error": error,
         }
