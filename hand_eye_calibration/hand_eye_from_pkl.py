@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Compute D405 eye-in-hand calibration from GELLO pkl episodes."""
+"""Compute eye-in-hand calibration from GELLO pkl episodes."""
 
 from __future__ import annotations
 
@@ -47,14 +47,24 @@ def chessboard_object_points(pattern_size: tuple[int, int], square_size_m: float
     return points
 
 
-def is_usable_frame(data: dict[str, Any], require_new_frame: bool) -> bool:
-    if "D405_rgb" not in data or "ee_pos_rotvec" not in data:
-        return False
+def camera_rgb_key(camera_name: str) -> str:
+    return f"{camera_name}_rgb"
+
+
+def camera_metadata(data: dict[str, Any], camera_name: str) -> dict[str, Any]:
     meta = data.get("meta", {})
-    d405_meta = meta.get("modalities", {}).get("D405", {})
-    if d405_meta.get("valid") is False:
+    modalities = meta.get("modalities", {})
+    value = modalities.get(camera_name, {})
+    return value if isinstance(value, dict) else {}
+
+
+def is_usable_frame(data: dict[str, Any], require_new_frame: bool, camera_name: str = "D405") -> bool:
+    if camera_rgb_key(camera_name) not in data or "ee_pos_rotvec" not in data:
         return False
-    if require_new_frame and d405_meta.get("frame_new") is not True:
+    selected_camera_meta = camera_metadata(data, camera_name)
+    if selected_camera_meta.get("valid") is False:
+        return False
+    if require_new_frame and selected_camera_meta.get("frame_new") is not True:
         return False
     return True
 
@@ -122,27 +132,30 @@ def collect_detections(args: argparse.Namespace) -> tuple[list[dict[str, Any]], 
     episode_dir = Path(args.episode_dir)
     paths = sorted(episode_dir.glob("*.pkl"))
     pattern_size = (args.board_cols, args.board_rows)
+    camera_name = getattr(args, "camera_name", "D405")
+    rgb_key = camera_rgb_key(camera_name)
     detections: list[dict[str, Any]] = []
 
     for path in paths[:: args.stride]:
         data = load_pkl(path)
-        if not is_usable_frame(data, args.require_new_frame):
+        if not is_usable_frame(data, args.require_new_frame, camera_name=camera_name):
             continue
 
-        ok, corners = find_chessboard(data["D405_rgb"], pattern_size)
+        ok, corners = find_chessboard(data[rgb_key], pattern_size)
         if not ok:
             continue
 
         meta = data.get("meta", {})
-        d405_meta = meta.get("modalities", {}).get("D405", {})
+        selected_camera_meta = camera_metadata(data, camera_name)
         detections.append(
             {
                 "path": str(path),
-                "rgb": data["D405_rgb"],
+                "camera_name": camera_name,
+                "rgb": data[rgb_key],
                 "corners": corners,
                 "ee_pos_rotvec": np.asarray(data["ee_pos_rotvec"], dtype=float),
                 "sample_index": meta.get("sample_index"),
-                "frame_id": d405_meta.get("frame_id"),
+                "frame_id": selected_camera_meta.get("frame_id"),
             }
         )
         if args.max_frames is not None and len(detections) >= args.max_frames:
@@ -285,6 +298,7 @@ def write_outputs(
     selected_frames = [
         {
             "path": detection["path"],
+            "camera_name": detection.get("camera_name", getattr(args, "camera_name", "D405")),
             "sample_index": detection["sample_index"],
             "frame_id": detection["frame_id"],
         }
@@ -295,6 +309,8 @@ def write_outputs(
 
     config = {
         "episode_dir": str(args.episode_dir),
+        "camera_name": getattr(args, "camera_name", "D405"),
+        "rgb_key": camera_rgb_key(getattr(args, "camera_name", "D405")),
         "board_inner_corners": [args.board_cols, args.board_rows],
         "square_size_m": args.square_size_m,
         "stride": args.stride,
@@ -325,8 +341,9 @@ def write_outputs(
         json.dump(report, f, indent=2)
 
     with open(output_dir / "calibration_report.md", "w", encoding="utf-8") as f:
-        f.write("# D405 Hand-Eye Calibration Report\n\n")
+        f.write(f"# {getattr(args, 'camera_name', 'D405')} Hand-Eye Calibration Report\n\n")
         f.write(f"- episode: `{args.episode_dir}`\n")
+        f.write(f"- camera: `{getattr(args, 'camera_name', 'D405')}`\n")
         f.write(f"- selected frames: {len(detections)}\n")
         f.write(f"- board inner corners: {args.board_cols} x {args.board_rows}\n")
         f.write(f"- square size: {args.square_size_m} m\n")
@@ -343,10 +360,11 @@ def write_outputs(
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Detect a chessboard in GELLO pkl frames and compute D405 T_tcp_camera."
+        description="Detect a chessboard in GELLO pkl frames and compute camera-to-TCP hand-eye calibration."
     )
     parser.add_argument("--episode-dir", required=True)
     parser.add_argument("--output-dir", default="hand_eye_calibration/results")
+    parser.add_argument("--camera-name", default="D405", choices=["D405", "Orbbec"])
     parser.add_argument("--board-cols", type=int, default=8, help="Number of inner corners along board columns.")
     parser.add_argument("--board-rows", type=int, default=8, help="Number of inner corners along board rows.")
     parser.add_argument("--square-size-m", type=float, default=None, help="Chessboard square size in meters.")

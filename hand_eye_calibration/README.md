@@ -1,6 +1,11 @@
-# 从 GELLO pkl 做 D405 手眼标定
+# 从 GELLO pkl 做手腕相机手眼标定
 
-这个文件夹用于从 GELLO 采集出来的 `.pkl` 数据段中离线计算手腕 D405 相机的手眼外参。
+这个文件夹用于从 GELLO 采集出来的 `.pkl` 数据段中离线计算手腕相机的手眼外参。当前脚本支持：
+
+```text
+D405
+Orbbec
+```
 
 目标输出是：
 
@@ -8,13 +13,13 @@
 T_tcp_camera
 ```
 
-它表示 **D405 相机坐标系到 UR TCP 坐标系** 的 4x4 变换矩阵。之后可以用于：
+它表示 **相机坐标系到 UR TCP 坐标系** 的 4x4 变换矩阵。之后可以用于：
 
 ```text
 P_base = T_base_tcp @ T_tcp_camera @ P_camera
 ```
 
-也就是把 D405 depth 反投影出来的点云、路径点、法向量从相机坐标系转换到机械臂 base/world 坐标系。
+也就是把 depth 反投影出来的点云、路径点、法向量从相机坐标系转换到机械臂 base/world 坐标系。
 
 ## 文件说明
 
@@ -25,15 +30,15 @@ P_base = T_base_tcp @ T_tcp_camera @ P_camera
 它会从一个 pkl 数据段目录中读取每一帧：
 
 ```text
-D405_rgb
+<camera_name>_rgb，例如 D405_rgb 或 Orbbec_rgb
 ee_pos_rotvec
 meta
 ```
 
 然后做这些事：
 
-1. 过滤掉 D405 缓存帧，只使用 `frame_new=True` 的帧。
-2. 从 `D405_rgb` 自动检测棋盘格角点。
+1. 过滤掉相机缓存帧，只使用 `frame_new=True` 的帧。
+2. 从 `<camera_name>_rgb` 自动检测棋盘格角点。
 3. 从 `ee_pos_rotvec` 计算 `T_base_tcp`。
 4. 用棋盘格角点估计每帧的 `T_camera_board`。
 5. 调用 OpenCV `cv2.calibrateHandEye()` 计算 `T_tcp_camera`。
@@ -136,7 +141,7 @@ camera_matrix
 dist_coeffs
 ```
 
-当前脚本会从检测到的棋盘格图像中估计内参。后续也可以改成读取 RealSense SDK 给出的 D405 RGB 内参。
+当前脚本会从检测到的棋盘格图像中估计内参。后续也可以改成读取相机 SDK 给出的 RGB 内参。
 
 ### `calibration_report.json`
 
@@ -185,6 +190,7 @@ dist_coeffs
 /home/ubuntu22/dev/anaconda3/envs/Newgello/bin/python hand_eye_calibration/hand_eye_from_pkl.py \
   --episode-dir /home/ubuntu22/bc_data/gello/0512_210114 \
   --output-dir hand_eye_calibration/results_0512_210114_detect \
+  --camera-name D405 \
   --board-cols 8 \
   --board-rows 8 \
   --max-frames 40 \
@@ -215,6 +221,7 @@ dist_coeffs
 /home/ubuntu22/dev/anaconda3/envs/Newgello/bin/python hand_eye_calibration/hand_eye_from_pkl.py \
   --episode-dir /home/ubuntu22/bc_data/gello/0512_210114 \
   --output-dir hand_eye_calibration/results_0512_210114 \
+  --camera-name D405 \
   --board-cols 8 \
   --board-rows 8 \
   --square-size-m 0.010 \
@@ -223,10 +230,55 @@ dist_coeffs
 
 把 `0.010` 换成你真实测量的小格边长。
 
+## Orbbec 重新标定
+
+Orbbec 使用同一个脚本，只需要把 `--camera-name` 改成 `Orbbec`，并把输出目录放到类似 `Results_Orbbec_YYYYMMDD` 的结果文件夹。
+
+先做检测：
+
+```bash
+/home/ubuntu22/dev/anaconda3/envs/Newgello/bin/python hand_eye_calibration/hand_eye_from_pkl.py \
+  --episode-dir /home/ubuntu22/bc_data/gello/<你的Orbbec标定episode> \
+  --output-dir hand_eye_calibration/Results_Orbbec_20260529_detect \
+  --camera-name Orbbec \
+  --board-cols 8 \
+  --board-rows 8 \
+  --max-frames 40 \
+  --detect-only
+```
+
+确认 `detected_chessboards.jpg` 里的角点检测正确后，正式标定：
+
+```bash
+/home/ubuntu22/dev/anaconda3/envs/Newgello/bin/python hand_eye_calibration/hand_eye_from_pkl.py \
+  --episode-dir /home/ubuntu22/bc_data/gello/<你的Orbbec标定episode> \
+  --output-dir hand_eye_calibration/Results_Orbbec_20260529 \
+  --camera-name Orbbec \
+  --board-cols 8 \
+  --board-rows 8 \
+  --square-size-m 0.010 \
+  --max-frames 40
+```
+
+输出结果仍然是：
+
+```text
+hand_eye_calibration/Results_Orbbec_20260529/T_tcp_camera.npy
+```
+
+GUI 可以直接指定这个新外参：
+
+```bash
+python -m visual_guided_collection_gui.main \
+  --wrist-camera Orbbec \
+  --t-tcp-camera hand_eye_calibration/Results_Orbbec_20260529/T_tcp_camera.npy
+```
+
 ## 注意事项
 
-- 不要用普通扫查数据做标定，必须是标定板固定且 D405 能看到标定板的数据。
-- 默认只使用 `frame_new=True` 的 D405 帧，避免图像是缓存帧而 TCP pose 是当前帧造成错配。
+- 不要用普通扫查数据做标定，必须是标定板固定且相机能看到标定板的数据。
+- 默认只使用 `frame_new=True` 的相机帧，避免图像是缓存帧而 TCP pose 是当前帧造成错配。
+- D405 的 `T_tcp_camera.npy` 不能给 Orbbec 用；相机拆装后也应该重新标定。
 - 棋盘格参数 `--board-cols` 和 `--board-rows` 指的是**内角点数量**，不是方格数量。
 - 如果棋盘格每边 9 个方格，那么内角点就是 8。
 - `--square-size-m` 必须是真实小方格边长，否则外参平移尺度会错。

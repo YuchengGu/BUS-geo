@@ -69,13 +69,13 @@ def main(args):
             # "wrist": ZMQClientCamera(port=args.wrist_camera_port, host=args.hostname),
             # "base": ZMQClientCamera(port=args.base_camera_port, host=args.hostname),
             args.wrist_camera: wrist_camera,
-            "Ultrasound": UltrasoundCamera(camera_index=4),
+            #"Ultrasound": UltrasoundCamera(camera_index=4),
         }
         # camera_clients = {}
 
-        my_force_sensor = ForceSensorMTCP(ip='192.168.1.160')
-        my_force_sensor.connect()
-        #my_force_sensor = None
+        # my_force_sensor = ForceSensorMTCP(ip='192.168.1.160')
+        # my_force_sensor.connect()
+        my_force_sensor = None
         robot_client = ZMQClientRobot(port=args.robot_port, host=args.hostname)
     env = RobotEnv(robot_client, control_rate_hz=args.hz, camera_dict=camera_clients, force_sensor=my_force_sensor)
 

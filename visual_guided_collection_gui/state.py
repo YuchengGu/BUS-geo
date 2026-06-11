@@ -23,9 +23,18 @@ _ENABLED_ACTIONS: dict[GuiStage, set[str]] = {
     GuiStage.FRAME_CAPTURED: {"recapture", "safe_stop"},
     GuiStage.SEGMENTED: {"resegment", "plan_path", "safe_stop"},
     GuiStage.PATH_PLANNED: {"confirm_path", "resegment", "safe_stop"},
-    GuiStage.PATH_CONFIRMED: {"start_gello_handover", "safe_stop"},
-    GuiStage.TELEOP_READY: {"start_recording", "toggle_fine_scan", "safe_stop"},
-    GuiStage.RECORDING: {"stop_recording", "toggle_fine_scan", "safe_stop"},
+    GuiStage.PATH_CONFIRMED: {"start_gello_handover", "surface_preview_darboux_line", "safe_stop"},
+    GuiStage.TELEOP_READY: {
+        "start_recording",
+        "toggle_fine_scan",
+        "surface_random_local_start",
+        "surface_set_neutral",
+        "surface_calibrate_x",
+        "surface_calibrate_z",
+        "surface_recenter",
+        "safe_stop",
+    },
+    GuiStage.RECORDING: {"stop_recording", "toggle_fine_scan", "surface_recenter", "safe_stop"},
     GuiStage.STOPPED: {"start_photo_positioning", "safe_stop"},
 }
 

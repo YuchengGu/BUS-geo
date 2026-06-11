@@ -4,6 +4,7 @@ from dataclasses import dataclass
 
 import numpy as np
 
+from breast_path_planning.geometry import normalize_vector
 from breast_path_planning.path_io import PlannedPath
 
 
@@ -42,6 +43,8 @@ def compute_path_features(
     clipped = np.clip(indices, 0, len(path) - 1)
     target_positions = positions[clipped]
     target_normals = path.normals_base[clipped]
+    target_tangents = _path_tangents(positions)[clipped]
+    target_tcp_rotvecs = _tcp_reference_rotvecs(target_tangents, target_normals)
     residuals = target_positions - probe
     progress = 0.0 if len(path) <= 1 else float(nearest / (len(path) - 1))
     return {
@@ -52,6 +55,61 @@ def compute_path_features(
         "path_target_positions_base": target_positions,
         "path_residuals_base": residuals,
         "path_normals_base": target_normals,
+        "path_reference_tcp_rotvecs_base": target_tcp_rotvecs,
         "path_distance_to_nearest_m": float(np.linalg.norm(positions[nearest] - probe)),
     }
 
+
+def _path_tangents(positions: np.ndarray) -> np.ndarray:
+    points = np.asarray(positions, dtype=float)
+    if len(points) == 1:
+        return np.tile(np.array([[1.0, 0.0, 0.0]]), (1, 1))
+    tangents = np.zeros_like(points)
+    tangents[0] = points[1] - points[0]
+    tangents[-1] = points[-1] - points[-2]
+    if len(points) > 2:
+        tangents[1:-1] = points[2:] - points[:-2]
+    return np.vstack([normalize_vector(t, fallback=np.array([1.0, 0.0, 0.0])) for t in tangents])
+
+
+def _tcp_reference_rotvecs(tangents: np.ndarray, normals: np.ndarray) -> np.ndarray:
+    rotvecs = []
+    for tangent, normal in zip(tangents, normals):
+        t = normalize_vector(tangent, fallback=np.array([1.0, 0.0, 0.0]))
+        n = normalize_vector(normal, fallback=np.array([0.0, 0.0, 1.0]))
+        b = normalize_vector(np.cross(t, n), fallback=np.array([0.0, -1.0, 0.0]))
+        n = normalize_vector(np.cross(b, t), fallback=n)
+        rotation = np.column_stack([-t, -b, -n])
+        rotvecs.append(_matrix_to_rotvec(rotation))
+    return np.asarray(rotvecs, dtype=float)
+
+
+def _matrix_to_rotvec(rotation: np.ndarray) -> np.ndarray:
+    value = np.asarray(rotation, dtype=float).reshape(3, 3)
+    cos_angle = (float(np.trace(value)) - 1.0) / 2.0
+    angle = float(np.arccos(np.clip(cos_angle, -1.0, 1.0)))
+    if angle < 1e-12:
+        return np.zeros(3, dtype=float)
+    if np.pi - angle < 1e-6:
+        axis = np.sqrt(np.maximum(np.diag(value) + 1.0, 0.0) / 2.0)
+        if axis[0] >= axis[1] and axis[0] >= axis[2] and axis[0] > 1e-12:
+            axis[1] = value[0, 1] / (2.0 * axis[0])
+            axis[2] = value[0, 2] / (2.0 * axis[0])
+        elif axis[1] >= axis[2] and axis[1] > 1e-12:
+            axis[0] = value[0, 1] / (2.0 * axis[1])
+            axis[2] = value[1, 2] / (2.0 * axis[1])
+        elif axis[2] > 1e-12:
+            axis[0] = value[0, 2] / (2.0 * axis[2])
+            axis[1] = value[1, 2] / (2.0 * axis[2])
+        else:
+            axis = np.array([1.0, 0.0, 0.0], dtype=float)
+        return normalize_vector(axis, fallback=np.array([1.0, 0.0, 0.0])) * angle
+    axis = np.array(
+        [
+            value[2, 1] - value[1, 2],
+            value[0, 2] - value[2, 0],
+            value[1, 0] - value[0, 1],
+        ],
+        dtype=float,
+    ) / (2.0 * np.sin(angle))
+    return axis * angle

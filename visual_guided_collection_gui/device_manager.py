@@ -1,11 +1,15 @@
 from __future__ import annotations
 
 import glob
+import threading
 import time
 from dataclasses import dataclass
-from typing import Any
+from typing import Any, Callable
 
 import numpy as np
+
+from visual_guided_collection_gui.gello_kinematics import gello_ur5_joint_action_to_tcp_pose
+from visual_guided_collection_gui.surface_teleop import interpolate_tcp_poses
 
 
 @dataclass
@@ -32,6 +36,7 @@ class DeviceManager:
         self.force_sensor = None
         self.env = None
         self.agent = None
+        self._io_lock = threading.RLock()
 
     def connect(self) -> None:
         from gello.agents.agent import DummyAgent
@@ -93,32 +98,34 @@ class DeviceManager:
         return self.config.wrist_camera
 
     def close(self) -> None:
-        if self.camera is not None and hasattr(self.camera, "pipeline"):
-            try:
-                self.camera.pipeline.stop()
-            except Exception:
-                pass
-        if self.ultrasound_camera is not None and hasattr(self.ultrasound_camera, "close"):
-            try:
-                self.ultrasound_camera.close()
-            except Exception:
-                pass
-        elif self.ultrasound_camera is not None and hasattr(self.ultrasound_camera, "cap"):
-            try:
-                self.ultrasound_camera.cap.release()
-            except Exception:
-                pass
-        self.camera = None
-        self.ultrasound_camera = None
-        self.force_sensor = None
-        self.env = None
-        self.agent = None
-        self.robot_client = None
+        with self._io_lock:
+            if self.camera is not None and hasattr(self.camera, "pipeline"):
+                try:
+                    self.camera.pipeline.stop()
+                except Exception:
+                    pass
+            if self.ultrasound_camera is not None and hasattr(self.ultrasound_camera, "close"):
+                try:
+                    self.ultrasound_camera.close()
+                except Exception:
+                    pass
+            elif self.ultrasound_camera is not None and hasattr(self.ultrasound_camera, "cap"):
+                try:
+                    self.ultrasound_camera.cap.release()
+                except Exception:
+                    pass
+            self.camera = None
+            self.ultrasound_camera = None
+            self.force_sensor = None
+            self.env = None
+            self.agent = None
+            self.robot_client = None
 
     def get_obs(self) -> dict[str, Any]:
         if self.env is None:
             raise RuntimeError("DeviceManager.connect() must be called first")
-        return self.env.get_obs()
+        with self._io_lock:
+            return self.env.get_obs()
 
     def latest_realsense_frames(self):
         if self.camera is None:
@@ -148,7 +155,8 @@ class DeviceManager:
     def read_action(self, obs: dict[str, Any]) -> np.ndarray:
         if self.agent is None:
             raise RuntimeError("Agent is not connected")
-        action = np.asarray(self.agent.act(obs), dtype=float)
+        with self._io_lock:
+            action = np.asarray(self.agent.act(obs), dtype=float)
         robot_dof = int(len(obs["joint_positions"]))
         if action.shape[0] > robot_dof:
             action = action[:robot_dof]
@@ -170,14 +178,132 @@ class DeviceManager:
     def step_agent(self, obs: dict[str, Any]) -> tuple[dict[str, Any], np.ndarray, dict[str, Any], dict[str, int]]:
         if self.env is None:
             raise RuntimeError("DeviceManager.connect() must be called first")
-        agent_act_start = time.monotonic_ns()
-        raw_action = self.read_action(obs)
-        agent_act_end = time.monotonic_ns()
-        action = self.clamp_action(obs, raw_action)
-        current_obs_meta = dict(getattr(self.env, "last_obs_meta", {}) or {})
-        next_obs = self.env.step(action)
+        with self._io_lock:
+            agent_act_start = time.monotonic_ns()
+            raw_action = self.read_action(obs)
+            agent_act_end = time.monotonic_ns()
+            action = self.clamp_action(obs, raw_action)
+            current_obs_meta = dict(getattr(self.env, "last_obs_meta", {}) or {})
+            next_obs = self.env.step(action)
         action_timing = {
             "agent_act_start_mono_ns": agent_act_start,
             "agent_act_end_mono_ns": agent_act_end,
         }
         return next_obs, action, current_obs_meta, action_timing
+
+    def gello_action_to_tcp_pose(self, action: np.ndarray) -> np.ndarray:
+        return gello_ur5_joint_action_to_tcp_pose(action)
+
+    def read_gello_tcp_pose(self, obs: dict[str, Any]) -> np.ndarray:
+        return self.gello_action_to_tcp_pose(self.read_action(obs))
+
+    def step_surface_cartesian_teleop(
+        self,
+        controller,
+        obs: dict[str, Any],
+    ) -> tuple[dict[str, Any], np.ndarray, dict[str, Any], dict[str, int]]:
+        if self.env is None:
+            raise RuntimeError("DeviceManager.connect() must be called first")
+        with self._io_lock:
+            agent_act_start = time.monotonic_ns()
+            gello_tcp_pose = self.read_gello_tcp_pose(obs)
+            agent_act_end = time.monotonic_ns()
+            current_obs_meta = dict(getattr(self.env, "last_obs_meta", {}) or {})
+            target_tcp_pose = controller.update(
+                gello_tcp_pose=gello_tcp_pose,
+                ur_tcp_pose=np.asarray(obs["ee_pos_rotvec"], dtype=float).reshape(6),
+            )
+            send_start = time.monotonic_ns()
+            next_obs = self.env.step_tcp_pose(target_tcp_pose)
+            send_end = time.monotonic_ns()
+        action_timing = {
+            "agent_act_start_mono_ns": agent_act_start,
+            "agent_act_end_mono_ns": agent_act_end,
+            "tcp_pose_send_start_mono_ns": send_start,
+            "tcp_pose_send_end_mono_ns": send_end,
+            "action_mode": "tcp_pose",
+        }
+        return next_obs, target_tcp_pose, current_obs_meta, action_timing
+
+    def step_tcp_pose(self, tcp_pose: np.ndarray) -> tuple[dict[str, Any], np.ndarray, dict[str, Any], dict[str, int]]:
+        if self.env is None:
+            raise RuntimeError("DeviceManager.connect() must be called first")
+        with self._io_lock:
+            action = np.asarray(tcp_pose, dtype=float).reshape(-1)
+            current_obs_meta = dict(getattr(self.env, "last_obs_meta", {}) or {})
+            send_start = time.monotonic_ns()
+            next_obs = self.env.step_tcp_pose(action)
+            send_end = time.monotonic_ns()
+        action_timing = {
+            "tcp_pose_send_start_mono_ns": send_start,
+            "tcp_pose_send_end_mono_ns": send_end,
+            "action_mode": "tcp_pose",
+        }
+        return next_obs, action, current_obs_meta, action_timing
+
+    def move_tcp_pose_linear(
+        self,
+        tcp_pose: np.ndarray,
+        *,
+        max_position_step_m: float = 0.01,
+        max_rotation_step_rad: float = 0.05,
+        position_tolerance_m: float = 0.002,
+        rotation_tolerance_rad: float = 0.03,
+        timeout_s: float = 10.0,
+        waypoint_callback: Callable[[dict[str, Any]], None] | None = None,
+    ) -> dict[str, Any]:
+        if self.env is None:
+            raise RuntimeError("DeviceManager.connect() must be called first")
+        target = np.asarray(tcp_pose, dtype=float).reshape(6)
+        obs = self.get_obs()
+        current = np.asarray(obs["ee_pos_rotvec"], dtype=float).reshape(6)
+        deadline = time.monotonic() + float(timeout_s)
+
+        waypoints = interpolate_tcp_poses(
+            current,
+            target,
+            max_position_step_m=max_position_step_m,
+            max_rotation_step_rad=max_rotation_step_rad,
+        )
+        for index, waypoint in enumerate(waypoints, start=1):
+            before = np.asarray(obs["ee_pos_rotvec"], dtype=float).reshape(6)
+            obs, _action, _obs_meta, _timing = self.step_tcp_pose(waypoint)
+            actual = np.asarray(obs["ee_pos_rotvec"], dtype=float).reshape(6)
+            if waypoint_callback is not None:
+                waypoint_callback(
+                    {
+                        "kind": "waypoint",
+                        "index": index,
+                        "count": len(waypoints),
+                        "target_tcp_pose": waypoint.tolist(),
+                        "actual_before_tcp_pose": before.tolist(),
+                        "actual_after_tcp_pose": actual.tolist(),
+                        "position_error_m": float(np.linalg.norm(actual[:3] - waypoint[:3])),
+                        "rotation_error_rad": float(np.linalg.norm(actual[3:] - waypoint[3:])),
+                    }
+                )
+            if time.monotonic() > deadline:
+                raise TimeoutError("Timed out while moving TCP along interpolated approach path")
+
+        while True:
+            actual = np.asarray(obs["ee_pos_rotvec"], dtype=float).reshape(6)
+            position_error = float(np.linalg.norm(actual[:3] - target[:3]))
+            rotation_error = float(np.linalg.norm(actual[3:] - target[3:]))
+            if waypoint_callback is not None:
+                waypoint_callback(
+                    {
+                        "kind": "settle",
+                        "target_tcp_pose": target.tolist(),
+                        "actual_tcp_pose": actual.tolist(),
+                        "position_error_m": position_error,
+                        "rotation_error_rad": rotation_error,
+                    }
+                )
+            if position_error <= position_tolerance_m and rotation_error <= rotation_tolerance_rad:
+                return obs
+            if time.monotonic() > deadline:
+                raise TimeoutError(
+                    "Timed out waiting for TCP target; "
+                    f"position_error={position_error:.6f} m, rotation_error={rotation_error:.6f} rad"
+                )
+            obs, _action, _obs_meta, _timing = self.step_tcp_pose(target)

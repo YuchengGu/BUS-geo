@@ -99,6 +99,21 @@ class URRobot(Robot):
             self.gripper.move(gripper_pos, 255, 10)
         self.robot.waitPeriod(t_start)
 
+    def command_tcp_pose(self, tcp_pose: np.ndarray) -> None:
+        """Command the UR TCP to a Cartesian pose vector [x, y, z, rx, ry, rz]."""
+        velocity = 0.25
+        acceleration = 0.25
+        dt = 1.0 / 500
+        lookahead_time = 0.2
+        gain = 100
+
+        pose = np.asarray(tcp_pose, dtype=float).reshape(-1)
+        if pose.shape[0] != 6:
+            raise ValueError(f"tcp_pose must have 6 values [x, y, z, rx, ry, rz], got {pose.shape[0]}")
+        t_start = self.robot.initPeriod()
+        self.robot.servoL(pose, velocity, acceleration, dt, lookahead_time, gain)
+        self.robot.waitPeriod(t_start)
+
     def freedrive_enabled(self) -> bool:
         """Check if the robot is in freedrive mode.
 

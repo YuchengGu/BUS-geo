@@ -101,6 +101,33 @@ class RobotEnv:
         }
         return obs
 
+    def step_tcp_pose(self, tcp_pose: np.ndarray) -> Dict[str, Any]:
+        """Step the environment with a Cartesian TCP pose action.
+
+        This is a separate path from ``step`` so the legacy joint action loop keeps
+        its existing behavior.
+        """
+        pose = np.asarray(tcp_pose, dtype=float).reshape(-1)
+        if pose.shape[0] != 6:
+            raise ValueError(f"tcp_pose action must have 6 values [x, y, z, rx, ry, rz], got {pose.shape[0]}")
+        if not hasattr(self._robot, "command_tcp_pose"):
+            raise RuntimeError("Robot does not support command_tcp_pose")
+        step_start = time.monotonic_ns()
+        action_send_start = time.monotonic_ns()
+        self._robot.command_tcp_pose(pose)
+        action_send_end = time.monotonic_ns()
+        self._rate.sleep()
+        obs = self.get_obs()
+        step_end = time.monotonic_ns()
+        self.last_step_timing = {
+            "step_start_mono_ns": step_start,
+            "action_send_start_mono_ns": action_send_start,
+            "action_send_end_mono_ns": action_send_end,
+            "step_end_mono_ns": step_end,
+            "action_mode": "tcp_pose",
+        }
+        return obs
+
     def get_obs(self) -> Dict[str, Any]:
         """Get observation from the environment.
 

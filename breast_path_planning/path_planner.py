@@ -13,14 +13,15 @@ from breast_path_planning.surface_processing import constrain_normals_to_referen
 
 @dataclass
 class PathPlannerParams:
-    step_y_m: float = 0.025
-    step_x_m: float = 0.015
+    step_y_m: float = 0.02
+    step_x_m: float = 0.007
     slice_tolerance_ratio: float = 0.65
     max_query_distance_m: float | None = None
     normal_k_neighbors: int = 20
     normal_reference_direction: np.ndarray = field(default_factory=lambda: np.array([0.0, 0.0, 1.0]))
     max_normal_angle_deg: float | None = None
     min_points_per_slice: int = 3
+    use_geodesic_resample: bool = False
 
 
 def _nearest_xy_indices(points_xy: np.ndarray, query_xy: np.ndarray, max_distance_m: float) -> np.ndarray:
@@ -65,7 +66,7 @@ def plan_serpentine_path(
     min_y = float(np.min(points[:, 1]))
     max_y = float(np.max(points[:, 1]))
     center_y = 0.5 * (min_y + max_y)
-    half_y = 0.5 * (max_y - min_y) * 0.8
+    half_y = 0.5 * (max_y - min_y) * 0.7
     min_y = center_y - half_y
     max_y = center_y + half_y
     step_y = params.step_y_m
@@ -89,7 +90,7 @@ def plan_serpentine_path(
         x_min = float(np.min(row_points[:, 0]))
         x_max = float(np.max(row_points[:, 0]))
         center_x = 0.5 * (x_min + x_max)
-        half_x = 0.5 * (x_max - x_min) * 0.8
+        half_x = 0.5 * (x_max - x_min) * 0.7
         x_min = center_x - half_x
         x_max = center_x + half_x
         if x_max < x_min:
@@ -122,6 +123,16 @@ def plan_serpentine_path(
 
     positions = np.concatenate([row[0] for row in rows], axis=0)
     path_normals = np.concatenate([row[1] for row in rows], axis=0)
+    corner_indices: list[int] = []
+    offset = 0
+    for row_index, (row_positions, _row_normals) in enumerate(rows):
+        row_len = int(len(row_positions))
+        if row_len > 0 and row_index > 0:
+            corner_indices.append(offset)
+        if row_len > 0 and row_index < len(rows) - 1:
+            corner_indices.append(offset + row_len - 1)
+        offset += row_len
+    corner_indices = sorted(set(corner_indices))
     path_metadata: dict[str, Any] = {
         "planner": "adaptive_slice_serpentine_v1",
         "step_y_m": params.step_y_m,
@@ -133,6 +144,7 @@ def plan_serpentine_path(
         "geodesic_resample": False,
         "contains_tangent": False,
         "contains_reverse_y": False,
+        "corner_indices": corner_indices,
     }
     if metadata:
         path_metadata.update(metadata)

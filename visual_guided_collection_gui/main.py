@@ -3,8 +3,6 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
-from visual_guided_collection_gui.app import VisualGuidedCollectionApp
-
 
 DEFAULT_T_TCP_CAMERA_PATHS = {
     "D405": (
@@ -32,7 +30,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--force-ip", default="192.168.1.160")
     parser.add_argument("--disable-force", action="store_true")
     parser.add_argument("--disable-ultrasound", action="store_true")
-    parser.add_argument("--ultrasound-index", type=int, default=10)
+    parser.add_argument("--ultrasound-index", type=int, default=4)
     parser.add_argument("--data-dir", default="~/bc_data")
     parser.add_argument("--t-tcp-camera", "--T-tcp-camera", dest="t_tcp_camera", default=None)
     parser.add_argument("--planning-output-root", default="breast_path_planning/results")
@@ -42,9 +40,16 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--capture-settle-s", type=float, default=0.5)
     parser.add_argument("--pick-radius-px", type=float, default=14.0)
     parser.add_argument("--normal-length-m", type=float, default=0.02)
-    parser.add_argument("--probe-tip-offset-m", type=float, default=0.25)
+    parser.add_argument("--probe-tip-offset-m", type=float, default=0.20)
     parser.add_argument("--probe-axis-length-m", type=float, default=0.04)
     parser.add_argument("--max-joint-step-rad", type=float, default=0.0)
+    parser.add_argument("--surface-cartesian-teleop", action="store_true")
+    parser.add_argument("--surface-random-local-episodes", action="store_true")
+    parser.add_argument("--surface-approach-height-m", type=float, default=0.15)
+    parser.add_argument("--surface-contact-height-m", type=float, default=0.04)
+    parser.add_argument("--surface-random-start-height-m", type=float, default=0.02)
+    parser.add_argument("--surface-translation-gain", type=float, default=0.25)
+    parser.add_argument("--surface-rotation-gain", type=float, default=1.0)
     return parser
 
 
@@ -55,6 +60,8 @@ def resolve_args(args: argparse.Namespace) -> argparse.Namespace:
 
 
 def main() -> None:
+    from visual_guided_collection_gui.app import VisualGuidedCollectionApp
+
     args = resolve_args(build_parser().parse_args())
     VisualGuidedCollectionApp(args).run()
 

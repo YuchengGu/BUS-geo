@@ -1,0 +1,13 @@
+{
+  "episode_dir": "/home/ubuntu22/bc_data/gello/0529_133158",
+  "camera_name": "Orbbec",
+  "rgb_key": "Orbbec_rgb",
+  "board_inner_corners": [
+    11,
+    8
+  ],
+  "square_size_m": 0.005,
+  "stride": 10,
+  "max_frames": 100,
+  "require_new_frame": true
+}

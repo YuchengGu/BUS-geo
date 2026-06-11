@@ -206,6 +206,27 @@ def test_plan_from_point_cloud_uses_seed_indices_and_writes_outputs(tmp_path):
     assert (tmp_path / "planning_report.json").exists()
 
 
+def test_plan_from_point_cloud_keeps_serpentine_path_by_default(tmp_path):
+    xs = np.linspace(0.0, 0.03, 4)
+    ys = np.linspace(0.0, 0.02, 3)
+    points = np.array([[x, y, 0.0] for y in ys for x in xs], dtype=float)
+    colors = np.tile(np.array([[200, 120, 100]], dtype=np.uint8), (len(points), 1))
+    cloud = PointCloud(points, colors)
+
+    result = plan_from_point_cloud(
+        raw_cloud=cloud,
+        seed_indices=[0],
+        output_dir=tmp_path,
+        segmentation_params=SegmentationParams(spatial_radius_m=0.02, max_distance_from_seed_m=0.1),
+        planner_params=PathPlannerParams(step_y_m=0.01, step_x_m=0.01, min_points_per_slice=3),
+    )
+
+    assert result.planned_path.metadata["geodesic_resample"] is False
+    assert result.planned_path.metadata["planner"] == "adaptive_slice_serpentine_v1"
+    assert not (tmp_path / "planned_path_serpentine.json").exists()
+    assert (tmp_path / "planned_path.json").exists()
+
+
 def test_region_growing_segments_seed_colored_component():
     points = np.array(
         [
@@ -249,7 +270,7 @@ def test_serpentine_planner_outputs_positions_and_normals_only():
         PathPlannerParams(
             step_y_m=0.01,
             step_x_m=0.01,
-            slice_tolerance_ratio=0.2,
+            slice_tolerance_ratio=0.35,
             min_points_per_slice=3,
         ),
     )
@@ -264,6 +285,26 @@ def test_serpentine_planner_outputs_positions_and_normals_only():
     assert path.metadata["normal_constrain_enabled"] is False
 
 
+def test_serpentine_planner_records_row_endpoint_corner_indices():
+    xs = np.linspace(0.0, 0.02, 3)
+    ys = np.linspace(0.0, 0.02, 3)
+    points = np.array([[x, y, 0.0] for y in ys for x in xs], dtype=float)
+    normals = np.tile(np.array([0.0, 0.0, 1.0]), (len(points), 1))
+
+    path = plan_serpentine_path(
+        points,
+        normals,
+        PathPlannerParams(
+            step_y_m=0.01,
+            step_x_m=0.01,
+            slice_tolerance_ratio=0.35,
+            min_points_per_slice=3,
+        ),
+    )
+
+    assert path.metadata["corner_indices"] == [1, 2]
+
+
 def test_serpentine_planner_uses_smaller_scan_area_and_fewer_points_by_default():
     xs = np.linspace(0.0, 0.04, 21)
     ys = np.linspace(0.0, 0.04, 21)
@@ -276,7 +317,7 @@ def test_serpentine_planner_uses_smaller_scan_area_and_fewer_points_by_default()
         PathPlannerParams(
             step_y_m=0.005,
             step_x_m=0.005,
-            slice_tolerance_ratio=0.2,
+            slice_tolerance_ratio=0.35,
             min_points_per_slice=3,
         ),
     )
@@ -301,7 +342,7 @@ def test_serpentine_planner_preserves_steep_normals_by_default():
         PathPlannerParams(
             step_y_m=0.01,
             step_x_m=0.01,
-            slice_tolerance_ratio=0.2,
+            slice_tolerance_ratio=0.35,
             min_points_per_slice=3,
         ),
     )
@@ -343,3 +384,6 @@ def test_compute_path_features_uses_position_and_normal():
     np.testing.assert_allclose(features["path_residuals_base"][0], [-0.001, 0.0, 0.0])
     np.testing.assert_array_equal(features["path_lookahead_mask"], [True, True, False, False])
     np.testing.assert_allclose(features["path_normals_base"][0], [0.0, 0.0, 1.0])
+    np.testing.assert_allclose(features["path_reference_tcp_rotvecs_base"][0], [0.0, np.pi, 0.0], atol=1e-8)
+    assert "path_tangents_base" not in features
+    assert "path_darboux_frames_base" not in features

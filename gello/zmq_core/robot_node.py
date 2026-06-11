@@ -46,6 +46,10 @@ class ZMQServerRobot:
                     result = self._robot.get_joint_state()
                 elif method == "command_joint_state":
                     result = self._robot.command_joint_state(**args)
+                elif method == "command_tcp_pose":
+                    if not hasattr(self._robot, "command_tcp_pose"):
+                        raise NotImplementedError("Robot does not support command_tcp_pose")
+                    result = self._robot.command_tcp_pose(**args)
                 elif method == "get_observations":
                     result = self._robot.get_observations()
                 else:
@@ -115,6 +119,19 @@ class ZMQClientRobot(Robot):
         send_message = pickle.dumps(request)
         self._socket.send(send_message)
         result = pickle.loads(self._socket.recv())
+        return result
+
+    def command_tcp_pose(self, tcp_pose: np.ndarray) -> None:
+        """Command a Cartesian TCP pose [x, y, z, rx, ry, rz] when the server supports it."""
+        request = {
+            "method": "command_tcp_pose",
+            "args": {"tcp_pose": tcp_pose},
+        }
+        send_message = pickle.dumps(request)
+        self._socket.send(send_message)
+        result = pickle.loads(self._socket.recv())
+        if isinstance(result, dict) and "error" in result:
+            raise RuntimeError(result["error"])
         return result
 
     def get_observations(self) -> Dict[str, np.ndarray]:

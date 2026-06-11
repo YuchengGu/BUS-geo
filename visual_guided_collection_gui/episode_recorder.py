@@ -34,12 +34,14 @@ class EpisodeRecorder:
         planned_path: PlannedPath,
         probe_tip_offset_m: float = 0.0,
         path_feature_params: PathFeatureParams | None = None,
+        episode_context: dict[str, Any] | None = None,
     ) -> None:
         self.data_dir = Path(data_dir).expanduser()
         self.agent_name = agent_name
         self.planned_path = planned_path
         self.probe_tip_offset_m = float(probe_tip_offset_m)
         self.path_feature_params = path_feature_params or PathFeatureParams()
+        self.episode_context = dict(episode_context or {})
         self.episode_dir: Path | None = None
         self.sample_index = 0
         self.last_path_index: int | None = None
@@ -73,6 +75,18 @@ class EpisodeRecorder:
             params=self.path_feature_params,
         )
         self.last_path_index = int(features["path_nearest_index"])
+        reference_tcp_positions = (
+            np.asarray(features["path_target_positions_base"], dtype=float)
+            + self.probe_tip_offset_m * np.asarray(features["path_normals_base"], dtype=float)
+        )
+        features["path_reference_tcp_positions_base"] = reference_tcp_positions
+        features["path_reference_tcp_poses_base"] = np.concatenate(
+            [
+                reference_tcp_positions,
+                np.asarray(features["path_reference_tcp_rotvecs_base"], dtype=float),
+            ],
+            axis=1,
+        )
         enriched.update(features)
         enriched["fine_scan_flag"] = int(self.fine_scan_flag)
         return enriched
@@ -89,6 +103,7 @@ class EpisodeRecorder:
             raise RuntimeError("EpisodeRecorder.start() must be called before saving")
         enriched = self.enrich_observation(obs)
         sample_meta = dict(meta or {})
+        sample_meta.update(self.episode_context)
         sample_meta["sample_index"] = self.sample_index
         sample_meta["fine_scan_flag"] = int(self.fine_scan_flag)
         sample_meta["path_nearest_index"] = int(enriched["path_nearest_index"])

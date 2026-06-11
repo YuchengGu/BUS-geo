@@ -110,6 +110,10 @@ def test_gui_defaults_match_legacy_control_loop_speed():
     assert args.max_joint_step_rad == 0.0
     assert args.gui_update_hz > 0.0
     assert args.wrist_camera == "Orbbec"
+    assert args.surface_cartesian_teleop is False
+    assert args.surface_approach_height_m == 0.2
+    assert args.surface_contact_height_m == 0.05
+    assert args.probe_tip_offset_m == 0.2
 
 
 def test_gui_accepts_orbbec_wrist_camera_choice():
@@ -186,6 +190,9 @@ def test_episode_recorder_saves_path_features_and_fine_scan_flag(tmp_path):
     assert frame["fine_scan_flag"] == 1
     assert frame["path_nearest_index"] == 1
     np.testing.assert_allclose(frame["path_residuals_base"][0], [-0.01, 0.0, 0.0])
+    np.testing.assert_allclose(frame["path_reference_tcp_positions_base"][0], [0.1, 0.0, 0.0])
+    np.testing.assert_allclose(frame["path_reference_tcp_poses_base"][0], [0.1, 0.0, 0.0, np.pi, 0.0, 0.0], atol=1e-8)
+    assert "path_tcp_frames_base" not in frame
     assert enriched["path_nearest_index"] == frame["path_nearest_index"]
     assert enriched["path_progress"] == frame["path_progress"]
     assert enriched["path_distance_to_nearest_m"] == frame["path_distance_to_nearest_m"]

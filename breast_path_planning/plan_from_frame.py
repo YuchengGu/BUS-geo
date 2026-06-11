@@ -8,6 +8,7 @@ from typing import Sequence
 import numpy as np
 
 from breast_path_planning.path_io import PlannedPath, save_planned_path
+from breast_path_planning.geodesic_path import resample_path_with_surface_geodesics
 from breast_path_planning.path_planner import PathPlannerParams, plan_serpentine_path
 from breast_path_planning.pointcloud_from_d405 import PointCloud, realsense_frames_to_point_cloud, save_point_cloud_ply
 from breast_path_planning.segmentation import SegmentationParams, segment_region_from_seed_indices, segment_region_from_seed_pixels
@@ -45,12 +46,25 @@ def plan_from_segmented_cloud(
     }
     if metadata:
         path_metadata.update(metadata)
-    planned_path = plan_serpentine_path(
+    active_planner_params = planner_params or PathPlannerParams()
+    serpentine_path = plan_serpentine_path(
         segmented_cloud.points_base,
         normals,
-        planner_params,
+        active_planner_params,
         metadata=path_metadata,
     )
+    planned_path = serpentine_path
+    original_planned_path = None
+    if active_planner_params.use_geodesic_resample:
+        original_planned_path = serpentine_path
+        planned_path = resample_path_with_surface_geodesics(
+            serpentine_path,
+            segmented_cloud.points_base,
+            surface_normals_base=normals,
+            metadata={
+                "pre_geodesic_planner": serpentine_path.metadata.get("planner"),
+            },
+        )
 
     if output_dir is not None:
         _save_planning_outputs(
@@ -58,8 +72,9 @@ def plan_from_segmented_cloud(
             raw_cloud=raw_cloud,
             segmented_cloud=segmented_cloud,
             planned_path=planned_path,
+            original_planned_path=original_planned_path,
             segmentation_params=segmentation_params,
-            planner_params=planner_params,
+            planner_params=active_planner_params,
             report_extra={
                 "seed_indices": [int(i) for i in seed_indices],
                 **(metadata or {}),
@@ -155,14 +170,17 @@ def _save_planning_outputs(
     raw_cloud: PointCloud,
     segmented_cloud: PointCloud,
     planned_path: PlannedPath,
-    segmentation_params: SegmentationParams | None,
-    planner_params: PathPlannerParams | None,
+    original_planned_path: PlannedPath | None = None,
+    segmentation_params: SegmentationParams | None = None,
+    planner_params: PathPlannerParams | None = None,
     report_extra: dict[str, object] | None = None,
 ) -> None:
     output = Path(output_dir)
     output.mkdir(parents=True, exist_ok=True)
     save_point_cloud_ply(raw_cloud, output / "raw_cloud_base.ply")
     save_point_cloud_ply(segmented_cloud, output / "segmented_breast.ply")
+    if original_planned_path is not None:
+        save_planned_path(original_planned_path, output / "planned_path_serpentine.json")
     save_planned_path(planned_path, output / "planned_path.json")
     report = {
         "num_raw_points": len(raw_cloud),
