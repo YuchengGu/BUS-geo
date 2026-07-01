@@ -9,7 +9,7 @@ from typing import Any
 import numpy as np
 
 from breast_path_planning.geometry import rotvec_pose_to_transform
-from breast_path_planning.path_io import PlannedPath
+from breast_path_planning.path_io import PlannedPath, save_planned_path
 from breast_path_planning.plan_from_frame import PlanFromFrameResult, plan_from_point_cloud
 from breast_path_planning.pointcloud_from_d405 import PointCloud, realsense_frames_to_point_cloud, rgbd_arrays_to_point_cloud
 from breast_path_planning.segmentation import SegmentationParams
@@ -142,3 +142,22 @@ class PlanningSession:
     @property
     def planned_path(self) -> PlannedPath | None:
         return None if self.plan_result is None else self.plan_result.planned_path
+
+    def replace_planned_path(
+        self,
+        planned_path: PlannedPath,
+        *,
+        backup_name: str = "planned_path_before_geodesic.json",
+    ) -> Path:
+        if self.plan_result is None:
+            raise RuntimeError("No plan result exists to replace")
+        if self.output_dir is None:
+            raise RuntimeError("No output directory exists for the current plan")
+        output_dir = Path(self.output_dir)
+        backup_path = output_dir / backup_name
+        if not backup_path.exists():
+            save_planned_path(self.plan_result.planned_path, backup_path)
+        self.plan_result.planned_path = planned_path
+        output_path = output_dir / "planned_path.json"
+        save_planned_path(planned_path, output_path)
+        return output_path

@@ -22,7 +22,23 @@ from visual_guided_collection_gui.images import depth_to_display_rgb
 from visual_guided_collection_gui.picking import pick_nearest_projected_point
 from visual_guided_collection_gui.planning_session import PlanningSession
 from visual_guided_collection_gui.probe_telemetry import obs_from_tcp_pose_rotvec, probe_path_telemetry_lines
+from visual_guided_collection_gui.geodesic_optimize import optimize_gui_planned_path_geodesic
+from visual_guided_collection_gui.path_variants import (
+    apply_b_spline_variant,
+    apply_moving_average_variant,
+    apply_original_variant,
+    original_path_for_variant,
+    path_variant_context,
+)
+from visual_guided_collection_gui.surface_auto_scan import SurfaceForceServoConfig, run_surface_auto_scan
 from visual_guided_collection_gui.surface_random_local import random_local_start_target
+from visual_guided_collection_gui.surface_bayes import (
+    SurfaceBOConfig,
+    SurfaceBOStopSignal,
+    parse_local_bounds,
+    run_surface_bayes_optimization,
+    select_current_tcp_bo_reference,
+)
 from visual_guided_collection_gui.surface_teleop import (
     SurfaceCartesianTeleopController,
     first_darboux_scan_line_tcp_poses,
@@ -30,6 +46,68 @@ from visual_guided_collection_gui.surface_teleop import (
     staged_surface_start_tcp_sequence,
 )
 from visual_guided_collection_gui.state import GuiStage, enabled_actions_for_stage
+
+
+SURFACE_CONFIRM_POSITION_STEP_M = 0.001
+SURFACE_CONFIRM_ROTATION_STEP_RAD = 0.006
+SURFACE_AUTOSCAN_POSITION_STEP_M = 0.0005
+SURFACE_AUTOSCAN_ROTATION_STEP_RAD = 0.003
+
+
+def format_surface_bo_status_lines(meta: dict[str, Any] | None) -> list[str]:
+    data = dict(meta or {})
+    if not str(data.get("auto_phase", "")).startswith("bo"):
+        return []
+
+    trial = data.get("bo_trial_index")
+    phase = data.get("bo_phase", data.get("auto_phase", "bo"))
+    measured = bool(data.get("bo_is_measurement", False))
+    if trial is None:
+        header = f"BO {phase}"
+    else:
+        header = f"BO trial {int(trial) + 1} [{phase}]"
+    header += " measured" if measured else " moving"
+    lines = [header]
+
+    x = data.get("bo_x")
+    if x is not None:
+        values = np.asarray(x, dtype=float).reshape(-1)
+        if values.shape[0] >= 4:
+            deg = np.degrees(values[1:4])
+            lines.append(
+                "x: "
+                f"dn={values[0] * 1000.0:.1f}mm, "
+                f"rdeg={deg[0]:.2f}, {deg[1]:.2f}, {deg[2]:.2f}"
+            )
+
+    target = data.get("bo_target_tcp_pose") or data.get("bo_best_target_tcp_pose")
+    if target is not None:
+        pose = np.asarray(target, dtype=float).reshape(-1)
+        if pose.shape[0] >= 6:
+            lines.append("target p: " + ", ".join(f"{v:.3f}" for v in pose[:3]))
+            lines.append("target r: " + ", ".join(f"{v:.3f}" for v in pose[3:6]))
+
+    if measured:
+        for key in ("Q", "F"):
+            if key in data:
+                lines.append(f"{key}={float(data[key]):.4f}")
+        if all(key in data for key in ("D", "E", "C", "S")):
+            lines.append(
+                "D/E/C/S="
+                f"{float(data['D']):.3f}/{float(data['E']):.3f}/"
+                f"{float(data['C']):.3f}/{float(data['S']):.3f}"
+            )
+        if "P_f" in data or "P_tau" in data:
+            lines.append(
+                f"Pf={float(data.get('P_f', 0.0)):.4f}, "
+                f"Ptau={float(data.get('P_tau', 0.0)):.4f}"
+            )
+        if "force_valid" in data:
+            lines.append(f"force valid={bool(data['force_valid'])}")
+        if "best_F" in data and data["best_F"] is not None:
+            lines.append(f"best F={float(data['best_F']):.4f}")
+
+    return lines
 
 
 def path_point_colors(
@@ -51,28 +129,121 @@ def path_point_colors(
     return colors
 
 
-def force_display_image(force: np.ndarray | None, width: int = 420, height: int = 220) -> np.ndarray:
+def path_display_color(path) -> np.ndarray:
+    metadata = dict(getattr(path, "metadata", {}) or {})
+    method = metadata.get("path_variant_method")
+    if metadata.get("geodesic_trigger") == "gui_optimize_geodesic" or metadata.get("geodesic_resample"):
+        return np.array([0.0, 0.8, 0.1], dtype=float)
+    if method == "moving_average":
+        return np.array([0.55, 0.55, 0.55], dtype=float)
+    if method == "b_spline":
+        return np.array([0.1, 0.35, 0.9], dtype=float)
+    return np.array([1.0, 0.05, 0.05], dtype=float)
+
+
+def path_preview_point_colors(path) -> np.ndarray:
+    path_length = len(path)
+    return np.tile(path_display_color(path), (int(path_length), 1))
+
+
+def path_point_geometry_name(path) -> str:
+    metadata = dict(getattr(path, "metadata", {}) or {})
+    method = metadata.get("path_variant_method")
+    if metadata.get("geodesic_trigger") == "gui_optimize_geodesic" or metadata.get("geodesic_resample"):
+        return "optimized_path_points"
+    if method == "moving_average":
+        return "moving_average_path_points"
+    if method == "b_spline":
+        return "b_spline_path_points"
+    return "planned_path_points"
+
+
+def all_path_point_geometry_names() -> tuple[str, ...]:
+    return (
+        "planned_path_points",
+        "optimized_path_points",
+        "moving_average_path_points",
+        "b_spline_path_points",
+    )
+
+
+def _force_vector_from_obs(force_or_obs: Any, key: str) -> np.ndarray | None:
+    if isinstance(force_or_obs, dict):
+        values = force_or_obs.get(key)
+    else:
+        values = force_or_obs if key == "force" else None
+    if values is None:
+        return None
+    array = np.asarray(values, dtype=float).reshape(-1)
+    if array.size < 6:
+        return None
+    return array[:6]
+
+
+def force_display_image(force: Any | None, width: int = 420, height: int = 220) -> np.ndarray:
+    if isinstance(force, dict):
+        width = max(width, 520)
+        height = max(height, 260)
     image = np.full((height, width, 3), 32, dtype=np.uint8)
     yellow = (255, 225, 0)
     muted = (170, 170, 170)
+    cyan = (120, 220, 255)
+    green = (90, 230, 120)
     cv2.putText(image, "FORCE", (18, 42), cv2.FONT_HERSHEY_SIMPLEX, 1.05, yellow, 3, cv2.LINE_AA)
     if force is None:
         cv2.putText(image, "waiting", (18, 108), cv2.FONT_HERSHEY_SIMPLEX, 1.15, muted, 2, cv2.LINE_AA)
         return image
 
-    values = np.asarray(force, dtype=float).reshape(-1)
-    if values.shape[0] < 6:
-        cv2.putText(image, "invalid", (18, 108), cv2.FONT_HERSHEY_SIMPLEX, 1.15, muted, 2, cv2.LINE_AA)
+    values = _force_vector_from_obs(force, "force")
+    if values is None:
+        status = ""
+        if isinstance(force, dict):
+            status = f"valid={bool(force.get('force_sensor_valid', False))}"
+            error = force.get("force_sensor_error")
+            if error:
+                status += f"  {error}"
+        cv2.putText(image, status or "invalid", (18, 108), cv2.FONT_HERSHEY_SIMPLEX, 0.8, muted, 2, cv2.LINE_AA)
         return image
 
+    if not isinstance(force, dict):
+        lines = [
+            f"F {values[0]: .2f} {values[1]: .2f} {values[2]: .2f}",
+            f"M {values[3]: .2f} {values[4]: .2f} {values[5]: .2f}",
+        ]
+        y = 106
+        for line in lines:
+            cv2.putText(image, line, (18, y), cv2.FONT_HERSHEY_SIMPLEX, 0.9, yellow, 2, cv2.LINE_AA)
+            y += 58
+        return image
+
+    raw = _force_vector_from_obs(force, "force_raw")
+    gravity = _force_vector_from_obs(force, "force_gravity")
+    if raw is None:
+        raw = values
+    if gravity is None:
+        gravity = np.zeros(6, dtype=float)
     lines = [
-        f"F {values[0]: .2f} {values[1]: .2f} {values[2]: .2f}",
-        f"M {values[3]: .2f} {values[4]: .2f} {values[5]: .2f}",
+        (f"comp F {values[0]: .2f} {values[1]: .2f} {values[2]: .2f}   M {values[3]: .2f} {values[4]: .2f} {values[5]: .2f}", yellow),
+        (f"raw  F {raw[0]: .2f} {raw[1]: .2f} {raw[2]: .2f}   M {raw[3]: .2f} {raw[4]: .2f} {raw[5]: .2f}", cyan),
+        (
+            f"grav F {gravity[0]: .2f} {gravity[1]: .2f} {gravity[2]: .2f}   "
+            f"M {gravity[3]: .2f} {gravity[4]: .2f} {gravity[5]: .2f}",
+            green,
+        ),
+        (
+            f"valid={bool(force.get('force_sensor_valid', True))}  "
+            f"zero={bool(force.get('force_zeroed', False))}  "
+            f"grav={bool(force.get('force_gravity_calibrated', False))}",
+            muted,
+        ),
     ]
-    y = 106
-    for line in lines:
-        cv2.putText(image, line, (18, y), cv2.FONT_HERSHEY_SIMPLEX, 0.9, yellow, 2, cv2.LINE_AA)
-        y += 58
+    error = force.get("force_sensor_error")
+    if error:
+        lines.append((f"error={error}", muted))
+    y = 88
+    for line, color in lines:
+        cv2.putText(image, line, (18, y), cv2.FONT_HERSHEY_SIMPLEX, 0.58, color, 2, cv2.LINE_AA)
+        y += 38
     return image
 
 
@@ -88,6 +259,7 @@ class VisualGuidedCollectionApp:
                 agent_name=args.agent,
                 gello_port=args.gello_port,
                 force_ip=args.force_ip,
+                force_gravity_calib_path=args.force_gravity_calib,
                 use_force=not args.disable_force,
                 use_ultrasound=not args.disable_ultrasound,
                 ultrasound_index=args.ultrasound_index,
@@ -108,12 +280,24 @@ class VisualGuidedCollectionApp:
         self.surface_controller: SurfaceCartesianTeleopController | None = None
         self.surface_frame_axis_mode = "world-y"
         self.surface_random_local_context: dict[str, Any] | None = None
+        self._surface_bo_stop_signal: SurfaceBOStopSignal | None = None
+        self._surface_bo_running = False
+        self._last_surface_bo_status_lines: list[str] = []
+        self._auto_scan_stop_event: threading.Event | None = None
+        self._auto_scan_pause_event: threading.Event | None = None
+        self._auto_scan_paused_ack_event: threading.Event | None = None
+        self._auto_scan_running = False
+        self._auto_scan_thread: threading.Thread | None = None
+        self._geodesic_opt_running = False
         self.seed_index: int | None = None
         self.latest_obs: dict[str, Any] | None = None
         self._last_gui_update_time = 0.0
         self._gui_update_period_s = 1.0 / float(args.gui_update_hz) if float(args.gui_update_hz) > 0.0 else 0.0
         self._last_scene_pose_update_time = 0.0
         self._scene_pose_update_period_s = 0.2
+        self._force_monitor_stop_event = threading.Event()
+        self._force_monitor_thread: threading.Thread | None = None
+        self._force_monitor_period_s = 0.05
         self._lock = threading.Lock()
 
         gui.Application.instance.initialize()
@@ -169,8 +353,15 @@ class VisualGuidedCollectionApp:
             ("capture_frame", "Freeze capture", self._on_capture_frame),
             ("resegment", "Re-pick seed", self._on_resegment),
             ("plan_path", "Plan path", self._on_plan_path),
+            ("use_original_path", "Use original path", self._on_use_original_path),
+            ("smooth_moving_average", "Smooth moving avg", self._on_smooth_moving_average),
+            ("smooth_b_spline", "Smooth B-spline", self._on_smooth_b_spline),
+            ("optimize_geodesic", "Optimize geodesic", self._on_optimize_geodesic),
             ("confirm_path", "Confirm path", self._on_confirm_path),
-            ("surface_preview_darboux_line", "Preview Darboux line", self._on_surface_preview_darboux_line),
+            ("surface_auto_scan_start", "Start auto scan", self._on_surface_auto_scan_start),
+            ("surface_auto_scan_stop", "Stop auto scan", self._on_surface_auto_scan_stop),
+            ("surface_bo_optimize", "Optimize local pose", self._on_surface_bo_optimize),
+            ("surface_bo_stop", "Stop BO", self._on_surface_bo_stop),
             ("surface_random_local_start", "Random local start", self._on_surface_random_local_start),
             ("surface_set_neutral", "Set neutral", self._on_surface_set_neutral),
             ("surface_calibrate_x", "Calibrate +X", self._on_surface_calibrate_x),
@@ -257,9 +448,42 @@ class VisualGuidedCollectionApp:
         enabled = enabled_actions_for_stage(self.stage)
         for key, button in self.buttons.items():
             button.enabled = key in enabled
-            if key.startswith("surface_") and not self.args.surface_cartesian_teleop:
+            if key.startswith("surface_") and not self.args.control_tcp:
                 button.enabled = False
-            if key == "start_recording" and self.args.surface_cartesian_teleop:
+            if key in {"surface_auto_scan_start", "surface_auto_scan_stop"}:
+                button.enabled = (
+                    button.enabled
+                    and self.args.operation_mode == "auto"
+                    and self.args.control_tcp
+                )
+            if key in {"surface_bo_optimize", "surface_bo_stop"}:
+                button.enabled = (
+                    button.enabled
+                    and self.args.operation_mode == "auto"
+                    and self.args.control_tcp
+                    and not self.args.disable_ultrasound
+                )
+            elif self.args.operation_mode == "auto" and key in {
+                "start_gello_handover",
+                "surface_random_local_start",
+                "surface_set_neutral",
+                "surface_calibrate_x",
+                "surface_calibrate_z",
+                "surface_recenter",
+                "start_recording",
+                "toggle_fine_scan",
+                "stop_recording",
+            }:
+                button.enabled = False
+            if key == "surface_bo_optimize":
+                button.enabled = button.enabled and not self._surface_bo_running
+            if key == "surface_bo_stop":
+                button.enabled = button.enabled and self._surface_bo_running
+            if key == "surface_auto_scan_start":
+                button.enabled = button.enabled and not self._auto_scan_running
+            if key == "surface_auto_scan_stop":
+                button.enabled = button.enabled and self._auto_scan_running
+            if key == "start_recording" and self.args.control_tcp:
                 button.enabled = (
                     button.enabled
                     and self.surface_controller is not None
@@ -273,12 +497,24 @@ class VisualGuidedCollectionApp:
                     and self.surface_controller is not None
                     and self.surface_controller.input_axes_ready
                 )
+            if self._geodesic_opt_running and key in {
+                "plan_path",
+                "use_original_path",
+                "smooth_moving_average",
+                "smooth_b_spline",
+                "optimize_geodesic",
+                "confirm_path",
+                "resegment",
+            }:
+                button.enabled = False
 
     def _set_status(self, text: str) -> None:
         self.status_label.text = text
 
     def _control_mode_text(self) -> str:
-        if self.args.surface_cartesian_teleop:
+        if self.args.operation_mode == "auto":
+            return "Control mode: Automatic surface scan + local Bayesian optimization"
+        if self.args.control_tcp:
             return "Control mode: Surface Cartesian Darboux TCP (servoL)"
         return "Control mode: Legacy GELLO joint mirroring (servoJ)"
 
@@ -299,7 +535,39 @@ class VisualGuidedCollectionApp:
 
     def _connected(self) -> None:
         self._set_stage(GuiStage.CONNECTED)
+        self._start_force_monitor()
         self._set_status(f"Connected. Click Photo positioning, then move UR5 to a good {self.args.wrist_camera} view with GELLO.")
+
+    def _start_force_monitor(self) -> None:
+        if self.args.disable_force:
+            return
+        if self._force_monitor_thread is not None and self._force_monitor_thread.is_alive():
+            return
+        self._force_monitor_stop_event.clear()
+        self._force_monitor_thread = threading.Thread(target=self._run_force_monitor, daemon=True)
+        self._force_monitor_thread.start()
+
+    def _stop_force_monitor(self) -> None:
+        self._force_monitor_stop_event.set()
+        if self._force_monitor_thread is not None:
+            self._force_monitor_thread.join(timeout=1.0)
+        self._force_monitor_thread = None
+
+    def _run_force_monitor(self) -> None:
+        while not self._force_monitor_stop_event.is_set():
+            try:
+                obs = self.devices.get_force_obs()
+            except Exception as exc:
+                obs = {
+                    "force": None,
+                    "force_sensor_valid": False,
+                    "force_sensor_error": f"{type(exc).__name__}: {exc}",
+                }
+            gui.Application.instance.post_to_main_thread(
+                self.window,
+                lambda obs=obs: self._update_rgb(self.force_widget, force_display_image(obs)),
+            )
+            time.sleep(self._force_monitor_period_s)
 
     def _start_gello_control(self, next_stage: GuiStage, status: str) -> None:
         if not self.devices.connected:
@@ -316,7 +584,7 @@ class VisualGuidedCollectionApp:
         )
 
     def _on_start_gello_handover(self) -> None:
-        if self.args.surface_cartesian_teleop:
+        if self.args.control_tcp:
             path = self.planning.planned_path
             if path is None:
                 self._set_status("Path is not confirmed yet.")
@@ -389,6 +657,111 @@ class VisualGuidedCollectionApp:
         out = self.planning.output_dir
         self._set_status(f"Path planned: {len(result.planned_path)} points. Output: {out}")
 
+    def _replace_with_path_variant(self, path, *, status: str) -> None:
+        source_path = original_path_for_variant(self.planning)
+        output_path = self.planning.replace_planned_path(path, backup_name="planned_path_before_geodesic.json")
+        if path.metadata.get("path_variant_method") == "original":
+            self._show_path(path, name_prefix="planned_path", include_normals=True)
+        else:
+            self._show_path(source_path, name_prefix="planned_path", include_normals=False)
+            self._show_path(path, name_prefix="optimized_path", include_normals=True)
+        self._set_stage(GuiStage.PATH_PLANNED)
+        self._set_status(f"{status}. Output: {output_path}")
+
+    def _on_use_original_path(self) -> None:
+        if self.planning.planned_path is None:
+            self._set_status("No planned path yet.")
+            return
+        try:
+            original = apply_original_variant(original_path_for_variant(self.planning))
+            self._replace_with_path_variant(original, status="Original path selected")
+        except Exception as exc:
+            self._set_status(f"Selecting original path failed: {type(exc).__name__}: {exc}")
+
+    def _on_smooth_moving_average(self) -> None:
+        if self.planning.planned_path is None:
+            self._set_status("No planned path yet.")
+            return
+        try:
+            smoothed = apply_moving_average_variant(original_path_for_variant(self.planning))
+            meta = smoothed.metadata
+            self._replace_with_path_variant(
+                smoothed,
+                status=(
+                    "Moving-average path selected "
+                    f"(window={meta['moving_average_window']}, passes={meta['moving_average_passes']})"
+                ),
+            )
+        except Exception as exc:
+            self._set_status(f"Moving-average smoothing failed: {type(exc).__name__}: {exc}")
+
+    def _on_smooth_b_spline(self) -> None:
+        if self.planning.planned_path is None:
+            self._set_status("No planned path yet.")
+            return
+        try:
+            smoothed = apply_b_spline_variant(original_path_for_variant(self.planning))
+            self._replace_with_path_variant(
+                smoothed,
+                status=(
+                    "B-spline path selected "
+                    f"(s={float(smoothed.metadata['b_spline_smoothing_factor']):.6g})"
+                ),
+            )
+        except Exception as exc:
+            self._set_status(f"B-spline smoothing failed: {type(exc).__name__}: {exc}")
+
+    def _on_optimize_geodesic(self) -> None:
+        if self._geodesic_opt_running:
+            self._set_status("Geodesic optimization is already running.")
+            return
+        result = self.planning.plan_result
+        if result is None or self.planning.planned_path is None:
+            self._set_status("No planned path yet.")
+            return
+        self._geodesic_opt_running = True
+        self._refresh_buttons()
+        self._set_status("Optimizing current planned path with geodesic simulated annealing ...")
+
+        def worker() -> None:
+            try:
+                source_path = original_path_for_variant(self.planning)
+                optimized = optimize_gui_planned_path_geodesic(
+                    source_path,
+                    result.segmented_cloud.points_base,
+                )
+                output_path = self.planning.replace_planned_path(optimized)
+                gui.Application.instance.post_to_main_thread(
+                    self.window,
+                    lambda: self._show_geodesic_result(source_path, optimized, output_path),
+                )
+            except Exception as exc:
+                gui.Application.instance.post_to_main_thread(
+                    self.window,
+                    lambda error=exc: self._geodesic_failed(error),
+                )
+
+        threading.Thread(target=worker, daemon=True).start()
+
+    def _show_geodesic_result(self, source_path, path, output_path: Path) -> None:
+        self._geodesic_opt_running = False
+        self._show_path(source_path, name_prefix="planned_path", include_normals=False)
+        self._show_path(path, name_prefix="optimized_path", include_normals=True)
+        self._set_stage(GuiStage.PATH_PLANNED)
+        meta = path.metadata
+        self._set_status(
+            "Geodesic optimized: "
+            f"E {float(meta.get('geodesic_energy_initial', 0.0)):.4g} -> "
+            f"{float(meta.get('geodesic_energy_final', 0.0)):.4g}, "
+            f"accepted {int(meta.get('geodesic_sa_accepted_moves', 0))}. "
+            f"Output: {output_path}"
+        )
+
+    def _geodesic_failed(self, error: Exception) -> None:
+        self._geodesic_opt_running = False
+        self._set_stage(GuiStage.PATH_PLANNED)
+        self._set_status(f"Geodesic optimization failed: {type(error).__name__}: {error}")
+
     def _on_confirm_path(self) -> None:
         path = self.planning.planned_path
         if path is None:
@@ -399,13 +772,13 @@ class VisualGuidedCollectionApp:
             return
         self.surface_controller = None
         self.surface_random_local_context = None
-        if self.args.surface_cartesian_teleop and self.args.surface_random_local_episodes:
+        if self.args.control_tcp and self.args.surface_random_local_episodes:
             self._set_stage(GuiStage.PATH_CONFIRMED)
             self._set_status(
                 "Path confirmed for random local episodes. Click GELLO handover, calibrate, then use Random local start."
             )
             return
-        if self.args.surface_cartesian_teleop:
+        if self.args.control_tcp:
             self._set_status("Path confirmed. Moving UR5 TCP to surface path start with Cartesian servoL ...")
 
             def worker() -> None:
@@ -441,8 +814,8 @@ class VisualGuidedCollectionApp:
                         },
                     )
                     move_kwargs = {
-                        "max_position_step_m": 0.002,
-                        "max_rotation_step_rad": 0.012,
+                        "max_position_step_m": SURFACE_CONFIRM_POSITION_STEP_M,
+                        "max_rotation_step_rad": SURFACE_CONFIRM_ROTATION_STEP_RAD,
                         "position_tolerance_m": 0.002,
                         "rotation_tolerance_rad": 0.03,
                         "timeout_s": 60.0,
@@ -468,17 +841,43 @@ class VisualGuidedCollectionApp:
         self._set_stage(GuiStage.PATH_CONFIRMED)
         self._set_status("Surface path confirmed. UR5 is at the first path point; move GELLO to a comfortable pose, then calibrate input axes.")
 
-    def _on_surface_preview_darboux_line(self) -> None:
+    def _on_surface_auto_scan_start(self) -> None:
         path = self.planning.planned_path
         if path is None:
             self._set_status("No planned path yet.")
             return
-        if not self.args.surface_cartesian_teleop:
-            self._set_status("Darboux preview is only available in surface Cartesian mode.")
+        if not self.args.control_tcp:
+            self._set_status("Auto scan is only available with --control-tcp.")
+            return
+        if self.args.operation_mode != "auto":
+            self._set_status("Start GUI with --operation-mode auto to use auto scan.")
             return
         if not self.devices.connected:
             self._set_status("Devices are not connected.")
             return
+        if self._auto_scan_running:
+            self._set_status("Auto scan is already running.")
+            return
+
+        self.teleop_loop.stop()
+        self.recorder = EpisodeRecorder(
+            data_dir=self.args.data_dir,
+            agent_name=self.args.agent,
+            planned_path=path,
+            probe_tip_offset_m=self.args.probe_tip_offset_m,
+            episode_context={
+                "operation_mode": "auto",
+                "auto_session": "surface_scan",
+                **path_variant_context(path),
+            },
+        )
+        episode_dir = self.recorder.start(datetime.datetime.now().strftime("auto_scan_%m%d_%H%M%S"))
+        self._auto_scan_stop_event = threading.Event()
+        self._auto_scan_pause_event = threading.Event()
+        self._auto_scan_paused_ack_event = threading.Event()
+        self._auto_scan_running = True
+        self._set_stage(GuiStage.RECORDING)
+        self._set_status(f"Auto scan recording started: {episode_dir}")
 
         def worker() -> None:
             try:
@@ -488,41 +887,296 @@ class VisualGuidedCollectionApp:
                     probe_length_m=self.args.probe_tip_offset_m,
                     frame_axis_mode=self.surface_frame_axis_mode,
                 )
-                log_path = self._surface_confirm_log_path("darboux_preview")
-                self._write_surface_confirm_log(
-                    log_path,
-                    {
-                        "kind": "start",
-                        "preview": "full_darboux_path",
-                        "frame_axis_mode": self.surface_frame_axis_mode,
-                        "pose_count": len(poses),
-                        "probe_tip_offset_m": float(self.args.probe_tip_offset_m),
-                        "contact_height_m": float(self.args.surface_contact_height_m),
-                    },
+                assert self.recorder is not None
+                result = run_surface_auto_scan(
+                    devices=self.devices,
+                    tcp_poses=poses,
+                    normals_base=path.normals_base,
+                    recorder=self.recorder,
+                    stop_event=self._auto_scan_stop_event,
+                    pause_event=self._auto_scan_pause_event,
+                    paused_ack_event=self._auto_scan_paused_ack_event,
+                    on_sample=self._on_loop_sample,
+                    on_status=self._post_status,
+                    max_position_step_m=SURFACE_AUTOSCAN_POSITION_STEP_M,
+                    max_rotation_step_rad=SURFACE_AUTOSCAN_ROTATION_STEP_RAD,
+                    force_servo=SurfaceForceServoConfig(
+                        enabled=not self.args.disable_force,
+                        pressure_min_n=3.0,
+                        pressure_max_n=4.0,
+                        max_offset_m=0.006,
+                        max_lift_offset_m=0.006,
+                        max_step_m=0.00025,
+                        hard_lift_pressure_n=8.0,
+                        hard_lift_lateral_force_n=8.0,
+                        hard_lift_resume_pressure_n=4.5,
+                        hard_lift_lateral_resume_n=4.5,
+                        hard_lift_step_m=0.0001,
+                        hard_lift_max_m=0.08,
+                        lowpass_alpha=0.25,
+                        mass=0.1,
+                        damping=50.0,
+                        stiffness=400.0,
+                        pressure_gain=1.1,
+                    ),
                 )
-                move_kwargs = {
-                    "max_position_step_m": 0.001,
-                    "max_rotation_step_rad": 0.006,
-                    "position_tolerance_m": 0.002,
-                    "rotation_tolerance_rad": 0.03,
-                    "timeout_s": 120.0,
-                }
-                for index, pose in enumerate(poses, start=1):
-                    self._post_status(f"Previewing Darboux line waypoint {index}/{len(poses)} ...")
-                    self._move_surface_confirm_stage(f"darboux_preview_{index:03d}", pose, log_path, **move_kwargs)
-                self._post_status(f"Darboux preview complete. Log: {log_path}")
-            except Exception as exc:
-                self._post_status(f"Darboux preview failed: {type(exc).__name__}: {exc}")
+                retreat_error: Exception | None = None
+                if result.completed and self.args.auto_scan_safe_retreat:
+                    try:
+                        self._run_auto_scan_safe_retreat(path, result)
+                    except Exception as exc:
+                        retreat_error = exc
 
-        self._set_status("Previewing full Darboux path with Cartesian servoL ...")
+                def done() -> None:
+                    if self.recorder is not None:
+                        self.recorder.stop()
+                    self.recorder = None
+                    self._auto_scan_running = False
+                    self._auto_scan_stop_event = None
+                    self._auto_scan_pause_event = None
+                    self._auto_scan_paused_ack_event = None
+                    self._set_stage(GuiStage.PATH_CONFIRMED)
+                    if result.error:
+                        self._set_status(f"Auto scan stopped with error: {result.error}. Saved {result.saved_samples} samples.")
+                    elif result.stopped:
+                        self._set_status(f"Auto scan stopped manually. Saved {result.saved_samples} samples.")
+                    elif retreat_error is not None:
+                        self._set_status(
+                            "Auto scan complete, but safe retreat failed: "
+                            f"{type(retreat_error).__name__}: {retreat_error}. "
+                            f"Saved {result.saved_samples} samples."
+                        )
+                    else:
+                        suffix = " Safe retreat complete." if self.args.auto_scan_safe_retreat else ""
+                        self._set_status(f"Auto scan complete. Saved {result.saved_samples} samples.{suffix}")
+
+                gui.Application.instance.post_to_main_thread(self.window, done)
+            except Exception as exc:
+                def failed(error: Exception = exc) -> None:
+                    if self.recorder is not None:
+                        self.recorder.stop()
+                    self.recorder = None
+                    self._auto_scan_running = False
+                    self._auto_scan_stop_event = None
+                    self._auto_scan_pause_event = None
+                    self._auto_scan_paused_ack_event = None
+                    self._set_stage(GuiStage.PATH_CONFIRMED)
+                    self._set_status(f"Auto scan failed: {type(error).__name__}: {error}")
+
+                gui.Application.instance.post_to_main_thread(self.window, failed)
+
+        self._auto_scan_thread = threading.Thread(target=worker, daemon=True)
+        self._auto_scan_thread.start()
+
+    def _run_auto_scan_safe_retreat(self, path, result) -> None:
+        if result.last_pose_index is None:
+            pose_index = len(path.positions_base) - 1
+        else:
+            pose_index = int(np.clip(result.last_pose_index, 0, len(path.positions_base) - 1))
+        self._run_safe_position_retreat(path=path, pose_index=pose_index, reason="Auto scan complete")
+
+    def _run_safe_position_retreat(self, *, path=None, pose_index: int | None = None, reason: str = "Safe stop") -> None:
+        if path is not None and len(path.positions_base) > 0:
+            if pose_index is None:
+                current = np.asarray(self.devices.get_obs()["ee_pos_rotvec"], dtype=float).reshape(6)
+                positions = np.asarray(path.positions_base, dtype=float)
+                pose_index = int(np.argmin(np.linalg.norm(positions - current[:3], axis=1)))
+            pose_index = int(np.clip(pose_index, 0, len(path.positions_base) - 1))
+            self._retreat_tcp_along_path_normal(path, pose_index=pose_index, reason=reason)
+        self._move_to_safe_joint_position(reason=reason)
+
+    def _retreat_tcp_along_path_normal(self, path, *, pose_index: int, reason: str) -> None:
+        normal = np.asarray(path.normals_base[pose_index], dtype=float).reshape(3)
+        norm = float(np.linalg.norm(normal))
+        if norm < 1e-12:
+            raise ValueError("Cannot safe-retreat because the last path normal is invalid")
+        normal = normal / norm
+        current = np.asarray(self.devices.get_obs()["ee_pos_rotvec"], dtype=float).reshape(6)
+        retreat_pose = current.copy()
+        retreat_pose[:3] += float(self.args.auto_scan_retreat_distance_m) * normal
+        self._post_status(
+            f"{reason}. Retreating TCP "
+            f"{float(self.args.auto_scan_retreat_distance_m) * 100.0:.1f} cm along surface normal ..."
+        )
+        self.devices.move_tcp_pose_linear(
+            retreat_pose,
+            max_position_step_m=SURFACE_CONFIRM_POSITION_STEP_M,
+            max_rotation_step_rad=SURFACE_CONFIRM_ROTATION_STEP_RAD,
+            position_tolerance_m=0.003,
+            rotation_tolerance_rad=0.05,
+            timeout_s=float(self.args.auto_scan_safe_retreat_timeout_s),
+        )
+
+    def _move_to_safe_joint_position(self, *, reason: str) -> None:
+        target_joints = np.radians(np.asarray(self.args.auto_scan_safe_joint_degrees, dtype=float).reshape(6))
+        self._post_status(
+            f"{reason}. Moving to safe joints deg: "
+            + ", ".join(f"{value:.1f}" for value in self.args.auto_scan_safe_joint_degrees)
+        )
+        self.devices.move_joint_positions_linear(
+            target_joints,
+            max_joint_step_rad=float(self.args.auto_scan_safe_joint_step_rad),
+            timeout_s=float(self.args.auto_scan_safe_retreat_timeout_s),
+        )
+
+    def _on_surface_auto_scan_stop(self) -> None:
+        if self._auto_scan_stop_event is None or not self._auto_scan_running:
+            self._set_status("Auto scan is not running.")
+            return
+        self._auto_scan_stop_event.set()
+        self._refresh_buttons()
+        self._set_status("Stop auto scan requested. Recording will stop after the current control step.")
+
+    def _surface_bo_config(self) -> SurfaceBOConfig:
+        return SurfaceBOConfig(
+            bounds=parse_local_bounds(self.args.surface_bo_bounds),
+            n_initial=int(self.args.surface_bo_n_initial),
+            n_ei=int(self.args.surface_bo_n_ei),
+            force_enabled=not self.args.disable_force,
+            lambda_force=float(self.args.surface_bo_lambda_force),
+            lambda_torque=float(self.args.surface_bo_lambda_torque),
+            force_max=float(self.args.surface_bo_force_max),
+            torque_max=float(self.args.surface_bo_torque_max),
+            large_penalty=float(self.args.surface_bo_large_penalty),
+            settle_s=float(self.args.surface_bo_settle_s),
+        )
+
+    def _surface_bo_reference_from_obs(self, obs: dict[str, Any]) -> tuple[np.ndarray, np.ndarray, dict[str, Any]]:
+        path = self.planning.planned_path
+        if path is None:
+            raise RuntimeError("No planned path yet")
+        temp_recorder = EpisodeRecorder(
+            data_dir=self.args.data_dir,
+            agent_name=self.args.agent,
+            planned_path=path,
+            probe_tip_offset_m=self.args.probe_tip_offset_m,
+            episode_context={"operation_mode": "auto", **path_variant_context(path)},
+        )
+        enriched = temp_recorder.enrich_observation(obs)
+        reference_pose, normal, _nearest = select_current_tcp_bo_reference(obs, enriched)
+        return reference_pose, normal, enriched
+
+    def _make_surface_bo_recorder(self) -> tuple[EpisodeRecorder, bool]:
+        path = self.planning.planned_path
+        if path is None:
+            raise RuntimeError("No planned path yet")
+        if self.recorder is not None and self.recorder.episode_dir is not None:
+            return self.recorder, False
+        recorder = EpisodeRecorder(
+            data_dir=self.args.data_dir,
+            agent_name=self.args.agent,
+            planned_path=path,
+            probe_tip_offset_m=self.args.probe_tip_offset_m,
+            episode_context={
+                "operation_mode": "auto",
+                "auto_session": "surface_bo",
+                **path_variant_context(path),
+            },
+        )
+        recorder.start(datetime.datetime.now().strftime("auto_bo_%m%d_%H%M%S"))
+        return recorder, True
+
+    def _on_surface_bo_optimize(self) -> None:
+        if self._surface_bo_running:
+            self._set_status("Surface BO is already running.")
+            return
+        if self.args.operation_mode != "auto":
+            self._set_status("Start GUI with --operation-mode auto to use online Bayesian optimization.")
+            return
+        if self.args.disable_ultrasound:
+            self._set_status("Online BO requires ultrasound input; do not start with --disable-ultrasound.")
+            return
+        if self.planning.planned_path is None:
+            self._set_status("No planned path yet.")
+            return
+        if not self.devices.connected:
+            self._set_status("Devices are not connected.")
+            return
+
+        self.teleop_loop.stop()
+        self._surface_bo_stop_signal = SurfaceBOStopSignal()
+        self._surface_bo_running = True
+        self._refresh_buttons()
+        self._set_status("Surface BO started. Click Stop BO to end after the current safe point.")
+
+        def worker() -> None:
+            temp_recorder_created = False
+            bo_recorder: EpisodeRecorder | None = None
+            paused_auto_scan = False
+            try:
+                if self._auto_scan_running and self._auto_scan_pause_event is not None:
+                    self._auto_scan_pause_event.set()
+                    paused_auto_scan = True
+                    if self._auto_scan_paused_ack_event is not None:
+                        self._auto_scan_paused_ack_event.wait(timeout=5.0)
+                obs = self.devices.get_obs()
+                reference_pose, normal, enriched = self._surface_bo_reference_from_obs(obs)
+                nearest = int(enriched["path_nearest_index"])
+                bo_recorder, temp_recorder_created = self._make_surface_bo_recorder()
+                result = run_surface_bayes_optimization(
+                    devices=self.devices,
+                    reference_tcp_pose=reference_pose,
+                    normal_base=normal,
+                    recorder=bo_recorder,
+                    config=self._surface_bo_config(),
+                    stop_signal=self._surface_bo_stop_signal,
+                    on_status=self._post_status,
+                    on_sample=self._on_loop_sample,
+                )
+
+                def done() -> None:
+                    self._surface_bo_running = False
+                    self._surface_bo_stop_signal = None
+                    self._refresh_buttons()
+                    if result.error:
+                        self._set_status(
+                            "Surface BO stopped with motion/objective error: "
+                            f"{result.error}. Trials saved: {result.trial_count}."
+                        )
+                    elif result.cancelled:
+                        self._set_status(
+                            f"Surface BO stopped manually near path index {nearest}. "
+                            f"Trials saved: {result.trial_count}."
+                        )
+                    else:
+                        self._set_status(
+                            f"Surface BO complete near path index {nearest}. "
+                            f"Best F={result.best_F:.4f}, trials={result.trial_count}."
+                            if result.best_F is not None
+                            else f"Surface BO complete near path index {nearest}. Trials={result.trial_count}."
+                        )
+
+                gui.Application.instance.post_to_main_thread(self.window, done)
+            except Exception as exc:
+                def failed(error: Exception = exc) -> None:
+                    self._surface_bo_running = False
+                    self._surface_bo_stop_signal = None
+                    self._refresh_buttons()
+                    self._set_status(f"Surface BO failed: {type(error).__name__}: {error}")
+
+                gui.Application.instance.post_to_main_thread(self.window, failed)
+            finally:
+                if paused_auto_scan and self._auto_scan_pause_event is not None:
+                    self._auto_scan_pause_event.clear()
+                if temp_recorder_created and bo_recorder is not None:
+                    bo_recorder.stop()
+
         threading.Thread(target=worker, daemon=True).start()
+
+    def _on_surface_bo_stop(self) -> None:
+        if self._surface_bo_stop_signal is None or not self._surface_bo_running:
+            self._set_status("Surface BO is not running.")
+            return
+        self._surface_bo_stop_signal.request_stop()
+        self._refresh_buttons()
+        self._set_status("Stop BO requested. Current trial will finish or abort at the next waypoint, then control returns.")
 
     def _on_surface_random_local_start(self) -> None:
         path = self.planning.planned_path
         if path is None:
             self._set_status("No planned path yet.")
             return
-        if not self.args.surface_cartesian_teleop:
+        if not self.args.control_tcp:
             self._set_status("Random local start is only available in surface Cartesian mode.")
             return
         if not self.args.surface_random_local_episodes:
@@ -550,8 +1204,8 @@ class VisualGuidedCollectionApp:
                 log_path = self._surface_confirm_log_path("surface_random_local_start")
                 self._write_surface_confirm_log(log_path, {"kind": "start", **target.meta})
                 move_kwargs = {
-                    "max_position_step_m": 0.002,
-                    "max_rotation_step_rad": 0.012,
+                    "max_position_step_m": SURFACE_CONFIRM_POSITION_STEP_M,
+                    "max_rotation_step_rad": SURFACE_CONFIRM_ROTATION_STEP_RAD,
                     "position_tolerance_m": 0.002,
                     "rotation_tolerance_rad": 0.03,
                     "timeout_s": 60.0,
@@ -570,7 +1224,7 @@ class VisualGuidedCollectionApp:
                 )
 
                 def done() -> None:
-                    self._show_path_points(path, nearest_index=target.index)
+                    self._show_path_points(path, nearest_index=target.index, point_name=path_point_geometry_name(path))
                     self._refresh_buttons()
                     self._set_status(
                         "Random local start reached "
@@ -662,7 +1316,7 @@ class VisualGuidedCollectionApp:
                     probe_tip_offset_m=self.args.probe_tip_offset_m,
                 )
                 if path is not None and nearest is not None:
-                    self._show_path_points(path, nearest_index=nearest)
+                    self._show_path_points(path, nearest_index=nearest, point_name=path_point_geometry_name(path))
             except Exception:
                 pass
             self._show_probe_pose(obs, force=True)
@@ -742,13 +1396,13 @@ class VisualGuidedCollectionApp:
             self._set_status("Cannot record directly. Click GELLO handover first and confirm stable control.")
             return
         if (
-            self.args.surface_cartesian_teleop
+            self.args.control_tcp
             and (self.surface_controller is None or not self.surface_controller.input_axes_ready)
         ):
             self._set_status("Calibrate surface input axes first: Set neutral, Calibrate +X, Calibrate +Z.")
             return
         self.teleop_loop.stop()
-        if self.args.surface_cartesian_teleop and self.surface_controller is None:
+        if self.args.control_tcp and self.surface_controller is None:
             self.surface_controller = SurfaceCartesianTeleopController(
                 path=path,
                 probe_length_m=self.args.probe_tip_offset_m,
@@ -762,11 +1416,14 @@ class VisualGuidedCollectionApp:
             agent_name=self.args.agent,
             planned_path=path,
             probe_tip_offset_m=self.args.probe_tip_offset_m,
-            episode_context=self.surface_random_local_context if self.args.surface_cartesian_teleop else None,
+            episode_context={
+                **path_variant_context(path),
+                **(self.surface_random_local_context if self.args.control_tcp and self.surface_random_local_context else {}),
+            },
         )
         episode_dir = self.recorder.start()
         self._set_stage(GuiStage.RECORDING)
-        if self.args.surface_cartesian_teleop:
+        if self.args.control_tcp:
             assert self.surface_controller is not None
             self.teleop_loop.start_surface_recording(
                 controller=self.surface_controller,
@@ -794,7 +1451,7 @@ class VisualGuidedCollectionApp:
         if self.recorder is not None:
             self.recorder.stop()
         self.recorder = None
-        if self.args.surface_cartesian_teleop and self.surface_controller is not None:
+        if self.args.control_tcp and self.surface_controller is not None:
             self._set_stage(GuiStage.TELEOP_READY)
             self.teleop_loop.start_surface_positioning(
                 controller=self.surface_controller,
@@ -808,24 +1465,70 @@ class VisualGuidedCollectionApp:
         self._set_status("Episode stopped. You can start another photo positioning step or safe stop.")
 
     def _on_safe_stop(self) -> None:
+        if self._auto_scan_stop_event is not None:
+            self._auto_scan_stop_event.set()
+        if self._surface_bo_stop_signal is not None:
+            self._surface_bo_stop_signal.request_stop()
         self.teleop_loop.stop()
-        if self.recorder is not None:
-            self.recorder.stop()
-        self.surface_controller = None
-        self.devices.close()
-        self._set_stage(GuiStage.DISCONNECTED)
-        self._set_status("Safe stopped. Devices released.")
+        self._set_status("Safe stop requested. Moving to safe position before releasing devices ...")
+
+        def worker() -> None:
+            error: Exception | None = None
+            try:
+                thread = self._auto_scan_thread
+                if thread is not None and thread.is_alive() and thread is not threading.current_thread():
+                    thread.join(timeout=2.0)
+                self._stop_force_monitor()
+                if self.recorder is not None:
+                    self.recorder.stop()
+                path = self.planning.planned_path
+                if self.devices.connected:
+                    self._run_safe_position_retreat(path=path, reason="Safe stop")
+            except Exception as exc:
+                error = exc
+            finally:
+                self.surface_controller = None
+                self.recorder = None
+                self._auto_scan_running = False
+                self._auto_scan_stop_event = None
+                self._auto_scan_pause_event = None
+                self._auto_scan_paused_ack_event = None
+                self._auto_scan_thread = None
+                self.devices.close()
+
+            def done() -> None:
+                self._set_stage(GuiStage.DISCONNECTED)
+                if error is None:
+                    self._set_status("Safe stopped at safe joint position. Devices released.")
+                else:
+                    self._set_status(
+                        "Safe stop released devices, but safe-position motion failed: "
+                        f"{type(error).__name__}: {error}"
+                    )
+
+            gui.Application.instance.post_to_main_thread(self.window, done)
+
+        threading.Thread(target=worker, daemon=True).start()
 
     def _on_close(self) -> bool:
+        if self._auto_scan_stop_event is not None:
+            self._auto_scan_stop_event.set()
+        if self._surface_bo_stop_signal is not None:
+            self._surface_bo_stop_signal.request_stop()
         self.teleop_loop.stop()
+        self._stop_force_monitor()
         self.devices.close()
         return True
 
     def _on_loop_sample(self, sample: dict[str, Any]) -> None:
         obs = sample.get("obs", sample)
         action = sample.get("action")
+        meta = sample.get("meta")
         with self._lock:
             self.latest_obs = dict(obs)
+            bo_lines = format_surface_bo_status_lines(meta)
+            if bo_lines:
+                self._last_surface_bo_status_lines = bo_lines
         now = time.monotonic()
         if self._gui_update_period_s > 0.0 and now - self._last_gui_update_time < self._gui_update_period_s:
             return
@@ -913,8 +1616,7 @@ class VisualGuidedCollectionApp:
         enriched_obs: dict[str, Any] | None = None,
     ) -> None:
         lines = []
-        force = obs.get("force")
-        self._update_rgb(self.force_widget, force_display_image(force))
+        self._update_rgb(self.force_widget, force_display_image(obs))
         if "tcp_position_base" in obs and "tcp_z_axis_base" in obs:
             try:
                 probe_lines, _nearest = probe_path_telemetry_lines(
@@ -944,6 +1646,8 @@ class VisualGuidedCollectionApp:
                 distance_mm = float(display_obs["path_distance_to_nearest_m"]) * 1000.0
                 lines.append(f"Path index: {nearest}/{max(total - 1, 0)}, progress: {progress:.1f}%")
                 lines.append(f"Path distance: {distance_mm:.1f} mm")
+        if self._last_surface_bo_status_lines:
+            lines.extend(self._last_surface_bo_status_lines)
         if not lines:
             lines.append("Telemetry: waiting for data")
         self.telemetry_label.text = "\n".join(lines)
@@ -971,49 +1675,71 @@ class VisualGuidedCollectionApp:
         material.shader = "defaultLit"
         self.scene.scene.add_geometry("seed_marker", sphere, material)
 
-    def _show_path(self, path) -> None:
+    def _show_path(self, path, *, name_prefix: str = "planned_path", include_normals: bool = True) -> None:
         positions = np.asarray(path.positions_base, dtype=float)
+        line_name = f"{name_prefix}_lines"
+        normal_name = f"{name_prefix}_normals"
+        point_name = f"{name_prefix}_points"
+        for name in (line_name, normal_name, point_name):
+            if self.scene.scene.has_geometry(name):
+                self.scene.scene.remove_geometry(name)
         lines = [[i, i + 1] for i in range(len(positions) - 1)]
         line_set = o3d.geometry.LineSet(
             points=o3d.utility.Vector3dVector(positions),
             lines=o3d.utility.Vector2iVector(lines),
         )
-        line_set.colors = o3d.utility.Vector3dVector(np.tile([[0.0, 0.8, 0.1]], (len(lines), 1)))
+        line_set.colors = o3d.utility.Vector3dVector(np.tile(path_display_color(path), (len(lines), 1)))
         mat = rendering.MaterialRecord()
         mat.shader = "unlitLine"
         mat.line_width = 3.0
-        self.scene.scene.add_geometry("planned_path_lines", line_set, mat)
+        self.scene.scene.add_geometry(line_name, line_set, mat)
 
-        normal_length = float(self.args.normal_length_m)
-        starts = positions
-        ends = positions + np.asarray(path.normals_base) * normal_length
-        normal_points = np.vstack([starts, ends])
-        normal_lines = [[i, i + len(starts)] for i in range(len(starts))]
-        normals = o3d.geometry.LineSet(
-            points=o3d.utility.Vector3dVector(normal_points),
-            lines=o3d.utility.Vector2iVector(normal_lines),
-        )
-        normals.colors = o3d.utility.Vector3dVector(np.tile([[0.1, 0.25, 1.0]], (len(normal_lines), 1)))
-        self.scene.scene.add_geometry("planned_path_normals", normals, mat)
-        self._show_path_points(path)
+        if include_normals:
+            normal_length = float(self.args.normal_length_m)
+            starts = positions
+            ends = positions + np.asarray(path.normals_base) * normal_length
+            normal_points = np.vstack([starts, ends])
+            normal_lines = [[i, i + len(starts)] for i in range(len(starts))]
+            normals = o3d.geometry.LineSet(
+                points=o3d.utility.Vector3dVector(normal_points),
+                lines=o3d.utility.Vector2iVector(normal_lines),
+            )
+            normals.colors = o3d.utility.Vector3dVector(np.tile([[0.1, 0.25, 1.0]], (len(normal_lines), 1)))
+            self.scene.scene.add_geometry(normal_name, normals, mat)
+        self._show_path_points(path, point_name=point_name)
 
-    def _show_path_points(self, path, nearest_index: int | None = None) -> None:
+    def _show_path_points(
+        self,
+        path,
+        nearest_index: int | None = None,
+        *,
+        point_name: str = "planned_path_points",
+    ) -> None:
         positions = np.asarray(path.positions_base, dtype=float)
         points = o3d.geometry.PointCloud()
         points.points = o3d.utility.Vector3dVector(positions)
-        points.colors = o3d.utility.Vector3dVector(path_point_colors(len(positions), nearest_index=nearest_index))
+        if nearest_index is None:
+            colors = path_preview_point_colors(path)
+        else:
+            colors = path_point_colors(len(positions), nearest_index=nearest_index)
+        points.colors = o3d.utility.Vector3dVector(colors)
         material = rendering.MaterialRecord()
         material.shader = "defaultUnlit"
         material.point_size = 9.0
-        if self.scene.scene.has_geometry("planned_path_points"):
-            self.scene.scene.remove_geometry("planned_path_points")
-        self.scene.scene.add_geometry("planned_path_points", points, material)
+        for stale_point_name in all_path_point_geometry_names():
+            if self.scene.scene.has_geometry(stale_point_name):
+                self.scene.scene.remove_geometry(stale_point_name)
+        self.scene.scene.add_geometry(point_name, points, material)
 
     def _update_path_progress_points(self, enriched_obs: dict[str, Any] | None) -> None:
         path = self.planning.planned_path
         if path is None or enriched_obs is None or "path_nearest_index" not in enriched_obs:
             return
-        self._show_path_points(path, nearest_index=int(enriched_obs["path_nearest_index"]))
+        self._show_path_points(
+            path,
+            nearest_index=int(enriched_obs["path_nearest_index"]),
+            point_name=path_point_geometry_name(path),
+        )
 
     def _show_probe_pose(self, obs: dict[str, Any], *, force: bool = False) -> None:
         if "tcp_position_base" not in obs:

@@ -75,11 +75,18 @@ def _path_tangents(positions: np.ndarray) -> np.ndarray:
 def _tcp_reference_rotvecs(tangents: np.ndarray, normals: np.ndarray) -> np.ndarray:
     rotvecs = []
     for tangent, normal in zip(tangents, normals):
-        t = normalize_vector(tangent, fallback=np.array([1.0, 0.0, 0.0]))
         n = normalize_vector(normal, fallback=np.array([0.0, 0.0, 1.0]))
-        b = normalize_vector(np.cross(t, n), fallback=np.array([0.0, -1.0, 0.0]))
-        n = normalize_vector(np.cross(b, t), fallback=n)
-        rotation = np.column_stack([-t, -b, -n])
+        t = normalize_vector(tangent, fallback=np.array([1.0, 0.0, 0.0]))
+        world_y = np.array([0.0, 1.0, 0.0], dtype=float)
+        fallback = t - np.dot(t, n) * n
+        if np.linalg.norm(fallback) < 1e-12:
+            fallback = np.array([1.0, 0.0, 0.0], dtype=float)
+            fallback = fallback - np.dot(fallback, n) * n
+        x_axis = normalize_vector(world_y - np.dot(world_y, n) * n, fallback=fallback)
+        z_axis = -n
+        y_axis = normalize_vector(np.cross(z_axis, x_axis), fallback=np.array([1.0, 0.0, 0.0]))
+        x_axis = normalize_vector(np.cross(y_axis, z_axis), fallback=x_axis)
+        rotation = np.column_stack([x_axis, y_axis, z_axis])
         rotvecs.append(_matrix_to_rotvec(rotation))
     return np.asarray(rotvecs, dtype=float)
 

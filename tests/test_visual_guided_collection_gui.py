@@ -5,13 +5,26 @@ import time
 import numpy as np
 
 from breast_path_planning.path_io import PlannedPath
+from breast_path_planning.geometry import rodrigues
 from visual_guided_collection_gui.collection_session import LoopConfig, TeleopLoop
 from visual_guided_collection_gui.device_manager import DeviceConfig, DeviceManager
 from visual_guided_collection_gui.episode_recorder import EpisodeRecorder, add_probe_tip_observation
 from visual_guided_collection_gui.images import depth_to_display_rgb
 from visual_guided_collection_gui.main import build_parser, resolve_args
 from visual_guided_collection_gui.picking import pick_nearest_projected_point, project_points_to_screen
-from visual_guided_collection_gui.app import force_display_image, path_point_colors
+from visual_guided_collection_gui.app import (
+    SURFACE_AUTOSCAN_POSITION_STEP_M,
+    SURFACE_AUTOSCAN_ROTATION_STEP_RAD,
+    SURFACE_CONFIRM_POSITION_STEP_M,
+    SURFACE_CONFIRM_ROTATION_STEP_RAD,
+    format_surface_bo_status_lines,
+    force_display_image,
+    all_path_point_geometry_names,
+    path_display_color,
+    path_point_geometry_name,
+    path_preview_point_colors,
+    path_point_colors,
+)
 from visual_guided_collection_gui.state import GuiStage, enabled_actions_for_stage
 
 
@@ -94,6 +107,76 @@ def test_force_display_image_returns_large_rgb_panel():
     assert image[..., 1].max() > 180
 
 
+def test_force_display_image_shows_compensated_raw_gravity_and_valid_status(monkeypatch):
+    drawn_text = []
+
+    def fake_put_text(image, text, *args, **kwargs):
+        drawn_text.append(str(text))
+        return image
+
+    monkeypatch.setattr("visual_guided_collection_gui.app.cv2.putText", fake_put_text)
+
+    image = force_display_image(
+        {
+            "force": np.array([1.2, -2.3, -3.4, 0.1, -0.2, 0.3]),
+            "force_raw": np.array([4.2, -5.3, 6.4, 0.4, -0.5, 0.6]),
+            "force_gravity": np.array([0.2, 0.3, 6.8, 0.01, 0.02, 0.03]),
+            "force_gravity_calibrated": True,
+            "force_zeroed": True,
+            "force_sensor_valid": True,
+        }
+    )
+
+    assert image.shape == (260, 520, 3)
+    text = "\n".join(drawn_text)
+    assert "comp F" in text
+    assert "raw  F" in text
+    assert "grav F" in text
+    assert "valid=True" in text
+    assert "zero=True" in text
+    assert "grav=True" in text
+
+
+def test_surface_automatic_motion_step_constants_are_halved():
+    assert SURFACE_CONFIRM_POSITION_STEP_M == 0.001
+    assert SURFACE_CONFIRM_ROTATION_STEP_RAD == 0.006
+    assert SURFACE_AUTOSCAN_POSITION_STEP_M == 0.0005
+    assert SURFACE_AUTOSCAN_ROTATION_STEP_RAD == 0.003
+
+
+def test_surface_bo_status_lines_show_candidate_and_measurement_values():
+    lines = format_surface_bo_status_lines(
+        {
+            "auto_phase": "bo",
+            "bo_is_measurement": True,
+            "bo_trial_index": 2,
+            "bo_phase": "EI",
+            "bo_x": [0.004, 0.01, -0.02, 0.03],
+            "bo_target_tcp_pose": [0.1, -0.2, 0.3, 0.01, 0.02, 0.03],
+            "Q": 0.72,
+            "F": -0.62,
+            "D": 0.5,
+            "E": 0.6,
+            "C": 0.7,
+            "S": 0.8,
+            "P_f": 0.01,
+            "P_tau": 0.02,
+            "force_valid": True,
+        }
+    )
+
+    text = "\n".join(lines)
+    assert "BO trial 3" in text
+    assert "EI" in text
+    assert "dn=4.0mm" in text
+    assert "target p: 0.100, -0.200, 0.300" in text
+    assert "Q=0.7200" in text
+    assert "F=-0.6200" in text
+    assert "D/E/C/S=0.500/0.600/0.700/0.800" in text
+    assert "Pf=0.0100" in text
+    assert "force valid=True" in text
+
+
 def test_path_point_colors_highlight_start_current_and_future_points():
     colors = path_point_colors(12, nearest_index=4, future_count=8)
 
@@ -103,17 +186,74 @@ def test_path_point_colors_highlight_start_current_and_future_points():
     np.testing.assert_allclose(colors[3], [0.0, 0.8, 0.1])
 
 
+def test_path_display_color_is_red_before_geodesic_and_green_after():
+    plain = PlannedPath(
+        positions_base=np.array([[0.0, 0.0, 0.0]]),
+        normals_base=np.array([[0.0, 0.0, 1.0]]),
+    )
+    optimized = PlannedPath(
+        positions_base=np.array([[0.0, 0.0, 0.0]]),
+        normals_base=np.array([[0.0, 0.0, 1.0]]),
+        metadata={"geodesic_trigger": "gui_optimize_geodesic"},
+    )
+    moving_average = PlannedPath(
+        positions_base=np.array([[0.0, 0.0, 0.0]]),
+        normals_base=np.array([[0.0, 0.0, 1.0]]),
+        metadata={"path_variant_method": "moving_average"},
+    )
+    b_spline = PlannedPath(
+        positions_base=np.array([[0.0, 0.0, 0.0]]),
+        normals_base=np.array([[0.0, 0.0, 1.0]]),
+        metadata={"path_variant_method": "b_spline"},
+    )
+
+    np.testing.assert_allclose(path_display_color(plain), [1.0, 0.05, 0.05])
+    np.testing.assert_allclose(path_display_color(moving_average), [0.55, 0.55, 0.55])
+    np.testing.assert_allclose(path_display_color(b_spline), [0.1, 0.35, 0.9])
+    np.testing.assert_allclose(path_display_color(optimized), [0.0, 0.8, 0.1])
+    np.testing.assert_allclose(path_preview_point_colors(plain), np.array([[1.0, 0.05, 0.05]]))
+    np.testing.assert_allclose(path_preview_point_colors(optimized), np.array([[0.0, 0.8, 0.1]]))
+    assert path_point_geometry_name(plain) == "planned_path_points"
+    assert path_point_geometry_name(moving_average) == "moving_average_path_points"
+    assert path_point_geometry_name(b_spline) == "b_spline_path_points"
+    assert path_point_geometry_name(optimized) == "optimized_path_points"
+
+
+def test_all_path_point_geometry_names_cover_every_path_variant():
+    assert set(all_path_point_geometry_names()) == {
+        "planned_path_points",
+        "optimized_path_points",
+        "moving_average_path_points",
+        "b_spline_path_points",
+    }
+
+
+def test_path_preview_point_colors_use_same_uniform_color_as_line():
+    path = PlannedPath(
+        positions_base=np.array([[0.0, 0.0, 0.0], [0.01, 0.0, 0.0], [0.02, 0.0, 0.0]]),
+        normals_base=np.tile(np.array([[0.0, 0.0, 1.0]]), (3, 1)),
+        metadata={"geodesic_trigger": "gui_optimize_geodesic"},
+    )
+
+    np.testing.assert_allclose(path_preview_point_colors(path), np.tile([[0.0, 0.8, 0.1]], (3, 1)))
+
+
 def test_gui_defaults_match_legacy_control_loop_speed():
     args = build_parser().parse_args([])
 
     assert args.hz == 50.0
+    assert args.force_ip == "192.168.1.100"
     assert args.max_joint_step_rad == 0.0
     assert args.gui_update_hz > 0.0
     assert args.wrist_camera == "Orbbec"
-    assert args.surface_cartesian_teleop is False
-    assert args.surface_approach_height_m == 0.2
-    assert args.surface_contact_height_m == 0.05
+    assert args.control_tcp is False
+    assert args.surface_approach_height_m == 0.15
+    assert args.surface_contact_height_m == 0.02
     assert args.probe_tip_offset_m == 0.2
+
+
+def test_device_config_defaults_to_force_sensor_signal_processor_ip():
+    assert DeviceConfig().force_ip == "192.168.1.100"
 
 
 def test_gui_accepts_orbbec_wrist_camera_choice():
@@ -191,7 +331,12 @@ def test_episode_recorder_saves_path_features_and_fine_scan_flag(tmp_path):
     assert frame["path_nearest_index"] == 1
     np.testing.assert_allclose(frame["path_residuals_base"][0], [-0.01, 0.0, 0.0])
     np.testing.assert_allclose(frame["path_reference_tcp_positions_base"][0], [0.1, 0.0, 0.0])
-    np.testing.assert_allclose(frame["path_reference_tcp_poses_base"][0], [0.1, 0.0, 0.0, np.pi, 0.0, 0.0], atol=1e-8)
+    reference_pose = frame["path_reference_tcp_poses_base"][0]
+    np.testing.assert_allclose(reference_pose[:3], [0.1, 0.0, 0.0], atol=1e-8)
+    reference_rotation = rodrigues(reference_pose[3:])
+    np.testing.assert_allclose(reference_rotation[:, 0], [0.0, 1.0, 0.0], atol=1e-8)
+    np.testing.assert_allclose(reference_rotation[:, 1], [1.0, 0.0, 0.0], atol=1e-8)
+    np.testing.assert_allclose(reference_rotation[:, 2], [0.0, 0.0, -1.0], atol=1e-8)
     assert "path_tcp_frames_base" not in frame
     assert enriched["path_nearest_index"] == frame["path_nearest_index"]
     assert enriched["path_progress"] == frame["path_progress"]

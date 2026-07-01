@@ -2,12 +2,17 @@ import json
 
 import numpy as np
 
+from breast_path_planning.geometry import rodrigues
 from breast_path_planning.path_features import PathFeatureParams, compute_path_features
 from breast_path_planning.path_io import PlannedPath, load_planned_path, save_planned_path
 from breast_path_planning.path_planner import PathPlannerParams, plan_serpentine_path
 from breast_path_planning.plan_from_frame import plan_from_point_cloud
 from breast_path_planning.pointcloud_from_d405 import PointCloud, load_point_cloud_ply, realsense_frames_to_point_cloud, rgbd_arrays_to_point_cloud, save_point_cloud_ply
-from breast_path_planning.segmentation import SegmentationParams, segment_region_from_seed_pixels
+from breast_path_planning.segmentation import (
+    SegmentationParams,
+    segment_region_from_seed_indices,
+    segment_region_from_seed_pixels,
+)
 from breast_path_planning.live_plan_from_d405 import compute_base_camera_transform
 
 
@@ -258,6 +263,34 @@ def test_region_growing_segments_seed_colored_component():
     np.testing.assert_array_equal(mask, [True, True, True, False])
 
 
+def test_region_growing_removes_sparse_radius_outliers_after_segmentation():
+    points = np.array(
+        [
+            [0.000, 0.000, 0.0],
+            [0.004, 0.000, 0.0],
+            [0.000, 0.004, 0.0],
+            [0.004, 0.004, 0.0],
+            [0.050, 0.000, 0.0],
+        ]
+    )
+    colors = np.tile(np.array([[200, 120, 100]], dtype=np.uint8), (len(points), 1))
+    cloud = PointCloud(points, colors)
+
+    segmented, mask = segment_region_from_seed_indices(
+        cloud,
+        [0],
+        SegmentationParams(
+            spatial_radius_m=0.06,
+            max_distance_from_seed_m=0.06,
+            outlier_radius_m=0.01,
+            outlier_min_neighbors=3,
+        ),
+    )
+
+    assert len(segmented) == 4
+    np.testing.assert_array_equal(mask, [True, True, True, True, False])
+
+
 def test_serpentine_planner_outputs_positions_and_normals_only():
     xs = np.linspace(0.0, 0.02, 3)
     ys = np.linspace(0.0, 0.02, 3)
@@ -384,6 +417,9 @@ def test_compute_path_features_uses_position_and_normal():
     np.testing.assert_allclose(features["path_residuals_base"][0], [-0.001, 0.0, 0.0])
     np.testing.assert_array_equal(features["path_lookahead_mask"], [True, True, False, False])
     np.testing.assert_allclose(features["path_normals_base"][0], [0.0, 0.0, 1.0])
-    np.testing.assert_allclose(features["path_reference_tcp_rotvecs_base"][0], [0.0, np.pi, 0.0], atol=1e-8)
+    reference_rotation = rodrigues(features["path_reference_tcp_rotvecs_base"][0])
+    np.testing.assert_allclose(reference_rotation[:, 0], [0.0, 1.0, 0.0], atol=1e-8)
+    np.testing.assert_allclose(reference_rotation[:, 1], [1.0, 0.0, 0.0], atol=1e-8)
+    np.testing.assert_allclose(reference_rotation[:, 2], [0.0, 0.0, -1.0], atol=1e-8)
     assert "path_tangents_base" not in features
     assert "path_darboux_frames_base" not in features

@@ -13,9 +13,9 @@ from breast_path_planning.surface_processing import constrain_normals_to_referen
 
 @dataclass
 class PathPlannerParams:
-    step_y_m: float = 0.02
+    step_y_m: float = 0.017
     step_x_m: float = 0.007
-    slice_tolerance_ratio: float = 0.65
+    slice_tolerance_ratio: float = 0.8
     max_query_distance_m: float | None = None
     normal_k_neighbors: int = 20
     normal_reference_direction: np.ndarray = field(default_factory=lambda: np.array([0.0, 0.0, 1.0]))

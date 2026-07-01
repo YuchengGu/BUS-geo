@@ -72,7 +72,7 @@ def test_confirm_path_skips_first_point_motion_only_in_random_local_mode():
         "    def _surface_path_confirmed", 1
     )[0]
 
-    assert "if self.args.surface_cartesian_teleop and self.args.surface_random_local_episodes:" in method_source
+    assert "if self.args.control_tcp and self.args.surface_random_local_episodes:" in method_source
     assert "Path confirmed for random local episodes" in method_source
 
 

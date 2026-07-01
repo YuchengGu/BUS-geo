@@ -10,13 +10,16 @@ from breast_path_planning.spatial import RadiusSearchIndex
 
 
 @dataclass
+
 class SegmentationParams:
-    spatial_radius_m: float = 0.015
+    spatial_radius_m: float = 0.010
     hue_threshold_deg: float = 30.0
     saturation_threshold: float = 0.35
     value_threshold: float = 0.60
     max_distance_from_seed_m: float = 0.12
     max_points: int | None = None
+    outlier_radius_m: float | None = 0.008
+    outlier_min_neighbors: int = 14
 
 
 def rgb_to_hsv(rgb: np.ndarray) -> np.ndarray:
@@ -112,9 +115,34 @@ def segment_region_from_seed_indices(
                 in_region[neighbor] = True
                 queue.append(neighbor)
                 if params.max_points is not None and int(np.sum(in_region)) >= params.max_points:
-                    return cloud.subset(in_region), in_region
+                    return _filtered_region(cloud, in_region, params)
 
-    return cloud.subset(in_region), in_region
+    return _filtered_region(cloud, in_region, params)
+
+
+def _filtered_region(
+    cloud: PointCloud,
+    in_region: np.ndarray,
+    params: SegmentationParams,
+) -> tuple[PointCloud, np.ndarray]:
+    radius = params.outlier_radius_m
+    min_neighbors = int(params.outlier_min_neighbors)
+    if radius is None or radius <= 0.0 or min_neighbors <= 1:
+        return cloud.subset(in_region), in_region
+
+    region_indices = np.flatnonzero(in_region)
+    if region_indices.size == 0:
+        return cloud.subset(in_region), in_region
+
+    region_points = cloud.points_base[region_indices]
+    neighbors_for = _query_neighbors(region_points, float(radius))
+    keep_local = np.zeros(region_indices.shape[0], dtype=bool)
+    for local_index in range(region_indices.shape[0]):
+        keep_local[local_index] = len(neighbors_for(local_index)) >= min_neighbors
+
+    filtered = np.zeros_like(in_region)
+    filtered[region_indices[keep_local]] = True
+    return cloud.subset(filtered), filtered
 
 
 def segment_region_from_seed_pixels(

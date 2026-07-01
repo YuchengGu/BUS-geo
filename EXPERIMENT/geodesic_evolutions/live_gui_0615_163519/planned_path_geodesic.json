@@ -1,0 +1,4742 @@
+{
+  "schema_version": "planned_path_v1",
+  "frame": "base",
+  "points": [
+    {
+      "index": 0,
+      "position_base": [
+        -0.083686,
+        -0.498872,
+        0.100643
+      ],
+      "normal_base": [
+        -0.5487150908615025,
+        -0.6026423019878282,
+        0.5794255818616092
+      ]
+    },
+    {
+      "index": 1,
+      "position_base": [
+        -0.075645,
+        -0.49896,
+        0.108348
+      ],
+      "normal_base": [
+        -0.5281218506846218,
+        -0.5995984832218331,
+        0.6013060533102319
+      ]
+    },
+    {
+      "index": 2,
+      "position_base": [
+        -0.068717,
+        -0.499296,
+        0.113951
+      ],
+      "normal_base": [
+        -0.44168101064685145,
+        -0.5329023075971467,
+        0.7217568949387404
+      ]
+    },
+    {
+      "index": 3,
+      "position_base": [
+        -0.060356,
+        -0.499019,
+        0.117669
+      ],
+      "normal_base": [
+        -0.3735251108764438,
+        -0.6013797284948139,
+        0.7062729031332324
+      ]
+    },
+    {
+      "index": 4,
+      "position_base": [
+        -0.053045,
+        -0.499067,
+        0.120295
+      ],
+      "normal_base": [
+        -0.11797670957965535,
+        -0.5700681628396871,
+        0.8130828898171094
+      ]
+    },
+    {
+      "index": 5,
+      "position_base": [
+        -0.044365,
+        -0.498601,
+        0.122033
+      ],
+      "normal_base": [
+        -0.23011729216252755,
+        -0.4938924862020631,
+        0.8385202704293624
+      ]
+    },
+    {
+      "index": 6,
+      "position_base": [
+        -0.038892,
+        -0.499276,
+        0.122495
+      ],
+      "normal_base": [
+        -0.01913265850841735,
+        -0.5831277340904499,
+        0.8121551496561097
+      ]
+    },
+    {
+      "index": 7,
+      "position_base": [
+        -0.034656,
+        -0.499099,
+        0.121849
+      ],
+      "normal_base": [
+        0.22777629447974032,
+        -0.6085088569161217,
+        0.7601545439762323
+      ]
+    },
+    {
+      "index": 8,
+      "position_base": [
+        -0.017091,
+        -0.501136,
+        0.114299
+      ],
+      "normal_base": [
+        0.3636838972665287,
+        -0.5768949825564563,
+        0.7313864928819884
+      ]
+    },
+    {
+      "index": 9,
+      "position_base": [
+        -0.014308,
+        -0.500187,
+        0.113533
+      ],
+      "normal_base": [
+        0.40944276724716067,
+        -0.5253108613620919,
+        0.745925679464117
+      ]
+    },
+    {
+      "index": 10,
+      "position_base": [
+        -0.014325,
+        -0.478672,
+        0.123604
+      ],
+      "normal_base": [
+        0.31388331681540266,
+        -0.1438411866315507,
+        0.938502518085801
+      ]
+    },
+    {
+      "index": 11,
+      "position_base": [
+        -0.017049,
+        -0.479665,
+        0.124375
+      ],
+      "normal_base": [
+        0.3284918781856048,
+        -0.17859886131454364,
+        0.9274672677260596
+      ]
+    },
+    {
+      "index": 12,
+      "position_base": [
+        -0.025541,
+        -0.481457,
+        0.126665
+      ],
+      "normal_base": [
+        0.1916779668478028,
+        -0.25720769275861816,
+        0.9471556154143209
+      ]
+    },
+    {
+      "index": 13,
+      "position_base": [
+        -0.0351,
+        -0.48233,
+        0.127862
+      ],
+      "normal_base": [
+        0.1372909231954666,
+        -0.30066772330299146,
+        0.9437955936387562
+      ]
+    },
+    {
+      "index": 14,
+      "position_base": [
+        -0.041953,
+        -0.48223,
+        0.128286
+      ],
+      "normal_base": [
+        -0.01597632714362349,
+        -0.2501885552565784,
+        0.9680653096716285
+      ]
+    },
+    {
+      "index": 15,
+      "position_base": [
+        -0.049604,
+        -0.48238,
+        0.127639
+      ],
+      "normal_base": [
+        -0.11496582462341319,
+        -0.27198542659798336,
+        0.9554092248282783
+      ]
+    },
+    {
+      "index": 16,
+      "position_base": [
+        -0.056115,
+        -0.482123,
+        0.127089
+      ],
+      "normal_base": [
+        -0.25303382720885936,
+        -0.38535792341507363,
+        0.8873968408492671
+      ]
+    },
+    {
+      "index": 17,
+      "position_base": [
+        -0.063515,
+        -0.482117,
+        0.12546
+      ],
+      "normal_base": [
+        -0.441388835146316,
+        -0.3693491529071997,
+        0.8177757024116774
+      ]
+    },
+    {
+      "index": 18,
+      "position_base": [
+        -0.068025,
+        -0.48229,
+        0.123071
+      ],
+      "normal_base": [
+        -0.4932797794618581,
+        -0.3097069075713944,
+        0.8128694179120189
+      ]
+    },
+    {
+      "index": 19,
+      "position_base": [
+        -0.077938,
+        -0.485257,
+        0.114199
+      ],
+      "normal_base": [
+        -0.6271906519440099,
+        -0.4442561775669294,
+        0.6397408340942984
+      ]
+    },
+    {
+      "index": 20,
+      "position_base": [
+        -0.088834,
+        -0.476381,
+        0.106268
+      ],
+      "normal_base": [
+        -0.7295160734211257,
+        -0.1514712482197329,
+        0.6669803292324136
+      ]
+    },
+    {
+      "index": 21,
+      "position_base": [
+        -0.089157,
+        -0.468452,
+        0.107257
+      ],
+      "normal_base": [
+        -0.8253843903895683,
+        -0.08562061015598295,
+        0.5580409655372605
+      ]
+    },
+    {
+      "index": 22,
+      "position_base": [
+        -0.078451,
+        -0.460686,
+        0.118212
+      ],
+      "normal_base": [
+        -0.6508671021701209,
+        0.1463761889881371,
+        0.7449469958392869
+      ]
+    },
+    {
+      "index": 23,
+      "position_base": [
+        -0.070894,
+        -0.462354,
+        0.121859
+      ],
+      "normal_base": [
+        -0.46422707837327387,
+        0.03237882756960563,
+        0.8851241897215509
+      ]
+    },
+    {
+      "index": 24,
+      "position_base": [
+        -0.06504,
+        -0.463262,
+        0.125363
+      ],
+      "normal_base": [
+        -0.338141005652142,
+        0.09228217722101582,
+        0.9365600141282497
+      ]
+    },
+    {
+      "index": 25,
+      "position_base": [
+        -0.056366,
+        -0.464281,
+        0.128102
+      ],
+      "normal_base": [
+        -0.4280078041624901,
+        0.07123868255892189,
+        0.9009630234828024
+      ]
+    },
+    {
+      "index": 26,
+      "position_base": [
+        -0.049039,
+        -0.464346,
+        0.129725
+      ],
+      "normal_base": [
+        -0.08426726356133118,
+        -0.0017382126894810942,
+        0.9964416726073491
+      ]
+    },
+    {
+      "index": 27,
+      "position_base": [
+        -0.042569,
+        -0.464601,
+        0.130271
+      ],
+      "normal_base": [
+        0.1437598841025795,
+        0.13319465372542819,
+        0.9806081174158086
+      ]
+    },
+    {
+      "index": 28,
+      "position_base": [
+        -0.033059,
+        -0.467457,
+        0.129064
+      ],
+      "normal_base": [
+        -0.019279313354869997,
+        -0.006038331807066449,
+        0.9997959024848784
+      ]
+    },
+    {
+      "index": 29,
+      "position_base": [
+        -0.025401,
+        -0.46846,
+        0.127702
+      ],
+      "normal_base": [
+        0.07368845163025828,
+        -0.005704651314837796,
+        0.9972649943970315
+      ]
+    },
+    {
+      "index": 30,
+      "position_base": [
+        -0.021167,
+        -0.468185,
+        0.127057
+      ],
+      "normal_base": [
+        0.2798997270413483,
+        -0.09560735044992008,
+        0.9552567075619647
+      ]
+    },
+    {
+      "index": 31,
+      "position_base": [
+        -0.013056,
+        -0.463724,
+        0.123736
+      ],
+      "normal_base": [
+        0.5130247923336212,
+        -0.0027104812287995985,
+        0.8583695100261618
+      ]
+    },
+    {
+      "index": 32,
+      "position_base": [
+        -0.013734,
+        -0.447921,
+        0.121699
+      ],
+      "normal_base": [
+        0.4062730247939064,
+        0.35427670095441516,
+        0.8422768241413662
+      ]
+    },
+    {
+      "index": 33,
+      "position_base": [
+        -0.019303,
+        -0.444735,
+        0.122237
+      ],
+      "normal_base": [
+        0.3066188065985596,
+        0.3191869140430859,
+        0.8967188084030172
+      ]
+    },
+    {
+      "index": 34,
+      "position_base": [
+        -0.031244,
+        -0.447051,
+        0.126241
+      ],
+      "normal_base": [
+        0.15155001530494663,
+        0.31137611093868506,
+        0.9381244642358338
+      ]
+    },
+    {
+      "index": 35,
+      "position_base": [
+        -0.035446,
+        -0.447393,
+        0.126889
+      ],
+      "normal_base": [
+        0.1118050554285428,
+        0.23882910183956074,
+        0.9646036956673603
+      ]
+    },
+    {
+      "index": 36,
+      "position_base": [
+        -0.042317,
+        -0.447401,
+        0.127311
+      ],
+      "normal_base": [
+        -0.03658381207565236,
+        0.35935273110629606,
+        0.9324844445568299
+      ]
+    },
+    {
+      "index": 37,
+      "position_base": [
+        -0.04885,
+        -0.447143,
+        0.126759
+      ],
+      "normal_base": [
+        -0.1540218322545619,
+        0.4029894669626259,
+        0.9021511872774576
+      ]
+    },
+    {
+      "index": 38,
+      "position_base": [
+        -0.05828,
+        -0.447581,
+        0.123954
+      ],
+      "normal_base": [
+        -0.24965080993801783,
+        0.3443990581085299,
+        0.9050214151451055
+      ]
+    },
+    {
+      "index": 39,
+      "position_base": [
+        -0.066506,
+        -0.44904,
+        0.122252
+      ],
+      "normal_base": [
+        -0.45858883729039723,
+        0.3834430916215778,
+        0.8016655623140662
+      ]
+    },
+    {
+      "index": 40,
+      "position_base": [
+        -0.069741,
+        -0.45002,
+        0.120974
+      ],
+      "normal_base": [
+        -0.41635203196912185,
+        0.33836620309909377,
+        0.8438953122724917
+      ]
+    },
+    {
+      "index": 41,
+      "position_base": [
+        -0.082577,
+        -0.451869,
+        0.111856
+      ],
+      "normal_base": [
+        -0.6521289098325378,
+        0.25139333068929764,
+        0.7152127503376652
+      ]
+    },
+    {
+      "index": 42,
+      "position_base": [
+        -0.085525,
+        -0.448135,
+        0.107599
+      ],
+      "normal_base": [
+        -0.7642760326770188,
+        0.24927829222497092,
+        0.5947625399273887
+      ]
+    },
+    {
+      "index": 43,
+      "position_base": [
+        -0.079616,
+        -0.43175,
+        0.105116
+      ],
+      "normal_base": [
+        -0.4941895090539218,
+        0.2936352994621477,
+        0.8182634294961609
+      ]
+    },
+    {
+      "index": 44,
+      "position_base": [
+        -0.07497,
+        -0.430324,
+        0.106515
+      ],
+      "normal_base": [
+        -0.46175041578605597,
+        0.44828108933385286,
+        0.765395726710738
+      ]
+    },
+    {
+      "index": 45,
+      "position_base": [
+        -0.066273,
+        -0.429948,
+        0.113273
+      ],
+      "normal_base": [
+        -0.46624015889643033,
+        0.4347583616889796,
+        0.7704578386736979
+      ]
+    },
+    {
+      "index": 46,
+      "position_base": [
+        -0.057642,
+        -0.429992,
+        0.116009
+      ],
+      "normal_base": [
+        -0.31787114146652523,
+        0.5099835431660042,
+        0.7992963925369717
+      ]
+    },
+    {
+      "index": 47,
+      "position_base": [
+        -0.051886,
+        -0.429701,
+        0.118504
+      ],
+      "normal_base": [
+        -0.2297899637642652,
+        0.4348809817086962,
+        0.8706750853799013
+      ]
+    },
+    {
+      "index": 48,
+      "position_base": [
+        -0.045188,
+        -0.429965,
+        0.11907
+      ],
+      "normal_base": [
+        0.034939501777574,
+        0.5359572962750522,
+        0.8435217885656962
+      ]
+    },
+    {
+      "index": 49,
+      "position_base": [
+        -0.033803,
+        -0.43102,
+        0.119027
+      ],
+      "normal_base": [
+        0.051077137369634006,
+        0.5009721928138638,
+        0.8639548530249671
+      ]
+    },
+    {
+      "index": 50,
+      "position_base": [
+        -0.026371,
+        -0.430667,
+        0.117649
+      ],
+      "normal_base": [
+        0.21513744796760892,
+        0.47426603182291005,
+        0.8536905818509039
+      ]
+    },
+    {
+      "index": 51,
+      "position_base": [
+        -0.018857,
+        -0.430318,
+        0.116278
+      ],
+      "normal_base": [
+        0.22480667060923507,
+        0.19003964890391153,
+        0.9556918398176626
+      ]
+    }
+  ],
+  "metadata": {
+    "planner": "geodesic_energy_sa_v1",
+    "step_y_m": 0.017,
+    "step_x_m": 0.007,
+    "slice_tolerance_ratio": 0.8,
+    "max_normal_angle_deg": null,
+    "normal_constrain_enabled": false,
+    "num_rows": 5,
+    "geodesic_resample": true,
+    "contains_tangent": false,
+    "contains_reverse_y": false,
+    "corner_indices": [
+      9,
+      10,
+      20,
+      21,
+      31,
+      32,
+      42,
+      43
+    ],
+    "source": "visual_guided_collection_gui",
+    "seed_indices": [
+      26523
+    ],
+    "num_raw_points": 74714,
+    "num_segmented_points": 4568,
+    "point_stride": 2,
+    "t_tcp_camera_path": "hand_eye_calibration/Results_Orbbec/T_tcp_camera.npy",
+    "camera_name": "Orbbec",
+    "pointcloud_backend": "rgbd_intrinsics",
+    "geodesic_source_path_points": 52,
+    "geodesic_output_points": 52,
+    "geodesic_energy_initial": 292634.3485856262,
+    "geodesic_curvature_initial": 292634.3485856262,
+    "geodesic_fidelity_initial": 0.0,
+    "geodesic_energy_final": 137016.23772220418,
+    "geodesic_curvature_final": 114717.99652220414,
+    "geodesic_fidelity_final": 22298.24120000005,
+    "geodesic_sa_iterations": 5000,
+    "geodesic_sa_accepted_moves": 827,
+    "geodesic_sa_initial_temperature": 1.0,
+    "geodesic_sa_cooling_rate": 0.995,
+    "geodesic_fidelity_weight": 50000000.0,
+    "geodesic_perturbation_radius_m": 0.01,
+    "geodesic_max_candidate_step_m": 0.0075,
+    "geodesic_corner_perturbation_scale": 0.1,
+    "geodesic_rejected_large_steps": 1244,
+    "geodesic_min_segment_length_m": 0.003,
+    "geodesic_energy_history": [
+      {
+        "iteration": 0,
+        "temperature": 1.0,
+        "accepted_moves": 0,
+        "total": 292634.3485856262,
+        "curvature": 292634.3485856262,
+        "fidelity": 0.0
+      },
+      {
+        "iteration": 10,
+        "temperature": 0.9511101304657719,
+        "accepted_moves": 4,
+        "total": 289365.0950426028,
+        "curvature": 287075.1457426028,
+        "fidelity": 2289.9493000000007
+      },
+      {
+        "iteration": 20,
+        "temperature": 0.9046104802746175,
+        "accepted_moves": 7,
+        "total": 289365.0950426028,
+        "curvature": 287075.1457426028,
+        "fidelity": 2289.9493000000007
+      },
+      {
+        "iteration": 30,
+        "temperature": 0.8603841919146962,
+        "accepted_moves": 10,
+        "total": 276250.929793946,
+        "curvature": 273785.23764394596,
+        "fidelity": 2465.692150000002
+      },
+      {
+        "iteration": 40,
+        "temperature": 0.8183201210226743,
+        "accepted_moves": 12,
+        "total": 261389.94884255406,
+        "curvature": 259028.00829255406,
+        "fidelity": 2361.940550000009
+      },
+      {
+        "iteration": 50,
+        "temperature": 0.778312557068642,
+        "accepted_moves": 13,
+        "total": 261389.94884255406,
+        "curvature": 259028.00829255406,
+        "fidelity": 2361.940550000009
+      },
+      {
+        "iteration": 60,
+        "temperature": 0.7402609576967045,
+        "accepted_moves": 14,
+        "total": 261389.94884255406,
+        "curvature": 259028.00829255406,
+        "fidelity": 2361.940550000009
+      },
+      {
+        "iteration": 70,
+        "temperature": 0.7040696960536299,
+        "accepted_moves": 16,
+        "total": 261389.94884255406,
+        "curvature": 259028.00829255406,
+        "fidelity": 2361.940550000009
+      },
+      {
+        "iteration": 80,
+        "temperature": 0.6696478204705644,
+        "accepted_moves": 18,
+        "total": 261389.94884255406,
+        "curvature": 259028.00829255406,
+        "fidelity": 2361.940550000009
+      },
+      {
+        "iteration": 90,
+        "temperature": 0.6369088258938781,
+        "accepted_moves": 21,
+        "total": 254086.98704618603,
+        "curvature": 249769.164346186,
+        "fidelity": 4317.822700000005
+      },
+      {
+        "iteration": 100,
+        "temperature": 0.6057704364907278,
+        "accepted_moves": 25,
+        "total": 244427.27856958294,
+        "curvature": 239275.30656958293,
+        "fidelity": 5151.972000000005
+      },
+      {
+        "iteration": 110,
+        "temperature": 0.5761543988830038,
+        "accepted_moves": 27,
+        "total": 244427.27856958294,
+        "curvature": 239275.30656958293,
+        "fidelity": 5151.972000000005
+      },
+      {
+        "iteration": 120,
+        "temperature": 0.547986285490042,
+        "accepted_moves": 28,
+        "total": 243364.21462438875,
+        "curvature": 237474.79877438876,
+        "fidelity": 5889.415850000003
+      },
+      {
+        "iteration": 130,
+        "temperature": 0.5211953074858876,
+        "accepted_moves": 29,
+        "total": 243364.21462438875,
+        "curvature": 237474.79877438876,
+        "fidelity": 5889.415850000003
+      },
+      {
+        "iteration": 140,
+        "temperature": 0.49571413690105054,
+        "accepted_moves": 31,
+        "total": 243364.21462438875,
+        "curvature": 237474.79877438876,
+        "fidelity": 5889.415850000003
+      },
+      {
+        "iteration": 150,
+        "temperature": 0.47147873742168567,
+        "accepted_moves": 34,
+        "total": 243364.21462438875,
+        "curvature": 237474.79877438876,
+        "fidelity": 5889.415850000003
+      },
+      {
+        "iteration": 160,
+        "temperature": 0.4484282034609769,
+        "accepted_moves": 37,
+        "total": 242627.92042186146,
+        "curvature": 234183.71872186149,
+        "fidelity": 8444.201699999985
+      },
+      {
+        "iteration": 170,
+        "temperature": 0.42650460709830135,
+        "accepted_moves": 40,
+        "total": 213692.01181694763,
+        "curvature": 204545.43391694763,
+        "fidelity": 9146.577899999997
+      },
+      {
+        "iteration": 180,
+        "temperature": 0.40565285250151817,
+        "accepted_moves": 43,
+        "total": 213692.01181694763,
+        "curvature": 204545.43391694763,
+        "fidelity": 9146.577899999997
+      },
+      {
+        "iteration": 190,
+        "temperature": 0.3858205374665315,
+        "accepted_moves": 47,
+        "total": 208986.15315583645,
+        "curvature": 196289.14255583644,
+        "fidelity": 12697.010600000023
+      },
+      {
+        "iteration": 200,
+        "temperature": 0.3669578217261671,
+        "accepted_moves": 50,
+        "total": 207347.6428147164,
+        "curvature": 195250.5004147164,
+        "fidelity": 12097.142400000013
+      },
+      {
+        "iteration": 210,
+        "temperature": 0.34901730169741024,
+        "accepted_moves": 52,
+        "total": 207347.6428147164,
+        "curvature": 195250.5004147164,
+        "fidelity": 12097.142400000013
+      },
+      {
+        "iteration": 220,
+        "temperature": 0.33195389135223546,
+        "accepted_moves": 54,
+        "total": 205492.34706590173,
+        "curvature": 191193.29656590172,
+        "fidelity": 14299.050500000008
+      },
+      {
+        "iteration": 230,
+        "temperature": 0.3157247089126454,
+        "accepted_moves": 56,
+        "total": 205492.34706590173,
+        "curvature": 191193.29656590172,
+        "fidelity": 14299.050500000008
+      },
+      {
+        "iteration": 240,
+        "temperature": 0.30028896908517405,
+        "accepted_moves": 57,
+        "total": 205067.66257968615,
+        "curvature": 190685.25997968615,
+        "fidelity": 14382.402600000009
+      },
+      {
+        "iteration": 250,
+        "temperature": 0.285607880564032,
+        "accepted_moves": 61,
+        "total": 200921.2154292518,
+        "curvature": 185800.6387792518,
+        "fidelity": 15120.576650000005
+      },
+      {
+        "iteration": 260,
+        "temperature": 0.27164454854530906,
+        "accepted_moves": 61,
+        "total": 200921.2154292518,
+        "curvature": 185800.6387792518,
+        "fidelity": 15120.576650000005
+      },
+      {
+        "iteration": 270,
+        "temperature": 0.2583638820072446,
+        "accepted_moves": 62,
+        "total": 200921.2154292518,
+        "curvature": 185800.6387792518,
+        "fidelity": 15120.576650000005
+      },
+      {
+        "iteration": 280,
+        "temperature": 0.2457325055235537,
+        "accepted_moves": 65,
+        "total": 200921.2154292518,
+        "curvature": 185800.6387792518,
+        "fidelity": 15120.576650000005
+      },
+      {
+        "iteration": 290,
+        "temperature": 0.23371867538818816,
+        "accepted_moves": 66,
+        "total": 200921.2154292518,
+        "curvature": 185800.6387792518,
+        "fidelity": 15120.576650000005
+      },
+      {
+        "iteration": 300,
+        "temperature": 0.22229219984074702,
+        "accepted_moves": 69,
+        "total": 200921.2154292518,
+        "curvature": 185800.6387792518,
+        "fidelity": 15120.576650000005
+      },
+      {
+        "iteration": 310,
+        "temperature": 0.21142436319205632,
+        "accepted_moves": 70,
+        "total": 200921.2154292518,
+        "curvature": 185800.6387792518,
+        "fidelity": 15120.576650000005
+      },
+      {
+        "iteration": 320,
+        "temperature": 0.2010878536592394,
+        "accepted_moves": 72,
+        "total": 200921.2154292518,
+        "curvature": 185800.6387792518,
+        "fidelity": 15120.576650000005
+      },
+      {
+        "iteration": 330,
+        "temperature": 0.1912566947289212,
+        "accepted_moves": 73,
+        "total": 200921.2154292518,
+        "curvature": 185800.6387792518,
+        "fidelity": 15120.576650000005
+      },
+      {
+        "iteration": 340,
+        "temperature": 0.18190617987607657,
+        "accepted_moves": 75,
+        "total": 200921.2154292518,
+        "curvature": 185800.6387792518,
+        "fidelity": 15120.576650000005
+      },
+      {
+        "iteration": 350,
+        "temperature": 0.1730128104744653,
+        "accepted_moves": 77,
+        "total": 200921.2154292518,
+        "curvature": 185800.6387792518,
+        "fidelity": 15120.576650000005
+      },
+      {
+        "iteration": 360,
+        "temperature": 0.16455423674261854,
+        "accepted_moves": 79,
+        "total": 200705.2249226001,
+        "curvature": 185503.2514226001,
+        "fidelity": 15201.973500000007
+      },
+      {
+        "iteration": 370,
+        "temperature": 0.15650920157696743,
+        "accepted_moves": 80,
+        "total": 200050.5462447202,
+        "curvature": 184444.8572447202,
+        "fidelity": 15605.68900000001
+      },
+      {
+        "iteration": 380,
+        "temperature": 0.14885748713096328,
+        "accepted_moves": 81,
+        "total": 199833.3327500862,
+        "curvature": 184145.74770008618,
+        "fidelity": 15687.585050000012
+      },
+      {
+        "iteration": 390,
+        "temperature": 0.14157986400593744,
+        "accepted_moves": 82,
+        "total": 199833.3327500862,
+        "curvature": 184145.74770008618,
+        "fidelity": 15687.585050000012
+      },
+      {
+        "iteration": 400,
+        "temperature": 0.1346580429260134,
+        "accepted_moves": 83,
+        "total": 199833.3327500862,
+        "curvature": 184145.74770008618,
+        "fidelity": 15687.585050000012
+      },
+      {
+        "iteration": 410,
+        "temperature": 0.12807462877562611,
+        "accepted_moves": 83,
+        "total": 199833.3327500862,
+        "curvature": 184145.74770008618,
+        "fidelity": 15687.585050000012
+      },
+      {
+        "iteration": 420,
+        "temperature": 0.12181307688414106,
+        "accepted_moves": 83,
+        "total": 199833.3327500862,
+        "curvature": 184145.74770008618,
+        "fidelity": 15687.585050000012
+      },
+      {
+        "iteration": 430,
+        "temperature": 0.11585765144771248,
+        "accepted_moves": 85,
+        "total": 199833.3327500862,
+        "curvature": 184145.74770008618,
+        "fidelity": 15687.585050000012
+      },
+      {
+        "iteration": 440,
+        "temperature": 0.11019338598389174,
+        "accepted_moves": 87,
+        "total": 198855.97745539332,
+        "curvature": 182675.35070539333,
+        "fidelity": 16180.626750000009
+      },
+      {
+        "iteration": 450,
+        "temperature": 0.10480604571960442,
+        "accepted_moves": 89,
+        "total": 198855.97745539332,
+        "curvature": 182675.35070539333,
+        "fidelity": 16180.626750000009
+      },
+      {
+        "iteration": 460,
+        "temperature": 0.0996820918179746,
+        "accepted_moves": 89,
+        "total": 198855.97745539332,
+        "curvature": 182675.35070539333,
+        "fidelity": 16180.626750000009
+      },
+      {
+        "iteration": 470,
+        "temperature": 0.09480864735409487,
+        "accepted_moves": 93,
+        "total": 198855.97745539332,
+        "curvature": 182675.35070539333,
+        "fidelity": 16180.626750000009
+      },
+      {
+        "iteration": 480,
+        "temperature": 0.09017346495423652,
+        "accepted_moves": 94,
+        "total": 198855.97745539332,
+        "curvature": 182675.35070539333,
+        "fidelity": 16180.626750000009
+      },
+      {
+        "iteration": 490,
+        "temperature": 0.08576489601717459,
+        "accepted_moves": 94,
+        "total": 198855.97745539332,
+        "curvature": 182675.35070539333,
+        "fidelity": 16180.626750000009
+      },
+      {
+        "iteration": 500,
+        "temperature": 0.08157186144027828,
+        "accepted_moves": 96,
+        "total": 198855.97745539332,
+        "curvature": 182675.35070539333,
+        "fidelity": 16180.626750000009
+      },
+      {
+        "iteration": 510,
+        "temperature": 0.07758382377679894,
+        "accepted_moves": 98,
+        "total": 198855.97745539332,
+        "curvature": 182675.35070539333,
+        "fidelity": 16180.626750000009
+      },
+      {
+        "iteration": 520,
+        "temperature": 0.07379076075438468,
+        "accepted_moves": 101,
+        "total": 198855.97745539332,
+        "curvature": 182675.35070539333,
+        "fidelity": 16180.626750000009
+      },
+      {
+        "iteration": 530,
+        "temperature": 0.07018314008827135,
+        "accepted_moves": 103,
+        "total": 197599.41605369575,
+        "curvature": 181345.48325369574,
+        "fidelity": 16253.932800000011
+      },
+      {
+        "iteration": 540,
+        "temperature": 0.0667518955258533,
+        "accepted_moves": 106,
+        "total": 197599.41605369575,
+        "curvature": 181345.48325369574,
+        "fidelity": 16253.932800000011
+      },
+      {
+        "iteration": 550,
+        "temperature": 0.06348840406243188,
+        "accepted_moves": 108,
+        "total": 197599.41605369575,
+        "curvature": 181345.48325369574,
+        "fidelity": 16253.932800000011
+      },
+      {
+        "iteration": 560,
+        "temperature": 0.06038446427088321,
+        "accepted_moves": 110,
+        "total": 197599.41605369575,
+        "curvature": 181345.48325369574,
+        "fidelity": 16253.932800000011
+      },
+      {
+        "iteration": 570,
+        "temperature": 0.05743227569078546,
+        "accepted_moves": 111,
+        "total": 197599.41605369575,
+        "curvature": 181345.48325369574,
+        "fidelity": 16253.932800000011
+      },
+      {
+        "iteration": 580,
+        "temperature": 0.05462441922520914,
+        "accepted_moves": 114,
+        "total": 197599.41605369575,
+        "curvature": 181345.48325369574,
+        "fidelity": 16253.932800000011
+      },
+      {
+        "iteration": 590,
+        "temperature": 0.05195383849590569,
+        "accepted_moves": 114,
+        "total": 197599.41605369575,
+        "curvature": 181345.48325369574,
+        "fidelity": 16253.932800000011
+      },
+      {
+        "iteration": 600,
+        "temperature": 0.0494138221100385,
+        "accepted_moves": 116,
+        "total": 196796.3112337058,
+        "curvature": 180880.2719837058,
+        "fidelity": 15916.03925000001
+      },
+      {
+        "iteration": 610,
+        "temperature": 0.046997986793891174,
+        "accepted_moves": 117,
+        "total": 196796.3112337058,
+        "curvature": 180880.2719837058,
+        "fidelity": 15916.03925000001
+      },
+      {
+        "iteration": 620,
+        "temperature": 0.04470026135116646,
+        "accepted_moves": 119,
+        "total": 196796.3112337058,
+        "curvature": 180880.2719837058,
+        "fidelity": 15916.03925000001
+      },
+      {
+        "iteration": 630,
+        "temperature": 0.04251487140556204,
+        "accepted_moves": 119,
+        "total": 196796.3112337058,
+        "curvature": 180880.2719837058,
+        "fidelity": 15916.03925000001
+      },
+      {
+        "iteration": 640,
+        "temperature": 0.04043632488927963,
+        "accepted_moves": 119,
+        "total": 196796.3112337058,
+        "curvature": 180880.2719837058,
+        "fidelity": 15916.03925000001
+      },
+      {
+        "iteration": 650,
+        "temperature": 0.03845939824099909,
+        "accepted_moves": 121,
+        "total": 188963.77495490783,
+        "curvature": 171806.23380490782,
+        "fidelity": 17157.541150000012
+      },
+      {
+        "iteration": 660,
+        "temperature": 0.03657912327863173,
+        "accepted_moves": 121,
+        "total": 188963.77495490783,
+        "curvature": 171806.23380490782,
+        "fidelity": 17157.541150000012
+      },
+      {
+        "iteration": 670,
+        "temperature": 0.03479077471386296,
+        "accepted_moves": 123,
+        "total": 188963.77495490783,
+        "curvature": 171806.23380490782,
+        "fidelity": 17157.541150000012
+      },
+      {
+        "iteration": 680,
+        "temperature": 0.03308985827710748,
+        "accepted_moves": 127,
+        "total": 181987.45506095112,
+        "curvature": 164589.53521095112,
+        "fidelity": 17397.919850000013
+      },
+      {
+        "iteration": 690,
+        "temperature": 0.03147209942303359,
+        "accepted_moves": 130,
+        "total": 181987.45506095112,
+        "curvature": 164589.53521095112,
+        "fidelity": 17397.919850000013
+      },
+      {
+        "iteration": 700,
+        "temperature": 0.029933432588273214,
+        "accepted_moves": 132,
+        "total": 181987.45506095112,
+        "curvature": 164589.53521095112,
+        "fidelity": 17397.919850000013
+      },
+      {
+        "iteration": 710,
+        "temperature": 0.028469990974320916,
+        "accepted_moves": 134,
+        "total": 181987.45506095112,
+        "curvature": 164589.53521095112,
+        "fidelity": 17397.919850000013
+      },
+      {
+        "iteration": 720,
+        "temperature": 0.02707809682994571,
+        "accepted_moves": 136,
+        "total": 181335.52259182767,
+        "curvature": 164367.44609182767,
+        "fidelity": 16968.07650000001
+      },
+      {
+        "iteration": 730,
+        "temperature": 0.025754252208694463,
+        "accepted_moves": 140,
+        "total": 179830.57816991603,
+        "curvature": 162785.43241991603,
+        "fidelity": 17045.145750000003
+      },
+      {
+        "iteration": 740,
+        "temperature": 0.02449513017825978,
+        "accepted_moves": 141,
+        "total": 179830.57816991603,
+        "curvature": 162785.43241991603,
+        "fidelity": 17045.145750000003
+      },
+      {
+        "iteration": 750,
+        "temperature": 0.023297566459620722,
+        "accepted_moves": 142,
+        "total": 178508.0207533303,
+        "curvature": 163641.93115333028,
+        "fidelity": 14866.089600000016
+      },
+      {
+        "iteration": 760,
+        "temperature": 0.022158551474944856,
+        "accepted_moves": 144,
+        "total": 176697.2384120616,
+        "curvature": 161657.21401206157,
+        "fidelity": 15040.024400000013
+      },
+      {
+        "iteration": 770,
+        "temperature": 0.021075222784267326,
+        "accepted_moves": 146,
+        "total": 176697.2384120616,
+        "curvature": 161657.21401206157,
+        "fidelity": 15040.024400000013
+      },
+      {
+        "iteration": 780,
+        "temperature": 0.020044857891939702,
+        "accepted_moves": 149,
+        "total": 176343.41875408633,
+        "curvature": 161007.23485408633,
+        "fidelity": 15336.183900000015
+      },
+      {
+        "iteration": 790,
+        "temperature": 0.019064867404770626,
+        "accepted_moves": 152,
+        "total": 176343.41875408633,
+        "curvature": 161007.23485408633,
+        "fidelity": 15336.183900000015
+      },
+      {
+        "iteration": 800,
+        "temperature": 0.018132788524664028,
+        "accepted_moves": 153,
+        "total": 176343.41875408633,
+        "curvature": 161007.23485408633,
+        "fidelity": 15336.183900000015
+      },
+      {
+        "iteration": 810,
+        "temperature": 0.01724627885940145,
+        "accepted_moves": 155,
+        "total": 176343.41875408633,
+        "curvature": 161007.23485408633,
+        "fidelity": 15336.183900000015
+      },
+      {
+        "iteration": 820,
+        "temperature": 0.0164031105360144,
+        "accepted_moves": 159,
+        "total": 176343.41875408633,
+        "curvature": 161007.23485408633,
+        "fidelity": 15336.183900000015
+      },
+      {
+        "iteration": 830,
+        "temperature": 0.015601164601953134,
+        "accepted_moves": 161,
+        "total": 176343.41875408633,
+        "curvature": 161007.23485408633,
+        "fidelity": 15336.183900000015
+      },
+      {
+        "iteration": 840,
+        "temperature": 0.014838425699981627,
+        "accepted_moves": 165,
+        "total": 176343.41875408633,
+        "curvature": 161007.23485408633,
+        "fidelity": 15336.183900000015
+      },
+      {
+        "iteration": 850,
+        "temperature": 0.014112977003416188,
+        "accepted_moves": 166,
+        "total": 176343.41875408633,
+        "curvature": 161007.23485408633,
+        "fidelity": 15336.183900000015
+      },
+      {
+        "iteration": 860,
+        "temperature": 0.013422995398979608,
+        "accepted_moves": 167,
+        "total": 176343.41875408633,
+        "curvature": 161007.23485408633,
+        "fidelity": 15336.183900000015
+      },
+      {
+        "iteration": 870,
+        "temperature": 0.012766746905164949,
+        "accepted_moves": 169,
+        "total": 176343.41875408633,
+        "curvature": 161007.23485408633,
+        "fidelity": 15336.183900000015
+      },
+      {
+        "iteration": 880,
+        "temperature": 0.012142582314594924,
+        "accepted_moves": 171,
+        "total": 176343.41875408633,
+        "curvature": 161007.23485408633,
+        "fidelity": 15336.183900000015
+      },
+      {
+        "iteration": 890,
+        "temperature": 0.01154893304942575,
+        "accepted_moves": 172,
+        "total": 176343.41875408633,
+        "curvature": 161007.23485408633,
+        "fidelity": 15336.183900000015
+      },
+      {
+        "iteration": 900,
+        "temperature": 0.01098430721937979,
+        "accepted_moves": 172,
+        "total": 176343.41875408633,
+        "curvature": 161007.23485408633,
+        "fidelity": 15336.183900000015
+      },
+      {
+        "iteration": 910,
+        "temperature": 0.010447285872500434,
+        "accepted_moves": 172,
+        "total": 176343.41875408633,
+        "curvature": 161007.23485408633,
+        "fidelity": 15336.183900000015
+      },
+      {
+        "iteration": 920,
+        "temperature": 0.009936519429207103,
+        "accepted_moves": 175,
+        "total": 172790.28090342053,
+        "curvature": 157329.64540342052,
+        "fidelity": 15460.635500000019
+      },
+      {
+        "iteration": 930,
+        "temperature": 0.009450724290688845,
+        "accepted_moves": 175,
+        "total": 172790.28090342053,
+        "curvature": 157329.64540342052,
+        "fidelity": 15460.635500000019
+      },
+      {
+        "iteration": 940,
+        "temperature": 0.008988679613113105,
+        "accepted_moves": 179,
+        "total": 172790.28090342053,
+        "curvature": 157329.64540342052,
+        "fidelity": 15460.635500000019
+      },
+      {
+        "iteration": 950,
+        "temperature": 0.00854922423954303,
+        "accepted_moves": 180,
+        "total": 172790.28090342053,
+        "curvature": 157329.64540342052,
+        "fidelity": 15460.635500000019
+      },
+      {
+        "iteration": 960,
+        "temperature": 0.008131253781852912,
+        "accepted_moves": 182,
+        "total": 172790.28090342053,
+        "curvature": 157329.64540342052,
+        "fidelity": 15460.635500000019
+      },
+      {
+        "iteration": 970,
+        "temperature": 0.0077337178453084215,
+        "accepted_moves": 183,
+        "total": 172790.28090342053,
+        "curvature": 157329.64540342052,
+        "fidelity": 15460.635500000019
+      },
+      {
+        "iteration": 980,
+        "temperature": 0.00735561738883676,
+        "accepted_moves": 184,
+        "total": 172790.28090342053,
+        "curvature": 157329.64540342052,
+        "fidelity": 15460.635500000019
+      },
+      {
+        "iteration": 990,
+        "temperature": 0.00699600221435283,
+        "accepted_moves": 186,
+        "total": 172790.28090342053,
+        "curvature": 157329.64540342052,
+        "fidelity": 15460.635500000019
+      },
+      {
+        "iteration": 1000,
+        "temperature": 0.006653968578831948,
+        "accepted_moves": 188,
+        "total": 172790.28090342053,
+        "curvature": 157329.64540342052,
+        "fidelity": 15460.635500000019
+      },
+      {
+        "iteration": 1010,
+        "temperature": 0.006328656923128,
+        "accepted_moves": 189,
+        "total": 172790.28090342053,
+        "curvature": 157329.64540342052,
+        "fidelity": 15460.635500000019
+      },
+      {
+        "iteration": 1020,
+        "temperature": 0.006019249711829383,
+        "accepted_moves": 189,
+        "total": 172790.28090342053,
+        "curvature": 157329.64540342052,
+        "fidelity": 15460.635500000019
+      },
+      {
+        "iteration": 1030,
+        "temperature": 0.005724969378724105,
+        "accepted_moves": 191,
+        "total": 172790.28090342053,
+        "curvature": 157329.64540342052,
+        "fidelity": 15460.635500000019
+      },
+      {
+        "iteration": 1040,
+        "temperature": 0.005445076372710831,
+        "accepted_moves": 193,
+        "total": 172790.28090342053,
+        "curvature": 157329.64540342052,
+        "fidelity": 15460.635500000019
+      },
+      {
+        "iteration": 1050,
+        "temperature": 0.005178867299245091,
+        "accepted_moves": 195,
+        "total": 172790.28090342053,
+        "curvature": 157329.64540342052,
+        "fidelity": 15460.635500000019
+      },
+      {
+        "iteration": 1060,
+        "temperature": 0.004925673152649918,
+        "accepted_moves": 196,
+        "total": 172790.28090342053,
+        "curvature": 157329.64540342052,
+        "fidelity": 15460.635500000019
+      },
+      {
+        "iteration": 1070,
+        "temperature": 0.004684857634848613,
+        "accepted_moves": 198,
+        "total": 172790.28090342053,
+        "curvature": 157329.64540342052,
+        "fidelity": 15460.635500000019
+      },
+      {
+        "iteration": 1080,
+        "temperature": 0.00445581555629443,
+        "accepted_moves": 200,
+        "total": 172790.28090342053,
+        "curvature": 157329.64540342052,
+        "fidelity": 15460.635500000019
+      },
+      {
+        "iteration": 1090,
+        "temperature": 0.004237971315078611,
+        "accepted_moves": 201,
+        "total": 172790.28090342053,
+        "curvature": 157329.64540342052,
+        "fidelity": 15460.635500000019
+      },
+      {
+        "iteration": 1100,
+        "temperature": 0.004030777450394616,
+        "accepted_moves": 202,
+        "total": 172790.28090342053,
+        "curvature": 157329.64540342052,
+        "fidelity": 15460.635500000019
+      },
+      {
+        "iteration": 1110,
+        "temperature": 0.003833713266723314,
+        "accepted_moves": 203,
+        "total": 172790.28090342053,
+        "curvature": 157329.64540342052,
+        "fidelity": 15460.635500000019
+      },
+      {
+        "iteration": 1120,
+        "temperature": 0.003646283525281571,
+        "accepted_moves": 205,
+        "total": 170185.03416492074,
+        "curvature": 155093.05821492072,
+        "fidelity": 15091.975950000018
+      },
+      {
+        "iteration": 1130,
+        "temperature": 0.0034680171994457497,
+        "accepted_moves": 206,
+        "total": 169996.03565391825,
+        "curvature": 154800.60950391824,
+        "fidelity": 15195.42615000002
+      },
+      {
+        "iteration": 1140,
+        "temperature": 0.003298466291022388,
+        "accepted_moves": 209,
+        "total": 167122.44525013777,
+        "curvature": 151565.65885013776,
+        "fidelity": 15556.78640000002
+      },
+      {
+        "iteration": 1150,
+        "temperature": 0.0031372047043912534,
+        "accepted_moves": 213,
+        "total": 167122.44525013777,
+        "curvature": 151565.65885013776,
+        "fidelity": 15556.78640000002
+      },
+      {
+        "iteration": 1160,
+        "temperature": 0.002983827175691398,
+        "accepted_moves": 215,
+        "total": 166222.84531523703,
+        "curvature": 150290.349565237,
+        "fidelity": 15932.495750000024
+      },
+      {
+        "iteration": 1170,
+        "temperature": 0.002837948254359161,
+        "accepted_moves": 216,
+        "total": 166222.84531523703,
+        "curvature": 150290.349565237,
+        "fidelity": 15932.495750000024
+      },
+      {
+        "iteration": 1180,
+        "temperature": 0.0026992013344586513,
+        "accepted_moves": 217,
+        "total": 166222.84531523703,
+        "curvature": 150290.349565237,
+        "fidelity": 15932.495750000024
+      },
+      {
+        "iteration": 1190,
+        "temperature": 0.002567237733370353,
+        "accepted_moves": 218,
+        "total": 166222.84531523703,
+        "curvature": 150290.349565237,
+        "fidelity": 15932.495750000024
+      },
+      {
+        "iteration": 1200,
+        "temperature": 0.002441725815522529,
+        "accepted_moves": 218,
+        "total": 166222.84531523703,
+        "curvature": 150290.349565237,
+        "fidelity": 15932.495750000024
+      },
+      {
+        "iteration": 1210,
+        "temperature": 0.002322350158963276,
+        "accepted_moves": 219,
+        "total": 166222.84531523703,
+        "curvature": 150290.349565237,
+        "fidelity": 15932.495750000024
+      },
+      {
+        "iteration": 1220,
+        "temperature": 0.0022088107626787677,
+        "accepted_moves": 219,
+        "total": 166222.84531523703,
+        "curvature": 150290.349565237,
+        "fidelity": 15932.495750000024
+      },
+      {
+        "iteration": 1230,
+        "temperature": 0.0021008222926656044,
+        "accepted_moves": 221,
+        "total": 166222.84531523703,
+        "curvature": 150290.349565237,
+        "fidelity": 15932.495750000024
+      },
+      {
+        "iteration": 1240,
+        "temperature": 0.0019981133648625847,
+        "accepted_moves": 223,
+        "total": 166222.84531523703,
+        "curvature": 150290.349565237,
+        "fidelity": 15932.495750000024
+      },
+      {
+        "iteration": 1250,
+        "temperature": 0.0019004258631398548,
+        "accepted_moves": 227,
+        "total": 164659.5710327633,
+        "curvature": 148214.55248276328,
+        "fidelity": 16445.018550000037
+      },
+      {
+        "iteration": 1260,
+        "temperature": 0.0018075142906314743,
+        "accepted_moves": 230,
+        "total": 162884.32582884454,
+        "curvature": 146382.2164288445,
+        "fidelity": 16502.109400000034
+      },
+      {
+        "iteration": 1270,
+        "temperature": 0.0017191451527812486,
+        "accepted_moves": 232,
+        "total": 162884.32582884454,
+        "curvature": 146382.2164288445,
+        "fidelity": 16502.109400000034
+      },
+      {
+        "iteration": 1280,
+        "temperature": 0.0016350963705513723,
+        "accepted_moves": 235,
+        "total": 162884.32582884454,
+        "curvature": 146382.2164288445,
+        "fidelity": 16502.109400000034
+      },
+      {
+        "iteration": 1290,
+        "temperature": 0.0015551567223192257,
+        "accepted_moves": 237,
+        "total": 162884.32582884454,
+        "curvature": 146382.2164288445,
+        "fidelity": 16502.109400000034
+      },
+      {
+        "iteration": 1300,
+        "temperature": 0.0014791253130597608,
+        "accepted_moves": 238,
+        "total": 162884.32582884454,
+        "curvature": 146382.2164288445,
+        "fidelity": 16502.109400000034
+      },
+      {
+        "iteration": 1310,
+        "temperature": 0.0014068110694794949,
+        "accepted_moves": 240,
+        "total": 162884.32582884454,
+        "curvature": 146382.2164288445,
+        "fidelity": 16502.109400000034
+      },
+      {
+        "iteration": 1320,
+        "temperature": 0.0013380322598333348,
+        "accepted_moves": 243,
+        "total": 162884.32582884454,
+        "curvature": 146382.2164288445,
+        "fidelity": 16502.109400000034
+      },
+      {
+        "iteration": 1330,
+        "temperature": 0.0012726160372174948,
+        "accepted_moves": 245,
+        "total": 162100.73435394696,
+        "curvature": 145469.16005394692,
+        "fidelity": 16631.57430000004
+      },
+      {
+        "iteration": 1340,
+        "temperature": 0.0012103980051907653,
+        "accepted_moves": 248,
+        "total": 162100.73435394696,
+        "curvature": 145469.16005394692,
+        "fidelity": 16631.57430000004
+      },
+      {
+        "iteration": 1350,
+        "temperature": 0.001151221804632499,
+        "accepted_moves": 250,
+        "total": 162100.73435394696,
+        "curvature": 145469.16005394692,
+        "fidelity": 16631.57430000004
+      },
+      {
+        "iteration": 1360,
+        "temperature": 0.0010949387207990578,
+        "accepted_moves": 252,
+        "total": 162100.73435394696,
+        "curvature": 145469.16005394692,
+        "fidelity": 16631.57430000004
+      },
+      {
+        "iteration": 1370,
+        "temperature": 0.0010414073095912173,
+        "accepted_moves": 253,
+        "total": 162100.73435394696,
+        "curvature": 145469.16005394692,
+        "fidelity": 16631.57430000004
+      },
+      {
+        "iteration": 1380,
+        "temperature": 0.0009904930420933113,
+        "accepted_moves": 254,
+        "total": 162100.73435394696,
+        "curvature": 145469.16005394692,
+        "fidelity": 16631.57430000004
+      },
+      {
+        "iteration": 1390,
+        "temperature": 0.0009420679664908086,
+        "accepted_moves": 256,
+        "total": 162100.73435394696,
+        "curvature": 145469.16005394692,
+        "fidelity": 16631.57430000004
+      },
+      {
+        "iteration": 1400,
+        "temperature": 0.0008960103865166974,
+        "accepted_moves": 257,
+        "total": 160552.0106306721,
+        "curvature": 143692.18773067207,
+        "fidelity": 16859.822900000043
+      },
+      {
+        "iteration": 1410,
+        "temperature": 0.0008522045556185825,
+        "accepted_moves": 259,
+        "total": 160552.0106306721,
+        "curvature": 143692.18773067207,
+        "fidelity": 16859.822900000043
+      },
+      {
+        "iteration": 1420,
+        "temperature": 0.0008105403860779152,
+        "accepted_moves": 261,
+        "total": 160552.0106306721,
+        "curvature": 143692.18773067207,
+        "fidelity": 16859.822900000043
+      },
+      {
+        "iteration": 1430,
+        "temperature": 0.000770913172350343,
+        "accepted_moves": 262,
+        "total": 160552.0106306721,
+        "curvature": 143692.18773067207,
+        "fidelity": 16859.822900000043
+      },
+      {
+        "iteration": 1440,
+        "temperature": 0.0007332233279319168,
+        "accepted_moves": 263,
+        "total": 160552.0106306721,
+        "curvature": 143692.18773067207,
+        "fidelity": 16859.822900000043
+      },
+      {
+        "iteration": 1450,
+        "temperature": 0.0006973761350898728,
+        "accepted_moves": 264,
+        "total": 160552.0106306721,
+        "curvature": 143692.18773067207,
+        "fidelity": 16859.822900000043
+      },
+      {
+        "iteration": 1460,
+        "temperature": 0.0006632815068290445,
+        "accepted_moves": 264,
+        "total": 160552.0106306721,
+        "curvature": 143692.18773067207,
+        "fidelity": 16859.822900000043
+      },
+      {
+        "iteration": 1470,
+        "temperature": 0.0006308537604957062,
+        "accepted_moves": 264,
+        "total": 160552.0106306721,
+        "curvature": 143692.18773067207,
+        "fidelity": 16859.822900000043
+      },
+      {
+        "iteration": 1480,
+        "temperature": 0.000600011402449894,
+        "accepted_moves": 265,
+        "total": 160552.0106306721,
+        "curvature": 143692.18773067207,
+        "fidelity": 16859.822900000043
+      },
+      {
+        "iteration": 1490,
+        "temperature": 0.0005706769232650694,
+        "accepted_moves": 266,
+        "total": 160552.0106306721,
+        "curvature": 143692.18773067207,
+        "fidelity": 16859.822900000043
+      },
+      {
+        "iteration": 1500,
+        "temperature": 0.0005427766029404454,
+        "accepted_moves": 268,
+        "total": 160552.0106306721,
+        "curvature": 143692.18773067207,
+        "fidelity": 16859.822900000043
+      },
+      {
+        "iteration": 1510,
+        "temperature": 0.0005162403256364555,
+        "accepted_moves": 270,
+        "total": 160552.0106306721,
+        "curvature": 143692.18773067207,
+        "fidelity": 16859.822900000043
+      },
+      {
+        "iteration": 1520,
+        "temperature": 0.0004910014034677818,
+        "accepted_moves": 271,
+        "total": 160552.0106306721,
+        "curvature": 143692.18773067207,
+        "fidelity": 16859.822900000043
+      },
+      {
+        "iteration": 1530,
+        "temperature": 0.000466996408911119,
+        "accepted_moves": 273,
+        "total": 160552.0106306721,
+        "curvature": 143692.18773067207,
+        "fidelity": 16859.822900000043
+      },
+      {
+        "iteration": 1540,
+        "temperature": 0.0004441650154065014,
+        "accepted_moves": 275,
+        "total": 160552.0106306721,
+        "curvature": 143692.18773067207,
+        "fidelity": 16859.822900000043
+      },
+      {
+        "iteration": 1550,
+        "temperature": 0.000422449845751609,
+        "accepted_moves": 278,
+        "total": 160552.0106306721,
+        "curvature": 143692.18773067207,
+        "fidelity": 16859.822900000043
+      },
+      {
+        "iteration": 1560,
+        "temperature": 0.000401796327908058,
+        "accepted_moves": 278,
+        "total": 160552.0106306721,
+        "curvature": 143692.18773067207,
+        "fidelity": 16859.822900000043
+      },
+      {
+        "iteration": 1570,
+        "temperature": 0.0003821525578573012,
+        "accepted_moves": 279,
+        "total": 160552.0106306721,
+        "curvature": 143692.18773067207,
+        "fidelity": 16859.822900000043
+      },
+      {
+        "iteration": 1580,
+        "temperature": 0.0003634691691614861,
+        "accepted_moves": 281,
+        "total": 160552.0106306721,
+        "curvature": 143692.18773067207,
+        "fidelity": 16859.822900000043
+      },
+      {
+        "iteration": 1590,
+        "temperature": 0.00034569920890146675,
+        "accepted_moves": 282,
+        "total": 160483.4140628031,
+        "curvature": 143858.63926280304,
+        "fidelity": 16624.77480000004
+      },
+      {
+        "iteration": 1600,
+        "temperature": 0.0003287980196801882,
+        "accepted_moves": 284,
+        "total": 160056.43687812446,
+        "curvature": 143185.73267812442,
+        "fidelity": 16870.704200000037
+      },
+      {
+        "iteration": 1610,
+        "temperature": 0.0003127231273949112,
+        "accepted_moves": 286,
+        "total": 160056.43687812446,
+        "curvature": 143185.73267812442,
+        "fidelity": 16870.704200000037
+      },
+      {
+        "iteration": 1620,
+        "temperature": 0.0002974341344962382,
+        "accepted_moves": 289,
+        "total": 160056.43687812446,
+        "curvature": 143185.73267812442,
+        "fidelity": 16870.704200000037
+      },
+      {
+        "iteration": 1630,
+        "temperature": 0.0002828926184656911,
+        "accepted_moves": 292,
+        "total": 160056.43687812446,
+        "curvature": 143185.73267812442,
+        "fidelity": 16870.704200000037
+      },
+      {
+        "iteration": 1640,
+        "temperature": 0.00026906203525670736,
+        "accepted_moves": 293,
+        "total": 160056.43687812446,
+        "curvature": 143185.73267812442,
+        "fidelity": 16870.704200000037
+      },
+      {
+        "iteration": 1650,
+        "temperature": 0.00025590762745639304,
+        "accepted_moves": 296,
+        "total": 160056.43687812446,
+        "curvature": 143185.73267812442,
+        "fidelity": 16870.704200000037
+      },
+      {
+        "iteration": 1660,
+        "temperature": 0.00024339633693723614,
+        "accepted_moves": 297,
+        "total": 160056.43687812446,
+        "curvature": 143185.73267812442,
+        "fidelity": 16870.704200000037
+      },
+      {
+        "iteration": 1670,
+        "temperature": 0.0002314967217792656,
+        "accepted_moves": 298,
+        "total": 160056.43687812446,
+        "curvature": 143185.73267812442,
+        "fidelity": 16870.704200000037
+      },
+      {
+        "iteration": 1680,
+        "temperature": 0.00022017887725387584,
+        "accepted_moves": 300,
+        "total": 160056.43687812446,
+        "curvature": 143185.73267812442,
+        "fidelity": 16870.704200000037
+      },
+      {
+        "iteration": 1690,
+        "temperature": 0.00020941436067074102,
+        "accepted_moves": 301,
+        "total": 160056.43687812446,
+        "curvature": 143185.73267812442,
+        "fidelity": 16870.704200000037
+      },
+      {
+        "iteration": 1700,
+        "temperature": 0.0001991761198989547,
+        "accepted_moves": 302,
+        "total": 160056.43687812446,
+        "curvature": 143185.73267812442,
+        "fidelity": 16870.704200000037
+      },
+      {
+        "iteration": 1710,
+        "temperature": 0.000189438425382761,
+        "accepted_moves": 305,
+        "total": 160056.43687812446,
+        "curvature": 143185.73267812442,
+        "fidelity": 16870.704200000037
+      },
+      {
+        "iteration": 1720,
+        "temperature": 0.00018017680548102822,
+        "accepted_moves": 309,
+        "total": 160056.43687812446,
+        "curvature": 143185.73267812442,
+        "fidelity": 16870.704200000037
+      },
+      {
+        "iteration": 1730,
+        "temperature": 0.00017136798496796677,
+        "accepted_moves": 312,
+        "total": 160056.43687812446,
+        "curvature": 143185.73267812442,
+        "fidelity": 16870.704200000037
+      },
+      {
+        "iteration": 1740,
+        "temperature": 0.0001629898265405393,
+        "accepted_moves": 313,
+        "total": 160056.43687812446,
+        "curvature": 143185.73267812442,
+        "fidelity": 16870.704200000037
+      },
+      {
+        "iteration": 1750,
+        "temperature": 0.00015502127518556585,
+        "accepted_moves": 318,
+        "total": 160056.43687812446,
+        "curvature": 143185.73267812442,
+        "fidelity": 16870.704200000037
+      },
+      {
+        "iteration": 1760,
+        "temperature": 0.00014744230526671386,
+        "accepted_moves": 318,
+        "total": 160056.43687812446,
+        "curvature": 143185.73267812442,
+        "fidelity": 16870.704200000037
+      },
+      {
+        "iteration": 1770,
+        "temperature": 0.0001402338701983984,
+        "accepted_moves": 320,
+        "total": 160056.43687812446,
+        "curvature": 143185.73267812442,
+        "fidelity": 16870.704200000037
+      },
+      {
+        "iteration": 1780,
+        "temperature": 0.00013337785458011878,
+        "accepted_moves": 322,
+        "total": 160056.43687812446,
+        "curvature": 143185.73267812442,
+        "fidelity": 16870.704200000037
+      },
+      {
+        "iteration": 1790,
+        "temperature": 0.00012685702867094148,
+        "accepted_moves": 323,
+        "total": 160056.43687812446,
+        "curvature": 143185.73267812442,
+        "fidelity": 16870.704200000037
+      },
+      {
+        "iteration": 1800,
+        "temperature": 0.0001206550050897193,
+        "accepted_moves": 326,
+        "total": 160056.43687812446,
+        "curvature": 143185.73267812442,
+        "fidelity": 16870.704200000037
+      },
+      {
+        "iteration": 1810,
+        "temperature": 0.0001147561976322313,
+        "accepted_moves": 327,
+        "total": 160056.43687812446,
+        "curvature": 143185.73267812442,
+        "fidelity": 16870.704200000037
+      },
+      {
+        "iteration": 1820,
+        "temperature": 0.0001091457821017474,
+        "accepted_moves": 328,
+        "total": 160056.43687812446,
+        "curvature": 143185.73267812442,
+        "fidelity": 16870.704200000037
+      },
+      {
+        "iteration": 1830,
+        "temperature": 0.00010380965905458168,
+        "accepted_moves": 330,
+        "total": 159776.28171644313,
+        "curvature": 142495.84851644307,
+        "fidelity": 17280.433200000054
+      },
+      {
+        "iteration": 1840,
+        "temperature": 9.873441836701049e-05,
+        "accepted_moves": 334,
+        "total": 159776.28171644313,
+        "curvature": 142495.84851644307,
+        "fidelity": 17280.433200000054
+      },
+      {
+        "iteration": 1850,
+        "temperature": 9.390730553450944e-05,
+        "accepted_moves": 337,
+        "total": 159776.28171644313,
+        "curvature": 142495.84851644307,
+        "fidelity": 17280.433200000054
+      },
+      {
+        "iteration": 1860,
+        "temperature": 8.931618961861639e-05,
+        "accepted_moves": 339,
+        "total": 159776.28171644313,
+        "curvature": 142495.84851644307,
+        "fidelity": 17280.433200000054
+      },
+      {
+        "iteration": 1870,
+        "temperature": 8.494953276086784e-05,
+        "accepted_moves": 340,
+        "total": 159776.28171644313,
+        "curvature": 142495.84851644307,
+        "fidelity": 17280.433200000054
+      },
+      {
+        "iteration": 1880,
+        "temperature": 8.079636118719534e-05,
+        "accepted_moves": 344,
+        "total": 159776.28171644313,
+        "curvature": 142495.84851644307,
+        "fidelity": 17280.433200000054
+      },
+      {
+        "iteration": 1890,
+        "temperature": 7.684623762991297e-05,
+        "accepted_moves": 346,
+        "total": 159776.28171644313,
+        "curvature": 142495.84851644307,
+        "fidelity": 17280.433200000054
+      },
+      {
+        "iteration": 1900,
+        "temperature": 7.308923509799025e-05,
+        "accepted_moves": 347,
+        "total": 159776.28171644313,
+        "curvature": 142495.84851644307,
+        "fidelity": 17280.433200000054
+      },
+      {
+        "iteration": 1910,
+        "temperature": 6.951591192969299e-05,
+        "accepted_moves": 350,
+        "total": 159776.28171644313,
+        "curvature": 142495.84851644307,
+        "fidelity": 17280.433200000054
+      },
+      {
+        "iteration": 1920,
+        "temperature": 6.61172880648974e-05,
+        "accepted_moves": 353,
+        "total": 159776.28171644313,
+        "curvature": 142495.84851644307,
+        "fidelity": 17280.433200000054
+      },
+      {
+        "iteration": 1930,
+        "temperature": 6.288482247744756e-05,
+        "accepted_moves": 355,
+        "total": 159776.28171644313,
+        "curvature": 142495.84851644307,
+        "fidelity": 17280.433200000054
+      },
+      {
+        "iteration": 1940,
+        "temperature": 5.981039171084206e-05,
+        "accepted_moves": 357,
+        "total": 158751.5572936845,
+        "curvature": 141023.53669368447,
+        "fidelity": 17728.02060000006
+      },
+      {
+        "iteration": 1950,
+        "temperature": 5.688626946330791e-05,
+        "accepted_moves": 361,
+        "total": 156251.48854015383,
+        "curvature": 138466.62834015375,
+        "fidelity": 17784.86020000007
+      },
+      {
+        "iteration": 1960,
+        "temperature": 5.410510717095784e-05,
+        "accepted_moves": 364,
+        "total": 155836.63743008845,
+        "curvature": 138127.7404800884,
+        "fidelity": 17708.896950000064
+      },
+      {
+        "iteration": 1970,
+        "temperature": 5.145991554023428e-05,
+        "accepted_moves": 366,
+        "total": 155836.63743008845,
+        "curvature": 138127.7404800884,
+        "fidelity": 17708.896950000064
+      },
+      {
+        "iteration": 1980,
+        "temperature": 4.894404698322983e-05,
+        "accepted_moves": 369,
+        "total": 155836.63743008845,
+        "curvature": 138127.7404800884,
+        "fidelity": 17708.896950000064
+      },
+      {
+        "iteration": 1990,
+        "temperature": 4.65511789117426e-05,
+        "accepted_moves": 370,
+        "total": 155836.63743008845,
+        "curvature": 138127.7404800884,
+        "fidelity": 17708.896950000064
+      },
+      {
+        "iteration": 2000,
+        "temperature": 4.4275297848083e-05,
+        "accepted_moves": 372,
+        "total": 155836.63743008845,
+        "curvature": 138127.7404800884,
+        "fidelity": 17708.896950000064
+      },
+      {
+        "iteration": 2010,
+        "temperature": 4.211068431270113e-05,
+        "accepted_moves": 372,
+        "total": 155836.63743008845,
+        "curvature": 138127.7404800884,
+        "fidelity": 17708.896950000064
+      },
+      {
+        "iteration": 2020,
+        "temperature": 4.0051898450656104e-05,
+        "accepted_moves": 373,
+        "total": 155836.63743008845,
+        "curvature": 138127.7404800884,
+        "fidelity": 17708.896950000064
+      },
+      {
+        "iteration": 2030,
+        "temperature": 3.809376636080537e-05,
+        "accepted_moves": 373,
+        "total": 155836.63743008845,
+        "curvature": 138127.7404800884,
+        "fidelity": 17708.896950000064
+      },
+      {
+        "iteration": 2040,
+        "temperature": 3.6231367093358226e-05,
+        "accepted_moves": 374,
+        "total": 155836.63743008845,
+        "curvature": 138127.7404800884,
+        "fidelity": 17708.896950000064
+      },
+      {
+        "iteration": 2050,
+        "temperature": 3.446002028311721e-05,
+        "accepted_moves": 375,
+        "total": 155808.1879671895,
+        "curvature": 137564.31871718942,
+        "fidelity": 18243.86925000007
+      },
+      {
+        "iteration": 2060,
+        "temperature": 3.277527438732875e-05,
+        "accepted_moves": 378,
+        "total": 155808.1879671895,
+        "curvature": 137564.31871718942,
+        "fidelity": 18243.86925000007
+      },
+      {
+        "iteration": 2070,
+        "temperature": 3.117289549858372e-05,
+        "accepted_moves": 378,
+        "total": 155808.1879671895,
+        "curvature": 137564.31871718942,
+        "fidelity": 18243.86925000007
+      },
+      {
+        "iteration": 2080,
+        "temperature": 2.964885670465383e-05,
+        "accepted_moves": 380,
+        "total": 155808.1879671895,
+        "curvature": 137564.31871718942,
+        "fidelity": 18243.86925000007
+      },
+      {
+        "iteration": 2090,
+        "temperature": 2.819932796852428e-05,
+        "accepted_moves": 380,
+        "total": 155808.1879671895,
+        "curvature": 137564.31871718942,
+        "fidelity": 18243.86925000007
+      },
+      {
+        "iteration": 2100,
+        "temperature": 2.6820666503190215e-05,
+        "accepted_moves": 381,
+        "total": 155808.1879671895,
+        "curvature": 137564.31871718942,
+        "fidelity": 18243.86925000007
+      },
+      {
+        "iteration": 2110,
+        "temperature": 2.5509407617028204e-05,
+        "accepted_moves": 382,
+        "total": 155808.1879671895,
+        "curvature": 137564.31871718942,
+        "fidelity": 18243.86925000007
+      },
+      {
+        "iteration": 2120,
+        "temperature": 2.4262256006736253e-05,
+        "accepted_moves": 383,
+        "total": 155808.1879671895,
+        "curvature": 137564.31871718942,
+        "fidelity": 18243.86925000007
+      },
+      {
+        "iteration": 2130,
+        "temperature": 2.3076077475960872e-05,
+        "accepted_moves": 384,
+        "total": 155808.1879671895,
+        "curvature": 137564.31871718942,
+        "fidelity": 18243.86925000007
+      },
+      {
+        "iteration": 2140,
+        "temperature": 2.1947891058799403e-05,
+        "accepted_moves": 386,
+        "total": 153894.75921300848,
+        "curvature": 137861.22251300843,
+        "fidelity": 16033.536700000048
+      },
+      {
+        "iteration": 2150,
+        "temperature": 2.0874861528383248e-05,
+        "accepted_moves": 386,
+        "total": 153894.75921300848,
+        "curvature": 137861.22251300843,
+        "fidelity": 16033.536700000048
+      },
+      {
+        "iteration": 2160,
+        "temperature": 1.985429227171551e-05,
+        "accepted_moves": 387,
+        "total": 153894.75921300848,
+        "curvature": 137861.22251300843,
+        "fidelity": 16033.536700000048
+      },
+      {
+        "iteration": 2170,
+        "temperature": 1.8883618512856904e-05,
+        "accepted_moves": 389,
+        "total": 153894.75921300848,
+        "curvature": 137861.22251300843,
+        "fidelity": 16033.536700000048
+      },
+      {
+        "iteration": 2180,
+        "temperature": 1.796040086742919e-05,
+        "accepted_moves": 390,
+        "total": 153894.75921300848,
+        "curvature": 137861.22251300843,
+        "fidelity": 16033.536700000048
+      },
+      {
+        "iteration": 2190,
+        "temperature": 1.7082319212238138e-05,
+        "accepted_moves": 390,
+        "total": 153894.75921300848,
+        "curvature": 137861.22251300843,
+        "fidelity": 16033.536700000048
+      },
+      {
+        "iteration": 2200,
+        "temperature": 1.6247166854609775e-05,
+        "accepted_moves": 391,
+        "total": 153894.75921300848,
+        "curvature": 137861.22251300843,
+        "fidelity": 16033.536700000048
+      },
+      {
+        "iteration": 2210,
+        "temperature": 1.5452844986787064e-05,
+        "accepted_moves": 392,
+        "total": 153894.75921300848,
+        "curvature": 137861.22251300843,
+        "fidelity": 16033.536700000048
+      },
+      {
+        "iteration": 2220,
+        "temperature": 1.4697357411450391e-05,
+        "accepted_moves": 393,
+        "total": 153894.75921300848,
+        "curvature": 137861.22251300843,
+        "fidelity": 16033.536700000048
+      },
+      {
+        "iteration": 2230,
+        "temperature": 1.397880552510666e-05,
+        "accepted_moves": 394,
+        "total": 153894.75921300848,
+        "curvature": 137861.22251300843,
+        "fidelity": 16033.536700000048
+      },
+      {
+        "iteration": 2240,
+        "temperature": 1.3295383546739849e-05,
+        "accepted_moves": 394,
+        "total": 153894.75921300848,
+        "curvature": 137861.22251300843,
+        "fidelity": 16033.536700000048
+      },
+      {
+        "iteration": 2250,
+        "temperature": 1.2645373979732214e-05,
+        "accepted_moves": 398,
+        "total": 153689.25643589423,
+        "curvature": 136772.66693589417,
+        "fidelity": 16916.589500000056
+      },
+      {
+        "iteration": 2260,
+        "temperature": 1.2027143295651585e-05,
+        "accepted_moves": 400,
+        "total": 153689.25643589423,
+        "curvature": 136772.66693589417,
+        "fidelity": 16916.589500000056
+      },
+      {
+        "iteration": 2270,
+        "temperature": 1.1439137829057712e-05,
+        "accepted_moves": 401,
+        "total": 153689.25643589423,
+        "curvature": 136772.66693589417,
+        "fidelity": 16916.589500000056
+      },
+      {
+        "iteration": 2280,
+        "temperature": 1.0879879873011026e-05,
+        "accepted_moves": 401,
+        "total": 153689.25643589423,
+        "curvature": 136772.66693589417,
+        "fidelity": 16916.589500000056
+      },
+      {
+        "iteration": 2290,
+        "temperature": 1.0347963965471444e-05,
+        "accepted_moves": 401,
+        "total": 153689.25643589423,
+        "curvature": 136772.66693589417,
+        "fidelity": 16916.589500000056
+      },
+      {
+        "iteration": 2300,
+        "temperature": 9.842053357254655e-06,
+        "accepted_moves": 402,
+        "total": 153689.25643589423,
+        "curvature": 136772.66693589417,
+        "fidelity": 16916.589500000056
+      },
+      {
+        "iteration": 2310,
+        "temperature": 9.360876652669565e-06,
+        "accepted_moves": 404,
+        "total": 153689.25643589423,
+        "curvature": 136772.66693589417,
+        "fidelity": 16916.589500000056
+      },
+      {
+        "iteration": 2320,
+        "temperature": 8.903224614394547e-06,
+        "accepted_moves": 405,
+        "total": 153689.25643589423,
+        "curvature": 136772.66693589417,
+        "fidelity": 16916.589500000056
+      },
+      {
+        "iteration": 2330,
+        "temperature": 8.467947124562867e-06,
+        "accepted_moves": 407,
+        "total": 153689.25643589423,
+        "curvature": 136772.66693589417,
+        "fidelity": 16916.589500000056
+      },
+      {
+        "iteration": 2340,
+        "temperature": 8.053950294420246e-06,
+        "accepted_moves": 409,
+        "total": 153689.25643589423,
+        "curvature": 136772.66693589417,
+        "fidelity": 16916.589500000056
+      },
+      {
+        "iteration": 2350,
+        "temperature": 7.660193715290883e-06,
+        "accepted_moves": 412,
+        "total": 153689.25643589423,
+        "curvature": 136772.66693589417,
+        "fidelity": 16916.589500000056
+      },
+      {
+        "iteration": 2360,
+        "temperature": 7.285687843943399e-06,
+        "accepted_moves": 413,
+        "total": 153689.25643589423,
+        "curvature": 136772.66693589417,
+        "fidelity": 16916.589500000056
+      },
+      {
+        "iteration": 2370,
+        "temperature": 6.929491515785894e-06,
+        "accepted_moves": 413,
+        "total": 153689.25643589423,
+        "curvature": 136772.66693589417,
+        "fidelity": 16916.589500000056
+      },
+      {
+        "iteration": 2380,
+        "temperature": 6.590709579640582e-06,
+        "accepted_moves": 414,
+        "total": 153689.25643589423,
+        "curvature": 136772.66693589417,
+        "fidelity": 16916.589500000056
+      },
+      {
+        "iteration": 2390,
+        "temperature": 6.268490648153966e-06,
+        "accepted_moves": 416,
+        "total": 153689.25643589423,
+        "curvature": 136772.66693589417,
+        "fidelity": 16916.589500000056
+      },
+      {
+        "iteration": 2400,
+        "temperature": 5.962024958189189e-06,
+        "accepted_moves": 417,
+        "total": 153689.25643589423,
+        "curvature": 136772.66693589417,
+        "fidelity": 16916.589500000056
+      },
+      {
+        "iteration": 2410,
+        "temperature": 5.6705423358235076e-06,
+        "accepted_moves": 421,
+        "total": 152329.2504617436,
+        "curvature": 135198.40566174354,
+        "fidelity": 17130.84480000006
+      },
+      {
+        "iteration": 2420,
+        "temperature": 5.393310260836778e-06,
+        "accepted_moves": 421,
+        "total": 152329.2504617436,
+        "curvature": 135198.40566174354,
+        "fidelity": 17130.84480000006
+      },
+      {
+        "iteration": 2430,
+        "temperature": 5.129632025826853e-06,
+        "accepted_moves": 422,
+        "total": 152329.2504617436,
+        "curvature": 135198.40566174354,
+        "fidelity": 17130.84480000006
+      },
+      {
+        "iteration": 2440,
+        "temperature": 4.87884498532558e-06,
+        "accepted_moves": 423,
+        "total": 152329.2504617436,
+        "curvature": 135198.40566174354,
+        "fidelity": 17130.84480000006
+      },
+      {
+        "iteration": 2450,
+        "temperature": 4.640318890515288e-06,
+        "accepted_moves": 423,
+        "total": 152329.2504617436,
+        "curvature": 135198.40566174354,
+        "fidelity": 17130.84480000006
+      },
+      {
+        "iteration": 2460,
+        "temperature": 4.4134543053607834e-06,
+        "accepted_moves": 423,
+        "total": 152329.2504617436,
+        "curvature": 135198.40566174354,
+        "fidelity": 17130.84480000006
+      },
+      {
+        "iteration": 2470,
+        "temperature": 4.197681100176417e-06,
+        "accepted_moves": 425,
+        "total": 152329.2504617436,
+        "curvature": 135198.40566174354,
+        "fidelity": 17130.84480000006
+      },
+      {
+        "iteration": 2480,
+        "temperature": 3.992457018842496e-06,
+        "accepted_moves": 426,
+        "total": 152329.2504617436,
+        "curvature": 135198.40566174354,
+        "fidelity": 17130.84480000006
+      },
+      {
+        "iteration": 2490,
+        "temperature": 3.7972663160702735e-06,
+        "accepted_moves": 427,
+        "total": 152329.2504617436,
+        "curvature": 135198.40566174354,
+        "fidelity": 17130.84480000006
+      },
+      {
+        "iteration": 2500,
+        "temperature": 3.6116184612908794e-06,
+        "accepted_moves": 428,
+        "total": 152329.2504617436,
+        "curvature": 135198.40566174354,
+        "fidelity": 17130.84480000006
+      },
+      {
+        "iteration": 2510,
+        "temperature": 3.435046905910958e-06,
+        "accepted_moves": 429,
+        "total": 152329.2504617436,
+        "curvature": 135198.40566174354,
+        "fidelity": 17130.84480000006
+      },
+      {
+        "iteration": 2520,
+        "temperature": 3.2671079108370165e-06,
+        "accepted_moves": 433,
+        "total": 152329.2504617436,
+        "curvature": 135198.40566174354,
+        "fidelity": 17130.84480000006
+      },
+      {
+        "iteration": 2530,
+        "temperature": 3.1073794313219497e-06,
+        "accepted_moves": 435,
+        "total": 151839.94776777408,
+        "curvature": 134412.26271777402,
+        "fidelity": 17427.68505000006
+      },
+      {
+        "iteration": 2540,
+        "temperature": 2.9554600563312757e-06,
+        "accepted_moves": 437,
+        "total": 151104.85848683165,
+        "curvature": 133459.4705868316,
+        "fidelity": 17645.387900000063
+      },
+      {
+        "iteration": 2550,
+        "temperature": 2.810967999763617e-06,
+        "accepted_moves": 438,
+        "total": 151104.85848683165,
+        "curvature": 133459.4705868316,
+        "fidelity": 17645.387900000063
+      },
+      {
+        "iteration": 2560,
+        "temperature": 2.673540140990284e-06,
+        "accepted_moves": 438,
+        "total": 151104.85848683165,
+        "curvature": 133459.4705868316,
+        "fidelity": 17645.387900000063
+      },
+      {
+        "iteration": 2570,
+        "temperature": 2.5428311123027468e-06,
+        "accepted_moves": 438,
+        "total": 151104.85848683165,
+        "curvature": 133459.4705868316,
+        "fidelity": 17645.387900000063
+      },
+      {
+        "iteration": 2580,
+        "temperature": 2.418512430974689e-06,
+        "accepted_moves": 441,
+        "total": 151104.85848683165,
+        "curvature": 133459.4705868316,
+        "fidelity": 17645.387900000063
+      },
+      {
+        "iteration": 2590,
+        "temperature": 2.3002716737574273e-06,
+        "accepted_moves": 444,
+        "total": 151104.85848683165,
+        "curvature": 133459.4705868316,
+        "fidelity": 17645.387900000063
+      },
+      {
+        "iteration": 2600,
+        "temperature": 2.1878116917341465e-06,
+        "accepted_moves": 446,
+        "total": 151104.85848683165,
+        "curvature": 133459.4705868316,
+        "fidelity": 17645.387900000063
+      },
+      {
+        "iteration": 2610,
+        "temperature": 2.080849863559805e-06,
+        "accepted_moves": 447,
+        "total": 151104.85848683165,
+        "curvature": 133459.4705868316,
+        "fidelity": 17645.387900000063
+      },
+      {
+        "iteration": 2620,
+        "temperature": 1.979117385210049e-06,
+        "accepted_moves": 449,
+        "total": 149068.9045241645,
+        "curvature": 131100.93237416443,
+        "fidelity": 17967.97215000006
+      },
+      {
+        "iteration": 2630,
+        "temperature": 1.8823585944542071e-06,
+        "accepted_moves": 452,
+        "total": 149068.9045241645,
+        "curvature": 131100.93237416443,
+        "fidelity": 17967.97215000006
+      },
+      {
+        "iteration": 2640,
+        "temperature": 1.7903303283547081e-06,
+        "accepted_moves": 454,
+        "total": 149068.9045241645,
+        "curvature": 131100.93237416443,
+        "fidelity": 17967.97215000006
+      },
+      {
+        "iteration": 2650,
+        "temperature": 1.702801312178275e-06,
+        "accepted_moves": 457,
+        "total": 149068.9045241645,
+        "curvature": 131100.93237416443,
+        "fidelity": 17967.97215000006
+      },
+      {
+        "iteration": 2660,
+        "temperature": 1.6195515781831667e-06,
+        "accepted_moves": 458,
+        "total": 149068.9045241645,
+        "curvature": 131100.93237416443,
+        "fidelity": 17967.97215000006
+      },
+      {
+        "iteration": 2670,
+        "temperature": 1.5403719128218382e-06,
+        "accepted_moves": 459,
+        "total": 149068.9045241645,
+        "curvature": 131100.93237416443,
+        "fidelity": 17967.97215000006
+      },
+      {
+        "iteration": 2680,
+        "temperature": 1.465063330969789e-06,
+        "accepted_moves": 464,
+        "total": 148627.5679780702,
+        "curvature": 130689.63542807015,
+        "fidelity": 17937.932550000063
+      },
+      {
+        "iteration": 2690,
+        "temperature": 1.3934365758592945e-06,
+        "accepted_moves": 465,
+        "total": 148627.5679780702,
+        "curvature": 130689.63542807015,
+        "fidelity": 17937.932550000063
+      },
+      {
+        "iteration": 2700,
+        "temperature": 1.325311643461312e-06,
+        "accepted_moves": 466,
+        "total": 148627.5679780702,
+        "curvature": 130689.63542807015,
+        "fidelity": 17937.932550000063
+      },
+      {
+        "iteration": 2710,
+        "temperature": 1.260517330120295e-06,
+        "accepted_moves": 469,
+        "total": 148627.5679780702,
+        "curvature": 130689.63542807015,
+        "fidelity": 17937.932550000063
+      },
+      {
+        "iteration": 2720,
+        "temperature": 1.1988908023050803e-06,
+        "accepted_moves": 469,
+        "total": 148627.5679780702,
+        "curvature": 130689.63542807015,
+        "fidelity": 17937.932550000063
+      },
+      {
+        "iteration": 2730,
+        "temperature": 1.1402771873945986e-06,
+        "accepted_moves": 470,
+        "total": 148627.5679780702,
+        "curvature": 130689.63542807015,
+        "fidelity": 17937.932550000063
+      },
+      {
+        "iteration": 2740,
+        "temperature": 1.08452918447002e-06,
+        "accepted_moves": 470,
+        "total": 148627.5679780702,
+        "curvature": 130689.63542807015,
+        "fidelity": 17937.932550000063
+      },
+      {
+        "iteration": 2750,
+        "temperature": 1.031506694135218e-06,
+        "accepted_moves": 471,
+        "total": 148627.5679780702,
+        "curvature": 130689.63542807015,
+        "fidelity": 17937.932550000063
+      },
+      {
+        "iteration": 2760,
+        "temperature": 9.810764664352644e-07,
+        "accepted_moves": 474,
+        "total": 148086.51590668975,
+        "curvature": 130573.63940668968,
+        "fidelity": 17512.876500000064
+      },
+      {
+        "iteration": 2770,
+        "temperature": 9.331117659881426e-07,
+        "accepted_moves": 476,
+        "total": 148086.51590668975,
+        "curvature": 130573.63940668968,
+        "fidelity": 17512.876500000064
+      },
+      {
+        "iteration": 2780,
+        "temperature": 8.87492053488129e-07,
+        "accepted_moves": 477,
+        "total": 148086.51590668975,
+        "curvature": 130573.63940668968,
+        "fidelity": 17512.876500000064
+      },
+      {
+        "iteration": 2790,
+        "temperature": 8.441026827804303e-07,
+        "accepted_moves": 480,
+        "total": 147774.90078189856,
+        "curvature": 130029.84513189849,
+        "fidelity": 17745.05565000006
+      },
+      {
+        "iteration": 2800,
+        "temperature": 8.028346127458031e-07,
+        "accepted_moves": 482,
+        "total": 147774.90078189856,
+        "curvature": 130029.84513189849,
+        "fidelity": 17745.05565000006
+      },
+      {
+        "iteration": 2810,
+        "temperature": 7.635841332710984e-07,
+        "accepted_moves": 482,
+        "total": 147774.90078189856,
+        "curvature": 130029.84513189849,
+        "fidelity": 17745.05565000006
+      },
+      {
+        "iteration": 2820,
+        "temperature": 7.262526046170678e-07,
+        "accepted_moves": 483,
+        "total": 147774.90078189856,
+        "curvature": 130029.84513189849,
+        "fidelity": 17745.05565000006
+      },
+      {
+        "iteration": 2830,
+        "temperature": 6.907462095284459e-07,
+        "accepted_moves": 484,
+        "total": 147774.90078189856,
+        "curvature": 130029.84513189849,
+        "fidelity": 17745.05565000006
+      },
+      {
+        "iteration": 2840,
+        "temperature": 6.569757174633375e-07,
+        "accepted_moves": 486,
+        "total": 147774.90078189856,
+        "curvature": 130029.84513189849,
+        "fidelity": 17745.05565000006
+      },
+      {
+        "iteration": 2850,
+        "temperature": 6.24856260349399e-07,
+        "accepted_moves": 487,
+        "total": 147464.60718333322,
+        "curvature": 129165.61613333315,
+        "fidelity": 18298.99105000006
+      },
+      {
+        "iteration": 2860,
+        "temperature": 5.943071193032712e-07,
+        "accepted_moves": 487,
+        "total": 147464.60718333322,
+        "curvature": 129165.61613333315,
+        "fidelity": 18298.99105000006
+      },
+      {
+        "iteration": 2870,
+        "temperature": 5.652515217772714e-07,
+        "accepted_moves": 488,
+        "total": 147464.60718333322,
+        "curvature": 129165.61613333315,
+        "fidelity": 18298.99105000006
+      },
+      {
+        "iteration": 2880,
+        "temperature": 5.376164486235566e-07,
+        "accepted_moves": 492,
+        "total": 147464.60718333322,
+        "curvature": 129165.61613333315,
+        "fidelity": 18298.99105000006
+      },
+      {
+        "iteration": 2890,
+        "temperature": 5.11332450590896e-07,
+        "accepted_moves": 495,
+        "total": 147464.60718333322,
+        "curvature": 129165.61613333315,
+        "fidelity": 18298.99105000006
+      },
+      {
+        "iteration": 2900,
+        "temperature": 4.863334737928898e-07,
+        "accepted_moves": 497,
+        "total": 147143.95358523674,
+        "curvature": 128841.3418852367,
+        "fidelity": 18302.61170000005
+      },
+      {
+        "iteration": 2910,
+        "temperature": 4.625566937090275e-07,
+        "accepted_moves": 501,
+        "total": 147143.95358523674,
+        "curvature": 128841.3418852367,
+        "fidelity": 18302.61170000005
+      },
+      {
+        "iteration": 2920,
+        "temperature": 4.399423573014093e-07,
+        "accepted_moves": 503,
+        "total": 147143.95358523674,
+        "curvature": 128841.3418852367,
+        "fidelity": 18302.61170000005
+      },
+      {
+        "iteration": 2930,
+        "temperature": 4.184336328503626e-07,
+        "accepted_moves": 504,
+        "total": 147143.95358523674,
+        "curvature": 128841.3418852367,
+        "fidelity": 18302.61170000005
+      },
+      {
+        "iteration": 2940,
+        "temperature": 3.979764671315752e-07,
+        "accepted_moves": 507,
+        "total": 147143.95358523674,
+        "curvature": 128841.3418852367,
+        "fidelity": 18302.61170000005
+      },
+      {
+        "iteration": 2950,
+        "temperature": 3.7851944957581945e-07,
+        "accepted_moves": 509,
+        "total": 147143.95358523674,
+        "curvature": 128841.3418852367,
+        "fidelity": 18302.61170000005
+      },
+      {
+        "iteration": 2960,
+        "temperature": 3.600136830698898e-07,
+        "accepted_moves": 511,
+        "total": 147143.95358523674,
+        "curvature": 128841.3418852367,
+        "fidelity": 18302.61170000005
+      },
+      {
+        "iteration": 2970,
+        "temperature": 3.42412661074066e-07,
+        "accepted_moves": 511,
+        "total": 147143.95358523674,
+        "curvature": 128841.3418852367,
+        "fidelity": 18302.61170000005
+      },
+      {
+        "iteration": 2980,
+        "temperature": 3.2567215074728703e-07,
+        "accepted_moves": 511,
+        "total": 147143.95358523674,
+        "curvature": 128841.3418852367,
+        "fidelity": 18302.61170000005
+      },
+      {
+        "iteration": 2990,
+        "temperature": 3.0975008178632076e-07,
+        "accepted_moves": 513,
+        "total": 146681.51090731943,
+        "curvature": 128195.33285731939,
+        "fidelity": 18486.178050000046
+      },
+      {
+        "iteration": 3000,
+        "temperature": 2.94606440699571e-07,
+        "accepted_moves": 514,
+        "total": 146681.51090731943,
+        "curvature": 128195.33285731939,
+        "fidelity": 18486.178050000046
+      },
+      {
+        "iteration": 3010,
+        "temperature": 2.8020317024982564e-07,
+        "accepted_moves": 515,
+        "total": 146681.51090731943,
+        "curvature": 128195.33285731939,
+        "fidelity": 18486.178050000046
+      },
+      {
+        "iteration": 3020,
+        "temperature": 2.6650407381323455e-07,
+        "accepted_moves": 515,
+        "total": 146681.51090731943,
+        "curvature": 128195.33285731939,
+        "fidelity": 18486.178050000046
+      },
+      {
+        "iteration": 3030,
+        "temperature": 2.534747244141652e-07,
+        "accepted_moves": 516,
+        "total": 146681.51090731943,
+        "curvature": 128195.33285731939,
+        "fidelity": 18486.178050000046
+      },
+      {
+        "iteration": 3040,
+        "temperature": 2.410823782073322e-07,
+        "accepted_moves": 517,
+        "total": 146681.51090731943,
+        "curvature": 128195.33285731939,
+        "fidelity": 18486.178050000046
+      },
+      {
+        "iteration": 3050,
+        "temperature": 2.2929589218977429e-07,
+        "accepted_moves": 518,
+        "total": 146681.51090731943,
+        "curvature": 128195.33285731939,
+        "fidelity": 18486.178050000046
+      },
+      {
+        "iteration": 3060,
+        "temperature": 2.1808564593588177e-07,
+        "accepted_moves": 519,
+        "total": 146681.51090731943,
+        "curvature": 128195.33285731939,
+        "fidelity": 18486.178050000046
+      },
+      {
+        "iteration": 3070,
+        "temperature": 2.0742346715878863e-07,
+        "accepted_moves": 521,
+        "total": 146681.51090731943,
+        "curvature": 128195.33285731939,
+        "fidelity": 18486.178050000046
+      },
+      {
+        "iteration": 3080,
+        "temperature": 1.972825609110582e-07,
+        "accepted_moves": 524,
+        "total": 146681.51090731943,
+        "curvature": 128195.33285731939,
+        "fidelity": 18486.178050000046
+      },
+      {
+        "iteration": 3090,
+        "temperature": 1.8763744224673812e-07,
+        "accepted_moves": 528,
+        "total": 146681.51090731943,
+        "curvature": 128195.33285731939,
+        "fidelity": 18486.178050000046
+      },
+      {
+        "iteration": 3100,
+        "temperature": 1.7846387217555884e-07,
+        "accepted_moves": 528,
+        "total": 146681.51090731943,
+        "curvature": 128195.33285731939,
+        "fidelity": 18486.178050000046
+      },
+      {
+        "iteration": 3110,
+        "temperature": 1.6973879674832257e-07,
+        "accepted_moves": 528,
+        "total": 146681.51090731943,
+        "curvature": 128195.33285731939,
+        "fidelity": 18486.178050000046
+      },
+      {
+        "iteration": 3120,
+        "temperature": 1.614402891204002e-07,
+        "accepted_moves": 529,
+        "total": 146681.51090731943,
+        "curvature": 128195.33285731939,
+        "fidelity": 18486.178050000046
+      },
+      {
+        "iteration": 3130,
+        "temperature": 1.5354749444773575e-07,
+        "accepted_moves": 530,
+        "total": 146681.51090731943,
+        "curvature": 128195.33285731939,
+        "fidelity": 18486.178050000046
+      },
+      {
+        "iteration": 3140,
+        "temperature": 1.4604057747687834e-07,
+        "accepted_moves": 531,
+        "total": 146681.51090731943,
+        "curvature": 128195.33285731939,
+        "fidelity": 18486.178050000046
+      },
+      {
+        "iteration": 3150,
+        "temperature": 1.3890067269733044e-07,
+        "accepted_moves": 532,
+        "total": 146681.51090731943,
+        "curvature": 128195.33285731939,
+        "fidelity": 18486.178050000046
+      },
+      {
+        "iteration": 3160,
+        "temperature": 1.321098369309414e-07,
+        "accepted_moves": 533,
+        "total": 146681.51090731943,
+        "curvature": 128195.33285731939,
+        "fidelity": 18486.178050000046
+      },
+      {
+        "iteration": 3170,
+        "temperature": 1.2565100423919957e-07,
+        "accepted_moves": 534,
+        "total": 146681.51090731943,
+        "curvature": 128195.33285731939,
+        "fidelity": 18486.178050000046
+      },
+      {
+        "iteration": 3180,
+        "temperature": 1.1950794303510038e-07,
+        "accepted_moves": 536,
+        "total": 146681.51090731943,
+        "curvature": 128195.33285731939,
+        "fidelity": 18486.178050000046
+      },
+      {
+        "iteration": 3190,
+        "temperature": 1.1366521529181035e-07,
+        "accepted_moves": 536,
+        "total": 146681.51090731943,
+        "curvature": 128195.33285731939,
+        "fidelity": 18486.178050000046
+      },
+      {
+        "iteration": 3200,
+        "temperature": 1.0810813774561376e-07,
+        "accepted_moves": 539,
+        "total": 146681.51090731943,
+        "curvature": 128195.33285731939,
+        "fidelity": 18486.178050000046
+      },
+      {
+        "iteration": 3210,
+        "temperature": 1.0282274499564235e-07,
+        "accepted_moves": 539,
+        "total": 146681.51090731943,
+        "curvature": 128195.33285731939,
+        "fidelity": 18486.178050000046
+      },
+      {
+        "iteration": 3220,
+        "temperature": 9.779575440765419e-08,
+        "accepted_moves": 540,
+        "total": 146681.51090731943,
+        "curvature": 128195.33285731939,
+        "fidelity": 18486.178050000046
+      },
+      {
+        "iteration": 3230,
+        "temperature": 9.301453273366255e-08,
+        "accepted_moves": 541,
+        "total": 146681.51090731943,
+        "curvature": 128195.33285731939,
+        "fidelity": 18486.178050000046
+      },
+      {
+        "iteration": 3240,
+        "temperature": 8.84670643635266e-08,
+        "accepted_moves": 543,
+        "total": 146681.51090731943,
+        "curvature": 128195.33285731939,
+        "fidelity": 18486.178050000046
+      },
+      {
+        "iteration": 3250,
+        "temperature": 8.414192112871759e-08,
+        "accepted_moves": 545,
+        "total": 146681.51090731943,
+        "curvature": 128195.33285731939,
+        "fidelity": 18486.178050000046
+      },
+      {
+        "iteration": 3260,
+        "temperature": 8.00282335823753e-08,
+        "accepted_moves": 547,
+        "total": 146681.51090731943,
+        "curvature": 128195.33285731939,
+        "fidelity": 18486.178050000046
+      },
+      {
+        "iteration": 3270,
+        "temperature": 7.611566368347823e-08,
+        "accepted_moves": 547,
+        "total": 146681.51090731943,
+        "curvature": 128195.33285731939,
+        "fidelity": 18486.178050000046
+      },
+      {
+        "iteration": 3280,
+        "temperature": 7.239437881648179e-08,
+        "accepted_moves": 548,
+        "total": 146392.59827617538,
+        "curvature": 127900.11642617533,
+        "fidelity": 18492.481850000047
+      },
+      {
+        "iteration": 3290,
+        "temperature": 6.885502708113252e-08,
+        "accepted_moves": 549,
+        "total": 146392.59827617538,
+        "curvature": 127900.11642617533,
+        "fidelity": 18492.481850000047
+      },
+      {
+        "iteration": 3300,
+        "temperature": 6.54887137903602e-08,
+        "accepted_moves": 552,
+        "total": 146123.76226940393,
+        "curvature": 126862.3191694039,
+        "fidelity": 19261.443100000037
+      },
+      {
+        "iteration": 3310,
+        "temperature": 6.228697911718511e-08,
+        "accepted_moves": 554,
+        "total": 146123.76226940393,
+        "curvature": 126862.3191694039,
+        "fidelity": 19261.443100000037
+      },
+      {
+        "iteration": 3320,
+        "temperature": 5.9241776834464715e-08,
+        "accepted_moves": 554,
+        "total": 146123.76226940393,
+        "curvature": 126862.3191694039,
+        "fidelity": 19261.443100000037
+      },
+      {
+        "iteration": 3330,
+        "temperature": 5.634545409405188e-08,
+        "accepted_moves": 559,
+        "total": 146123.76226940393,
+        "curvature": 126862.3191694039,
+        "fidelity": 19261.443100000037
+      },
+      {
+        "iteration": 3340,
+        "temperature": 5.3590732194546845e-08,
+        "accepted_moves": 560,
+        "total": 146123.76226940393,
+        "curvature": 126862.3191694039,
+        "fidelity": 19261.443100000037
+      },
+      {
+        "iteration": 3350,
+        "temperature": 5.0970688289311693e-08,
+        "accepted_moves": 561,
+        "total": 146123.76226940393,
+        "curvature": 126862.3191694039,
+        "fidelity": 19261.443100000037
+      },
+      {
+        "iteration": 3360,
+        "temperature": 4.847873798877743e-08,
+        "accepted_moves": 561,
+        "total": 146123.76226940393,
+        "curvature": 126862.3191694039,
+        "fidelity": 19261.443100000037
+      },
+      {
+        "iteration": 3370,
+        "temperature": 4.610861881332208e-08,
+        "accepted_moves": 562,
+        "total": 146123.76226940393,
+        "curvature": 126862.3191694039,
+        "fidelity": 19261.443100000037
+      },
+      {
+        "iteration": 3380,
+        "temperature": 4.3854374455135304e-08,
+        "accepted_moves": 566,
+        "total": 146123.76226940393,
+        "curvature": 126862.3191694039,
+        "fidelity": 19261.443100000037
+      },
+      {
+        "iteration": 3390,
+        "temperature": 4.171033980951856e-08,
+        "accepted_moves": 571,
+        "total": 145462.99145884163,
+        "curvature": 125628.1127088416,
+        "fidelity": 19834.878750000033
+      },
+      {
+        "iteration": 3400,
+        "temperature": 3.967112673800288e-08,
+        "accepted_moves": 574,
+        "total": 145228.94975104573,
+        "curvature": 125641.69300104569,
+        "fidelity": 19587.256750000033
+      },
+      {
+        "iteration": 3410,
+        "temperature": 3.7731610527506085e-08,
+        "accepted_moves": 578,
+        "total": 144689.61744751746,
+        "curvature": 124921.42709751743,
+        "fidelity": 19768.19035000004
+      },
+      {
+        "iteration": 3420,
+        "temperature": 3.5886917011500007e-08,
+        "accepted_moves": 580,
+        "total": 144689.61744751746,
+        "curvature": 124921.42709751743,
+        "fidelity": 19768.19035000004
+      },
+      {
+        "iteration": 3430,
+        "temperature": 3.41324103208221e-08,
+        "accepted_moves": 581,
+        "total": 144689.61744751746,
+        "curvature": 124921.42709751743,
+        "fidelity": 19768.19035000004
+      },
+      {
+        "iteration": 3440,
+        "temperature": 3.2463681233348365e-08,
+        "accepted_moves": 583,
+        "total": 144689.61744751746,
+        "curvature": 124921.42709751743,
+        "fidelity": 19768.19035000004
+      },
+      {
+        "iteration": 3450,
+        "temperature": 3.0876536093249186e-08,
+        "accepted_moves": 585,
+        "total": 144689.61744751746,
+        "curvature": 124921.42709751743,
+        "fidelity": 19768.19035000004
+      },
+      {
+        "iteration": 3460,
+        "temperature": 2.9366986271981353e-08,
+        "accepted_moves": 587,
+        "total": 144689.61744751746,
+        "curvature": 124921.42709751743,
+        "fidelity": 19768.19035000004
+      },
+      {
+        "iteration": 3470,
+        "temperature": 2.7931238144530714e-08,
+        "accepted_moves": 588,
+        "total": 144689.61744751746,
+        "curvature": 124921.42709751743,
+        "fidelity": 19768.19035000004
+      },
+      {
+        "iteration": 3480,
+        "temperature": 2.656568355571515e-08,
+        "accepted_moves": 591,
+        "total": 143984.61278516907,
+        "curvature": 123460.61463516903,
+        "fidelity": 20523.998150000036
+      },
+      {
+        "iteration": 3490,
+        "temperature": 2.5266890752588646e-08,
+        "accepted_moves": 593,
+        "total": 143570.04372465468,
+        "curvature": 123268.69437465465,
+        "fidelity": 20301.349350000037
+      },
+      {
+        "iteration": 3500,
+        "temperature": 2.4031595760158995e-08,
+        "accepted_moves": 596,
+        "total": 142345.80313215547,
+        "curvature": 122449.12598215544,
+        "fidelity": 19896.67715000004
+      },
+      {
+        "iteration": 3510,
+        "temperature": 2.285669417874551e-08,
+        "accepted_moves": 597,
+        "total": 142345.80313215547,
+        "curvature": 122449.12598215544,
+        "fidelity": 19896.67715000004
+      },
+      {
+        "iteration": 3520,
+        "temperature": 2.1739233382362887e-08,
+        "accepted_moves": 599,
+        "total": 142345.80313215547,
+        "curvature": 122449.12598215544,
+        "fidelity": 19896.67715000004
+      },
+      {
+        "iteration": 3530,
+        "temperature": 2.0676405098525035e-08,
+        "accepted_moves": 599,
+        "total": 142345.80313215547,
+        "curvature": 122449.12598215544,
+        "fidelity": 19896.67715000004
+      },
+      {
+        "iteration": 3540,
+        "temperature": 1.9665538350821297e-08,
+        "accepted_moves": 599,
+        "total": 142345.80313215547,
+        "curvature": 122449.12598215544,
+        "fidelity": 19896.67715000004
+      },
+      {
+        "iteration": 3550,
+        "temperature": 1.8704092746529285e-08,
+        "accepted_moves": 600,
+        "total": 142345.80313215547,
+        "curvature": 122449.12598215544,
+        "fidelity": 19896.67715000004
+      },
+      {
+        "iteration": 3560,
+        "temperature": 1.7789652092395367e-08,
+        "accepted_moves": 603,
+        "total": 142345.80313215547,
+        "curvature": 122449.12598215544,
+        "fidelity": 19896.67715000004
+      },
+      {
+        "iteration": 3570,
+        "temperature": 1.6919918322538846e-08,
+        "accepted_moves": 607,
+        "total": 142345.80313215547,
+        "curvature": 122449.12598215544,
+        "fidelity": 19896.67715000004
+      },
+      {
+        "iteration": 3580,
+        "temperature": 1.6092705723220126e-08,
+        "accepted_moves": 610,
+        "total": 142345.80313215547,
+        "curvature": 122449.12598215544,
+        "fidelity": 19896.67715000004
+      },
+      {
+        "iteration": 3590,
+        "temperature": 1.5305935439959167e-08,
+        "accepted_moves": 612,
+        "total": 142345.80313215547,
+        "curvature": 122449.12598215544,
+        "fidelity": 19896.67715000004
+      },
+      {
+        "iteration": 3600,
+        "temperature": 1.4557630253200242e-08,
+        "accepted_moves": 613,
+        "total": 142345.80313215547,
+        "curvature": 122449.12598215544,
+        "fidelity": 19896.67715000004
+      },
+      {
+        "iteration": 3610,
+        "temperature": 1.384590960939375e-08,
+        "accepted_moves": 614,
+        "total": 142345.80313215547,
+        "curvature": 122449.12598215544,
+        "fidelity": 19896.67715000004
+      },
+      {
+        "iteration": 3620,
+        "temperature": 1.3168984895007777e-08,
+        "accepted_moves": 614,
+        "total": 142345.80313215547,
+        "curvature": 122449.12598215544,
+        "fidelity": 19896.67715000004
+      },
+      {
+        "iteration": 3630,
+        "temperature": 1.2525154941592626e-08,
+        "accepted_moves": 616,
+        "total": 142345.80313215547,
+        "curvature": 122449.12598215544,
+        "fidelity": 19896.67715000004
+      },
+      {
+        "iteration": 3640,
+        "temperature": 1.1912801750602169e-08,
+        "accepted_moves": 616,
+        "total": 142345.80313215547,
+        "curvature": 122449.12598215544,
+        "fidelity": 19896.67715000004
+      },
+      {
+        "iteration": 3650,
+        "temperature": 1.1330386427228106e-08,
+        "accepted_moves": 617,
+        "total": 142345.80313215547,
+        "curvature": 122449.12598215544,
+        "fidelity": 19896.67715000004
+      },
+      {
+        "iteration": 3660,
+        "temperature": 1.0776445313028533e-08,
+        "accepted_moves": 619,
+        "total": 141459.83318060247,
+        "curvature": 121137.24673060243,
+        "fidelity": 20322.58645000004
+      },
+      {
+        "iteration": 3670,
+        "temperature": 1.0249586307631821e-08,
+        "accepted_moves": 620,
+        "total": 141136.8294978163,
+        "curvature": 120517.32444781627,
+        "fidelity": 20619.505050000043
+      },
+      {
+        "iteration": 3680,
+        "temperature": 9.748485370271888e-09,
+        "accepted_moves": 621,
+        "total": 141136.8294978163,
+        "curvature": 120517.32444781627,
+        "fidelity": 20619.505050000043
+      },
+      {
+        "iteration": 3690,
+        "temperature": 9.271883192362962e-09,
+        "accepted_moves": 623,
+        "total": 141136.8294978163,
+        "curvature": 120517.32444781627,
+        "fidelity": 20619.505050000043
+      },
+      {
+        "iteration": 3700,
+        "temperature": 8.818582032751733e-09,
+        "accepted_moves": 623,
+        "total": 141136.8294978163,
+        "curvature": 120517.32444781627,
+        "fidelity": 20619.505050000043
+      },
+      {
+        "iteration": 3710,
+        "temperature": 8.387442707693612e-09,
+        "accepted_moves": 624,
+        "total": 141023.92388016474,
+        "curvature": 120304.7157301647,
+        "fidelity": 20719.208150000046
+      },
+      {
+        "iteration": 3720,
+        "temperature": 7.977381727988655e-09,
+        "accepted_moves": 625,
+        "total": 141023.92388016474,
+        "curvature": 120304.7157301647,
+        "fidelity": 20719.208150000046
+      },
+      {
+        "iteration": 3730,
+        "temperature": 7.587368576082554e-09,
+        "accepted_moves": 625,
+        "total": 141023.92388016474,
+        "curvature": 120304.7157301647,
+        "fidelity": 20719.208150000046
+      },
+      {
+        "iteration": 3740,
+        "temperature": 7.216423116289778e-09,
+        "accepted_moves": 627,
+        "total": 141023.92388016474,
+        "curvature": 120304.7157301647,
+        "fidelity": 20719.208150000046
+      },
+      {
+        "iteration": 3750,
+        "temperature": 6.8636131316305845e-09,
+        "accepted_moves": 630,
+        "total": 141023.92388016474,
+        "curvature": 120304.7157301647,
+        "fidelity": 20719.208150000046
+      },
+      {
+        "iteration": 3760,
+        "temperature": 6.52805198109175e-09,
+        "accepted_moves": 634,
+        "total": 141023.92388016474,
+        "curvature": 120304.7157301647,
+        "fidelity": 20719.208150000046
+      },
+      {
+        "iteration": 3770,
+        "temperature": 6.208896371423515e-09,
+        "accepted_moves": 636,
+        "total": 140013.52379949242,
+        "curvature": 119294.26744949238,
+        "fidelity": 20719.25635000005
+      },
+      {
+        "iteration": 3780,
+        "temperature": 5.905344237873078e-09,
+        "accepted_moves": 638,
+        "total": 140013.52379949242,
+        "curvature": 119294.26744949238,
+        "fidelity": 20719.25635000005
+      },
+      {
+        "iteration": 3790,
+        "temperature": 5.616632728528756e-09,
+        "accepted_moves": 638,
+        "total": 140013.52379949242,
+        "curvature": 119294.26744949238,
+        "fidelity": 20719.25635000005
+      },
+      {
+        "iteration": 3800,
+        "temperature": 5.342036287209309e-09,
+        "accepted_moves": 640,
+        "total": 140013.52379949242,
+        "curvature": 119294.26744949238,
+        "fidelity": 20719.25635000005
+      },
+      {
+        "iteration": 3810,
+        "temperature": 5.080864830080533e-09,
+        "accepted_moves": 641,
+        "total": 140013.52379949242,
+        "curvature": 119294.26744949238,
+        "fidelity": 20719.25635000005
+      },
+      {
+        "iteration": 3820,
+        "temperature": 4.832462011416848e-09,
+        "accepted_moves": 641,
+        "total": 140013.52379949242,
+        "curvature": 119294.26744949238,
+        "fidelity": 20719.25635000005
+      },
+      {
+        "iteration": 3830,
+        "temperature": 4.596203574149564e-09,
+        "accepted_moves": 642,
+        "total": 140007.77089536175,
+        "curvature": 119201.31834536171,
+        "fidelity": 20806.452550000045
+      },
+      {
+        "iteration": 3840,
+        "temperature": 4.371495781056639e-09,
+        "accepted_moves": 644,
+        "total": 140007.77089536175,
+        "curvature": 119201.31834536171,
+        "fidelity": 20806.452550000045
+      },
+      {
+        "iteration": 3850,
+        "temperature": 4.1577739226513516e-09,
+        "accepted_moves": 646,
+        "total": 139682.6880407335,
+        "curvature": 118838.24964073347,
+        "fidelity": 20844.438400000057
+      },
+      {
+        "iteration": 3860,
+        "temperature": 3.954500898020111e-09,
+        "accepted_moves": 648,
+        "total": 139682.6880407335,
+        "curvature": 118838.24964073347,
+        "fidelity": 20844.438400000057
+      },
+      {
+        "iteration": 3870,
+        "temperature": 3.76116586504292e-09,
+        "accepted_moves": 648,
+        "total": 139682.6880407335,
+        "curvature": 118838.24964073347,
+        "fidelity": 20844.438400000057
+      },
+      {
+        "iteration": 3880,
+        "temperature": 3.577282956604379e-09,
+        "accepted_moves": 649,
+        "total": 139682.6880407335,
+        "curvature": 118838.24964073347,
+        "fidelity": 20844.438400000057
+      },
+      {
+        "iteration": 3890,
+        "temperature": 3.402390059568973e-09,
+        "accepted_moves": 651,
+        "total": 139468.45746652974,
+        "curvature": 118549.90296652968,
+        "fidelity": 20918.554500000057
+      },
+      {
+        "iteration": 3900,
+        "temperature": 3.2360476534520918e-09,
+        "accepted_moves": 653,
+        "total": 139468.45746652974,
+        "curvature": 118549.90296652968,
+        "fidelity": 20918.554500000057
+      },
+      {
+        "iteration": 3910,
+        "temperature": 3.0778377058682735e-09,
+        "accepted_moves": 655,
+        "total": 139468.45746652974,
+        "curvature": 118549.90296652968,
+        "fidelity": 20918.554500000057
+      },
+      {
+        "iteration": 3920,
+        "temperature": 2.9273626219808455e-09,
+        "accepted_moves": 656,
+        "total": 139468.45746652974,
+        "curvature": 118549.90296652968,
+        "fidelity": 20918.554500000057
+      },
+      {
+        "iteration": 3930,
+        "temperature": 2.7842442453128253e-09,
+        "accepted_moves": 657,
+        "total": 139468.45746652974,
+        "curvature": 118549.90296652968,
+        "fidelity": 20918.554500000057
+      },
+      {
+        "iteration": 3940,
+        "temperature": 2.6481229074080557e-09,
+        "accepted_moves": 658,
+        "total": 139468.45746652974,
+        "curvature": 118549.90296652968,
+        "fidelity": 20918.554500000057
+      },
+      {
+        "iteration": 3950,
+        "temperature": 2.5186565239542747e-09,
+        "accepted_moves": 659,
+        "total": 139468.45746652974,
+        "curvature": 118549.90296652968,
+        "fidelity": 20918.554500000057
+      },
+      {
+        "iteration": 3960,
+        "temperature": 2.3955197350966178e-09,
+        "accepted_moves": 660,
+        "total": 139468.45746652974,
+        "curvature": 118549.90296652968,
+        "fidelity": 20918.554500000057
+      },
+      {
+        "iteration": 3970,
+        "temperature": 2.2784030877810754e-09,
+        "accepted_moves": 661,
+        "total": 139468.45746652974,
+        "curvature": 118549.90296652968,
+        "fidelity": 20918.554500000057
+      },
+      {
+        "iteration": 3980,
+        "temperature": 2.167012258073076e-09,
+        "accepted_moves": 662,
+        "total": 139468.45746652974,
+        "curvature": 118549.90296652968,
+        "fidelity": 20918.554500000057
+      },
+      {
+        "iteration": 3990,
+        "temperature": 2.06106731149681e-09,
+        "accepted_moves": 662,
+        "total": 139468.45746652974,
+        "curvature": 118549.90296652968,
+        "fidelity": 20918.554500000057
+      },
+      {
+        "iteration": 4000,
+        "temperature": 1.960301999536469e-09,
+        "accepted_moves": 666,
+        "total": 139468.45746652974,
+        "curvature": 118549.90296652968,
+        "fidelity": 20918.554500000057
+      },
+      {
+        "iteration": 4010,
+        "temperature": 1.864463090531445e-09,
+        "accepted_moves": 669,
+        "total": 139468.45746652974,
+        "curvature": 118549.90296652968,
+        "fidelity": 20918.554500000057
+      },
+      {
+        "iteration": 4020,
+        "temperature": 1.773309733283979e-09,
+        "accepted_moves": 670,
+        "total": 139468.45746652974,
+        "curvature": 118549.90296652968,
+        "fidelity": 20918.554500000057
+      },
+      {
+        "iteration": 4030,
+        "temperature": 1.686612851779948e-09,
+        "accepted_moves": 671,
+        "total": 139468.45746652974,
+        "curvature": 118549.90296652968,
+        "fidelity": 20918.554500000057
+      },
+      {
+        "iteration": 4040,
+        "temperature": 1.6041545695016743e-09,
+        "accepted_moves": 673,
+        "total": 139468.45746652974,
+        "curvature": 118549.90296652968,
+        "fidelity": 20918.554500000057
+      },
+      {
+        "iteration": 4050,
+        "temperature": 1.5257276618860016e-09,
+        "accepted_moves": 679,
+        "total": 139468.45746652974,
+        "curvature": 118549.90296652968,
+        "fidelity": 20918.554500000057
+      },
+      {
+        "iteration": 4060,
+        "temperature": 1.451135035551632e-09,
+        "accepted_moves": 681,
+        "total": 139468.45746652974,
+        "curvature": 118549.90296652968,
+        "fidelity": 20918.554500000057
+      },
+      {
+        "iteration": 4070,
+        "temperature": 1.3801892329869652e-09,
+        "accepted_moves": 682,
+        "total": 139468.45746652974,
+        "curvature": 118549.90296652968,
+        "fidelity": 20918.554500000057
+      },
+      {
+        "iteration": 4080,
+        "temperature": 1.3127119614536861e-09,
+        "accepted_moves": 684,
+        "total": 139468.45746652974,
+        "curvature": 118549.90296652968,
+        "fidelity": 20918.554500000057
+      },
+      {
+        "iteration": 4090,
+        "temperature": 1.2485336449221948e-09,
+        "accepted_moves": 685,
+        "total": 139468.45746652974,
+        "curvature": 118549.90296652968,
+        "fidelity": 20918.554500000057
+      },
+      {
+        "iteration": 4100,
+        "temperature": 1.1874929979128545e-09,
+        "accepted_moves": 686,
+        "total": 139468.45746652974,
+        "curvature": 118549.90296652968,
+        "fidelity": 20918.554500000057
+      },
+      {
+        "iteration": 4110,
+        "temperature": 1.1294366201720854e-09,
+        "accepted_moves": 687,
+        "total": 139468.45746652974,
+        "curvature": 118549.90296652968,
+        "fidelity": 20918.554500000057
+      },
+      {
+        "iteration": 4120,
+        "temperature": 1.0742186111646927e-09,
+        "accepted_moves": 687,
+        "total": 139468.45746652974,
+        "curvature": 118549.90296652968,
+        "fidelity": 20918.554500000057
+      },
+      {
+        "iteration": 4130,
+        "temperature": 1.0217002034136112e-09,
+        "accepted_moves": 689,
+        "total": 139468.45746652974,
+        "curvature": 118549.90296652968,
+        "fidelity": 20918.554500000057
+      },
+      {
+        "iteration": 4140,
+        "temperature": 9.717494137656255e-10,
+        "accepted_moves": 693,
+        "total": 139468.45746652974,
+        "curvature": 118549.90296652968,
+        "fidelity": 20918.554500000057
+      },
+      {
+        "iteration": 4150,
+        "temperature": 9.242407117066612e-10,
+        "accepted_moves": 694,
+        "total": 139468.45746652974,
+        "curvature": 118549.90296652968,
+        "fidelity": 20918.554500000057
+      },
+      {
+        "iteration": 4160,
+        "temperature": 8.790547038931005e-10,
+        "accepted_moves": 695,
+        "total": 139468.45746652974,
+        "curvature": 118549.90296652968,
+        "fidelity": 20918.554500000057
+      },
+      {
+        "iteration": 4170,
+        "temperature": 8.360778341063172e-10,
+        "accepted_moves": 700,
+        "total": 139468.45746652974,
+        "curvature": 118549.90296652968,
+        "fidelity": 20918.554500000057
+      },
+      {
+        "iteration": 4180,
+        "temperature": 7.952020978763993e-10,
+        "accepted_moves": 703,
+        "total": 139468.45746652974,
+        "curvature": 118549.90296652968,
+        "fidelity": 20918.554500000057
+      },
+      {
+        "iteration": 4190,
+        "temperature": 7.563247710578775e-10,
+        "accepted_moves": 707,
+        "total": 139468.45746652974,
+        "curvature": 118549.90296652968,
+        "fidelity": 20918.554500000057
+      },
+      {
+        "iteration": 4200,
+        "temperature": 7.193481516753529e-10,
+        "accepted_moves": 708,
+        "total": 139468.45746652974,
+        "curvature": 118549.90296652968,
+        "fidelity": 20918.554500000057
+      },
+      {
+        "iteration": 4210,
+        "temperature": 6.841793143902568e-10,
+        "accepted_moves": 709,
+        "total": 139468.45746652974,
+        "curvature": 118549.90296652968,
+        "fidelity": 20918.554500000057
+      },
+      {
+        "iteration": 4220,
+        "temperature": 6.507298769716996e-10,
+        "accepted_moves": 709,
+        "total": 139468.45746652974,
+        "curvature": 118549.90296652968,
+        "fidelity": 20918.554500000057
+      },
+      {
+        "iteration": 4230,
+        "temperature": 6.189157781845289e-10,
+        "accepted_moves": 710,
+        "total": 139468.45746652974,
+        "curvature": 118549.90296652968,
+        "fidelity": 20918.554500000057
+      },
+      {
+        "iteration": 4240,
+        "temperature": 5.886570665364121e-10,
+        "accepted_moves": 712,
+        "total": 139468.45746652974,
+        "curvature": 118549.90296652968,
+        "fidelity": 20918.554500000057
+      },
+      {
+        "iteration": 4250,
+        "temperature": 5.598776993530454e-10,
+        "accepted_moves": 714,
+        "total": 139468.45746652974,
+        "curvature": 118549.90296652968,
+        "fidelity": 20918.554500000057
+      },
+      {
+        "iteration": 4260,
+        "temperature": 5.325053516765514e-10,
+        "accepted_moves": 716,
+        "total": 139468.45746652974,
+        "curvature": 118549.90296652968,
+        "fidelity": 20918.554500000057
+      },
+      {
+        "iteration": 4270,
+        "temperature": 5.064712345068064e-10,
+        "accepted_moves": 717,
+        "total": 139468.45746652974,
+        "curvature": 118549.90296652968,
+        "fidelity": 20918.554500000057
+      },
+      {
+        "iteration": 4280,
+        "temperature": 4.817099219289291e-10,
+        "accepted_moves": 718,
+        "total": 139468.45746652974,
+        "curvature": 118549.90296652968,
+        "fidelity": 20918.554500000057
+      },
+      {
+        "iteration": 4290,
+        "temperature": 4.5815918669248054e-10,
+        "accepted_moves": 719,
+        "total": 139468.45746652974,
+        "curvature": 118549.90296652968,
+        "fidelity": 20918.554500000057
+      },
+      {
+        "iteration": 4300,
+        "temperature": 4.3575984382917716e-10,
+        "accepted_moves": 719,
+        "total": 139468.45746652974,
+        "curvature": 118549.90296652968,
+        "fidelity": 20918.554500000057
+      },
+      {
+        "iteration": 4310,
+        "temperature": 4.14455601916113e-10,
+        "accepted_moves": 721,
+        "total": 139468.45746652974,
+        "curvature": 118549.90296652968,
+        "fidelity": 20918.554500000057
+      },
+      {
+        "iteration": 4320,
+        "temperature": 3.941929216107042e-10,
+        "accepted_moves": 722,
+        "total": 139468.45746652974,
+        "curvature": 118549.90296652968,
+        "fidelity": 20918.554500000057
+      },
+      {
+        "iteration": 4330,
+        "temperature": 3.749208811018406e-10,
+        "accepted_moves": 725,
+        "total": 139260.23476943266,
+        "curvature": 117980.7652694326,
+        "fidelity": 21279.46950000006
+      },
+      {
+        "iteration": 4340,
+        "temperature": 3.5659104813911373e-10,
+        "accepted_moves": 729,
+        "total": 139260.23476943266,
+        "curvature": 117980.7652694326,
+        "fidelity": 21279.46950000006
+      },
+      {
+        "iteration": 4350,
+        "temperature": 3.391573583185188e-10,
+        "accepted_moves": 729,
+        "total": 139260.23476943266,
+        "curvature": 117980.7652694326,
+        "fidelity": 21279.46950000006
+      },
+      {
+        "iteration": 4360,
+        "temperature": 3.2257599931875297e-10,
+        "accepted_moves": 731,
+        "total": 139260.23476943266,
+        "curvature": 117980.7652694326,
+        "fidelity": 21279.46950000006
+      },
+      {
+        "iteration": 4370,
+        "temperature": 3.068053007971858e-10,
+        "accepted_moves": 734,
+        "total": 139260.23476943266,
+        "curvature": 117980.7652694326,
+        "fidelity": 21279.46950000006
+      },
+      {
+        "iteration": 4380,
+        "temperature": 2.918056296688017e-10,
+        "accepted_moves": 735,
+        "total": 139260.23476943266,
+        "curvature": 117980.7652694326,
+        "fidelity": 21279.46950000006
+      },
+      {
+        "iteration": 4390,
+        "temperature": 2.775392905049407e-10,
+        "accepted_moves": 737,
+        "total": 139260.23476943266,
+        "curvature": 117980.7652694326,
+        "fidelity": 21279.46950000006
+      },
+      {
+        "iteration": 4400,
+        "temperature": 2.63970430801532e-10,
+        "accepted_moves": 739,
+        "total": 139260.23476943266,
+        "curvature": 117980.7652694326,
+        "fidelity": 21279.46950000006
+      },
+      {
+        "iteration": 4410,
+        "temperature": 2.510649508787511e-10,
+        "accepted_moves": 742,
+        "total": 137801.33801424355,
+        "curvature": 115692.76811424349,
+        "fidelity": 22108.569900000057
+      },
+      {
+        "iteration": 4420,
+        "temperature": 2.3879041818567163e-10,
+        "accepted_moves": 743,
+        "total": 137801.33801424355,
+        "curvature": 115692.76811424349,
+        "fidelity": 22108.569900000057
+      },
+      {
+        "iteration": 4430,
+        "temperature": 2.2711598579455037e-10,
+        "accepted_moves": 746,
+        "total": 137801.33801424355,
+        "curvature": 115692.76811424349,
+        "fidelity": 22108.569900000057
+      },
+      {
+        "iteration": 4440,
+        "temperature": 2.160123148799172e-10,
+        "accepted_moves": 747,
+        "total": 137801.33801424355,
+        "curvature": 115692.76811424349,
+        "fidelity": 22108.569900000057
+      },
+      {
+        "iteration": 4450,
+        "temperature": 2.0545150098765144e-10,
+        "accepted_moves": 747,
+        "total": 137801.33801424355,
+        "curvature": 115692.76811424349,
+        "fidelity": 22108.569900000057
+      },
+      {
+        "iteration": 4460,
+        "temperature": 1.9540700390875384e-10,
+        "accepted_moves": 748,
+        "total": 137399.69521788848,
+        "curvature": 115119.13146788842,
+        "fidelity": 22280.563750000052
+      },
+      {
+        "iteration": 4470,
+        "temperature": 1.8585358098158045e-10,
+        "accepted_moves": 749,
+        "total": 137399.69521788848,
+        "curvature": 115119.13146788842,
+        "fidelity": 22280.563750000052
+      },
+      {
+        "iteration": 4480,
+        "temperature": 1.7676722365492189e-10,
+        "accepted_moves": 751,
+        "total": 137399.69521788848,
+        "curvature": 115119.13146788842,
+        "fidelity": 22280.563750000052
+      },
+      {
+        "iteration": 4490,
+        "temperature": 1.6812509715250501e-10,
+        "accepted_moves": 754,
+        "total": 137399.69521788848,
+        "curvature": 115119.13146788842,
+        "fidelity": 22280.563750000052
+      },
+      {
+        "iteration": 4500,
+        "temperature": 1.599054830872896e-10,
+        "accepted_moves": 756,
+        "total": 137399.69521788848,
+        "curvature": 115119.13146788842,
+        "fidelity": 22280.563750000052
+      },
+      {
+        "iteration": 4510,
+        "temperature": 1.5208772488134431e-10,
+        "accepted_moves": 756,
+        "total": 137399.69521788848,
+        "curvature": 115119.13146788842,
+        "fidelity": 22280.563750000052
+      },
+      {
+        "iteration": 4520,
+        "temperature": 1.4465217585413776e-10,
+        "accepted_moves": 759,
+        "total": 137399.69521788848,
+        "curvature": 115119.13146788842,
+        "fidelity": 22280.563750000052
+      },
+      {
+        "iteration": 4530,
+        "temperature": 1.3758014984878676e-10,
+        "accepted_moves": 759,
+        "total": 137399.69521788848,
+        "curvature": 115119.13146788842,
+        "fidelity": 22280.563750000052
+      },
+      {
+        "iteration": 4540,
+        "temperature": 1.3085387427217997e-10,
+        "accepted_moves": 761,
+        "total": 137399.69521788848,
+        "curvature": 115119.13146788842,
+        "fidelity": 22280.563750000052
+      },
+      {
+        "iteration": 4550,
+        "temperature": 1.2445644543096483e-10,
+        "accepted_moves": 763,
+        "total": 137280.63876725928,
+        "curvature": 114761.96326725924,
+        "fidelity": 22518.67550000005
+      },
+      {
+        "iteration": 4560,
+        "temperature": 1.183717860511512e-10,
+        "accepted_moves": 764,
+        "total": 137280.63876725928,
+        "curvature": 114761.96326725924,
+        "fidelity": 22518.67550000005
+      },
+      {
+        "iteration": 4570,
+        "temperature": 1.1258460487457683e-10,
+        "accepted_moves": 767,
+        "total": 137280.63876725928,
+        "curvature": 114761.96326725924,
+        "fidelity": 22518.67550000005
+      },
+      {
+        "iteration": 4580,
+        "temperature": 1.0708035823069614e-10,
+        "accepted_moves": 769,
+        "total": 137117.43980117788,
+        "curvature": 114967.54860117784,
+        "fidelity": 22149.89120000005
+      },
+      {
+        "iteration": 4590,
+        "temperature": 1.01845213487119e-10,
+        "accepted_moves": 769,
+        "total": 137117.43980117788,
+        "curvature": 114967.54860117784,
+        "fidelity": 22149.89120000005
+      },
+      {
+        "iteration": 4600,
+        "temperature": 9.686601428704811e-11,
+        "accepted_moves": 770,
+        "total": 137117.43980117788,
+        "curvature": 114967.54860117784,
+        "fidelity": 22149.89120000005
+      },
+      {
+        "iteration": 4610,
+        "temperature": 9.213024748625365e-11,
+        "accepted_moves": 773,
+        "total": 137117.43980117788,
+        "curvature": 114967.54860117784,
+        "fidelity": 22149.89120000005
+      },
+      {
+        "iteration": 4620,
+        "temperature": 8.762601170649456e-11,
+        "accepted_moves": 775,
+        "total": 137117.43980117788,
+        "curvature": 114967.54860117784,
+        "fidelity": 22149.89120000005
+      },
+      {
+        "iteration": 4630,
+        "temperature": 8.334198742635928e-11,
+        "accepted_moves": 776,
+        "total": 137117.43980117788,
+        "curvature": 114967.54860117784,
+        "fidelity": 22149.89120000005
+      },
+      {
+        "iteration": 4640,
+        "temperature": 7.926740853436129e-11,
+        "accepted_moves": 779,
+        "total": 137117.43980117788,
+        "curvature": 114967.54860117784,
+        "fidelity": 22149.89120000005
+      },
+      {
+        "iteration": 4650,
+        "temperature": 7.53920352728e-11,
+        "accepted_moves": 781,
+        "total": 137117.43980117788,
+        "curvature": 114967.54860117784,
+        "fidelity": 22149.89120000005
+      },
+      {
+        "iteration": 4660,
+        "temperature": 7.170612850439287e-11,
+        "accepted_moves": 781,
+        "total": 137117.43980117788,
+        "curvature": 114967.54860117784,
+        "fidelity": 22149.89120000005
+      },
+      {
+        "iteration": 4670,
+        "temperature": 6.820042523700852e-11,
+        "accepted_moves": 781,
+        "total": 137117.43980117788,
+        "curvature": 114967.54860117784,
+        "fidelity": 22149.89120000005
+      },
+      {
+        "iteration": 4680,
+        "temperature": 6.48661153449923e-11,
+        "accepted_moves": 784,
+        "total": 137117.43980117788,
+        "curvature": 114967.54860117784,
+        "fidelity": 22149.89120000005
+      },
+      {
+        "iteration": 4690,
+        "temperature": 6.169481942858345e-11,
+        "accepted_moves": 785,
+        "total": 137117.43980117788,
+        "curvature": 114967.54860117784,
+        "fidelity": 22149.89120000005
+      },
+      {
+        "iteration": 4700,
+        "temperature": 5.867856775578224e-11,
+        "accepted_moves": 788,
+        "total": 137117.43980117788,
+        "curvature": 114967.54860117784,
+        "fidelity": 22149.89120000005
+      },
+      {
+        "iteration": 4710,
+        "temperature": 5.5809780233746676e-11,
+        "accepted_moves": 790,
+        "total": 137117.43980117788,
+        "curvature": 114967.54860117784,
+        "fidelity": 22149.89120000005
+      },
+      {
+        "iteration": 4720,
+        "temperature": 5.308124735938486e-11,
+        "accepted_moves": 791,
+        "total": 137117.43980117788,
+        "curvature": 114967.54860117784,
+        "fidelity": 22149.89120000005
+      },
+      {
+        "iteration": 4730,
+        "temperature": 5.0486112101270446e-11,
+        "accepted_moves": 792,
+        "total": 137117.43980117788,
+        "curvature": 114967.54860117784,
+        "fidelity": 22149.89120000005
+      },
+      {
+        "iteration": 4740,
+        "temperature": 4.801785266734892e-11,
+        "accepted_moves": 794,
+        "total": 137117.43980117788,
+        "curvature": 114967.54860117784,
+        "fidelity": 22149.89120000005
+      },
+      {
+        "iteration": 4750,
+        "temperature": 4.567026611512844e-11,
+        "accepted_moves": 796,
+        "total": 137117.43980117788,
+        "curvature": 114967.54860117784,
+        "fidelity": 22149.89120000005
+      },
+      {
+        "iteration": 4760,
+        "temperature": 4.343745276316632e-11,
+        "accepted_moves": 797,
+        "total": 137117.43980117788,
+        "curvature": 114967.54860117784,
+        "fidelity": 22149.89120000005
+      },
+      {
+        "iteration": 4770,
+        "temperature": 4.1313801364675925e-11,
+        "accepted_moves": 801,
+        "total": 137117.43980117788,
+        "curvature": 114967.54860117784,
+        "fidelity": 22149.89120000005
+      },
+      {
+        "iteration": 4780,
+        "temperature": 3.92939750059939e-11,
+        "accepted_moves": 802,
+        "total": 137117.43980117788,
+        "curvature": 114967.54860117784,
+        "fidelity": 22149.89120000005
+      },
+      {
+        "iteration": 4790,
+        "temperature": 3.737289769446964e-11,
+        "accepted_moves": 804,
+        "total": 137117.43980117788,
+        "curvature": 114967.54860117784,
+        "fidelity": 22149.89120000005
+      },
+      {
+        "iteration": 4800,
+        "temperature": 3.554574160207097e-11,
+        "accepted_moves": 807,
+        "total": 137117.43980117788,
+        "curvature": 114967.54860117784,
+        "fidelity": 22149.89120000005
+      },
+      {
+        "iteration": 4810,
+        "temperature": 3.3807914932648327e-11,
+        "accepted_moves": 807,
+        "total": 137117.43980117788,
+        "curvature": 114967.54860117784,
+        "fidelity": 22149.89120000005
+      },
+      {
+        "iteration": 4820,
+        "temperature": 3.215505038236686e-11,
+        "accepted_moves": 808,
+        "total": 137117.43980117788,
+        "curvature": 114967.54860117784,
+        "fidelity": 22149.89120000005
+      },
+      {
+        "iteration": 4830,
+        "temperature": 3.058299416430641e-11,
+        "accepted_moves": 808,
+        "total": 137117.43980117788,
+        "curvature": 114967.54860117784,
+        "fidelity": 22149.89120000005
+      },
+      {
+        "iteration": 4840,
+        "temperature": 2.9087795569647412e-11,
+        "accepted_moves": 811,
+        "total": 137117.43980117788,
+        "curvature": 114967.54860117784,
+        "fidelity": 22149.89120000005
+      },
+      {
+        "iteration": 4850,
+        "temperature": 2.7665697039209053e-11,
+        "accepted_moves": 815,
+        "total": 137117.43980117788,
+        "curvature": 114967.54860117784,
+        "fidelity": 22149.89120000005
+      },
+      {
+        "iteration": 4860,
+        "temperature": 2.6313124720388637e-11,
+        "accepted_moves": 816,
+        "total": 137117.43980117788,
+        "curvature": 114967.54860117784,
+        "fidelity": 22149.89120000005
+      },
+      {
+        "iteration": 4870,
+        "temperature": 2.5026679485770958e-11,
+        "accepted_moves": 817,
+        "total": 137117.43980117788,
+        "curvature": 114967.54860117784,
+        "fidelity": 22149.89120000005
+      },
+      {
+        "iteration": 4880,
+        "temperature": 2.3803128390836675e-11,
+        "accepted_moves": 817,
+        "total": 137117.43980117788,
+        "curvature": 114967.54860117784,
+        "fidelity": 22149.89120000005
+      },
+      {
+        "iteration": 4890,
+        "temperature": 2.263939654930219e-11,
+        "accepted_moves": 817,
+        "total": 137117.43980117788,
+        "curvature": 114967.54860117784,
+        "fidelity": 22149.89120000005
+      },
+      {
+        "iteration": 4900,
+        "temperature": 2.153255940567315e-11,
+        "accepted_moves": 818,
+        "total": 137117.43980117788,
+        "curvature": 114967.54860117784,
+        "fidelity": 22149.89120000005
+      },
+      {
+        "iteration": 4910,
+        "temperature": 2.0479835385591773e-11,
+        "accepted_moves": 820,
+        "total": 137016.23772220418,
+        "curvature": 114717.99652220414,
+        "fidelity": 22298.24120000005
+      },
+      {
+        "iteration": 4920,
+        "temperature": 1.947857890550772e-11,
+        "accepted_moves": 820,
+        "total": 137016.23772220418,
+        "curvature": 114717.99652220414,
+        "fidelity": 22298.24120000005
+      },
+      {
+        "iteration": 4930,
+        "temperature": 1.8526273724105278e-11,
+        "accepted_moves": 822,
+        "total": 137016.23772220418,
+        "curvature": 114717.99652220414,
+        "fidelity": 22298.24120000005
+      },
+      {
+        "iteration": 4940,
+        "temperature": 1.7620526618778373e-11,
+        "accepted_moves": 822,
+        "total": 137016.23772220418,
+        "curvature": 114717.99652220414,
+        "fidelity": 22298.24120000005
+      },
+      {
+        "iteration": 4950,
+        "temperature": 1.6759061371261897e-11,
+        "accepted_moves": 823,
+        "total": 137016.23772220418,
+        "curvature": 114717.99652220414,
+        "fidelity": 22298.24120000005
+      },
+      {
+        "iteration": 4960,
+        "temperature": 1.5939713047304777e-11,
+        "accepted_moves": 823,
+        "total": 137016.23772220418,
+        "curvature": 114717.99652220414,
+        "fidelity": 22298.24120000005
+      },
+      {
+        "iteration": 4970,
+        "temperature": 1.516042255600901e-11,
+        "accepted_moves": 824,
+        "total": 137016.23772220418,
+        "curvature": 114717.99652220414,
+        "fidelity": 22298.24120000005
+      },
+      {
+        "iteration": 4980,
+        "temperature": 1.4419231475161961e-11,
+        "accepted_moves": 825,
+        "total": 137016.23772220418,
+        "curvature": 114717.99652220414,
+        "fidelity": 22298.24120000005
+      },
+      {
+        "iteration": 4990,
+        "temperature": 1.3714277129557455e-11,
+        "accepted_moves": 826,
+        "total": 137016.23772220418,
+        "curvature": 114717.99652220414,
+        "fidelity": 22298.24120000005
+      },
+      {
+        "iteration": 5000,
+        "temperature": 1.3043787909937144e-11,
+        "accepted_moves": 827,
+        "total": 137016.23772220418,
+        "curvature": 114717.99652220414,
+        "fidelity": 22298.24120000005
+      }
+    ]
+  }
+}
