@@ -129,6 +129,17 @@ class LocalBayesOptimizer:
         z = improvement / sigma
         return improvement * norm.cdf(z) + sigma * norm.pdf(z)
 
+    def posterior(self, candidates: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
+        """Return GP posterior mean and standard deviation at candidate points."""
+        if self.n_observed < self.config.n_initial:
+            raise RuntimeError("posterior requires initial observations")
+        points = np.asarray(candidates, dtype=float)
+        if points.ndim != 2 or points.shape[1] != self.dim:
+            raise ValueError(f"candidates must have shape (N, {self.dim})")
+        model = self._fit_model()
+        mean, std = model.predict(points, return_std=True)
+        return np.asarray(mean, dtype=float), np.asarray(std, dtype=float)
+
     def _ask_by_expected_improvement(self, *, xi: float) -> np.ndarray:
         candidates = self._sample_candidates(int(self.config.candidate_count))
         if not len(candidates):

@@ -39,6 +39,8 @@ class SurfaceForceServoConfig:
     damping: float = 30.0
     stiffness: float = 400.0
     pressure_gain: float = 1.0
+    hold_offset_retention_ratio: float = 0.2
+    hard_lift_release_hold_s: float = 0.1
     dt_s: float | None = None
 
 
@@ -70,6 +72,8 @@ def run_surface_auto_scan(
     force_velocity_m_s = 0.0
     filtered_pressure_n: float | None = None
     hard_lift_active = False
+    hold_offset_target_m: float | None = None
+    release_hold_remaining_s = 0.0
 
     try:
         obs = devices.get_obs()
@@ -115,8 +119,14 @@ def run_surface_auto_scan(
                         force_velocity_m_s=force_velocity_m_s,
                         filtered_pressure_n=filtered_pressure_n,
                         hard_lift_active=hard_lift_active,
+                        hold_offset_target_m=hold_offset_target_m,
+                        release_hold_remaining_s=release_hold_remaining_s,
                         dt_s=dt_s,
                         config=servo,
+                    )
+                    hold_offset_target_m = servo_meta.get("auto_force_servo_hold_offset_target_m")
+                    release_hold_remaining_s = float(
+                        servo_meta.get("auto_force_servo_release_hold_remaining_s", 0.0)
                     )
                 obs, action, obs_meta, action_timing = devices.step_tcp_pose(command)
                 timestamp = datetime.datetime.now()
@@ -156,7 +166,9 @@ def run_surface_auto_scan(
                         last_pose_index,
                         error="hard lift limit reached before pressure recovered",
                     )
-                if not hard_lift_active:
+                if not hard_lift_active and not bool(
+                    servo_meta.get("auto_force_servo_release_hold_active", False)
+                ):
                     waypoint_index += 1
         return SurfaceAutoScanResult(True, False, saved, last_pose_index)
     except Exception as exc:
@@ -198,6 +210,8 @@ def _update_force_servo_command(
     force_velocity_m_s: float,
     filtered_pressure_n: float | None,
     hard_lift_active: bool,
+    hold_offset_target_m: float | None = None,
+    release_hold_remaining_s: float = 0.0,
     dt_s: float,
     config: SurfaceForceServoConfig,
 ) -> tuple[float, float, float | None, bool, dict[str, Any]]:
@@ -243,6 +257,7 @@ def _update_force_servo_command(
         hard_lift_reason = "pressure"
     elif hard_lift_lateral_entry:
         hard_lift_reason = "lateral"
+    was_hard_lift_active = bool(hard_lift_active)
     if hard_lift_active:
         hard_lift_active = (
             filtered > float(config.hard_lift_resume_pressure_n)
@@ -258,6 +273,11 @@ def _update_force_servo_command(
     elif hard_lift_entry:
         hard_lift_active = True
 
+    just_released_hard_lift = was_hard_lift_active and not hard_lift_active
+    if just_released_hard_lift:
+        release_hold_remaining_s = max(float(config.hard_lift_release_hold_s), 0.0)
+    release_hold_active = not hard_lift_active and release_hold_remaining_s > 1e-12
+
     if hard_lift_active:
         pressure_error_n = max(
             0.0,
@@ -265,12 +285,23 @@ def _update_force_servo_command(
             lateral_force_n - float(config.hard_lift_lateral_force_n),
         )
         direction = "hard_lift"
+        hold_offset_target_m = None
+    elif release_hold_active:
+        direction = "release_hold"
+        pressure_error_n = 0.0
+        hold_offset_target_m = None
     elif filtered > float(config.pressure_max_n):
         pressure_error_n = filtered - float(config.pressure_max_n)
         direction = "lift"
+        hold_offset_target_m = None
     elif filtered < float(config.pressure_min_n):
         pressure_error_n = filtered - float(config.pressure_min_n)
         direction = "press"
+        hold_offset_target_m = None
+    else:
+        if hold_offset_target_m is None:
+            retention = float(np.clip(config.hold_offset_retention_ratio, 0.0, 1.0))
+            hold_offset_target_m = retention * float(force_offset_m)
 
     max_step = abs(float(config.max_step_m))
     max_velocity = max_step / dt_s if dt_s > 0.0 else 0.0
@@ -282,9 +313,20 @@ def _update_force_servo_command(
     drive = float(config.pressure_gain) * pressure_error_n
     acceleration = 0.0
 
-    if hard_lift_active:
+    if hard_lift_active or release_hold_active:
         delta_offset = 0.0
         force_velocity_m_s = 0.0
+        acceleration = 0.0
+    elif direction == "hold" and hold_offset_target_m is not None:
+        delta_offset = float(
+            np.clip(
+                float(hold_offset_target_m) - float(force_offset_m),
+                -max_step,
+                max_step,
+            )
+        )
+        force_velocity_m_s = 0.0
+        acceleration = 0.0
     else:
         acceleration = (drive - damping * force_velocity_m_s - stiffness * force_offset_m) / mass
         delta_offset = force_velocity_m_s * dt_s + 0.5 * acceleration * dt_s * dt_s
@@ -310,6 +352,10 @@ def _update_force_servo_command(
 
     previous_force_offset_m = float(force_offset_m)
     force_offset_m += delta_offset
+    if direction == "hold" and hold_offset_target_m is not None:
+        if abs(force_offset_m - float(hold_offset_target_m)) <= 1e-12:
+            force_offset_m = float(hold_offset_target_m)
+            force_velocity_m_s = 0.0
 
     lower_limit, upper_limit = _force_offset_limits(
         config,
@@ -352,6 +398,8 @@ def _update_force_servo_command(
             command[:3] += (min_lift_motion - command_normal_motion) * normal
             inward_motion_blocked = True
     final_command_offset = float(np.dot(command[:3] - reference, normal))
+    if release_hold_active:
+        release_hold_remaining_s = max(0.0, release_hold_remaining_s - dt_s)
     meta.update(
         {
             "auto_force_servo_valid": True,
@@ -391,6 +439,11 @@ def _update_force_servo_command(
             "auto_force_servo_damping": float(config.damping),
             "auto_force_servo_stiffness": float(config.stiffness),
             "auto_force_servo_pressure_gain": float(config.pressure_gain),
+            "auto_force_servo_hold_offset_retention_ratio": float(config.hold_offset_retention_ratio),
+            "auto_force_servo_hold_offset_target_m": hold_offset_target_m,
+            "auto_force_servo_release_hold_active": bool(release_hold_active),
+            "auto_force_servo_release_hold_remaining_s": float(release_hold_remaining_s),
+            "auto_force_servo_hard_lift_release_hold_s": float(config.hard_lift_release_hold_s),
             "auto_force_servo_dt_s": float(dt_s),
             "auto_force_servo_pressure_min_n": float(config.pressure_min_n),
             "auto_force_servo_pressure_max_n": float(config.pressure_max_n),

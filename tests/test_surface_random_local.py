@@ -76,6 +76,51 @@ def test_confirm_path_skips_first_point_motion_only_in_random_local_mode():
     assert "Path confirmed for random local episodes" in method_source
 
 
+def test_comparison_confirm_path_only_locks_path_without_motion():
+    from pathlib import Path
+
+    app_source = Path("visual_guided_collection_gui/app.py").read_text(encoding="utf-8")
+    method_source = app_source.split("    def _on_confirm_path", 1)[1].split(
+        "    def _surface_path_confirmed", 1
+    )[0]
+    comparison_branch = method_source.split(
+        'if self.args.operation_mode == "comparison":',
+        1,
+    )[1].split("if self.args.control_tcp", 1)[0]
+
+    assert "self._comparison_path_confirmed = True" in comparison_branch
+    assert "self._set_stage(GuiStage.PATH_CONFIRMED)" in comparison_branch
+    assert "_move_surface_confirm_stage" not in comparison_branch
+
+
+def test_comparison_geodesic_result_remains_path_confirmed():
+    from pathlib import Path
+
+    app_source = Path("visual_guided_collection_gui/app.py").read_text(encoding="utf-8")
+    method_source = app_source.split("    def _show_geodesic_result", 1)[1].split(
+        "    def _geodesic_failed",
+        1,
+    )[0]
+
+    assert "self._comparison_path_confirmed" in method_source
+    assert "GuiStage.PATH_CONFIRMED" in method_source
+    assert "_clear_comparison_pair_for_path_change" in method_source
+
+
+def test_comparison_path_variant_change_clears_pair_but_remains_confirmed():
+    from pathlib import Path
+
+    app_source = Path("visual_guided_collection_gui/app.py").read_text(encoding="utf-8")
+    method_source = app_source.split("    def _replace_with_path_variant", 1)[1].split(
+        "    def _on_use_original_path",
+        1,
+    )[0]
+
+    assert "_clear_comparison_pair_for_path_change" in method_source
+    assert "self._comparison_path_confirmed" in method_source
+    assert "GuiStage.PATH_CONFIRMED" in method_source
+
+
 def test_episode_recorder_adds_episode_context_to_sample_meta(tmp_path):
     path = PlannedPath(
         positions_base=np.array([[0.0, 0.0, 0.0], [0.1, 0.0, 0.0]]),

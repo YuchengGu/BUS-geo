@@ -1,4 +1,5 @@
 import numpy as np
+import pytest
 import threading
 import time
 
@@ -45,6 +46,7 @@ class FakeJointEnv:
     def __init__(self):
         self.joints = np.zeros(6, dtype=float)
         self.commands = []
+        self.servo_stop_calls = 0
         self.last_obs_meta = {}
         self.last_step_timing = {}
 
@@ -57,6 +59,20 @@ class FakeJointEnv:
     def step(self, joints):
         self.joints = np.asarray(joints, dtype=float).copy()
         self.commands.append(self.joints.copy())
+        return self.get_obs()
+
+    def robot(self):
+        return self
+
+    def stop_servo(self):
+        self.servo_stop_calls += 1
+
+
+class LaggingJointEnv(FakeJointEnv):
+    def step(self, joints):
+        command = np.asarray(joints, dtype=float).copy()
+        self.joints += 0.25 * (command - self.joints)
+        self.commands.append(command)
         return self.get_obs()
 
 
@@ -110,6 +126,36 @@ class FakeSurfaceAgent:
 
     def act(self, _obs):
         return self.actions.pop(0)
+
+
+class ConstantJointAgent:
+    def __init__(self, action):
+        self.action = np.asarray(action, dtype=float)
+
+    def act(self, _obs):
+        return self.action.copy()
+
+
+def test_joint_handover_error_compares_current_robot_and_gello_commands():
+    manager = DeviceManager(DeviceConfig())
+    manager.agent = ConstantJointAgent([0.1, -0.2, 0.3, 0.0, 0.0, 0.0])
+    obs = {"joint_positions": np.array([0.08, -0.18, 0.25, 0.0, 0.0, 0.0])}
+
+    error, target = manager.joint_handover_error(obs)
+
+    assert error == pytest.approx(0.05)
+    np.testing.assert_allclose(target, [0.1, -0.2, 0.3, 0.0, 0.0, 0.0])
+
+
+def test_joint_step_reports_joint_position_action_mode():
+    manager = DeviceManager(DeviceConfig())
+    manager.env = FakeJointEnv()
+    manager.agent = ConstantJointAgent(np.full(6, 0.1))
+    obs = manager.env.get_obs()
+
+    _next_obs, _action, _obs_meta, timing = manager.step_agent(obs)
+
+    assert timing["action_mode"] == "joint_position"
 
 
 def test_move_tcp_pose_linear_interpolates_and_waits_until_target_reached():
@@ -423,3 +469,22 @@ def test_move_joint_positions_linear_uses_interpolated_joint_steps():
     assert len(manager.env.commands) == 5
     np.testing.assert_allclose(manager.env.commands[-1], target)
     np.testing.assert_allclose(obs["joint_positions"], target)
+    assert manager.env.servo_stop_calls == 1
+
+
+def test_move_joint_positions_linear_keeps_commanding_target_until_actual_joints_arrive():
+    manager = DeviceManager(DeviceConfig())
+    manager.env = LaggingJointEnv()
+    target = np.array([0.0, -0.1, 0.2, -0.3, 0.4, 0.5])
+
+    obs = manager.move_joint_positions_linear(
+        target,
+        max_joint_step_rad=0.1,
+        joint_tolerance_rad=0.01,
+        timeout_s=1.0,
+    )
+
+    assert len(manager.env.commands) > 5
+    np.testing.assert_allclose(manager.env.commands[-1], target)
+    assert np.max(np.abs(obs["joint_positions"] - target)) <= 0.01
+    assert manager.env.servo_stop_calls == 1

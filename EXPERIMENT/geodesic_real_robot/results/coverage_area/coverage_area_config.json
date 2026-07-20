@@ -1,0 +1,8 @@
+{
+  "probe_width_m": 0.04,
+  "path_sample_spacing_m": 0.0008,
+  "poisson_depth": 10,
+  "poisson_density_quantile": 0.03,
+  "normal_k_neighbors": 20,
+  "max_mesh_point_distance_m": 0.003
+}

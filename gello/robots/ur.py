@@ -91,13 +91,15 @@ class URRobot(Robot):
 
         robot_joints = joint_state[:6]
         t_start = self.robot.initPeriod()
-        self.robot.servoJ(
+        accepted = self.robot.servoJ(
             robot_joints, velocity, acceleration, dt, lookahead_time, gain
         )
         if self._use_gripper:
             gripper_pos = joint_state[-1] * 255
             self.gripper.move(gripper_pos, 255, 10)
         self.robot.waitPeriod(t_start)
+        if accepted is False:
+            raise RuntimeError("RTDE servoJ command rejected")
 
     def command_tcp_pose(self, tcp_pose: np.ndarray) -> None:
         """Command the UR TCP to a Cartesian pose vector [x, y, z, rx, ry, rz]."""
@@ -111,8 +113,18 @@ class URRobot(Robot):
         if pose.shape[0] != 6:
             raise ValueError(f"tcp_pose must have 6 values [x, y, z, rx, ry, rz], got {pose.shape[0]}")
         t_start = self.robot.initPeriod()
-        self.robot.servoL(pose, velocity, acceleration, dt, lookahead_time, gain)
+        accepted = self.robot.servoL(
+            pose, velocity, acceleration, dt, lookahead_time, gain
+        )
         self.robot.waitPeriod(t_start)
+        if accepted is False:
+            raise RuntimeError("RTDE servoL command rejected")
+
+    def stop_servo(self) -> None:
+        """Exit the active servoJ/servoL mode before changing motion modes."""
+        accepted = self.robot.servoStop()
+        if accepted is False:
+            raise RuntimeError("RTDE servoStop command rejected")
 
     def freedrive_enabled(self) -> bool:
         """Check if the robot is in freedrive mode.

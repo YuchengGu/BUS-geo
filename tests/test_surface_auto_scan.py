@@ -495,3 +495,80 @@ def test_surface_auto_scan_force_servo_holds_when_force_is_missing():
     assert result.completed is True
     np.testing.assert_allclose(devices.actions[0][:3], [0.0, 0.0, 0.0])
     assert recorder.samples[0]["meta"]["auto_force_servo_valid"] is False
+
+
+def test_surface_force_servo_strongly_restores_eighty_percent_then_retains_twenty_percent():
+    offset = 0.001
+    velocity = 0.0
+    hold_target = None
+    first_delta = None
+    for _ in range(12):
+        command = np.zeros(6, dtype=float)
+        offset, velocity, _filtered, _hard_lift_active, meta = _update_force_servo_command(
+            {"force": np.array([0.0, 0.0, -3.5, 0.0, 0.0, 0.0])},
+            command,
+            np.array([0.0, 0.0, 1.0]),
+            reference_position=np.zeros(3),
+            force_offset_m=offset,
+            force_velocity_m_s=velocity,
+            filtered_pressure_n=3.5,
+            hard_lift_active=False,
+            hold_offset_target_m=hold_target,
+            dt_s=0.02,
+            config=SurfaceForceServoConfig(enabled=True, hold_offset_retention_ratio=0.2),
+        )
+        hold_target = meta["auto_force_servo_hold_offset_target_m"]
+        if first_delta is None:
+            first_delta = meta["auto_force_servo_delta_offset_m"]
+
+    assert first_delta == -0.00025
+    assert hold_target == 0.0002
+    np.testing.assert_allclose(offset, 0.0002, atol=1e-12)
+    assert velocity == 0.0
+
+
+def test_surface_auto_scan_holds_same_waypoint_briefly_after_hard_lift_release():
+    devices = SequenceForceAutoScanDevices(
+        [
+            [0.0, 0.0, -10.0, 0.0, 0.0, 0.0],
+            [0.0, 0.0, -4.0, 0.0, 0.0, 0.0],
+            [0.0, 0.0, -2.0, 0.0, 0.0, 0.0],
+            [0.0, 0.0, -2.0, 0.0, 0.0, 0.0],
+            [0.0, 0.0, -3.5, 0.0, 0.0, 0.0],
+        ]
+    )
+    recorder = FakeRecorder()
+
+    result = run_surface_auto_scan(
+        devices=devices,
+        tcp_poses=[np.array([0.001, 0.0, 0.0, 0.0, 0.0, 0.0])],
+        normals_base=[np.array([0.0, 0.0, 1.0])],
+        recorder=recorder,
+        max_position_step_m=0.001,
+        max_rotation_step_rad=0.01,
+        force_servo=SurfaceForceServoConfig(
+            enabled=True,
+            lowpass_alpha=1.0,
+            hard_lift_pressure_n=8.0,
+            hard_lift_resume_pressure_n=4.5,
+            hard_lift_step_m=0.0001,
+            hard_lift_release_hold_s=0.04,
+        ),
+    )
+
+    assert result.completed is True
+    release_samples = [
+        sample
+        for sample in recorder.samples
+        if sample["meta"].get("auto_force_servo_release_hold_active")
+    ]
+    assert len(release_samples) == 2
+    assert {sample["meta"]["auto_scan_waypoint_index"] for sample in release_samples} == {1}
+    assert all(
+        sample["meta"]["auto_force_servo_direction"] == "release_hold"
+        for sample in release_samples
+    )
+    assert all(
+        sample["meta"]["auto_force_servo_delta_offset_m"] == 0.0
+        for sample in release_samples
+    )

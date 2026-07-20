@@ -13,6 +13,7 @@ from typing import Any
 os.environ.setdefault("MPLCONFIGDIR", str(Path(tempfile.gettempdir()) / "matplotlib_cache_geodesic_boxplots"))
 
 import numpy as np
+from matplotlib.transforms import blended_transform_factory
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 REPO_ROOT = SCRIPT_DIR.parent
@@ -435,6 +436,80 @@ def draw_boxplot(axis, values: list[list[float]], labels: list[str], colors: lis
         )
     axis.set_xticks(positions)
     axis.set_xticklabels(labels, rotation=XTICK_LABEL_ROTATION, ha=XTICK_LABEL_HA)
+    add_geodesic_significance(axis, values, labels, positions)
+
+
+def add_geodesic_significance(axis, values: list[list[float]], labels: list[str], positions: np.ndarray) -> None:
+    geodesic_indices = [idx for idx, label in enumerate(labels) if "Geodesic" in label]
+    if not geodesic_indices:
+        return
+    geodesic_index = geodesic_indices[0]
+    transform = blended_transform_factory(axis.transData, axis.transAxes)
+    y0 = 1.035
+    dy = 0.095
+    comparison_index = 0
+    for other_index, other_values in enumerate(values):
+        if other_index == geodesic_index:
+            continue
+        label = significance_label(paired_wilcoxon_pvalue(other_values, values[geodesic_index]))
+        if label in {"n.s.", r"$\dagger$"}:
+            continue
+        x1 = float(positions[other_index])
+        x2 = float(positions[geodesic_index])
+        y = y0 + comparison_index * dy
+        h = 0.025
+        axis.plot(
+            [x1, x1, x2, x2],
+            [y, y + h, y + h, y],
+            transform=transform,
+            color=AXIS_COLOR,
+            linewidth=0.72,
+            clip_on=False,
+        )
+        axis.text(
+            0.5 * (x1 + x2),
+            y + h + 0.004,
+            label,
+            transform=transform,
+            ha="center",
+            va="bottom",
+            fontsize=6.5,
+            color=AXIS_COLOR,
+            clip_on=False,
+        )
+        comparison_index += 1
+
+
+def paired_wilcoxon_pvalue(a: list[float], b: list[float]) -> float:
+    arr_a = np.asarray(a, dtype=float)
+    arr_b = np.asarray(b, dtype=float)
+    valid = np.isfinite(arr_a) & np.isfinite(arr_b)
+    arr_a = arr_a[valid]
+    arr_b = arr_b[valid]
+    if arr_a.size < 3 or np.allclose(arr_a, arr_b):
+        return 1.0
+    try:
+        from scipy.stats import wilcoxon
+
+        return float(wilcoxon(arr_a, arr_b, zero_method="wilcox", alternative="two-sided").pvalue)
+    except Exception:
+        return float("nan")
+
+
+def significance_label(pvalue: float) -> str:
+    if not np.isfinite(pvalue):
+        return "n.s."
+    if pvalue < 1e-4:
+        return "****"
+    if pvalue < 1e-3:
+        return "***"
+    if pvalue < 1e-2:
+        return "**"
+    if pvalue < 5e-2:
+        return "*"
+    if pvalue < 1e-1:
+        return r"$\dagger$"
+    return "n.s."
 
 
 def emphasize_ours_tick(axis) -> None:

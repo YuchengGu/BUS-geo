@@ -8,6 +8,7 @@ class FakeCapture:
     def __init__(self):
         self.frames = Queue()
         self.released = False
+        self.set_calls = []
 
     def isOpened(self):
         return True
@@ -17,6 +18,20 @@ class FakeCapture:
             return True, self.frames.get(timeout=0.05)
         except Empty:
             return False, None
+
+    def set(self, prop, value):
+        self.set_calls.append((prop, value))
+        return True
+
+    def grab(self):
+        try:
+            self.frames.get_nowait()
+            return True
+        except Empty:
+            return False
+
+    def retrieve(self):
+        return self.read()
 
     def release(self):
         self.released = True
@@ -69,3 +84,4 @@ def test_ultrasound_read_returns_cached_frame_without_waiting_for_next_capture(m
     finally:
         camera.close()
         assert fake_capture.released is True
+

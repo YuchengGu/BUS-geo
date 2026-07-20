@@ -407,6 +407,20 @@ class DeviceManager:
             command = current + delta
         return command
 
+    def joint_handover_error(
+        self,
+        obs: dict[str, Any],
+    ) -> tuple[float, np.ndarray]:
+        target = self.read_action(obs)
+        current = np.asarray(obs["joint_positions"], dtype=float).reshape(-1)
+        if target.shape != current.shape:
+            raise ValueError(
+                f"GELLO target shape {target.shape} does not match robot joints "
+                f"{current.shape}"
+            )
+        error = float(np.max(np.abs(target - current))) if current.size else 0.0
+        return error, target
+
     def step_agent(self, obs: dict[str, Any]) -> tuple[dict[str, Any], np.ndarray, dict[str, Any], dict[str, int]]:
         if self.env is None:
             raise RuntimeError("DeviceManager.connect() must be called first")
@@ -420,6 +434,7 @@ class DeviceManager:
         action_timing = {
             "agent_act_start_mono_ns": agent_act_start,
             "agent_act_end_mono_ns": agent_act_end,
+            "action_mode": "joint_position",
         }
         return next_obs, action, current_obs_meta, action_timing
 
@@ -478,6 +493,7 @@ class DeviceManager:
         joint_positions: np.ndarray,
         *,
         max_joint_step_rad: float = 0.01,
+        joint_tolerance_rad: float = 0.01,
         timeout_s: float = 30.0,
         waypoint_callback: Callable[[dict[str, Any]], None] | None = None,
     ) -> dict[str, Any]:
@@ -510,7 +526,34 @@ class DeviceManager:
                 )
             if time.monotonic() > deadline:
                 raise TimeoutError("Timed out while moving joints along interpolated safe retreat path")
-        return obs
+
+        tolerance = abs(float(joint_tolerance_rad))
+        while True:
+            actual = np.asarray(obs["joint_positions"], dtype=float).reshape(-1)[: target.shape[0]]
+            max_error = float(np.max(np.abs(actual - target)))
+            if waypoint_callback is not None:
+                waypoint_callback(
+                    {
+                        "kind": "joint_settle",
+                        "target_joint_positions": target.tolist(),
+                        "actual_joint_positions": actual.tolist(),
+                        "max_joint_error_rad": max_error,
+                    }
+                )
+            if max_error <= tolerance:
+                with self._io_lock:
+                    robot = self.env.robot()
+                    stop_servo = getattr(robot, "stop_servo", None)
+                    if callable(stop_servo):
+                        stop_servo()
+                return obs
+            if time.monotonic() > deadline:
+                raise TimeoutError(
+                    "Timed out waiting for safe joint target; "
+                    f"max_joint_error={max_error:.6f} rad"
+                )
+            with self._io_lock:
+                obs = self._apply_force_compensation(self.env.step(target))
 
     def move_tcp_pose_linear(
         self,

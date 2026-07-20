@@ -50,6 +50,10 @@ class ZMQServerRobot:
                     if not hasattr(self._robot, "command_tcp_pose"):
                         raise NotImplementedError("Robot does not support command_tcp_pose")
                     result = self._robot.command_tcp_pose(**args)
+                elif method == "stop_servo":
+                    if not hasattr(self._robot, "stop_servo"):
+                        raise NotImplementedError("Robot does not support stop_servo")
+                    result = self._robot.stop_servo()
                 elif method == "get_observations":
                     result = self._robot.get_observations()
                 else:
@@ -63,6 +67,10 @@ class ZMQServerRobot:
             except zmq.Again:
                 # Timeout occurred - don't spam the console
                 pass
+            except Exception as exc:
+                self._socket.send(
+                    pickle.dumps({"error": f"{type(exc).__name__}: {exc}"})
+                )
 
     def stop(self) -> None:
         """Signal the server to stop serving."""
@@ -119,6 +127,8 @@ class ZMQClientRobot(Robot):
         send_message = pickle.dumps(request)
         self._socket.send(send_message)
         result = pickle.loads(self._socket.recv())
+        if isinstance(result, dict) and "error" in result:
+            raise RuntimeError(result["error"])
         return result
 
     def command_tcp_pose(self, tcp_pose: np.ndarray) -> None:
@@ -129,6 +139,15 @@ class ZMQClientRobot(Robot):
         }
         send_message = pickle.dumps(request)
         self._socket.send(send_message)
+        result = pickle.loads(self._socket.recv())
+        if isinstance(result, dict) and "error" in result:
+            raise RuntimeError(result["error"])
+        return result
+
+    def stop_servo(self) -> None:
+        """Exit the robot's active Cartesian or joint servo mode."""
+        request = {"method": "stop_servo"}
+        self._socket.send(pickle.dumps(request))
         result = pickle.loads(self._socket.recv())
         if isinstance(result, dict) and "error" in result:
             raise RuntimeError(result["error"])

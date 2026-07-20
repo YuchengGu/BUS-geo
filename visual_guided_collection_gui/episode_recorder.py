@@ -35,6 +35,7 @@ class EpisodeRecorder:
         probe_tip_offset_m: float = 0.0,
         path_feature_params: PathFeatureParams | None = None,
         episode_context: dict[str, Any] | None = None,
+        record_rgb_depth: bool = True,
     ) -> None:
         self.data_dir = Path(data_dir).expanduser()
         self.agent_name = agent_name
@@ -42,6 +43,7 @@ class EpisodeRecorder:
         self.probe_tip_offset_m = float(probe_tip_offset_m)
         self.path_feature_params = path_feature_params or PathFeatureParams()
         self.episode_context = dict(episode_context or {})
+        self.record_rgb_depth = bool(record_rgb_depth)
         self.episode_dir: Path | None = None
         self.sample_index = 0
         self.last_path_index: int | None = None
@@ -108,10 +110,20 @@ class EpisodeRecorder:
         sample_meta["fine_scan_flag"] = int(self.fine_scan_flag)
         sample_meta["path_nearest_index"] = int(enriched["path_nearest_index"])
         sample_meta["path_progress"] = float(enriched["path_progress"])
+        sample_meta["rgb_depth_recorded"] = bool(self.record_rgb_depth)
+        saved_observation = (
+            enriched
+            if self.record_rgb_depth
+            else {
+                key: value
+                for key, value in enriched.items()
+                if not key.endswith(("_rgb", "_depth"))
+            }
+        )
         save_frame(
             self.episode_dir,
             timestamp or datetime.datetime.now(),
-            enriched,
+            saved_observation,
             np.asarray(action),
             meta=sample_meta,
         )

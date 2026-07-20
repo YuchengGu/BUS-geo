@@ -1,0 +1,178 @@
+{
+  "typical_run": "bo_0707_143029",
+  "typical_strategy": "bo",
+  "typical_objective_variant": "full",
+  "full_bo_run_count": 15,
+  "q_before_after": [
+    {
+      "run": "bo_0706_180158",
+      "before_Q": 0.48866472292504,
+      "best_observed_Q_at_best_F": 0.6196693306804396,
+      "best_observed_F": -0.6165870297196048
+    },
+    {
+      "run": "bo_0707_112912",
+      "before_Q": 0.4870589442518018,
+      "best_observed_Q_at_best_F": 0.6444714445048041,
+      "best_observed_F": -0.631943194738246
+    },
+    {
+      "run": "bo_0707_113740",
+      "before_Q": 0.5288928369032849,
+      "best_observed_Q_at_best_F": 0.6413431857547173,
+      "best_observed_F": -0.6411022574818025
+    },
+    {
+      "run": "bo_0707_114926",
+      "before_Q": 0.6202018756751323,
+      "best_observed_Q_at_best_F": 0.6293807544394684,
+      "best_observed_F": -0.6276901896285505
+    },
+    {
+      "run": "bo_0707_131105",
+      "before_Q": 0.6276450653997955,
+      "best_observed_Q_at_best_F": 0.6447580099326932,
+      "best_observed_F": -0.6256382755616429
+    },
+    {
+      "run": "bo_0707_135504",
+      "before_Q": 0.6228493513053235,
+      "best_observed_Q_at_best_F": 0.6484518367391029,
+      "best_observed_F": -0.6479454809431162
+    },
+    {
+      "run": "bo_0707_140553",
+      "before_Q": 0.5017631992860088,
+      "best_observed_Q_at_best_F": 0.6502860129738469,
+      "best_observed_F": -0.6476170922445136
+    },
+    {
+      "run": "bo_0707_141233",
+      "before_Q": 0.538856180136239,
+      "best_observed_Q_at_best_F": 0.6387492199442822,
+      "best_observed_F": -0.6362920054559834
+    },
+    {
+      "run": "bo_0707_142537",
+      "before_Q": 0.6376216211038142,
+      "best_observed_Q_at_best_F": 0.6419857873337754,
+      "best_observed_F": -0.6383850427314827
+    },
+    {
+      "run": "bo_0707_143029",
+      "before_Q": 0.6208061369930379,
+      "best_observed_Q_at_best_F": 0.6355808756014875,
+      "best_observed_F": -0.632084943639153
+    },
+    {
+      "run": "bo_0707_144112",
+      "before_Q": 0.6341445122789071,
+      "best_observed_Q_at_best_F": 0.6419048770509695,
+      "best_observed_F": -0.6411455229923728
+    },
+    {
+      "run": "bo_0707_145131",
+      "before_Q": 0.63427360799005,
+      "best_observed_Q_at_best_F": 0.6496703878420553,
+      "best_observed_F": -0.6485087877109482
+    },
+    {
+      "run": "bo_0707_150116",
+      "before_Q": 0.5106919835209432,
+      "best_observed_Q_at_best_F": 0.6325082444411095,
+      "best_observed_F": -0.6285122151908584
+    },
+    {
+      "run": "bo_0707_151225",
+      "before_Q": 0.5154453222552536,
+      "best_observed_Q_at_best_F": 0.6476369462487075,
+      "best_observed_F": -0.6415601022022697
+    },
+    {
+      "run": "bo_0707_151802",
+      "before_Q": 0.49107947348077186,
+      "best_observed_Q_at_best_F": 0.6214724252972728,
+      "best_observed_F": -0.5994182760265336
+    }
+  ],
+  "selected_ultrasound": [
+    {
+      "label": "Before",
+      "role": "before",
+      "trial": null,
+      "F": -0.5028698901684896,
+      "Q": 0.6208061369930379,
+      "P_f": 0.11178701086830806,
+      "P_tau": 0.006149235956240339,
+      "pressure_N": 15.984834093425395,
+      "force_tangential_N": 1.408300458236576,
+      "torque_tangential_Nm": 0.22179692809388324,
+      "file": "2026-07-07T14:30:29.894256.pkl"
+    },
+    {
+      "label": "Initial\ntrial 1",
+      "role": "candidate",
+      "trial": 1,
+      "F": 0.3868125276624833,
+      "Q": 0.6386806566387028,
+      "P_f": 0.9932522768263771,
+      "P_tau": 0.032240907474809004,
+      "pressure_N": 31.817821733525378,
+      "force_tangential_N": 4.049993372572367,
+      "torque_tangential_Nm": 0.5078258282164225,
+      "file": "2026-07-07T14:30:31.427030.pkl"
+    },
+    {
+      "label": "High penalty\ntrial 9",
+      "role": "candidate",
+      "trial": 9,
+      "F": 1.035058059118513,
+      "Q": 0.6378810084035552,
+      "P_f": 1.499226375123366,
+      "P_tau": 0.1737126923987022,
+      "pressure_N": 36.951541237163916,
+      "force_tangential_N": 7.261259517998901,
+      "torque_tangential_Nm": 1.1787987396982786,
+      "file": "2026-07-07T14:30:40.548971.pkl"
+    },
+    {
+      "label": "Mid search\ntrial 5",
+      "role": "candidate",
+      "trial": 5,
+      "F": 0.6604060201081,
+      "Q": 0.6389796007399787,
+      "P_f": 1.2019573721677659,
+      "P_tau": 0.09742824868031282,
+      "pressure_N": 34.10948548021609,
+      "force_tangential_N": 5.220043499520796,
+      "torque_tangential_Nm": 0.8828301815053361,
+      "file": "2026-07-07T14:30:35.098882.pkl"
+    },
+    {
+      "label": "Best F\ntrial 7",
+      "role": "candidate",
+      "trial": 7,
+      "F": -0.6308810723774609,
+      "Q": 0.6326926086645428,
+      "P_f": 0.0001924356017185709,
+      "P_tau": 0.0016191006853632892,
+      "pressure_N": 7.145099558228878,
+      "force_tangential_N": 0.41616347935249137,
+      "torque_tangential_Nm": 0.11366760235214596,
+      "file": "2026-07-07T14:30:37.594957.pkl"
+    },
+    {
+      "label": "Verified\nbest",
+      "role": "verified_best",
+      "trial": null,
+      "F": -0.6018217271025451,
+      "Q": 0.6338450085264923,
+      "P_f": 0.031414104515553806,
+      "P_tau": 0.0006091769083933713,
+      "pressure_N": 0.933686043684343,
+      "force_tangential_N": 0.36237286259635443,
+      "torque_tangential_Nm": 0.057721974551383684,
+      "file": "2026-07-07T14:30:41.446380.pkl"
+    }
+  ]
+}

@@ -177,6 +177,42 @@ def test_surface_bo_status_lines_show_candidate_and_measurement_values():
     assert "force valid=True" in text
 
 
+def test_comparison_recording_checks_endpoint_and_timeout_from_loop_samples():
+    from pathlib import Path
+
+    app_source = Path("visual_guided_collection_gui/app.py").read_text(
+        encoding="utf-8"
+    )
+    method_source = app_source.split("    def _on_loop_sample", 1)[1].split(
+        "    def _on_scene_mouse",
+        1,
+    )[0]
+
+    assert "_check_comparison_scan_completion" in method_source
+    assert '_request_comparison_finish("reached")' in app_source
+    assert '_request_comparison_finish("timeout")' in app_source
+
+
+def test_comparison_darboux_start_rebases_current_pose_before_releasing_clutch():
+    from pathlib import Path
+
+    app_source = Path("visual_guided_collection_gui/app.py").read_text(
+        encoding="utf-8"
+    )
+    method_source = app_source.split(
+        "    def _on_comparison_start_scan",
+        1,
+    )[1].split(
+        "    def _on_comparison_finish_trial",
+        1,
+    )[0]
+    assert "_current_surface_calibration_inputs()" in method_source
+    assert ".recenter(" in method_source
+    assert method_source.index(".recenter(") < method_source.index(
+        "set_clutch(False)"
+    )
+
+
 def test_path_point_colors_highlight_start_current_and_future_points():
     colors = path_point_colors(12, nearest_index=4, future_count=8)
 
@@ -343,6 +379,48 @@ def test_episode_recorder_saves_path_features_and_fine_scan_flag(tmp_path):
     assert enriched["path_distance_to_nearest_m"] == frame["path_distance_to_nearest_m"]
     assert frame["meta"]["fine_scan_flag"] == 1
     assert recorder.sample_index == 1
+
+
+def test_episode_recorder_can_skip_rgb_and_depth_without_mutating_live_observation(tmp_path):
+    path = PlannedPath(
+        positions_base=np.array([[0.0, 0.0, 0.0], [0.1, 0.0, 0.0]]),
+        normals_base=np.tile(np.array([[0.0, 0.0, 1.0]]), (2, 1)),
+    )
+    recorder = EpisodeRecorder(
+        data_dir=tmp_path,
+        agent_name="gello",
+        planned_path=path,
+        record_rgb_depth=False,
+    )
+    recorder.start(episode_id="compact")
+    obs = {
+        "Orbbec_rgb": np.zeros((2, 2, 3), dtype=np.uint8),
+        "Orbbec_depth": np.zeros((2, 2, 1), dtype=np.uint16),
+        "D405_rgb": np.zeros((2, 2, 3), dtype=np.uint8),
+        "D405_depth": np.zeros((2, 2, 1), dtype=np.uint16),
+        "Ultrasound_gray": np.ones((2, 2, 1), dtype=np.uint8),
+        "force": np.arange(6, dtype=float),
+        "tcp_position_base": np.zeros(3),
+        "tcp_x_axis_base": np.array([1.0, 0.0, 0.0]),
+        "tcp_y_axis_base": np.array([0.0, 1.0, 0.0]),
+        "tcp_z_axis_base": np.array([0.0, 0.0, 1.0]),
+    }
+    timestamp = datetime.datetime(2026, 7, 1, 12, 0, 0)
+
+    enriched = recorder.save_sample(obs, np.zeros(6), timestamp=timestamp)
+
+    with open(tmp_path / "gello" / "compact" / f"{timestamp.isoformat()}.pkl", "rb") as handle:
+        frame = pickle.load(handle)
+    assert "Orbbec_rgb" not in frame
+    assert "Orbbec_depth" not in frame
+    assert "D405_rgb" not in frame
+    assert "D405_depth" not in frame
+    assert "Ultrasound_gray" in frame
+    assert "force" in frame
+    assert "Orbbec_rgb" in obs
+    assert "Orbbec_depth" in obs
+    assert "Orbbec_rgb" in enriched
+    assert "Orbbec_depth" in enriched
 
 
 class FakePositioningDevices:
