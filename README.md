@@ -28,18 +28,6 @@ breast ultrasound workflows.
 
 The current development environment uses Python 3.11.
 
-```bash
-cd /home/ubuntu22/dev/gello_software
-conda activate Newgello
-
-git submodule init
-git submodule update
-
-pip install -r requirements.txt
-pip install -e .
-pip install -e third_party/DynamixelSDK/python
-```
-
 For a fresh clone:
 
 ```bash
@@ -50,39 +38,7 @@ git submodule update
 ```
 
 ## Visual-Guided Collection GUI
-
-Start the UR robot node first:
-
-```bash
-python experiments/launch_nodes.py --robot ur
-```
-
-Then start the GUI:
-
-```bash
-python -m visual_guided_collection_gui.main \
-  --point-stride 2 \
-  --probe-tip-offset-m 0.0
-```
-
-If the ultrasound capture device is not connected:
-
-```bash
-python -m visual_guided_collection_gui.main --disable-ultrasound
-```
-
-Typical GUI workflow:
-
-1. Connect services.
-2. Use GELLO positioning to move the UR probe.
-3. Freeze an RGB-D frame from the D405.
-4. Pick a seed point on the 3D point cloud.
-5. Plan and confirm a breast surface path.
-6. Hand control back to GELLO before recording.
-7. Start episode recording.
-8. Stop the episode or use safe stop when needed.
-
-See `visual_guided_collection_gui/README.md` for the detailed Chinese workflow.
+ see demo.ipynb
 
 ## NDI Relative Replay
 
@@ -116,27 +72,6 @@ python ndi_relative_replay/replay_relative_ndi.py --execute
 - Force sensor, optional depending on launch arguments and hardware state.
 - GELLO teleoperation device for manual positioning and episode recording.
 - NDI optical tracker and marker for relative trajectory replay experiments.
-
-## Testing
-
-Run focused tests for the recently added NDI replay tools:
-
-```bash
-python -m pytest tests/test_ndi_relative_replay.py tests/test_ndi_replay_preview_gui.py -q
-```
-
-Run GUI/planning-related tests:
-
-```bash
-python -m pytest tests/test_visual_guided_collection_gui.py tests/test_surface_auto_scan.py -q
-```
-
-Run the full test suite when the local hardware-independent dependencies are
-available:
-
-```bash
-python -m pytest tests -q
-```
 
 ## Notes
 
